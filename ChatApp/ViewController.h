@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSMessagesViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : JSMessagesViewController<JSMessagesViewDataSource, JSMessagesViewDelegate>
 
 @end
