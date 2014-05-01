@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "JSMessagesViewController.h"
+#import <MultipeerConnectivity/MultipeerConnectivity.h>
 
-@interface ViewController : JSMessagesViewController<JSMessagesViewDataSource, JSMessagesViewDelegate>
+@interface ViewController : JSMessagesViewController<JSMessagesViewDataSource, JSMessagesViewDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate, MCAdvertiserAssistantDelegate>
 
 @end
