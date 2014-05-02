@@ -19,6 +19,8 @@ static NSString* const kServiceName = @"multipeer";
 
 @interface ViewController ()
 
+@property (strong) NSMutableArray* chatMessagesArray;
+
 // Required for both Browser and Advertiser roles
 @property (nonatomic, strong) MCPeerID *peerID;
 @property (nonatomic, strong) MCSession *session;
@@ -27,7 +29,7 @@ static NSString* const kServiceName = @"multipeer";
 @property (nonatomic, strong) MCNearbyServiceBrowser *browser;
 
 // Advertiser assistant for declaring intent to receive invitations
-@property (nonatomic, strong) MCAdvertiserAssistant *advertiserAssistant;
+@property (nonatomic, strong) MCNearbyServiceAdvertiser *advertiser;
 
 @property (strong) NSArray* nearbyPeers;
 
@@ -38,41 +40,42 @@ static NSString* const kServiceName = @"multipeer";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.delegate = self;
-//    self.dataSource = self;
+    self.delegate = self;
+    self.dataSource = self;
+    
+    _chatMessagesArray = [NSMutableArray new];
+    
+    _peerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
+    _session = [[MCSession alloc] initWithPeer:_peerID];
+    _session.delegate = self;
     
 //    [self setBackgroundColor:[UIColor whiteColor]];
     
 //    MultiPeerConnector* mcManager = [[MultiPeerConnector alloc] init];
 //    [mcManager startFinding:self];
 
-    if (CURRENTDEVICE == IPHONE) {
+//    if (CURRENTDEVICE != IPHONE) {
         [self startBrowsing];
-    } else {
-        [self launchAdvertiser:nil];
-    }// Do any additional setup after loading the view, typically from a nib.
+//    } else {
+//        [self launchAdvertiser:nil];
+//    }
 }
 
 -(void)startBrowsing
 {
     NSLog(@"browse");
     
-    _peerID = [[MCPeerID alloc] initWithDisplayName:@"Browser Name"];
-    _session = [[MCSession alloc] initWithPeer:_peerID];
-    _session.delegate = self;
     _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:kServiceName];
     _browser.delegate = self;
     [_browser startBrowsingForPeers];
     self.messageInputView.textView.placeHolder = @"browser";
-//    [self presentViewController:_browserView animated:YES completion:nil];
 }
 
 - (void)launchAdvertiser:(id)sender {
-    _peerID = [[MCPeerID alloc] initWithDisplayName:@"Advertiser Name"];
-    _session = [[MCSession alloc] initWithPeer:_peerID];
-    _session.delegate = self;
-    _advertiserAssistant = [[MCAdvertiserAssistant alloc] initWithServiceType:kServiceName discoveryInfo:nil session:_session];
-    [_advertiserAssistant start];
+    
+    _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:nil serviceType:kServiceName];
+    _advertiser.delegate = self;
+    [_advertiser startAdvertisingPeer];
     self.messageInputView.textView.placeHolder = @"advertiser";
 }
 
@@ -80,21 +83,46 @@ static NSString* const kServiceName = @"multipeer";
 {
     NSLog(@"found");
     
-//    self.nearbyPeers = @[@{@"peerID": peerID, @"peerInfo": info}];
-    MCSession* session = [[MCSession alloc] initWithPeer:peerID];
-    [self.browser invitePeer:peerID toSession:session withContext:nil timeout:0];
+//    MCSession* session = [[MCSession alloc] initWithPeer:peerID];
+    [self.browser invitePeer:peerID toSession:_session withContext:nil timeout:0];
     
-//    [browser startBrowsingForPeers];
 }
 
--(void)advertiserAssitantWillPresentInvitation:(MCAdvertiserAssistant *)advertiserAssistant
+-(void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
 {
-    
+    NSLog(@"lost");
+}
+
+-(void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
+{
+    NSLog(@"recived invitation");
+    invitationHandler(YES, _session);
 }
 
 -(void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
-    NSLog(@"change");
+    NSLog(@"changed to %d", state);
+}
+
+-(void)session:(MCSession *)session didReceiveCertificate:(NSArray *)certificate fromPeer:(MCPeerID *)peerID certificateHandler:(void (^)(BOOL))certificateHandler
+{
+    certificateHandler(YES);
+}
+
+-(void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
+{
+//    NSPropertyListFormat format;
+//    NSDictionary* recievedData = [NSPropertyListSerialization propertyListWithData:data options:0 format:&format error:NULL];
+//    NSString* message = recievedData[@"message"];
+    NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    JSMessage* messageObj = [[JSMessage alloc] initWithText:message sender:@"sender" date:[NSDate date]];
+    [_chatMessagesArray addObject:messageObj];
+    
+    [self.tableView reloadData];
+    [self scrollToBottomAnimated:YES];
+    NSLog(@"%@", message);
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,7 +135,7 @@ static NSString* const kServiceName = @"multipeer";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return _chatMessagesArray.count;
 }
 
 #pragma mark -
@@ -127,13 +155,23 @@ static NSString* const kServiceName = @"multipeer";
 -(void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date
 {
     NSLog(@"sent");
+    NSString* message = text;
+    NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSLog(@"%@", [_session connectedPeers]);
+    NSError* error = nil;
+    if (![self.session sendData:data toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:&error]) {
+        NSLog(@"%@", error);
+    }
+    [self finishSend];
 }
 
 #pragma mark - Messages view data source: REQUIRED
 
 -(id<JSMessageData>)messageForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSMessage* message = [[JSMessage alloc] initWithText:@"a" sender:@"sender" date:[NSDate date]];
+    JSMessage* message = _chatMessagesArray[indexPath.row];
+    
     return message;
 }
 

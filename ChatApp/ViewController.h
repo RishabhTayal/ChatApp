@@ -10,6 +10,6 @@
 #import "JSMessagesViewController.h"
 #import <MultipeerConnectivity/MultipeerConnectivity.h>
 
-@interface ViewController : JSMessagesViewController<JSMessagesViewDataSource, JSMessagesViewDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate, MCAdvertiserAssistantDelegate>
+@interface ViewController : JSMessagesViewController<JSMessagesViewDataSource, JSMessagesViewDelegate, MCNearbyServiceBrowserDelegate, MCSessionDelegate, MCNearbyServiceAdvertiserDelegate>
 
 @end
