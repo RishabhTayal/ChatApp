@@ -59,7 +59,9 @@ static NSString* const kServiceName = @"multipeer";
     _peerID = [[MCPeerID alloc] initWithDisplayName:name];
     _session = [[MCSession alloc] initWithPeer:_peerID];
     _session.delegate = self;
-    
+
+    self.messageInputView.textView.placeHolder = @"Type a message...";
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settingsShow:)];
     //    [self setBackgroundColor:[UIColor whiteColor]];
     
@@ -85,7 +87,6 @@ static NSString* const kServiceName = @"multipeer";
     _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:kServiceName];
     _browser.delegate = self;
     [_browser startBrowsingForPeers];
-    self.messageInputView.textView.placeHolder = @"browsing";
     
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchAdvertiser:) userInfo:nil repeats:NO];
 }
@@ -95,7 +96,6 @@ static NSString* const kServiceName = @"multipeer";
         _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:nil serviceType:kServiceName];
         _advertiser.delegate = self;
         [_advertiser startAdvertisingPeer];
-        self.messageInputView.textView.placeHolder = @"advertiser";
     }
 }
 
@@ -132,7 +132,7 @@ static NSString* const kServiceName = @"multipeer";
         {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [TSMessage dismissActiveNotification];
-                [TSMessage showNotificationInViewController:self title:@"connected to users" subtitle:nil type:TSMessageNotificationTypeSuccess duration:1.0 canBeDismissedByUser:YES];
+                [TSMessage showNotificationInViewController:self title:[NSString stringWithFormat:@"connected to %d users", [_session connectedPeers].count] subtitle:nil type:TSMessageNotificationTypeSuccess duration:1.0 canBeDismissedByUser:YES];
             });
         }
             break;
