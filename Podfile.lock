@@ -1,22 +1,25 @@
 PODS:
   - EAIntroView (2.4.0)
   - Facebook-iOS-SDK (3.13.1)
+  - HexColors (2.2.1)
   - JSMessagesViewController (4.0.4):
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.4.0)
-  - TWMessageBarManager (1.6.0)
+  - TSMessages (0.9.7):
+    - HexColors
 
 DEPENDENCIES:
   - EAIntroView
   - Facebook-iOS-SDK
   - JSMessagesViewController
-  - TWMessageBarManager (~> 1.6.0)
+  - TSMessages
 
 SPEC CHECKSUMS:
   EAIntroView: 0d386ae6ebdc84cba58af7c0eb1044bff2f61bd2
   Facebook-iOS-SDK: 47ae9e54684c84f93d75d4e6ab47cd031abdf406
+  HexColors: 99211502e17904af7891fc8f687d0e4958a6d66e
   JSMessagesViewController: 6b59dec2b679ee6a8c6d9c9f1d5d9748abf4c05c
   JSQSystemSoundPlayer: 28ccd01a92a0cebc6de6361e8499011b4cb6dab7
-  TWMessageBarManager: 0c48a47b6a0f682659042470d36a93864ee4a9b5
+  TSMessages: 9dd053bcf1a8985275177ebe0fb8c0f1416e92f7
 
 COCOAPODS: 0.32.1

@@ -9,7 +9,8 @@
 #import "ViewController.h"
 #import "JSMessage.h"
 #import "SettingsViewController.h"
-#import "TWMessageBarManager.h"
+//#import "TWMessageBarManager.h"
+#import "TSMessage.h"
 
 static NSString* const kServiceName = @"multipeer";
 
@@ -33,9 +34,11 @@ static NSString* const kServiceName = @"multipeer";
 
 @property (strong) NSArray* nearbyPeers;
 
-@property (strong) NSString* name;
+//@property (strong) NSString* name;
 
 @property (assign) BOOL foundPeer;
+
+@property (strong) NSDate* lastShownTimeStamp;
 
 @end
 
@@ -51,21 +54,17 @@ static NSString* const kServiceName = @"multipeer";
     
     _chatMessagesArray = [NSMutableArray new];
     
-    _name = [NSString stringWithFormat:@"%@ %@", [[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserFirstName], [[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLastName]];
+    NSString* name = [NSString stringWithFormat:@"%@ %@", [[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserFirstName], [[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLastName]];
     
-    _peerID = [[MCPeerID alloc] initWithDisplayName:_name];
+    _peerID = [[MCPeerID alloc] initWithDisplayName:name];
     _session = [[MCSession alloc] initWithPeer:_peerID];
     _session.delegate = self;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settingsShow:)];
     //    [self setBackgroundColor:[UIColor whiteColor]];
     
-    //    if (CURRENTDEVICE != IPHONE) {
-    
     _foundPeer = false;
     [self startBrowsing];
-    //    } else {
-    //    }
 }
 
 -(void)settingsShow:(id)sender
@@ -81,7 +80,7 @@ static NSString* const kServiceName = @"multipeer";
 {
     NSLog(@"browse");
     
-    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Looking for friend..." description:nil type:TWMessageBarMessageTypeInfo duration:1000];
+    [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];
     
     _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:kServiceName];
     _browser.delegate = self;
@@ -89,15 +88,10 @@ static NSString* const kServiceName = @"multipeer";
     self.messageInputView.textView.placeHolder = @"browsing";
     
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchAdvertiser:) userInfo:nil repeats:NO];
-    //    [self launchAdvertiser:nil];
-    
 }
 
 - (void)launchAdvertiser:(id)sender {
     if (!_foundPeer) {
-        
-        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Looking for friend..." description:nil type:TWMessageBarMessageTypeInfo duration:1000];
-        
         _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:nil serviceType:kServiceName];
         _advertiser.delegate = self;
         [_advertiser startAdvertisingPeer];
@@ -135,17 +129,21 @@ static NSString* const kServiceName = @"multipeer";
     NSLog(@"changed to %d", state);
     switch (state) {
         case MCSessionStateConnected:
+        {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[TWMessageBarManager sharedInstance] hideAllAnimated:YES];
-                [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Connected" description:nil type:TWMessageBarMessageTypeSuccess];
+                [TSMessage dismissActiveNotification];
+                [TSMessage showNotificationInViewController:self title:@"connected to users" subtitle:nil type:TSMessageNotificationTypeSuccess duration:1.0 canBeDismissedByUser:YES];
             });
+        }
             break;
         case MCSessionStateNotConnected:
+        {
+            
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[TWMessageBarManager sharedInstance] hideAllAnimated:YES];
-                [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Not Connected" description:nil type:TWMessageBarMessageTypeError];
+                [TSMessage dismissActiveNotification];
+                [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];
             });
-            break;
+        }    break;
         default:
             break;
     }
@@ -291,16 +289,21 @@ static NSString* const kServiceName = @"multipeer";
 -(BOOL)shouldDisplayTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
+        JSMessage* firstMessgae = _chatMessagesArray[0];
+        _lastShownTimeStamp = firstMessgae.date;
         return YES;
     }
     JSMessage* message = _chatMessagesArray[indexPath.row];
-    JSMessage* prevMessage = _chatMessagesArray[indexPath.row - 1];
     
-    NSTimeInterval timeDiff = [message.date timeIntervalSinceDate:prevMessage.date];
+    NSTimeInterval timeDiff = [message.date timeIntervalSinceDate:_lastShownTimeStamp];
     
     double mins = floor(timeDiff/60);
-    //    double secs = round(timeDiff - mins * 60);
-    if (mins > 0) {
+    NSLog(@"%@", message.date);
+    NSLog(@"%@", _lastShownTimeStamp);
+    NSLog(@"%f", mins);
+    double secs = round(timeDiff - mins * 60);
+    if (secs > 5) {
+        _lastShownTimeStamp = message.date;
         return YES;
     }
     return NO;

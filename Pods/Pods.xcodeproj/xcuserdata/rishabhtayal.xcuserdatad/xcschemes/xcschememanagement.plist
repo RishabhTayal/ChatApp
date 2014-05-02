@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-HexColors.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-JSMessagesViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,7 +29,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-TWMessageBarManager.xcscheme</key>
+		<key>Pods-TSMessages.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>14FB0CEFC1A442FDBC0A22F1</key>
+		<key>090BF5D8682848C2BC8C77E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>737F85E26FA14841AFF9ACE0</key>
+		<key>30CCC0EB282E4DA1A3AAA648</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7F41BB0E8B45460AA819D6C7</key>
+		<key>53F930DAAA44428787594B9E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>99E57C093E5B43C989F1C546</key>
+		<key>5533C7E2F9984B92B12BAC3E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5EFEA9FF1194A68960347C4</key>
+		<key>C0CD25BAFD4143A1803BD592</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E4050B52A5A042A68ECA2530</key>
+		<key>C3A9CE5DD9224EBA930E8ED8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DFD829BC0C1E48B980EEDDFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
