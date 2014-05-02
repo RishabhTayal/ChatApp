@@ -9,8 +9,6 @@
 #import "ViewController.h"
 #import "JSMessage.h"
 
-
-
 static NSString* const kServiceName = @"multipeer";
 
 #define CURRENTDEVICE [[UIDevice currentDevice] userInterfaceIdiom]
@@ -39,9 +37,11 @@ static NSString* const kServiceName = @"multipeer";
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    
     self.delegate = self;
     self.dataSource = self;
+
+    [super viewDidLoad];
     
     _chatMessagesArray = [NSMutableArray new];
     
@@ -54,11 +54,11 @@ static NSString* const kServiceName = @"multipeer";
 //    MultiPeerConnector* mcManager = [[MultiPeerConnector alloc] init];
 //    [mcManager startFinding:self];
 
-    if (CURRENTDEVICE != IPHONE) {
+//    if (CURRENTDEVICE != IPHONE) {
         [self startBrowsing];
-    } else {
+//    } else {
         [self launchAdvertiser:nil];
-    }
+//    }
 }
 
 #pragma mark -
@@ -171,6 +171,12 @@ static NSString* const kServiceName = @"multipeer";
 -(JSMessageInputViewStyle)inputViewStyle
 {
     return JSMessageInputViewStyleFlat;
+}
+
+-(UIView *)inputView
+{
+    InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    return inputV;
 }
 
 #pragma mark - Message View Delegate: REQUIRED
