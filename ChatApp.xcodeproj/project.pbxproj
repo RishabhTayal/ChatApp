@@ -22,6 +22,7 @@
 		065A15FE1912BCFB00B85D3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 065A15FC1912BCFB00B85D3D /* InfoPlist.strings */; };
 		065A16001912BCFB00B85D3D /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A15FF1912BCFB00B85D3D /* ChatAppTests.m */; };
 		065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */; };
+		065A16151913FC6800B85D3D /* PhotoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 065A16141913FC6800B85D3D /* PhotoButton@2x.png */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		065A15FD1912BCFB00B85D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		065A15FF1912BCFB00B85D3D /* ChatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAppTests.m; sourceTree = "<group>"; };
 		065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		065A16141913FC6800B85D3D /* PhotoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoButton@2x.png"; sourceTree = "<group>"; };
 		184A048636424222948F2C41 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		98C94CC7A30A47D08D7B3D0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 		065A15DB1912BCFB00B85D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				065A16141913FC6800B85D3D /* PhotoButton@2x.png */,
 				065A15DC1912BCFB00B85D3D /* ChatApp-Info.plist */,
 				065A15DD1912BCFB00B85D3D /* InfoPlist.strings */,
 				065A15E01912BCFB00B85D3D /* main.m */,
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
+				065A16151913FC6800B85D3D /* PhotoButton@2x.png in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
 			);

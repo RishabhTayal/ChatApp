@@ -54,12 +54,14 @@ static NSString* const kServiceName = @"multipeer";
 //    MultiPeerConnector* mcManager = [[MultiPeerConnector alloc] init];
 //    [mcManager startFinding:self];
 
-//    if (CURRENTDEVICE != IPHONE) {
-//        [self startBrowsing];
-//    } else {
+    if (CURRENTDEVICE != IPHONE) {
+        [self startBrowsing];
+    } else {
         [self launchAdvertiser:nil];
-//    }
+    }
 }
+
+#pragma mark -
 
 -(void)startBrowsing
 {
@@ -79,13 +81,12 @@ static NSString* const kServiceName = @"multipeer";
     self.messageInputView.textView.placeHolder = @"advertiser";
 }
 
+#pragma mark - MCNearbyServiceBrowser Delegate
+
 -(void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
     NSLog(@"found");
-    
-//    MCSession* session = [[MCSession alloc] initWithPeer:peerID];
     [self.browser invitePeer:peerID toSession:_session withContext:nil timeout:0];
-    
 }
 
 -(void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
@@ -93,11 +94,15 @@ static NSString* const kServiceName = @"multipeer";
     NSLog(@"lost");
 }
 
+#pragma mark - MCNearbyServiceAdvertiser Delegate
+
 -(void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void (^)(BOOL, MCSession *))invitationHandler
 {
     NSLog(@"recived invitation");
     invitationHandler(YES, _session);
 }
+
+#pragma mark - MCSession Delegate
 
 -(void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
@@ -111,21 +116,33 @@ static NSString* const kServiceName = @"multipeer";
 
 -(void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
-//    NSPropertyListFormat format;
-//    NSDictionary* recievedData = [NSPropertyListSerialization propertyListWithData:data options:0 format:&format error:NULL];
-//    NSString* message = recievedData[@"message"];
     NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     JSMessage* messageObj = [[JSMessage alloc] initWithText:message sender:peerID.displayName date:[NSDate date]];
     [_chatMessagesArray addObject:messageObj];
     
-//    [self reloadInputViews];
-    [self.tableView reloadData];
-    [self scrollToBottomAnimated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+        [self scrollToBottomAnimated:YES];
+    });
+}
 
-    NSLog(@"%@", message);
+-(void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
+{
     
 }
+
+-(void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
+{
+    
+}
+
+-(void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error
+{
+    
+}
+
+#pragma mark -
 
 - (void)didReceiveMemoryWarning
 {
@@ -144,12 +161,16 @@ static NSString* const kServiceName = @"multipeer";
 
 -(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+     JSMessage* message = _chatMessagesArray[indexPath.row];
+    if ([message.sender isEqualToString:[[UIDevice currentDevice] name]]) {
+        return JSBubbleMessageTypeOutgoing;
+    }
     return JSBubbleMessageTypeIncoming;
 }
 
 -(JSMessageInputViewStyle)inputViewStyle
 {
-    return JSMessageInputViewStyleClassic;
+    return JSMessageInputViewStyleFlat;
 }
 
 #pragma mark - Message View Delegate: REQUIRED
@@ -160,10 +181,15 @@ static NSString* const kServiceName = @"multipeer";
     NSString* message = text;
     NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
 
-    NSLog(@"%@", [_session connectedPeers]);
     NSError* error = nil;
     if (![self.session sendData:data toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:&error]) {
         NSLog(@"%@", error);
+    } else {
+        JSMessage* sentMessage = [[JSMessage alloc] initWithText:message sender:[[UIDevice currentDevice] name] date:date];
+        [_chatMessagesArray addObject:sentMessage];
+        
+        [self.tableView reloadData];
+        [self scrollToBottomAnimated:YES];
     }
     [self finishSend];
 }
@@ -179,7 +205,11 @@ static NSString* const kServiceName = @"multipeer";
 
 -(UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor whiteColor]];
+    JSMessage* message = _chatMessagesArray[indexPath.row];
+    if ([message.sender isEqualToString:[[UIDevice currentDevice] name]]) {
+        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleGreenColor]];
+    }
+    return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];
 }
 
 -(UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath sender:(NSString *)sender
