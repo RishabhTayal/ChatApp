@@ -30,3 +30,9 @@
 #define COCOAPODS_VERSION_MINOR_JSQSystemSoundPlayer 4
 #define COCOAPODS_VERSION_PATCH_JSQSystemSoundPlayer 0
 
+// TWMessageBarManager
+#define COCOAPODS_POD_AVAILABLE_TWMessageBarManager
+#define COCOAPODS_VERSION_MAJOR_TWMessageBarManager 1
+#define COCOAPODS_VERSION_MINOR_TWMessageBarManager 6
+#define COCOAPODS_VERSION_PATCH_TWMessageBarManager 0
+

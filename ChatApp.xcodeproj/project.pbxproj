@@ -140,7 +140,6 @@
 		065A15DA1912BCFB00B85D3D /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
-				065A160E1912D97600B85D3D /* iPad */,
 				065A15E31912BCFB00B85D3D /* AppDelegate.h */,
 				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
 				065A15E61912BCFB00B85D3D /* Main.storyboard */,
@@ -183,13 +182,6 @@
 				065A15FC1912BCFB00B85D3D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		065A160E1912D97600B85D3D /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = iPad;
 			sourceTree = "<group>";
 		};
 		065A161E19140B8800B85D3D /* Input View */ = {

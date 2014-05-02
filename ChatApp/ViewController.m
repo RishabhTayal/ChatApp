@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "JSMessage.h"
 #import "SettingsViewController.h"
+#import "TWMessageBarManager.h"
 
 static NSString* const kServiceName = @"multipeer";
 
@@ -43,7 +44,7 @@ static NSString* const kServiceName = @"multipeer";
     
     self.delegate = self;
     self.dataSource = self;
-
+    
     [super viewDidLoad];
     
     _chatMessagesArray = [NSMutableArray new];
@@ -55,16 +56,16 @@ static NSString* const kServiceName = @"multipeer";
     _session.delegate = self;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settingsShow:)];
-//    [self setBackgroundColor:[UIColor whiteColor]];
+    //    [self setBackgroundColor:[UIColor whiteColor]];
     
-//    MultiPeerConnector* mcManager = [[MultiPeerConnector alloc] init];
-//    [mcManager startFinding:self];
-
-//    if (CURRENTDEVICE != IPHONE) {
-        [self startBrowsing];
-//    } else {
-        [self launchAdvertiser:nil];
-//    }
+    //    MultiPeerConnector* mcManager = [[MultiPeerConnector alloc] init];
+    //    [mcManager startFinding:self];
+    
+    //    if (CURRENTDEVICE != IPHONE) {
+    [self startBrowsing];
+    //    } else {
+    [self launchAdvertiser:nil];
+    //    }
 }
 
 -(void)settingsShow:(id)sender
@@ -80,6 +81,8 @@ static NSString* const kServiceName = @"multipeer";
 {
     NSLog(@"browse");
     
+    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Looking for friend..." description:nil type:TWMessageBarMessageTypeInfo];
+    
     _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:kServiceName];
     _browser.delegate = self;
     [_browser startBrowsingForPeers];
@@ -87,6 +90,8 @@ static NSString* const kServiceName = @"multipeer";
 }
 
 - (void)launchAdvertiser:(id)sender {
+    
+    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Looking for friend..." description:nil type:TWMessageBarMessageTypeInfo];
     
     _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:nil serviceType:kServiceName];
     _advertiser.delegate = self;
@@ -99,6 +104,7 @@ static NSString* const kServiceName = @"multipeer";
 -(void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info
 {
     NSLog(@"found");
+    [_browser stopBrowsingForPeers];
     [self.browser invitePeer:peerID toSession:_session withContext:nil timeout:0];
 }
 
@@ -120,6 +126,16 @@ static NSString* const kServiceName = @"multipeer";
 -(void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
     NSLog(@"changed to %d", state);
+    switch (state) {
+        case MCSessionStateConnected:
+            [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Connected" description:nil type:TWMessageBarMessageTypeSuccess duration:1.0];
+            break;
+        case MCSessionStateNotConnected:
+            [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Not Connected" description:nil type:TWMessageBarMessageTypeError duration:1.0];
+            break;
+        default:
+            break;
+    }
 }
 
 -(void)session:(MCSession *)session didReceiveCertificate:(NSArray *)certificate fromPeer:(MCPeerID *)peerID certificateHandler:(void (^)(BOOL))certificateHandler
@@ -174,7 +190,7 @@ static NSString* const kServiceName = @"multipeer";
 
 -(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     JSMessage* message = _chatMessagesArray[indexPath.row];
+    JSMessage* message = _chatMessagesArray[indexPath.row];
     if ([message.sender isEqualToString:@"me"]) {
         return JSBubbleMessageTypeOutgoing;
     }
@@ -199,7 +215,7 @@ static NSString* const kServiceName = @"multipeer";
     NSLog(@"sent");
     NSString* message = text;
     NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
-
+    
     NSError* error = nil;
     if (![self.session sendData:data toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:&error]) {
         NSLog(@"%@", error);

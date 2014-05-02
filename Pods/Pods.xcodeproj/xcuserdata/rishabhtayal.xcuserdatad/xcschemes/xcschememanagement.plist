@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-TWMessageBarManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0354F803FAB54CBFA998B90A</key>
+		<key>14FB0CEFC1A442FDBC0A22F1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>55B571A345524621AE21E10E</key>
+		<key>737F85E26FA14841AFF9ACE0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8EC73F6598B0491399A452E4</key>
+		<key>7F41BB0E8B45460AA819D6C7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8FFEAA7229274E2B86F180FF</key>
+		<key>99E57C093E5B43C989F1C546</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A4FE203CCA5B43C285320EE2</key>
+		<key>C5EFEA9FF1194A68960347C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4050B52A5A042A68ECA2530</key>
 		<dict>
 			<key>primary</key>
 			<true/>

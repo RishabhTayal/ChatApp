@@ -94,6 +94,12 @@ install_resource "JSMessagesViewController/JSMessagesViewController/Resources/Im
 install_resource "JSMessagesViewController/JSMessagesViewController/Resources/Images/input-bar-classic"
 install_resource "JSMessagesViewController/JSMessagesViewController/Resources/Images/input-bar-flat"
 install_resource "JSMessagesViewController/JSMessagesViewController/Resources/Sounds"
+install_resource "TWMessageBarManager/Classes/Icons/icon-error.png"
+install_resource "TWMessageBarManager/Classes/Icons/icon-error@2x.png"
+install_resource "TWMessageBarManager/Classes/Icons/icon-info.png"
+install_resource "TWMessageBarManager/Classes/Icons/icon-info@2x.png"
+install_resource "TWMessageBarManager/Classes/Icons/icon-success.png"
+install_resource "TWMessageBarManager/Classes/Icons/icon-success@2x.png"
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then
