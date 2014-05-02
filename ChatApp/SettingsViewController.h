@@ -1,5 +1,5 @@
 //
-//  LoginViewController.h
+//  SettingsViewController.h
 //  ChatApp
 //
 //  Created by Rishabh Tayal on 5/2/14.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "EAIntroView.h"
 
-@interface LoginViewController : UIViewController<FBLoginViewDelegate, EAIntroDelegate>
+@interface SettingsViewController : UIViewController<FBLoginViewDelegate>
 
 @end

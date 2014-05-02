@@ -26,6 +26,9 @@
 		065A16181914056B00B85D3D /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16171914056B00B85D3D /* InputView.m */; };
 		065A161A1914057B00B85D3D /* InputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 065A16191914057B00B85D3D /* InputView.xib */; };
 		065A161D191406C100B85D3D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A161C191406C100B85D3D /* LoginViewController.m */; };
+		065A162319141F3700B85D3D /* bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 065A162119141F3700B85D3D /* bg1@2x.png */; };
+		065A162419141F3700B85D3D /* bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 065A162219141F3700B85D3D /* bg2@2x.png */; };
+		065A16281914257700B85D3D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16271914257700B85D3D /* SettingsViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +69,11 @@
 		065A16191914057B00B85D3D /* InputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputView.xib; sourceTree = "<group>"; };
 		065A161B191406C100B85D3D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		065A161C191406C100B85D3D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		065A162119141F3700B85D3D /* bg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1@2x.png"; sourceTree = "<group>"; };
+		065A162219141F3700B85D3D /* bg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg2@2x.png"; sourceTree = "<group>"; };
+		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		065A16261914257700B85D3D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		184A048636424222948F2C41 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		98C94CC7A30A47D08D7B3D0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -136,13 +144,8 @@
 				065A15E31912BCFB00B85D3D /* AppDelegate.h */,
 				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
 				065A15E61912BCFB00B85D3D /* Main.storyboard */,
-				065A161B191406C100B85D3D /* LoginViewController.h */,
-				065A161C191406C100B85D3D /* LoginViewController.m */,
-				065A15E91912BCFB00B85D3D /* ViewController.h */,
-				065A15EA1912BCFB00B85D3D /* ViewController.m */,
-				065A16161914056B00B85D3D /* InputView.h */,
-				065A16171914056B00B85D3D /* InputView.m */,
-				065A16191914057B00B85D3D /* InputView.xib */,
+				065A1620191412A200B85D3D /* Login ViewController */,
+				065A161F19140B9300B85D3D /* Chat ViewController */,
 				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				065A15DB1912BCFB00B85D3D /* Supporting Files */,
 			);
@@ -152,11 +155,14 @@
 		065A15DB1912BCFB00B85D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				065A162119141F3700B85D3D /* bg1@2x.png */,
+				065A162219141F3700B85D3D /* bg2@2x.png */,
 				065A16141913FC6800B85D3D /* PhotoButton@2x.png */,
 				065A15DC1912BCFB00B85D3D /* ChatApp-Info.plist */,
 				065A15DD1912BCFB00B85D3D /* InfoPlist.strings */,
 				065A15E01912BCFB00B85D3D /* main.m */,
 				065A15E21912BCFB00B85D3D /* ChatApp-Prefix.pch */,
+				065A1625191422BE00B85D3D /* Constants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -184,6 +190,37 @@
 			children = (
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		065A161E19140B8800B85D3D /* Input View */ = {
+			isa = PBXGroup;
+			children = (
+				065A16161914056B00B85D3D /* InputView.h */,
+				065A16171914056B00B85D3D /* InputView.m */,
+				065A16191914057B00B85D3D /* InputView.xib */,
+			);
+			name = "Input View";
+			sourceTree = "<group>";
+		};
+		065A161F19140B9300B85D3D /* Chat ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				065A161E19140B8800B85D3D /* Input View */,
+				065A15E91912BCFB00B85D3D /* ViewController.h */,
+				065A15EA1912BCFB00B85D3D /* ViewController.m */,
+				065A16261914257700B85D3D /* SettingsViewController.h */,
+				065A16271914257700B85D3D /* SettingsViewController.m */,
+			);
+			name = "Chat ViewController";
+			sourceTree = "<group>";
+		};
+		065A1620191412A200B85D3D /* Login ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				065A161B191406C100B85D3D /* LoginViewController.h */,
+				065A161C191406C100B85D3D /* LoginViewController.m */,
+			);
+			name = "Login ViewController";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,7 +302,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
+				065A162319141F3700B85D3D /* bg1@2x.png in Resources */,
 				065A16151913FC6800B85D3D /* PhotoButton@2x.png in Resources */,
+				065A162419141F3700B85D3D /* bg2@2x.png in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
 				065A161A1914057B00B85D3D /* InputView.xib in Resources */,
@@ -323,6 +362,7 @@
 				065A15EB1912BCFB00B85D3D /* ViewController.m in Sources */,
 				065A16181914056B00B85D3D /* InputView.m in Sources */,
 				065A15E51912BCFB00B85D3D /* AppDelegate.m in Sources */,
+				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
 				065A15E11912BCFB00B85D3D /* main.m in Sources */,
 				065A161D191406C100B85D3D /* LoginViewController.m in Sources */,
 			);

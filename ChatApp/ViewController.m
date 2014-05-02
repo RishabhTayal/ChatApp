@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "JSMessage.h"
+#import "SettingsViewController.h"
 
 static NSString* const kServiceName = @"multipeer";
 
@@ -31,6 +32,8 @@ static NSString* const kServiceName = @"multipeer";
 
 @property (strong) NSArray* nearbyPeers;
 
+@property (strong) NSString* name;
+
 @end
 
 @implementation ViewController
@@ -45,10 +48,13 @@ static NSString* const kServiceName = @"multipeer";
     
     _chatMessagesArray = [NSMutableArray new];
     
-    _peerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
+    _name = [NSString stringWithFormat:@"%@ %@", [[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserFirstName], [[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLastName]];
+    
+    _peerID = [[MCPeerID alloc] initWithDisplayName:_name];
     _session = [[MCSession alloc] initWithPeer:_peerID];
     _session.delegate = self;
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settingsShow:)];
 //    [self setBackgroundColor:[UIColor whiteColor]];
     
 //    MultiPeerConnector* mcManager = [[MultiPeerConnector alloc] init];
@@ -59,6 +65,13 @@ static NSString* const kServiceName = @"multipeer";
 //    } else {
         [self launchAdvertiser:nil];
 //    }
+}
+
+-(void)settingsShow:(id)sender
+{
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SettingsViewController* settVC = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:settVC] animated:YES  completion:nil];
 }
 
 #pragma mark -
@@ -162,7 +175,7 @@ static NSString* const kServiceName = @"multipeer";
 -(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
 {
      JSMessage* message = _chatMessagesArray[indexPath.row];
-    if ([message.sender isEqualToString:[[UIDevice currentDevice] name]]) {
+    if ([message.sender isEqualToString:@"me"]) {
         return JSBubbleMessageTypeOutgoing;
     }
     return JSBubbleMessageTypeIncoming;
@@ -191,7 +204,7 @@ static NSString* const kServiceName = @"multipeer";
     if (![self.session sendData:data toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:&error]) {
         NSLog(@"%@", error);
     } else {
-        JSMessage* sentMessage = [[JSMessage alloc] initWithText:message sender:[[UIDevice currentDevice] name] date:date];
+        JSMessage* sentMessage = [[JSMessage alloc] initWithText:message sender:@"me" date:date];
         [_chatMessagesArray addObject:sentMessage];
         
         [self.tableView reloadData];
@@ -212,7 +225,7 @@ static NSString* const kServiceName = @"multipeer";
 -(UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JSMessage* message = _chatMessagesArray[indexPath.row];
-    if ([message.sender isEqualToString:[[UIDevice currentDevice] name]]) {
+    if ([message.sender isEqualToString:@"me"]) {
         return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleGreenColor]];
     }
     return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];

@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "ViewController.h"
 
 @interface LoginViewController ()
 
@@ -14,18 +15,12 @@
 
 @implementation LoginViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
+
+
     [super viewDidLoad];
+    [self showIntroView];
     // Do any additional setup after loading the view.
 }
 
@@ -35,6 +30,40 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)showIntroView
+{
+    EAIntroPage* page1 = [EAIntroPage page];
+    page1.title = @"a title";
+    [page1 setBgImage:[UIImage imageNamed:@"bg1"]];
+    
+    EAIntroPage* page2 = [EAIntroPage page];
+    page2.title = @"second title";
+    page2.titlePositionY = 30;
+     [page2 setBgImage:[UIImage imageNamed:@"bg2"]];
+    
+    EAIntroView* introView = [[EAIntroView alloc] initWithFrame:self.view.bounds andPages:@[page1, page2]];
+    introView.delegate = self;
+    introView.skipButton = nil;
+    [introView setUseMotionEffects:YES];
+    [introView setMotionEffectsRelativeValue:40];
+    [introView showInView:self.view animateDuration:0.3];
+}
+//
+//-(UIImage*)imageFromColor:(UIColor*)color
+//{
+//    CGRect rect = CGRectMake(0, 0, 1, 1);
+//    // Create a 1 by 1 pixel context
+//    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+//    [color setFill];
+//    UIRectFill(rect);   // Fill it with your color
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    
+//    return image;
+//}
+
+#pragma mark - FBLoginView Delegate
+
 -(void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
 {
     NSLog(@"asdf");
@@ -43,6 +72,18 @@
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
 {
     NSLog(@"fetch");
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDKeyUserLoggedIn];
+    [[NSUserDefaults standardUserDefaults] setObject:user[@"first_name"] forKey:kUDKeyUserFirstName];
+    [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ViewController* vc = [sb instantiateViewControllerWithIdentifier:@"ViewController"];
+    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:vc];
+    [UIView transitionWithView:self.view.window duration:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.view.window.rootViewController = navC;
+    } completion:nil];
 }
 
 -(void)loginViewShowingLoggedInUser:(FBLoginView *)loginView

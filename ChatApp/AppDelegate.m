@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "LoginViewController.h"
+#import "ViewController.h"
 
 @implementation AppDelegate
 
@@ -16,7 +18,28 @@
     // Override point for customization after application launch.
 //    [UINavigationBar appearance].barTintColor = [UIColor blueColor];
 
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {
+        [self setMainView];
+    } else {
+        [self setLoginView];
+    }
     return YES;
+}
+
+-(void)setLoginView
+{
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController* loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    self.window.rootViewController = loginVC;
+    [self.window makeKeyAndVisible];
+}
+
+-(void)setMainView
+{
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ViewController* vc = [sb instantiateViewControllerWithIdentifier:@"ViewController"];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.window makeKeyAndVisible];
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
