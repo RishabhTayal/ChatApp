@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatApp/ViewController.m"
-            timestampString = "420757863.76679"
+            timestampString = "420759959.302772"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "-didSendText:fromSender:onDate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatApp/ViewController.m"
-            timestampString = "420759243.963729"
+            timestampString = "420759959.302772"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-shouldDisplayTimestampForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>

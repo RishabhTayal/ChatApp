@@ -89,19 +89,19 @@ static NSString* const kServiceName = @"multipeer";
     self.messageInputView.textView.placeHolder = @"browsing";
     
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchAdvertiser:) userInfo:nil repeats:NO];
-//    [self launchAdvertiser:nil];
-
+    //    [self launchAdvertiser:nil];
+    
 }
 
 - (void)launchAdvertiser:(id)sender {
     if (!_foundPeer) {
         
-    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Looking for friend..." description:nil type:TWMessageBarMessageTypeInfo duration:1000];
-    
-    _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:nil serviceType:kServiceName];
-    _advertiser.delegate = self;
-    [_advertiser startAdvertisingPeer];
-    self.messageInputView.textView.placeHolder = @"advertiser";
+        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Looking for friend..." description:nil type:TWMessageBarMessageTypeInfo duration:1000];
+        
+        _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:nil serviceType:kServiceName];
+        _advertiser.delegate = self;
+        [_advertiser startAdvertisingPeer];
+        self.messageInputView.textView.placeHolder = @"advertiser";
     }
 }
 
@@ -111,7 +111,7 @@ static NSString* const kServiceName = @"multipeer";
 {
     NSLog(@"found");
     _foundPeer = YES;
-//    [_browser stopBrowsingForPeers];
+    //    [_browser stopBrowsingForPeers];
     [self.browser invitePeer:peerID toSession:_session withContext:nil timeout:0];
 }
 
@@ -199,6 +199,29 @@ static NSString* const kServiceName = @"multipeer";
     return _chatMessagesArray.count;
 }
 
+-(void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
+        cell.bubbleView.textView.textColor = [UIColor whiteColor];
+        
+        NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
+        [attrs setValue:[UIColor blueColor] forKey:NSForegroundColorAttributeName];
+        
+        cell.bubbleView.textView.linkTextAttributes = attrs;
+    }
+    
+    if (cell.timestampLabel) {
+        cell.timestampLabel.textColor = [UIColor lightGrayColor];
+        cell.timestampLabel.shadowOffset = CGSizeZero;
+    }
+    
+    if (cell.subtitleLabel) {
+        cell.subtitleLabel.textColor = [UIColor lightGrayColor];
+    }
+    
+    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+}
+
 #pragma mark -
 
 -(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -276,7 +299,7 @@ static NSString* const kServiceName = @"multipeer";
     NSTimeInterval timeDiff = [message.date timeIntervalSinceDate:prevMessage.date];
     
     double mins = floor(timeDiff/60);
-//    double secs = round(timeDiff - mins * 60);
+    //    double secs = round(timeDiff - mins * 60);
     if (mins > 0) {
         return YES;
     }
