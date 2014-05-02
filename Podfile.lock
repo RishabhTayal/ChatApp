@@ -1,12 +1,15 @@
 PODS:
+  - Facebook-iOS-SDK (3.13.1)
   - JSMessagesViewController (4.0.4):
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.4.0)
 
 DEPENDENCIES:
+  - Facebook-iOS-SDK
   - JSMessagesViewController
 
 SPEC CHECKSUMS:
+  Facebook-iOS-SDK: 47ae9e54684c84f93d75d4e6ab47cd031abdf406
   JSMessagesViewController: 6b59dec2b679ee6a8c6d9c9f1d5d9748abf4c05c
   JSQSystemSoundPlayer: 28ccd01a92a0cebc6de6361e8499011b4cb6dab7
 

@@ -173,11 +173,11 @@ static NSString* const kServiceName = @"multipeer";
     return JSMessageInputViewStyleFlat;
 }
 
--(UIView *)inputView
-{
-    InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-    return inputV;
-}
+//-(UIView *)inputView
+//{
+//    InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+//    return inputV;
+//}
 
 #pragma mark - Message View Delegate: REQUIRED
 

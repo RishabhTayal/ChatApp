@@ -43,6 +43,36 @@
             endingLineNumber = "123"
             landmarkName = "-session:didReceiveData:fromPeer:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ViewController session:didReceiveData:fromPeer:]"
+                  moduleName = "ChatApp"
+                  urlString = "file:///Users/rishabhtayal/Desktop/ChatApp/ChatApp/ViewController.m"
+                  timestampString = "420744002.292609"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "486">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[ViewController session:didReceiveData:fromPeer:]_block_invoke"
+                  moduleName = "ChatApp"
+                  urlString = "file:///Users/rishabhtayal/Desktop/ChatApp/ChatApp/ViewController.m"
+                  timestampString = "420744002.29282"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -51,13 +81,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatApp/ViewController.m"
-            timestampString = "420742673.509608"
+            filePath = "ChatApp/LoginViewController.m"
+            timestampString = "420743998.762143"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "-inputView"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "-loginViewFetchedUserInfo:user:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
