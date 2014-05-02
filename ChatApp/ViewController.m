@@ -55,9 +55,9 @@ static NSString* const kServiceName = @"multipeer";
 //    [mcManager startFinding:self];
 
 //    if (CURRENTDEVICE != IPHONE) {
-        [self startBrowsing];
+//        [self startBrowsing];
 //    } else {
-//        [self launchAdvertiser:nil];
+        [self launchAdvertiser:nil];
 //    }
 }
 
@@ -116,11 +116,13 @@ static NSString* const kServiceName = @"multipeer";
 //    NSString* message = recievedData[@"message"];
     NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    JSMessage* messageObj = [[JSMessage alloc] initWithText:message sender:@"sender" date:[NSDate date]];
+    JSMessage* messageObj = [[JSMessage alloc] initWithText:message sender:peerID.displayName date:[NSDate date]];
     [_chatMessagesArray addObject:messageObj];
     
+//    [self reloadInputViews];
     [self.tableView reloadData];
     [self scrollToBottomAnimated:YES];
+
     NSLog(@"%@", message);
     
 }
