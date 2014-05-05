@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 
 @interface SettingsViewController ()
 
@@ -34,12 +35,25 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
+-(void)logout:(id)sender
 {
-    NSLog(@"logged out");
+    [PFUser logOut];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate setLoginView];
 }
+
+//-(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
+//{
+//    NSLog(@"logged out");
+//    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+//    [appDelegate setLoginView];
+//}
 
 /*
 #pragma mark - Navigation

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FacebookSDK/FacebookSDK.h>
+//#import <FacebookSDK/FacebookSDK.h>
 
-@interface SettingsViewController : UIViewController<FBLoginViewDelegate>
+@interface SettingsViewController : UIViewController
+
+-(IBAction)logout:(id)sender;
 
 @end

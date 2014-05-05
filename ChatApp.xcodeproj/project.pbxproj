@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061E7E40191806A100A0DF90 /* bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E3E191806A100A0DF90 /* bg1@2x.png */; };
+		061E7E41191806A100A0DF90 /* bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E3F191806A100A0DF90 /* bg2@2x.png */; };
 		065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D41912BCFB00B85D3D /* Foundation.framework */; };
 		065A15D71912BCFB00B85D3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D61912BCFB00B85D3D /* CoreGraphics.framework */; };
 		065A15D91912BCFB00B85D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D81912BCFB00B85D3D /* UIKit.framework */; };
@@ -14,7 +16,7 @@
 		065A15E11912BCFB00B85D3D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A15E01912BCFB00B85D3D /* main.m */; };
 		065A15E51912BCFB00B85D3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A15E41912BCFB00B85D3D /* AppDelegate.m */; };
 		065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 065A15E61912BCFB00B85D3D /* Main.storyboard */; };
-		065A15EB1912BCFB00B85D3D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A15EA1912BCFB00B85D3D /* ViewController.m */; };
+		065A15EB1912BCFB00B85D3D /* NearChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A15EA1912BCFB00B85D3D /* NearChatViewController.m */; };
 		065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065A15EC1912BCFB00B85D3D /* Images.xcassets */; };
 		065A15F41912BCFB00B85D3D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15F31912BCFB00B85D3D /* XCTest.framework */; };
 		065A15F51912BCFB00B85D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D41912BCFB00B85D3D /* Foundation.framework */; };
@@ -23,11 +25,7 @@
 		065A16001912BCFB00B85D3D /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A15FF1912BCFB00B85D3D /* ChatAppTests.m */; };
 		065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */; };
 		065A16151913FC6800B85D3D /* PhotoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 065A16141913FC6800B85D3D /* PhotoButton@2x.png */; };
-		065A16181914056B00B85D3D /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16171914056B00B85D3D /* InputView.m */; };
-		065A161A1914057B00B85D3D /* InputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 065A16191914057B00B85D3D /* InputView.xib */; };
 		065A161D191406C100B85D3D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A161C191406C100B85D3D /* LoginViewController.m */; };
-		065A162319141F3700B85D3D /* bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 065A162119141F3700B85D3D /* bg1@2x.png */; };
-		065A162419141F3700B85D3D /* bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 065A162219141F3700B85D3D /* bg2@2x.png */; };
 		065A16281914257700B85D3D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16271914257700B85D3D /* SettingsViewController.m */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
@@ -44,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		061E7E3E191806A100A0DF90 /* bg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1@2x.png"; sourceTree = "<group>"; };
+		061E7E3F191806A100A0DF90 /* bg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg2@2x.png"; sourceTree = "<group>"; };
 		065A15D11912BCFB00B85D3D /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065A15D41912BCFB00B85D3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		065A15D61912BCFB00B85D3D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -55,8 +55,8 @@
 		065A15E31912BCFB00B85D3D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		065A15E41912BCFB00B85D3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		065A15E71912BCFB00B85D3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		065A15E91912BCFB00B85D3D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		065A15EA1912BCFB00B85D3D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		065A15E91912BCFB00B85D3D /* NearChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NearChatViewController.h; sourceTree = "<group>"; };
+		065A15EA1912BCFB00B85D3D /* NearChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NearChatViewController.m; sourceTree = "<group>"; };
 		065A15EC1912BCFB00B85D3D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		065A15F21912BCFB00B85D3D /* ChatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		065A15F31912BCFB00B85D3D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -65,13 +65,8 @@
 		065A15FF1912BCFB00B85D3D /* ChatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAppTests.m; sourceTree = "<group>"; };
 		065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		065A16141913FC6800B85D3D /* PhotoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoButton@2x.png"; sourceTree = "<group>"; };
-		065A16161914056B00B85D3D /* InputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputView.h; sourceTree = "<group>"; };
-		065A16171914056B00B85D3D /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
-		065A16191914057B00B85D3D /* InputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputView.xib; sourceTree = "<group>"; };
 		065A161B191406C100B85D3D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		065A161C191406C100B85D3D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		065A162119141F3700B85D3D /* bg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1@2x.png"; sourceTree = "<group>"; };
-		065A162219141F3700B85D3D /* bg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg2@2x.png"; sourceTree = "<group>"; };
 		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		065A16261914257700B85D3D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -189,22 +184,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		065A161E19140B8800B85D3D /* Input View */ = {
-			isa = PBXGroup;
-			children = (
-				065A16161914056B00B85D3D /* InputView.h */,
-				065A16171914056B00B85D3D /* InputView.m */,
-				065A16191914057B00B85D3D /* InputView.xib */,
-			);
-			name = "Input View";
-			sourceTree = "<group>";
-		};
 		065A161F19140B9300B85D3D /* Chat ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				065A161E19140B8800B85D3D /* Input View */,
-				065A15E91912BCFB00B85D3D /* ViewController.h */,
-				065A15EA1912BCFB00B85D3D /* ViewController.m */,
+				065A15E91912BCFB00B85D3D /* NearChatViewController.h */,
+				065A15EA1912BCFB00B85D3D /* NearChatViewController.m */,
 			);
 			name = "Chat ViewController";
 			sourceTree = "<group>";
@@ -221,8 +205,8 @@
 		065A162B19145BA900B85D3D /* temp */ = {
 			isa = PBXGroup;
 			children = (
-				065A162119141F3700B85D3D /* bg1@2x.png */,
-				065A162219141F3700B85D3D /* bg2@2x.png */,
+				061E7E3E191806A100A0DF90 /* bg1@2x.png */,
+				061E7E3F191806A100A0DF90 /* bg2@2x.png */,
 			);
 			name = temp;
 			sourceTree = "<group>";
@@ -315,12 +299,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
-				065A162319141F3700B85D3D /* bg1@2x.png in Resources */,
+				061E7E40191806A100A0DF90 /* bg1@2x.png in Resources */,
 				065A16151913FC6800B85D3D /* PhotoButton@2x.png in Resources */,
-				065A162419141F3700B85D3D /* bg2@2x.png in Resources */,
+				061E7E41191806A100A0DF90 /* bg2@2x.png in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
-				065A161A1914057B00B85D3D /* InputView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,8 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				065A15EB1912BCFB00B85D3D /* ViewController.m in Sources */,
-				065A16181914056B00B85D3D /* InputView.m in Sources */,
+				065A15EB1912BCFB00B85D3D /* NearChatViewController.m in Sources */,
 				065A15E51912BCFB00B85D3D /* AppDelegate.m in Sources */,
 				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
 				065A15E11912BCFB00B85D3D /* main.m in Sources */,

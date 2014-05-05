@@ -9,8 +9,9 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
-#import "ViewController.h"
+#import "NearChatViewController.h"
 #import "IntroViewController.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
@@ -19,6 +20,9 @@
     // Override point for customization after application launch.
 //    [UINavigationBar appearance].barTintColor = [UIColor blueColor];
 
+    [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
+    [PFFacebookUtils initializeFacebook];
+    
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {
         [self setMainView];
     } else {
@@ -32,11 +36,11 @@
 //    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    LoginViewController* loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
     
-    NSArray* infoArray = @[@{@"Header": @"", @"Label": @""}, @{@"Header": @"", @"Label": @""}];
+    NSArray* infoArray = @[@{@"Header": @"Camping", @"Label": @"Some camping description"}, @{@"Header": @"School", @"Label": @"Some school description.    "}];
     
     IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2"] andInformations:infoArray];
     
-    [intro setHeaderImage:[UIImage imageNamed:@"facebook-logo"]];
+    [intro setHeaderImage:[UIImage imageNamed:@"PhotoButton"]];
     [intro setButtons:AOTutorialButtonLogin];
     
     UIButton* loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -49,14 +53,14 @@
 -(void)setMainView
 {
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ViewController* vc = [sb instantiateViewControllerWithIdentifier:@"ViewController"];
+    NearChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
     [self.window makeKeyAndVisible];
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session]];
     
     return wasHandled;
 }
@@ -80,6 +84,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

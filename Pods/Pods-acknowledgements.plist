@@ -353,6 +353,14 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>See https://parse.com/about/terms</string>
+			<key>Title</key>
+			<string>Parse-iOS-SDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright (c) 2013, Toursprung
 All rights reserved.
 

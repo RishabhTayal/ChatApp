@@ -9,7 +9,7 @@
                 <outlet property="backgroundBottomImage" destination="fcB-8H-SUt" id="WjC-CX-0qz"/>
                 <outlet property="backgroundTopImage" destination="rA3-BW-oO8" id="mYl-lt-8T5"/>
                 <outlet property="dismissButton" destination="df0-RF-RT2" id="tDi-21-fbO"/>
-                <outlet property="loginButton" destination="vDA-1Y-jP4" id="Nso-0O-Iix"/>
+                <outlet property="loginButton" destination="ID8-qs-8Uv" id="BpI-Im-dur"/>
                 <outlet property="logo" destination="50a-yb-Td1" id="Itx-a1-s42"/>
                 <outlet property="pageController" destination="Bwo-0s-TBS" id="dtU-bh-aql"/>
                 <outlet property="scrollview" destination="GAh-dW-Csc" id="Axx-1m-vcq"/>
@@ -66,14 +66,18 @@
                     <rect key="frame" x="42" y="473" width="236" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </pageControl>
-                <view contentMode="scaleToFill" id="vDA-1Y-jP4" customClass="FBLoginView">
-                    <rect key="frame" x="61" y="513" width="198" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ID8-qs-8Uv">
+                    <rect key="frame" x="74" y="517" width="173" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Login with facebook">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="MX9-Yr-EE6"/>
+                        <action selector="login:" destination="-1" eventType="touchUpInside" id="aFl-UQ-gSp"/>
                     </connections>
-                </view>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

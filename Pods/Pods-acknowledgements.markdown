@@ -316,6 +316,10 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTI
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+## Parse-iOS-SDK
+
+See https://parse.com/about/terms
+
 ## TSMessages
 
 Copyright (c) 2013, Toursprung

@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "ViewController.h"
+#import "NearChatViewController.h"
 
 @interface LoginViewController ()
 

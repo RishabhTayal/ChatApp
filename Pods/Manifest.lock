@@ -7,6 +7,8 @@ PODS:
   - JSMessagesViewController (4.0.4):
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.4.0)
+  - Parse-iOS-SDK (1.2.19):
+    - Facebook-iOS-SDK (~> 3.7)
   - TSMessages (0.9.7):
     - HexColors
 
@@ -14,6 +16,7 @@ DEPENDENCIES:
   - AOTutorial
   - Facebook-iOS-SDK
   - JSMessagesViewController
+  - Parse-iOS-SDK
   - TSMessages
 
 SPEC CHECKSUMS:
@@ -23,6 +26,7 @@ SPEC CHECKSUMS:
   HexColors: 99211502e17904af7891fc8f687d0e4958a6d66e
   JSMessagesViewController: 6b59dec2b679ee6a8c6d9c9f1d5d9748abf4c05c
   JSQSystemSoundPlayer: 28ccd01a92a0cebc6de6361e8499011b4cb6dab7
+  Parse-iOS-SDK: 48e366fb9a8956c4e50d93cfd16243176938fae1
   TSMessages: 9dd053bcf1a8985275177ebe0fb8c0f1416e92f7
 
 COCOAPODS: 0.32.1
