@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "EAIntroView.h"
+//#import "EAIntroView.h"
 
-@interface LoginViewController : UIViewController<FBLoginViewDelegate, EAIntroDelegate>
+@interface LoginViewController : UIViewController<FBLoginViewDelegate>
 
 @end

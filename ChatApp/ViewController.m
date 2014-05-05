@@ -276,9 +276,9 @@ static NSString* const kServiceName = @"multipeer";
 {
     JSMessage* message = _chatMessagesArray[indexPath.row];
     if ([message.sender isEqualToString:@"me"]) {
-        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleGreenColor]];
+        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];
     }
-    return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];
+    return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleLightGrayColor]];
 }
 
 -(UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath sender:(NSString *)sender
@@ -302,7 +302,7 @@ static NSString* const kServiceName = @"multipeer";
     NSLog(@"%@", _lastShownTimeStamp);
     NSLog(@"%f", mins);
     double secs = round(timeDiff - mins * 60);
-    if (secs > 5) {
+    if (mins > 1) {
         _lastShownTimeStamp = message.date;
         return YES;
     }

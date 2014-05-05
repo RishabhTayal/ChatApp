@@ -51,29 +51,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ChatApp/LoginViewController.m"
-            timestampString = "420992767.729245"
+            filePath = "ChatApp/AppDelegate.m"
+            timestampString = "421000249.807716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "-loginViewShowingLoggedInUser:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChatApp/LoginViewController.m"
-            timestampString = "420997788.404645"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-loginViewFetchedUserInfo:user:"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-setLoginView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

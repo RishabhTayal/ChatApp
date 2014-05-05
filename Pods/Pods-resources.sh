@@ -41,6 +41,7 @@ install_resource()
       ;;
   esac
 }
+install_resource "AOTutorial/src/AOTutorialViewController.xib"
 install_resource "Facebook-iOS-SDK/src/FBUserSettingsViewResources.bundle"
 install_resource "JSMessagesViewController/JSMessagesViewController/Resources/Images/avatar/avatar-placeholder.png"
 install_resource "JSMessagesViewController/JSMessagesViewController/Resources/Images/avatar/avatar-placeholder@2x.png"

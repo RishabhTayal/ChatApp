@@ -10,6 +10,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
 #import "ViewController.h"
+#import "IntroViewController.h"
 
 @implementation AppDelegate
 
@@ -28,9 +29,20 @@
 
 -(void)setLoginView
 {
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController* loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    self.window.rootViewController = loginVC;
+//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    LoginViewController* loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    
+    NSArray* infoArray = @[@{@"Header": @"", @"Label": @""}, @{@"Header": @"", @"Label": @""}];
+    
+    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2"] andInformations:infoArray];
+    
+    [intro setHeaderImage:[UIImage imageNamed:@"facebook-logo"]];
+    [intro setButtons:AOTutorialButtonLogin];
+    
+    UIButton* loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [intro setLoginButton:loginButton];
+    
+    self.window.rootViewController = intro;
     [self.window makeKeyAndVisible];
 }
 
