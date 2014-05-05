@@ -9,7 +9,9 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
-#import "NearChatViewController.h"
+//#import "NearChatViewController.h"
+#import "FriendsChatViewController.h"
+
 #import "IntroViewController.h"
 #import <Parse/Parse.h>
 
@@ -53,7 +55,7 @@
 -(void)setMainView
 {
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NearChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
+    FriendsChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
     [self.window makeKeyAndVisible];
 }

@@ -20,6 +20,20 @@
             </objects>
             <point key="canvasLocation" x="665" y="360"/>
         </scene>
+        <!--Friends Chat View Controller-->
+        <scene sceneID="ocv-X2-pqK">
+            <objects>
+                <viewController restorationIdentifier="FriendsChatViewController" storyboardIdentifier="FriendsChatViewController" id="GjL-hg-2XM" customClass="FriendsChatViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8fz-DU-dFV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eCf-Fz-nTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1093" y="266"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="izH-mn-4sg">
             <objects>
