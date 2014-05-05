@@ -67,6 +67,7 @@
 -(void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
 {
     NSLog(@"asdf");
+    NSLog(@"%@", error);
 }
 
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
@@ -77,6 +78,11 @@
     [[NSUserDefaults standardUserDefaults] setObject:user[@"first_name"] forKey:kUDKeyUserFirstName];
     [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:NO, @"redirect", @"200", @"height", @"normal", @"type", @"200", @"width", nil];
+//    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@/picture", user[@"id"]] parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//        NSLog(@"%@", result);
+//    }];
     
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ViewController* vc = [sb instantiateViewControllerWithIdentifier:@"ViewController"];

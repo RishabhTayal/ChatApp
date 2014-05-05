@@ -144,6 +144,7 @@
 				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
 				065A15E61912BCFB00B85D3D /* Main.storyboard */,
 				065A1620191412A200B85D3D /* Login ViewController */,
+				06FD23811917D72100AE7226 /* Settings VC */,
 				065A161F19140B9300B85D3D /* Chat ViewController */,
 				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				065A15DB1912BCFB00B85D3D /* Supporting Files */,
@@ -154,8 +155,7 @@
 		065A15DB1912BCFB00B85D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				065A162119141F3700B85D3D /* bg1@2x.png */,
-				065A162219141F3700B85D3D /* bg2@2x.png */,
+				065A162B19145BA900B85D3D /* temp */,
 				065A16141913FC6800B85D3D /* PhotoButton@2x.png */,
 				065A15DC1912BCFB00B85D3D /* ChatApp-Info.plist */,
 				065A15DD1912BCFB00B85D3D /* InfoPlist.strings */,
@@ -200,8 +200,6 @@
 				065A161E19140B8800B85D3D /* Input View */,
 				065A15E91912BCFB00B85D3D /* ViewController.h */,
 				065A15EA1912BCFB00B85D3D /* ViewController.m */,
-				065A16261914257700B85D3D /* SettingsViewController.h */,
-				065A16271914257700B85D3D /* SettingsViewController.m */,
 			);
 			name = "Chat ViewController";
 			sourceTree = "<group>";
@@ -213,6 +211,24 @@
 				065A161C191406C100B85D3D /* LoginViewController.m */,
 			);
 			name = "Login ViewController";
+			sourceTree = "<group>";
+		};
+		065A162B19145BA900B85D3D /* temp */ = {
+			isa = PBXGroup;
+			children = (
+				065A162119141F3700B85D3D /* bg1@2x.png */,
+				065A162219141F3700B85D3D /* bg2@2x.png */,
+			);
+			name = temp;
+			sourceTree = "<group>";
+		};
+		06FD23811917D72100AE7226 /* Settings VC */ = {
+			isa = PBXGroup;
+			children = (
+				065A16261914257700B85D3D /* SettingsViewController.h */,
+				065A16271914257700B85D3D /* SettingsViewController.m */,
+			);
+			name = "Settings VC";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
