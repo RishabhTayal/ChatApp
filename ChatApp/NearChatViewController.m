@@ -88,11 +88,13 @@ static NSString* const kServiceName = @"multipeer";
     _browser.delegate = self;
     [_browser startBrowsingForPeers];
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchAdvertiser:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(launchAdvertiser:) userInfo:nil repeats:NO];
 }
 
 - (void)launchAdvertiser:(id)sender {
     if (!_foundPeer) {
+        
+        NSLog(@"Advertise");
         _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:_peerID discoveryInfo:nil serviceType:kServiceName];
         _advertiser.delegate = self;
         [_advertiser startAdvertisingPeer];
@@ -138,7 +140,6 @@ static NSString* const kServiceName = @"multipeer";
             break;
         case MCSessionStateNotConnected:
         {
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [TSMessage dismissActiveNotification];
                 [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];

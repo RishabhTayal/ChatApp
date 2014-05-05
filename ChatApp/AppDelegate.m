@@ -9,11 +9,12 @@
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
-//#import "NearChatViewController.h"
+#import "NearChatViewController.h"
 #import "FriendsChatViewController.h"
-
+#import <MFSideMenu/MFSideMenu.h>
 #import "IntroViewController.h"
 #import <Parse/Parse.h>
+#import "MenuViewController.h"
 
 @implementation AppDelegate
 
@@ -69,9 +70,10 @@
 
 -(void)setMainView
 {
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    FriendsChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:vc];
+//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[NearChatViewController alloc] init] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+//    FriendsChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
+    self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
 }
 

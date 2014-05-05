@@ -9,6 +9,9 @@
 #import "IntroViewController.h"
 #import "NearChatViewController.h"
 #import <Parse/Parse.h>
+#import "MenuViewController.h"
+#import <MFSideMenu.h>
+#import "NearChatViewController.h"
 
 @interface IntroViewController ()
 
@@ -33,7 +36,7 @@
     NSLog(@"login");
     [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
         NSLog(@"%@", user);
-       
+        
         
         [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
@@ -49,7 +52,7 @@
                 [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-//                NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:NO, @"redirect", @"200", @"height", @"normal", @"type", @"200", @"width", nil];
+                //                NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:NO, @"redirect", @"200", @"height", @"normal", @"type", @"200", @"width", nil];
                 //    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@/picture", user[@"id"]] parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                 //        NSLog(@"%@", result);
                 //    }];
@@ -57,12 +60,11 @@
                 //    PFUser* newUser = [PFUser user];
                 //    newUser.email = user[@"email"];
                 
-                
-                UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                NearChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
-                UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:vc];
+//                UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[NearChatViewController alloc] init] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+                //    FriendsChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
                 [UIView transitionWithView:self.view.window duration:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-                    self.view.window.rootViewController = navC;
+                    self.view.window.rootViewController = vc;
                 } completion:nil];
             }
         }];
@@ -80,21 +82,21 @@
 //-(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
 //{
 //    NSLog(@"fetch");
-//    
+//
 //    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDKeyUserLoggedIn];
 //    [[NSUserDefaults standardUserDefaults] setObject:user[@"first_name"] forKey:kUDKeyUserFirstName];
 //    [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
-//    
+//
 //    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:NO, @"redirect", @"200", @"height", @"normal", @"type", @"200", @"width", nil];
 //    //    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@/picture", user[@"id"]] parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
 //    //        NSLog(@"%@", result);
 //    //    }];
-//    
+//
 ////    PFUser* newUser = [PFUser user];
 ////    newUser.email = user[@"email"];
-//    
-//    
+//
+//
 //    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    ViewController* vc = [sb instantiateViewControllerWithIdentifier:@"ViewController"];
 //    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:vc];
@@ -115,14 +117,14 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
