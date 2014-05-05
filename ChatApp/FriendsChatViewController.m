@@ -14,6 +14,8 @@
 
 @property (strong) NSMutableArray* chatArray;
 
+@property (strong) NSTimer* timer;
+
 @end
 
 @implementation FriendsChatViewController
@@ -27,8 +29,20 @@
     
     _chatArray = [NSMutableArray new];
     
-    [self loadChat];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(loadChat) userInfo:nil repeats:YES];
+    [self loadChat];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [_timer invalidate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,7 +54,8 @@
 -(void)loadChat
 {
     PFQuery *query = [[PFQuery alloc] initWithClassName:@"Wechat"];
-    [query orderByAscending:@"createdAt"];
+    query.limit = 10;
+    [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [_chatArray removeAllObjects];
         
@@ -48,10 +63,11 @@
             JSMessage* message = [[JSMessage alloc] initWithText:object[@"msg"] sender:object[@"name"] date:object.createdAt];
             [_chatArray addObject:message];
         }
+        _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
         [self.tableView reloadData];
         [self scrollToBottomAnimated:YES];
     }];
-
+    
 }
 
 -(void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date
@@ -94,10 +110,10 @@
 
 -(UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    JSMessage* message = _chatMessagesArray[indexPath.row];
-//    if ([message.sender isEqualToString:@"me"]) {
-//        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];
-//    }
+    //    JSMessage* message = _chatMessagesArray[indexPath.row];
+    //    if ([message.sender isEqualToString:@"me"]) {
+    //        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];
+    //    }
     return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleLightGrayColor]];
 }
 
