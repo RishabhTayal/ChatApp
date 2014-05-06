@@ -155,7 +155,7 @@
         {
             if (!_settings)
                 _settings = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-            array = [[NSMutableArray alloc] initWithObjects:_settings, nil];
+            array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_settings], nil];
         }
             break;
     }

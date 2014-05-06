@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import <UIScrollView+APParallaxHeader.h>
 
 @interface SettingsViewController ()
 
@@ -20,13 +21,11 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPress:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPress:)];
+    
+    UIImage* image = [UIImage imageWithData:[PFUser currentUser][@"picture"]];
+    [self.tableView addParallaxWithImage:image andHeight:200];
     // Do any additional setup after loading the view.
-}
-
--(void)cancelPress:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,7 +43,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate setLoginView];
 }
 

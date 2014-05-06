@@ -35,11 +35,10 @@
 {
     NSLog(@"login");
     
-    NSArray* permissions = @[@"user_friends"];
+    //    NSArray* permissions = @[@"user_friends"];
     
-    [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
+    [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
         NSLog(@"%@", user);
-        
         
         [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
@@ -48,6 +47,15 @@
                 [[PFUser currentUser] setObject:result[@"name"] forKey:@"username"];
                 [[PFUser currentUser] setObject:result[@"email"] forKey:@"email"];
                 [[PFUser currentUser] saveInBackground];
+                
+                [FBRequestConnection startWithGraphPath:@"/me/picture" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                    NSLog(@"%@", connection.urlResponse.URL);
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                        NSData* imgData = [NSData dataWithContentsOfURL:connection.urlResponse.URL];
+                        [[PFUser currentUser] setObject:imgData forKey:@"picture"];
+                        [[PFUser currentUser] saveInBackground];
+                    });
+                }];
                 
                 NSLog(@"%@", [PFUser currentUser][@"fbID"]);
                 [[PFInstallation currentInstallation] setObject:[PFUser currentUser][@"fbID"] forKey:@"owner"];
@@ -58,15 +66,6 @@
                 [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-                //                NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:NO, @"redirect", @"200", @"height", @"normal", @"type", @"200", @"width", nil];
-                //    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@/picture", user[@"id"]] parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                //        NSLog(@"%@", result);
-                //    }];
-                
-                //    PFUser* newUser = [PFUser user];
-                //    newUser.email = user[@"email"];
-                
-//                UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[NearChatViewController alloc] init] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
                 //    FriendsChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
                 [UIView transitionWithView:self.view.window duration:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
@@ -76,61 +75,5 @@
         }];
     }];
 }
-
-//#pragma mark - FBLoginView Delegate
-//
-//-(void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
-//{
-//    NSLog(@"asdf");
-//    NSLog(@"%@", error);
-//}
-//
-//-(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
-//{
-//    NSLog(@"fetch");
-//
-//    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDKeyUserLoggedIn];
-//    [[NSUserDefaults standardUserDefaults] setObject:user[@"first_name"] forKey:kUDKeyUserFirstName];
-//    [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//
-//    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:NO, @"redirect", @"200", @"height", @"normal", @"type", @"200", @"width", nil];
-//    //    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@/picture", user[@"id"]] parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//    //        NSLog(@"%@", result);
-//    //    }];
-//
-////    PFUser* newUser = [PFUser user];
-////    newUser.email = user[@"email"];
-//
-//
-//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    ViewController* vc = [sb instantiateViewControllerWithIdentifier:@"ViewController"];
-//    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:vc];
-//    [UIView transitionWithView:self.view.window duration:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-//        self.view.window.rootViewController = navC;
-//    } completion:nil];
-//}
-//
-//-(void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
-//{
-//    NSLog(@"logg");
-//}
-//
-//-(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
-//{
-//    NSLog(@"out");
-//}
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
