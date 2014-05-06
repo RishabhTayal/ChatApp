@@ -29,6 +29,7 @@
     
     _chatArray = [NSMutableArray new];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationRecieved:) name:@"notification" object:nil];
     // Do any additional setup after loading the view.
 }
 
@@ -45,10 +46,24 @@
     [_timer invalidate];
 }
 
+-(void)dealloc
+{
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)pushNotificationRecieved:(NSNotification*)notification
+{
+    NSLog(@"%@", notification.userInfo[@"aps"][@"alert"]);
+    JSMessage* message = [[JSMessage alloc] initWithText:notification.userInfo[@"aps"][@"alert"] sender:@"" date:nil];
+    [_chatArray addObject:message];
+    [self.tableView reloadData];
+    [self scrollToBottomAnimated:YES];
 }
 
 -(void)loadChat
@@ -75,12 +90,22 @@
     JSMessage* message = [[JSMessage alloc] initWithText:text sender:sender date:date];
     [_chatArray addObject:message];
     
-    PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];
-    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:@"msg"];
-    [sendObjects setObject:[PFUser currentUser].username forKey:@"name"];
-    [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        NSLog(@"save");
-    }];
+    
+    NSArray* recipients = @[@"vJEY4hOcVC",@"2"];
+    PFQuery* pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"owner" containedIn:recipients];
+    
+    PFPush *push = [[PFPush alloc] init];
+    [push setQuery:pushQuery];
+    [push setMessage:text];
+    [push sendPushInBackground];
+    
+//    PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];
+//    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:@"msg"];
+//    [sendObjects setObject:[PFUser currentUser].username forKey:@"name"];
+//    [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        NSLog(@"save");
+//    }];
     
     [self.tableView reloadData];
     [self scrollToBottomAnimated:YES];

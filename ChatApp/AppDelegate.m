@@ -40,13 +40,18 @@
 {
     PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation setObject:[PFUser currentUser].objectId forKey:@"owner"];
     [currentInstallation setChannels:@[@"channel"]];
     [currentInstallation saveInBackground];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [PFPush handlePush:userInfo];
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:userInfo];
+    } else {
+        [PFPush handlePush:userInfo];
+    }
 }
 
 -(void)setLoginView

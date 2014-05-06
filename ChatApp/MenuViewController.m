@@ -7,7 +7,7 @@
 //
 
 #import "MenuViewController.h"
-#import "FriendsChatViewController.h"
+#import "FriendsListViewController.h"
 #import "NearChatViewController.h"
 #import "SettingsViewController.h"
 #import <MFSideMenu.h>
@@ -15,7 +15,7 @@
 @interface MenuViewController ()
 
 @property (strong) NearChatViewController* near;
-@property (strong) FriendsChatViewController* friends;
+@property (strong) FriendsListViewController* friends;
 @property (strong) SettingsViewController* settings;
 
 @end
@@ -112,8 +112,8 @@
         case 1:
         {
             if (!_friends)
-                _friends = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
-            array =[[NSMutableArray alloc] initWithObjects:_friends, nil];
+                _friends = [sb instantiateViewControllerWithIdentifier:@"FriendsListViewController"];
+            array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_friends], nil];
         }
             break;
         default:
