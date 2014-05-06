@@ -93,7 +93,12 @@
                 NSString* firstName = (__bridge NSString*)(ABRecordCopyValue(ref, kABPersonFirstNameProperty));
                 NSString* lastName = (__bridge NSString*)(ABRecordCopyValue(ref, kABPersonLastNameProperty));
                 NSString* name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-                NSDictionary* dict = @{@"name": name, @"email": email};
+                NSData* imgData = (__bridge NSData*)(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail));
+                UIImage* img = [UIImage imageWithData:imgData];
+                if (img == nil) {
+                    img = [UIImage imageNamed:@"avatar-placeholder"];
+                }
+                NSDictionary* dict = @{@"name": name, @"email": email, @"image": img};
                 [allcontacts addObject:dict];
             }
             CFRelease(emails);
@@ -146,6 +151,7 @@
     } else {
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friendNotUsingAppCell"];
         cell.friendName.text = _friendsNotUsingApp[indexPath.row][@"name"];
+        cell.profilePicture.image = _friendsNotUsingApp[indexPath.row][@"image"];
         return cell;
     }
 }

@@ -119,6 +119,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0608596D19198BD4005F6A75 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				065A15E31912BCFB00B85D3D /* AppDelegate.h */,
+				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
+			);
+			name = "App Delegate";
+			sourceTree = "<group>";
+		};
 		061E7E4419182A1A00A0DF90 /* Near */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,9 +140,9 @@
 		061E7E4519182A2500A0DF90 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				061E7E52191881A100A0DF90 /* Friends List */,
 				061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */,
 				061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */,
-				061E7E52191881A100A0DF90 /* Friends List */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -186,8 +195,7 @@
 		065A15DA1912BCFB00B85D3D /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
-				065A15E31912BCFB00B85D3D /* AppDelegate.h */,
-				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
+				0608596D19198BD4005F6A75 /* App Delegate */,
 				065A15E61912BCFB00B85D3D /* Main.storyboard */,
 				06FD23841917F1B800AE7226 /* IntroViewController.h */,
 				06FD23851917F1B800AE7226 /* IntroViewController.m */,
