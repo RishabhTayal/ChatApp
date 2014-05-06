@@ -1,11 +1,11 @@
 platform:ios, '7.0'
 
-#pod 'AFNetworking'
+pod 'AFNetworking'
 pod 'JSMessagesViewController'
 pod 'Facebook-iOS-SDK'
 #pod 'EAIntroView'
 pod 'AOTutorial'
 #pod 'TWMessageBarManager', '~> 1.6.0'
-pod 'TSMessages'
+pod 'TSMessages', '0.9.7'
 pod 'Parse-iOS-SDK'
 pod 'MFSideMenu'

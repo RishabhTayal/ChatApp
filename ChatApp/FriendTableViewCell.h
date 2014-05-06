@@ -11,5 +11,6 @@
 @interface FriendTableViewCell : UITableViewCell
 
 @property (strong) IBOutlet UILabel* friendName;
+@property (strong) IBOutlet UIImageView* profilePicture;
 
 @end

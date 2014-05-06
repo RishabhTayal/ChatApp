@@ -59,6 +59,8 @@
 
 -(void)pushNotificationRecieved:(NSNotification*)notification
 {
+    [JSMessageSoundEffect playMessageReceivedSound];
+    
     NSLog(@"%@", notification.userInfo[@"aps"][@"alert"]);
     JSMessage* message = [[JSMessage alloc] initWithText:notification.userInfo[@"aps"][@"alert"] sender:@"" date:nil];
     [_chatArray addObject:message];
@@ -90,8 +92,9 @@
     JSMessage* message = [[JSMessage alloc] initWithText:text sender:sender date:date];
     [_chatArray addObject:message];
     
+    [JSMessageSoundEffect playMessageSentSound];
     
-    NSArray* recipients = @[@"vJEY4hOcVC",@"2"];
+    NSArray* recipients = @[_friendId];
     PFQuery* pushQuery = [PFInstallation query];
     [pushQuery whereKey:@"owner" containedIn:recipients];
     
@@ -100,12 +103,12 @@
     [push setMessage:text];
     [push sendPushInBackground];
     
-//    PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];
-//    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:@"msg"];
-//    [sendObjects setObject:[PFUser currentUser].username forKey:@"name"];
-//    [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        NSLog(@"save");
-//    }];
+    PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];
+    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:@"msg"];
+    [sendObjects setObject:[PFUser currentUser].username forKey:@"name"];
+    [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSLog(@"save");
+    }];
     
     [self.tableView reloadData];
     [self scrollToBottomAnimated:YES];

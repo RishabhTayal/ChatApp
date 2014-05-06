@@ -36,8 +36,11 @@
 }
 
 -(void)logout:(id)sender
-{
-    [PFUser logOut];
+{    
+//    [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser] block:^(BOOL succeeded, NSError *error) {
+            [PFUser logOut];
+//    }];
+    
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

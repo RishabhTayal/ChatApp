@@ -26,6 +26,8 @@
     [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
     [PFFacebookUtils initializeFacebook];
     
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {
@@ -40,16 +42,15 @@
 {
     PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation setObject:[PFUser currentUser].objectId forKey:@"owner"];
     [currentInstallation setChannels:@[@"channel"]];
     [currentInstallation saveInBackground];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:userInfo];
-    } else {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:userInfo];
+
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         [PFPush handlePush:userInfo];
     }
 }

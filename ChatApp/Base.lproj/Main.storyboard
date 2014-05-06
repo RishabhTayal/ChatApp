@@ -93,6 +93,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="friendName" destination="RGJ-FV-yHA" id="QcP-QI-lk1"/>
+                                    <outlet property="profilePicture" destination="COF-SA-Zp4" id="cAb-Ix-bpp"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

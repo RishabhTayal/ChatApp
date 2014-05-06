@@ -13,6 +13,7 @@
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
 		061E7E4E191880C000A0DF90 /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4D191880C000A0DF90 /* FriendsListViewController.m */; };
 		061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E501918818400A0DF90 /* FriendTableViewCell.m */; };
+		061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E53191922BB00A0DF90 /* chicago1.jpg */; };
 		065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D41912BCFB00B85D3D /* Foundation.framework */; };
 		065A15D71912BCFB00B85D3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D61912BCFB00B85D3D /* CoreGraphics.framework */; };
 		065A15D91912BCFB00B85D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D81912BCFB00B85D3D /* UIKit.framework */; };
@@ -56,6 +57,7 @@
 		061E7E4D191880C000A0DF90 /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsListViewController.m; sourceTree = "<group>"; };
 		061E7E4F1918818400A0DF90 /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		061E7E501918818400A0DF90 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
+		061E7E53191922BB00A0DF90 /* chicago1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chicago1.jpg; sourceTree = "<group>"; };
 		065A15D11912BCFB00B85D3D /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065A15D41912BCFB00B85D3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		065A15D61912BCFB00B85D3D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -249,6 +251,7 @@
 		065A162B19145BA900B85D3D /* temp */ = {
 			isa = PBXGroup;
 			children = (
+				061E7E53191922BB00A0DF90 /* chicago1.jpg */,
 				061E7E3E191806A100A0DF90 /* bg1@2x.png */,
 				061E7E3F191806A100A0DF90 /* bg2@2x.png */,
 			);
@@ -348,6 +351,7 @@
 				061E7E41191806A100A0DF90 /* bg2@2x.png in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
+				061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

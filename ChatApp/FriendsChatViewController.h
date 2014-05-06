@@ -11,4 +11,6 @@
 
 @interface FriendsChatViewController : JSMessagesViewController<JSMessagesViewDataSource, JSMessagesViewDelegate>
 
+@property (strong) NSString* friendId;
+
 @end

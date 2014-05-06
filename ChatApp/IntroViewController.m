@@ -46,6 +46,9 @@
                 [[PFUser currentUser] setObject:result[@"email"] forKey:@"email"];
                 [[PFUser currentUser] saveInBackground];
                 
+                NSLog(@"%@", [PFUser currentUser][@"fbID"]);
+                [[PFInstallation currentInstallation] setObject:[PFUser currentUser][@"fbID"] forKey:@"owner"];
+                [[PFInstallation currentInstallation] saveInBackground];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDKeyUserLoggedIn];
                 [[NSUserDefaults standardUserDefaults] setObject:user[@"first_name"] forKey:kUDKeyUserFirstName];
