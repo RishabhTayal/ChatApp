@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MPNotificationView.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, MPNotificationViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

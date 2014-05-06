@@ -49,10 +49,18 @@
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:userInfo];
-
+    
     if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         [PFPush handlePush:userInfo];
+    } else {
+        MPNotificationView *notification = [MPNotificationView notifyWithText:@"" andDetail:userInfo[@"aps"][@"alert"]];
+        notification.delegate = self;
     }
+}
+
+-(void)didTapOnNotificationView:(MPNotificationView *)notificationView
+{
+    NSLog(@"tapped");
 }
 
 -(void)setLoginView

@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "ChatApp": {
+            "applicationId": "BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X", 
+            "masterKey": "zIBVZeoDPyo2vNG6V1a6h9IFozIIOf7Ue7OOBFYs"
+        }, 
+        "_default": {
+            "link": "ChatApp"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.18"
+    }
+}

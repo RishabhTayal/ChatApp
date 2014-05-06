@@ -27,6 +27,7 @@ PODS:
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.4.0)
   - MFSideMenu (0.5.4)
+  - MPNotificationView (1.1.0)
   - Parse-iOS-SDK (1.2.19):
     - Facebook-iOS-SDK (~> 3.7)
   - TSMessages (0.9.7):
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - Facebook-iOS-SDK
   - JSMessagesViewController
   - MFSideMenu
+  - MPNotificationView
   - Parse-iOS-SDK
   - TSMessages (= 0.9.7)
 
@@ -50,6 +52,7 @@ SPEC CHECKSUMS:
   JSMessagesViewController: 6b59dec2b679ee6a8c6d9c9f1d5d9748abf4c05c
   JSQSystemSoundPlayer: 28ccd01a92a0cebc6de6361e8499011b4cb6dab7
   MFSideMenu: f59e25c080097a701e108459c207fb22e1f62c30
+  MPNotificationView: fff59b369312e946f5abdb71e5aff2c4a827eedf
   Parse-iOS-SDK: 48e366fb9a8956c4e50d93cfd16243176938fae1
   TSMessages: 9dd053bcf1a8985275177ebe0fb8c0f1416e92f7
 

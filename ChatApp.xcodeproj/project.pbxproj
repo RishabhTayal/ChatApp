@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0608596B19196CD9005F6A75 /* AddressBook.framework */; };
 		061E7E40191806A100A0DF90 /* bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E3E191806A100A0DF90 /* bg1@2x.png */; };
 		061E7E41191806A100A0DF90 /* bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E3F191806A100A0DF90 /* bg2@2x.png */; };
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0608596B19196CD9005F6A75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		061E7E3E191806A100A0DF90 /* bg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1@2x.png"; sourceTree = "<group>"; };
 		061E7E3F191806A100A0DF90 /* bg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg2@2x.png"; sourceTree = "<group>"; };
 		061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsChatViewController.h; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */,
 				065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */,
 				065A15D71912BCFB00B85D3D /* CoreGraphics.framework in Frameworks */,
 				065A15D91912BCFB00B85D3D /* UIKit.framework in Frameworks */,
@@ -169,6 +172,7 @@
 		065A15D31912BCFB00B85D3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0608596B19196CD9005F6A75 /* AddressBook.framework */,
 				065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */,
 				065A15D41912BCFB00B85D3D /* Foundation.framework */,
 				065A15D61912BCFB00B85D3D /* CoreGraphics.framework */,

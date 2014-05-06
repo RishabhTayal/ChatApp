@@ -10,4 +10,6 @@
 
 @interface FriendsListViewController : UITableViewController
 
+-(IBAction)inviteFriend:(id)sender;
+
 @end

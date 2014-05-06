@@ -34,7 +34,10 @@
 -(void)login:(id)sender
 {
     NSLog(@"login");
-    [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
+    
+    NSArray* permissions = @[@"user_friends"];
+    
+    [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
         NSLog(@"%@", user);
         
         
