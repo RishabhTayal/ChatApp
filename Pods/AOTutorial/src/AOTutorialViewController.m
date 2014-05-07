@@ -109,7 +109,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 {
     self.backgroundImages = [NSMutableArray arrayWithArray:images];
     self.informationLabels = [NSMutableArray arrayWithArray:informations];
-
+    
 }
 
 #pragma mark - Life cycle methods
@@ -170,7 +170,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
-
+    
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -180,7 +180,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 
 - (void)addButton
 {
-//    [self.loginButton setTitleColor:[UIColor colorWithHexString:loginLabelColor] forState:UIControlStateNormal];
+    //    [self.loginButton setTitleColor:[UIColor colorWithHexString:loginLabelColor] forState:UIControlStateNormal];
     [self.signupButton setTitleColor:[UIColor colorWithHexString:signupLabelColor] forState:UIControlStateNormal];
     [self.dismissButton setTitleColor:[UIColor colorWithHexString:dismissLabelColor] forState:UIControlStateNormal];
     
@@ -211,7 +211,8 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     [self addInformationsLabels];
     [self resetBackgroundImageState];
     
-    [self.backgroundBottomImage setImage:[UIImage imageNamed:[self.backgroundImages objectAtIndex:_index+1]]];
+    UIImage* img = [UIImage imageNamed:[self.backgroundImages objectAtIndex:_index+1]];
+    [self.backgroundBottomImage setImage:img];
 }
 
 - (void)addInformationsLabels
@@ -233,18 +234,18 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         } else {
             
             header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + headerLeftMargin,
-                                                                        SCREEN_HEIGHT - 120.0f - lSize.height,
-                                                                        SCREEN_WIDTH - (headerLeftMargin * 2),
-                                                                        hSize.height + 5.0f)];
+                                                               SCREEN_HEIGHT - 120.0f - lSize.height,
+                                                               SCREEN_WIDTH - (headerLeftMargin * 2),
+                                                               hSize.height + 5.0f)];
             
         }
-
+        
         [header setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
         [header setNumberOfLines:1];
         [header setTag:index];
         [header setLineBreakMode:NSLineBreakByTruncatingTail];
-        [header setShadowOffset:CGSizeMake(1, 1)];
-        [header setShadowColor:[UIColor blackColor]];
+        //        [header setShadowOffset:CGSizeMake(1, 1)];
+        //        [header setShadowColor:[UIColor blackColor]];
         [header setText:[labels valueForKey:@"Header"]];
         [header setTextAlignment:NSTextAlignmentCenter];
         [header setBackgroundColor:[UIColor clearColor]];
@@ -263,13 +264,13 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
             
         }
         
- 
+        
         [label setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin];
         [label setNumberOfLines:0];
         [label setTag:index];
         [label setLineBreakMode:NSLineBreakByWordWrapping];
-        [label setShadowOffset:CGSizeMake(1, 1)];
-        [label setShadowColor:[UIColor blackColor]];
+        //        [label setShadowOffset:CGSizeMake(1, 1)];
+        //        [label setShadowColor:[UIColor blackColor]];
         [label setText:[labels valueForKey:@"Label"]];
         [label setTextAlignment:NSTextAlignmentCenter];
         [label setBackgroundColor:[UIColor clearColor]];
@@ -301,7 +302,8 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 
 - (void)resetBackgroundImageState
 {
-    [self.backgroundTopImage setImage:[UIImage imageNamed:[self.backgroundImages objectAtIndex:_index]]];
+    UIImage* image = [UIImage imageNamed:[self.backgroundImages objectAtIndex:_index]];
+    [self.backgroundTopImage setImage:image];
     [self.backgroundTopImage setAlpha:1.0];
     [self.backgroundBottomImage setAlpha:0.0];
 }
@@ -320,12 +322,12 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     [style setLineSpacing:5.0f];
     [style setLineBreakMode:NSLineBreakByTruncatingTail];
     
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor blackColor];
-    shadow.shadowBlurRadius = 0.0;
-    shadow.shadowOffset = CGSizeMake(1.0, 1.0);
+    //    NSShadow *shadow = [[NSShadow alloc] init];
+    //    shadow.shadowColor = [UIColor blackColor];
+    //    shadow.shadowBlurRadius = 0.0;
+    //    shadow.shadowOffset = CGSizeMake(1.0, 1.0);
     
-    return @{NSFontAttributeName:[UIFont fontWithName:headerFontType size:headerFontSize], NSForegroundColorAttributeName:headerColor, NSParagraphStyleAttributeName:style, NSShadowAttributeName:shadow};
+    return @{NSFontAttributeName:[UIFont fontWithName:headerFontType size:headerFontSize], NSForegroundColorAttributeName:headerColor, NSParagraphStyleAttributeName:style};
 }
 
 - (NSDictionary *)labelTextStyleAttributes
@@ -335,12 +337,12 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     [style setLineSpacing:5.0f];
     [style setLineBreakMode:NSLineBreakByWordWrapping];
     
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor blackColor];
-    shadow.shadowBlurRadius = 0.0;
-    shadow.shadowOffset = CGSizeMake(1.0, 1.0);
+    //    NSShadow *shadow = [[NSShadow alloc] init];
+    //    shadow.shadowColor = [UIColor blackColor];
+    //    shadow.shadowBlurRadius = 0.0;
+    //    shadow.shadowOffset = CGSizeMake(1.0, 1.0);
     
-    return @{NSFontAttributeName:[UIFont fontWithName:labelFontType size:labelFontSize], NSForegroundColorAttributeName:labelColor, NSParagraphStyleAttributeName:style, NSShadowAttributeName:shadow};
+    return @{NSFontAttributeName:[UIFont fontWithName:labelFontType size:labelFontSize], NSForegroundColorAttributeName:labelColor, NSParagraphStyleAttributeName:style};
 }
 
 #pragma mark - User interface methods
@@ -371,7 +373,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     UIImage *nextImage = [UIImage imageNamed:[self.backgroundImages objectAtIndex:(newIndex < 0 ? 0 : (newIndex >= [self.backgroundImages count] ? [self.backgroundImages count]-1 : newIndex))]];
     
     if (![[self.backgroundBottomImage image] isEqual:nextImage]) [self.backgroundBottomImage setImage:nextImage];
-     
+    
     [self.backgroundTopImage setAlpha:1-fabs(alpha)];
     [self.backgroundBottomImage setAlpha:fabs(alpha)];
 }

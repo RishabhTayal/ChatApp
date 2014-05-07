@@ -48,7 +48,8 @@
                 [[PFUser currentUser] setObject:result[@"email"] forKey:@"email"];
                 [[PFUser currentUser] saveInBackground];
                 
-                [FBRequestConnection startWithGraphPath:@"/me/picture" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: NO, @"redirect", @"400", @"height", @"large", @"type", @"400", @"width", nil];
+                [FBRequestConnection startWithGraphPath:@"/me/picture" parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                     NSLog(@"%@", connection.urlResponse.URL);
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         NSData* imgData = [NSData dataWithContentsOfURL:connection.urlResponse.URL];

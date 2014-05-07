@@ -74,9 +74,10 @@
     
     [intro setHeaderImage:[UIImage imageNamed:@"PhotoButton"]];
     [intro setButtons:AOTutorialButtonLogin];
-    
+
     UIButton* loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [intro setLoginButton:loginButton];
+    intro.loginButton.layer.cornerRadius = 10;
     
     self.window.rootViewController = intro;
     [self.window makeKeyAndVisible];

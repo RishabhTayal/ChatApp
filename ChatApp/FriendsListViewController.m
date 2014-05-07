@@ -144,9 +144,9 @@
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: NO, @"redirect", @"50", @"height", @"normal", @"type", @"50", @"width", nil];
         
         /* make the API call */
-        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@/picture", _friendsUsingApp[indexPath.row][@"id"]] parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@/picture", _friendsUsingApp[indexPath.row][@"id"]] parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             [cell.profilePicture setImageWithURL:connection.urlResponse.URL];
-        }];
+//        }];
         return cell;
     } else {
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friendNotUsingAppCell"];

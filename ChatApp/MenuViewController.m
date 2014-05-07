@@ -11,6 +11,7 @@
 #import "NearChatViewController.h"
 #import "SettingsViewController.h"
 #import <MFSideMenu.h>
+#import "UIImage+Utility.h"
 
 @interface MenuViewController ()
 
@@ -36,7 +37,7 @@
     [super viewDidLoad];
     
     UIImage* img = [UIImage imageNamed:@"chicago1.jpg"];
-    UIImage* blurImage = [self gaussianBlur:img];
+    UIImage* blurImage = [img applyGaussianBlur];
     UIImageView* iv = [[UIImageView alloc] initWithImage:blurImage];
     iv.contentMode = UIViewContentModeScaleAspectFill;
     iv.frame = self.tableView.frame;
@@ -57,27 +58,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
--(UIImage*)gaussianBlur:(UIImage*)img
-{
-    CIFilter* gaussianBLurFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
-    [gaussianBLurFilter setDefaults];
-    [gaussianBLurFilter setValue:[CIImage imageWithCGImage:[img CGImage]] forKey:kCIInputImageKey];
-    [gaussianBLurFilter setValue:@10 forKey:kCIInputRadiusKey];
-    
-    CIImage* outImage = [gaussianBLurFilter outputImage];
-    CIContext* context = [CIContext contextWithOptions:nil];
-    CGRect rect = [outImage extent];
-    
-    rect.origin.x += (rect.size.width - img.size.width) / 2;
-    rect.origin.y += (rect.size.height - img.size.height) / 2;
-    rect.size = img.size;
-    
-    CGImageRef cgimg = [context createCGImage:outImage fromRect:rect];
-    UIImage* image = [UIImage imageWithCGImage:cgimg];
-    return image;
 }
 
 
