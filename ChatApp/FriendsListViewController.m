@@ -37,16 +37,16 @@
     [super viewDidLoad];
     
     _friendsUsingApp = [NSMutableArray new];
-
+    
     _friendsNotUsingApp = [NSMutableArray arrayWithArray:[self getAllDeviceContacts]];
-
+    
     FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         NSLog(@"%@", result[@"data"]);
         _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
         
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-     
+        
     }];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -141,12 +141,7 @@
     if (indexPath.section == 0) {
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         cell.friendName.text = _friendsUsingApp[indexPath.row][@"name"];
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: NO, @"redirect", @"50", @"height", @"normal", @"type", @"50", @"width", nil];
-        
-        /* make the API call */
-//        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@/picture", _friendsUsingApp[indexPath.row][@"id"]] parameters:params HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-            [cell.profilePicture setImageWithURL:connection.urlResponse.URL];
-//        }];
+        [cell.profilePicture setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", _friendsUsingApp[indexPath.row][@"id"]]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
         return cell;
     } else {
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friendNotUsingAppCell"];

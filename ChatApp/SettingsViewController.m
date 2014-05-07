@@ -21,11 +21,12 @@
 {
     [super viewDidLoad];
     
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPress:)];
     self.navigationController.navigationBar.translucent = NO;
     
-    UIImage* image = [UIImage imageWithData:[PFUser currentUser][@"picture"]];
-    [self.tableView addParallaxWithImage:image andHeight:200];
+    PFFile* file = [PFUser currentUser][@"picture"];
+    UIImage* img = [UIImage imageWithData:[file getData]];
+    [self.tableView addParallaxWithImage:img andHeight:200];
+
     // Do any additional setup after loading the view.
 }
 
@@ -36,10 +37,8 @@
 }
 
 -(void)logout:(id)sender
-{    
-//    [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser] block:^(BOOL succeeded, NSError *error) {
-            [PFUser logOut];
-//    }];
+{
+    [PFUser logOut];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -47,26 +46,5 @@
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate setLoginView];
 }
-
-//-(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView
-//{
-//    NSLog(@"logged out");
-//    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    
-//    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
-//    [appDelegate setLoginView];
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
