@@ -12,6 +12,7 @@
 #import "SettingsViewController.h"
 #import <MFSideMenu.h>
 #import "UIImage+Utility.h"
+#import <Parse/Parse.h>
 
 @interface MenuViewController ()
 
@@ -46,7 +47,13 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    
+    UIImageView* navImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+    PFFile* file = [PFUser currentUser][@"picture"];
+    UIImage* image = [UIImage imageWithData:[file getData]];
+    navImage.image = image;
+    navImage.contentMode = UIViewContentModeScaleAspectFill;
+    navImage.clipsToBounds = YES;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navImage];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

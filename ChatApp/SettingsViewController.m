@@ -13,6 +13,8 @@
 
 @interface SettingsViewController ()
 
+@property (strong) IBOutlet UILabel* nameLabel;
+
 @end
 
 @implementation SettingsViewController
@@ -23,10 +25,15 @@
     
     self.navigationController.navigationBar.translucent = NO;
     
+    
+    _nameLabel.text = [PFUser currentUser].username;
+    
     PFFile* file = [PFUser currentUser][@"picture"];
     UIImage* img = [UIImage imageWithData:[file getData]];
     [self.tableView addParallaxWithImage:img andHeight:200];
 
+    self.title = @"Settings";
+    
     // Do any additional setup after loading the view.
 }
 

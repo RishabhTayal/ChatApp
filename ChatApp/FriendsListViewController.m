@@ -36,6 +36,8 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Friends";
+    
     _friendsUsingApp = [NSMutableArray new];
     
     _friendsNotUsingApp = [NSMutableArray arrayWithArray:[self getAllDeviceContacts]];
@@ -121,7 +123,7 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return @"Friends on ChatApp";
+        return @"Friends using ChatApp";
     }
     return @"Friends not on ChatApp";
 }
