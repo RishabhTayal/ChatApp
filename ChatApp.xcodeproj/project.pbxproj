@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0608596B19196CD9005F6A75 /* AddressBook.framework */; };
 		06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608596F191991B5005F6A75 /* UIImage+Utility.m */; };
+		06085973191A965E005F6A75 /* bg3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06085971191A965E005F6A75 /* bg3@2x.png */; };
+		06085974191A965E005F6A75 /* bg4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06085972191A965E005F6A75 /* bg4@2x.png */; };
 		061E7E40191806A100A0DF90 /* bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E3E191806A100A0DF90 /* bg1@2x.png */; };
 		061E7E41191806A100A0DF90 /* bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E3F191806A100A0DF90 /* bg2@2x.png */; };
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
@@ -52,6 +54,8 @@
 		0608596B19196CD9005F6A75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0608596E191991B5005F6A75 /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
 		0608596F191991B5005F6A75 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
+		06085971191A965E005F6A75 /* bg3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg3@2x.png"; sourceTree = "<group>"; };
+		06085972191A965E005F6A75 /* bg4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg4@2x.png"; sourceTree = "<group>"; };
 		061E7E3E191806A100A0DF90 /* bg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1@2x.png"; sourceTree = "<group>"; };
 		061E7E3F191806A100A0DF90 /* bg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg2@2x.png"; sourceTree = "<group>"; };
 		061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsChatViewController.h; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 				061E7E53191922BB00A0DF90 /* chicago1.jpg */,
 				061E7E3E191806A100A0DF90 /* bg1@2x.png */,
 				061E7E3F191806A100A0DF90 /* bg2@2x.png */,
+				06085971191A965E005F6A75 /* bg3@2x.png */,
+				06085972191A965E005F6A75 /* bg4@2x.png */,
 			);
 			name = temp;
 			sourceTree = "<group>";
@@ -363,8 +369,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
+				06085974191A965E005F6A75 /* bg4@2x.png in Resources */,
 				061E7E40191806A100A0DF90 /* bg1@2x.png in Resources */,
 				065A16151913FC6800B85D3D /* PhotoButton@2x.png in Resources */,
+				06085973191A965E005F6A75 /* bg3@2x.png in Resources */,
 				061E7E41191806A100A0DF90 /* bg2@2x.png in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,

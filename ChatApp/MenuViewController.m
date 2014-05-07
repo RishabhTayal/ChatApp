@@ -37,6 +37,8 @@
 {
     [super viewDidLoad];
     
+    self.title = @"ChatApp";
+    
     UIImage* img = [UIImage imageNamed:@"chicago1.jpg"];
     UIImage* blurImage = [img applyGaussianBlur];
     UIImageView* iv = [[UIImageView alloc] initWithImage:blurImage];
@@ -54,11 +56,6 @@
     navImage.contentMode = UIViewContentModeScaleAspectFill;
     navImage.clipsToBounds = YES;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navImage];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning

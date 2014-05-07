@@ -68,9 +68,9 @@
 //    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    LoginViewController* loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
     
-    NSArray* infoArray = @[@{@"Header": @"Camping", @"Label": @"Some camping description"}, @{@"Header": @"School", @"Label": @"Some school description.    "}];
+    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Some friends description"}, @{@"Header": @"Camping", @"Label": @"Some camping description."}, @{@"Header": @"Beach", @"Label": @"Some Beach Description"}, @{@"Header": @"Concert", @"Label":@"Some Concert Description"}];
     
-    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2"] andInformations:infoArray];
+    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2", @"bg3", @"bg4"] andInformations:infoArray];
     
     [intro setHeaderImage:[UIImage imageNamed:@"PhotoButton"]];
     [intro setButtons:AOTutorialButtonLogin];
