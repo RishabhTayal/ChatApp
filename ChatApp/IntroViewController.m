@@ -48,14 +48,14 @@
                 [[PFUser currentUser] setObject:result[@"email"] forKey:@"email"];
                 [[PFUser currentUser] saveInBackground];
                 
-                [FBRequestConnection startWithGraphPath:@"/me/picture" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                    NSLog(@"%@", connection.urlResponse.URL);
+//                [FBRequestConnection startWithGraphPath:@"/me/picture" parameters:nil HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//                    NSLog(@"%@", connection.urlResponse.URL);
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                        NSData* imgData = [NSData dataWithContentsOfURL:connection.urlResponse.URL];
+                        NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", result[@"id"]]]];
                         [[PFUser currentUser] setObject:imgData forKey:@"picture"];
                         [[PFUser currentUser] saveInBackground];
                     });
-                }];
+//                }];
                 
                 NSLog(@"%@", [PFUser currentUser][@"fbID"]);
                 [[PFInstallation currentInstallation] setObject:[PFUser currentUser][@"fbID"] forKey:@"owner"];

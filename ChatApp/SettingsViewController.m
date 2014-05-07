@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPress:)];
+    self.navigationController.navigationBar.translucent = NO;
     
     UIImage* image = [UIImage imageWithData:[PFUser currentUser][@"picture"]];
     [self.tableView addParallaxWithImage:image andHeight:200];
