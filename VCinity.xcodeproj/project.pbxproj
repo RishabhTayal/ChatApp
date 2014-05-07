@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0608596B19196CD9005F6A75 /* AddressBook.framework */; };
 		06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608596F191991B5005F6A75 /* UIImage+Utility.m */; };
-		06085973191A965E005F6A75 /* bg3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06085971191A965E005F6A75 /* bg3@2x.png */; };
-		06085974191A965E005F6A75 /* bg4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 06085972191A965E005F6A75 /* bg4@2x.png */; };
-		061E7E40191806A100A0DF90 /* bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E3E191806A100A0DF90 /* bg1@2x.png */; };
-		061E7E41191806A100A0DF90 /* bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E3F191806A100A0DF90 /* bg2@2x.png */; };
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
 		061E7E4E191880C000A0DF90 /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4D191880C000A0DF90 /* FriendsListViewController.m */; };
@@ -33,7 +29,6 @@
 		065A15FE1912BCFB00B85D3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 065A15FC1912BCFB00B85D3D /* InfoPlist.strings */; };
 		065A16001912BCFB00B85D3D /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A15FF1912BCFB00B85D3D /* ChatAppTests.m */; };
 		065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */; };
-		065A16151913FC6800B85D3D /* PhotoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 065A16141913FC6800B85D3D /* PhotoButton@2x.png */; };
 		065A161D191406C100B85D3D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A161C191406C100B85D3D /* LoginViewController.m */; };
 		065A16281914257700B85D3D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16271914257700B85D3D /* SettingsViewController.m */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
@@ -54,10 +49,6 @@
 		0608596B19196CD9005F6A75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0608596E191991B5005F6A75 /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
 		0608596F191991B5005F6A75 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
-		06085971191A965E005F6A75 /* bg3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg3@2x.png"; sourceTree = "<group>"; };
-		06085972191A965E005F6A75 /* bg4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg4@2x.png"; sourceTree = "<group>"; };
-		061E7E3E191806A100A0DF90 /* bg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1@2x.png"; sourceTree = "<group>"; };
-		061E7E3F191806A100A0DF90 /* bg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg2@2x.png"; sourceTree = "<group>"; };
 		061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsChatViewController.h; sourceTree = "<group>"; };
 		061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsChatViewController.m; sourceTree = "<group>"; };
 		061E7E4919183D1400A0DF90 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -87,7 +78,6 @@
 		065A15FD1912BCFB00B85D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		065A15FF1912BCFB00B85D3D /* ChatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAppTests.m; sourceTree = "<group>"; };
 		065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
-		065A16141913FC6800B85D3D /* PhotoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoButton@2x.png"; sourceTree = "<group>"; };
 		065A161B191406C100B85D3D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		065A161C191406C100B85D3D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -214,6 +204,8 @@
 				06FD23811917D72100AE7226 /* Settings VC */,
 				065A161F19140B9300B85D3D /* Chat ViewController */,
 				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
+				061E7E53191922BB00A0DF90 /* chicago1.jpg */,
+				065A162B19145BA900B85D3D /* temp */,
 				065A15DB1912BCFB00B85D3D /* Supporting Files */,
 			);
 			path = ChatApp;
@@ -222,8 +214,6 @@
 		065A15DB1912BCFB00B85D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				065A162B19145BA900B85D3D /* temp */,
-				065A16141913FC6800B85D3D /* PhotoButton@2x.png */,
 				065A15DC1912BCFB00B85D3D /* VCinity-Info.plist */,
 				065A15DD1912BCFB00B85D3D /* InfoPlist.strings */,
 				065A15E01912BCFB00B85D3D /* main.m */,
@@ -272,11 +262,6 @@
 		065A162B19145BA900B85D3D /* temp */ = {
 			isa = PBXGroup;
 			children = (
-				061E7E53191922BB00A0DF90 /* chicago1.jpg */,
-				061E7E3E191806A100A0DF90 /* bg1@2x.png */,
-				061E7E3F191806A100A0DF90 /* bg2@2x.png */,
-				06085971191A965E005F6A75 /* bg3@2x.png */,
-				06085972191A965E005F6A75 /* bg4@2x.png */,
 			);
 			name = temp;
 			sourceTree = "<group>";
@@ -372,11 +357,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
-				06085974191A965E005F6A75 /* bg4@2x.png in Resources */,
-				061E7E40191806A100A0DF90 /* bg1@2x.png in Resources */,
-				065A16151913FC6800B85D3D /* PhotoButton@2x.png in Resources */,
-				06085973191A965E005F6A75 /* bg3@2x.png in Resources */,
-				061E7E41191806A100A0DF90 /* bg2@2x.png in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
 				061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */,
@@ -567,15 +547,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: rishabh tayal (VJS8GXZ7PW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: rishabh tayal (VJS8GXZ7PW)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = VCinity;
-				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "03FD07EE-3219-4D8B-A958-793D8520AB56";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -586,15 +566,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: rishabh tayal (GJ7VFS8326)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: rishabh tayal (GJ7VFS8326)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = VCinity;
-				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "7CA6D684-D0FB-4BB8-985F-03B791C36753";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
