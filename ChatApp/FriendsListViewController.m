@@ -123,9 +123,9 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return @"Friends using ChatApp";
+        return @"Friends using vCinity";
     }
-    return @"Friends not on ChatApp";
+    return @"Friends not on vCinity";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

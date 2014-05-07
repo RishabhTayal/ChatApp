@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "065A15D01912BCFB00B85D3D"
-               BuildableName = "ChatApp.app"
-               BlueprintName = "ChatApp"
-               ReferencedContainer = "container:ChatApp.xcodeproj">
+               BuildableName = "VCinity.app"
+               BlueprintName = "VCinity"
+               ReferencedContainer = "container:VCinity.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "065A15F11912BCFB00B85D3D"
-               BuildableName = "ChatAppTests.xctest"
-               BlueprintName = "ChatAppTests"
-               ReferencedContainer = "container:ChatApp.xcodeproj">
+               BuildableName = "VCinityTests.xctest"
+               BlueprintName = "VCinityTests"
+               ReferencedContainer = "container:VCinity.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "065A15D01912BCFB00B85D3D"
-            BuildableName = "ChatApp.app"
-            BlueprintName = "ChatApp"
-            ReferencedContainer = "container:ChatApp.xcodeproj">
+            BuildableName = "VCinity.app"
+            BlueprintName = "VCinity"
+            ReferencedContainer = "container:VCinity.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "065A15D01912BCFB00B85D3D"
-            BuildableName = "ChatApp.app"
-            BlueprintName = "ChatApp"
-            ReferencedContainer = "container:ChatApp.xcodeproj">
+            BuildableName = "VCinity.app"
+            BlueprintName = "VCinity"
+            ReferencedContainer = "container:VCinity.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "065A15D01912BCFB00B85D3D"
-            BuildableName = "ChatApp.app"
-            BlueprintName = "ChatApp"
-            ReferencedContainer = "container:ChatApp.xcodeproj">
+            BuildableName = "VCinity.app"
+            BlueprintName = "VCinity"
+            ReferencedContainer = "container:VCinity.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

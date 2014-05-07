@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"ChatApp";
+    self.title = @"vCinity";
     
     UIImage* img = [UIImage imageNamed:@"chicago1.jpg"];
     UIImage* blurImage = [img applyGaussianBlur];
