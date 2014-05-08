@@ -10,6 +10,6 @@
 #import "JSQMessagesViewController.h"
 #import <MultipeerConnectivity/MultipeerConnectivity.h>
 
-@interface NearChatViewController : JSQMessagesViewController<MCNearbyServiceBrowserDelegate, MCSessionDelegate, MCNearbyServiceAdvertiserDelegate>
+@interface NearChatViewController : JSQMessagesViewController<MCNearbyServiceBrowserDelegate, MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end

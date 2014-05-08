@@ -66,6 +66,12 @@ static NSString* const kServiceName = @"multipeer";
     [self startBrowsing];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 #pragma mark -
 
 -(void)startBrowsing
@@ -160,26 +166,20 @@ static NSString* const kServiceName = @"multipeer";
 
 -(void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID
 {
-    
+    NSLog(@"recieve stream");
 }
 
 -(void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress
 {
-    
+    NSLog(@"start recieve resource");
 }
 
 -(void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(NSError *)error
 {
-    
+    NSLog(@"finish recieve resource");
 }
 
-#pragma mark -
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - Sending Data
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text sender:(NSString *)sender date:(NSDate *)date
 {
@@ -202,6 +202,46 @@ static NSString* const kServiceName = @"multipeer";
 -(void)didPressAccessoryButton:(UIButton *)sender
 {
     NSLog(@"Camera pressed!");
+    UIActionSheet* photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Exisiting Photo", nil];
+    [photoSheet showInView:self.view.window];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    if (buttonIndex == 0) {
+        //Take photo
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    } else if (buttonIndex == 1) {
+        //Choose Photo
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+}
+
+#pragma mark - UIImagePickerController Delegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSData* imageData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 0.7);
+        
+        if ([self.session sendData:imageData toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:nil]) {
+//            JSQMessage* m = [[JSQMessage alloc] init];
+        
+//            JSQMessage* sentMessage = [[JSQMessage alloc] initWithText:message sender:@"me" date:date];
+//            [_chatMessagesArray addObject:sentMessage];
+            
+//            [self scrollToBottomAnimated:YES];
+        }
+    }];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - JSQMessages CollectionView Datasource
