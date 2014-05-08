@@ -8,9 +8,10 @@
 
 #import "NearChatViewController.h"
 #import "SettingsViewController.h"
-//#import "TWMessageBarManager.h"
 #import "TSMessage.h"
 #import <JSQMessages.h>
+#import "MenuButton.h"
+#import <MFSideMenu.h>
 
 static NSString* const kServiceName = @"multipeer";
 
@@ -47,12 +48,14 @@ static NSString* const kServiceName = @"multipeer";
 - (void)viewDidLoad
 {
     
-//    self.delegate = self;
-//    self.dataSource = self;
+    //    self.delegate = self;
+    //    self.dataSource = self;
     
     [super viewDidLoad];
     
     self.sender = @"me";
+    
+    [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
     _chatMessagesArray = [NSMutableArray new];
     
@@ -72,6 +75,11 @@ static NSString* const kServiceName = @"multipeer";
     // Dispose of any resources that can be recreated.
 }
 
+-(void)leftSideMenuButtonPressed:(id)sender
+{
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
+}
+
 #pragma mark -
 
 -(void)startBrowsing
@@ -84,7 +92,7 @@ static NSString* const kServiceName = @"multipeer";
     _browser.delegate = self;
     [_browser startBrowsingForPeers];
     
-    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(launchAdvertiser:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchAdvertiser:) userInfo:nil repeats:NO];
 }
 
 - (void)launchAdvertiser:(id)sender {
@@ -153,10 +161,22 @@ static NSString* const kServiceName = @"multipeer";
 
 -(void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
-    NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    JSQMessage* messageObj = [[JSQMessage alloc] initWithText:message sender:peerID.displayName date:[NSDate date]];
-    [_chatMessagesArray addObject:messageObj];
+    NSKeyedUnarchiver* unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    //    unArchiver.requiresSecureCoding = YES;
+    id object = [unArchiver decodeObject];
+    [unArchiver finishDecoding];
+    
+    
+    
+    if ([object isKindOfClass:[NSString class]]) {
+        NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        JSQMessage* messageObj = [[JSQMessage alloc] initWithText:message sender:peerID.displayName date:[NSDate date]];
+        [_chatMessagesArray addObject:messageObj];
+    } else {
+        UIImage* image = [UIImage imageWithData:object];
+    }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self finishReceivingMessage];
@@ -185,15 +205,19 @@ static NSString* const kServiceName = @"multipeer";
 {
     NSLog(@"sent");
     NSString* message = text;
-    NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
-
+    
+    NSMutableData* data = [[NSMutableData alloc] init];
+    NSKeyedArchiver* archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:message];
+    [archiver finishEncoding];
+    
     NSError* error = nil;
     if (![self.session sendData:data toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:&error]) {
         NSLog(@"%@", error);
     } else {
         JSQMessage* sentMessage = [[JSQMessage alloc] initWithText:message sender:@"me" date:date];
         [_chatMessagesArray addObject:sentMessage];
-
+        
         [self scrollToBottomAnimated:YES];
     }
     [self finishSendingMessage];
@@ -226,15 +250,21 @@ static NSString* const kServiceName = @"multipeer";
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        NSData* imageData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 0.7);
         
-        if ([self.session sendData:imageData toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:nil]) {
-//            JSQMessage* m = [[JSQMessage alloc] init];
+        NSData* imgData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 0.7);
+        NSMutableData* data = [[NSMutableData alloc] init];
+        NSKeyedArchiver* archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+        [archiver encodeObject:imgData];
+        [archiver finishEncoding];
         
-//            JSQMessage* sentMessage = [[JSQMessage alloc] initWithText:message sender:@"me" date:date];
-//            [_chatMessagesArray addObject:sentMessage];
+        BOOL sentSuccessful = [self.session sendData:data toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:nil];
+        if (sentSuccessful) {
+            //            JSQMessage* m = [[JSQMessage alloc] init];
             
-//            [self scrollToBottomAnimated:YES];
+            //            JSQMessage* sentMessage = [[JSQMessage alloc] initWithText:message sender:@"me" date:date];
+            //            [_chatMessagesArray addObject:sentMessage];
+            
+            //            [self scrollToBottomAnimated:YES];
         }
     }];
 }
@@ -298,87 +328,28 @@ static NSString* const kServiceName = @"multipeer";
     
     return cell;
 }
-
-
-#pragma mark - JSQMessages collection view flow layout delegate
-
-//#pragma mark - UITableView Datasource: REQUIRED
-//
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return _chatMessagesArray.count;
-//}
 //
 //-(void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
 //{
 //    if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
 //        cell.bubbleView.textView.textColor = [UIColor whiteColor];
-//        
+//
 //        NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
 //        [attrs setValue:[UIColor blueColor] forKey:NSForegroundColorAttributeName];
-//        
+//
 //        cell.bubbleView.textView.linkTextAttributes = attrs;
 //    }
-//    
+//
 //    if (cell.timestampLabel) {
 //        cell.timestampLabel.textColor = [UIColor lightGrayColor];
 //        cell.timestampLabel.shadowOffset = CGSizeZero;
 //    }
-//    
+//
 //    if (cell.subtitleLabel) {
 //        cell.subtitleLabel.textColor = [UIColor lightGrayColor];
 //    }
-//    
+//
 //    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-//}
-//
-//#pragma mark -
-//
-//-(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    JSMessage* message = _chatMessagesArray[indexPath.row];
-//    if ([message.sender isEqualToString:@"me"]) {
-//        return JSBubbleMessageTypeOutgoing;
-//    }
-//    return JSBubbleMessageTypeIncoming;
-//}
-//
-//-(JSMessageInputViewStyle)inputViewStyle
-//{
-//    return JSMessageInputViewStyleFlat;
-//}
-//
-////-(UIView *)inputView
-////{
-////    InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-////    return inputV;
-////}
-//
-//#pragma mark - Message View Delegate: REQUIRED
-//
-
-//
-//#pragma mark - Messages view data source: REQUIRED
-//
-//-(id<JSMessageData>)messageForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    JSMessage* message = _chatMessagesArray[indexPath.row];
-//    
-//    return message;
-//}
-//
-//-(UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    JSMessage* message = _chatMessagesArray[indexPath.row];
-//    if ([message.sender isEqualToString:@"me"]) {
-//        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];
-//    }
-//    return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleLightGrayColor]];
-//}
-//
-//-(UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath sender:(NSString *)sender
-//{
-//    return nil;
 //}
 //
 //-(BOOL)shouldDisplayTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -389,9 +360,9 @@ static NSString* const kServiceName = @"multipeer";
 //        return YES;
 //    }
 //    JSMessage* message = _chatMessagesArray[indexPath.row];
-//    
+//
 //    NSTimeInterval timeDiff = [message.date timeIntervalSinceDate:_lastShownTimeStamp];
-//    
+//
 //    double mins = floor(timeDiff/60);
 //    NSLog(@"%@", message.date);
 //    NSLog(@"%@", _lastShownTimeStamp);

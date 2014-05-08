@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0608596B19196CD9005F6A75 /* AddressBook.framework */; };
 		06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608596F191991B5005F6A75 /* UIImage+Utility.m */; };
+		06085978191BFB10005F6A75 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 06085977191BFB10005F6A75 /* MenuButton.m */; };
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
 		061E7E4E191880C000A0DF90 /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4D191880C000A0DF90 /* FriendsListViewController.m */; };
@@ -49,6 +50,8 @@
 		0608596B19196CD9005F6A75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0608596E191991B5005F6A75 /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
 		0608596F191991B5005F6A75 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
+		06085976191BFB10005F6A75 /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuButton.h; sourceTree = "<group>"; };
+		06085977191BFB10005F6A75 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButton.m; sourceTree = "<group>"; };
 		061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsChatViewController.h; sourceTree = "<group>"; };
 		061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsChatViewController.m; sourceTree = "<group>"; };
 		061E7E4919183D1400A0DF90 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -125,6 +128,17 @@
 			name = "App Delegate";
 			sourceTree = "<group>";
 		};
+		06085975191BFAE0005F6A75 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0608596E191991B5005F6A75 /* UIImage+Utility.h */,
+				0608596F191991B5005F6A75 /* UIImage+Utility.m */,
+				06085976191BFB10005F6A75 /* MenuButton.h */,
+				06085977191BFB10005F6A75 /* MenuButton.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		061E7E4419182A1A00A0DF90 /* Near */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,8 +212,7 @@
 				06FD23851917F1B800AE7226 /* IntroViewController.m */,
 				061E7E4919183D1400A0DF90 /* MenuViewController.h */,
 				061E7E4A19183D1400A0DF90 /* MenuViewController.m */,
-				0608596E191991B5005F6A75 /* UIImage+Utility.h */,
-				0608596F191991B5005F6A75 /* UIImage+Utility.m */,
+				06085975191BFAE0005F6A75 /* Utilities */,
 				065A1620191412A200B85D3D /* Login ViewController */,
 				06FD23811917D72100AE7226 /* Settings VC */,
 				065A161F19140B9300B85D3D /* Chat ViewController */,
@@ -419,6 +432,7 @@
 				061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */,
 				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
 				065A15E11912BCFB00B85D3D /* main.m in Sources */,
+				06085978191BFB10005F6A75 /* MenuButton.m in Sources */,
 				065A161D191406C100B85D3D /* LoginViewController.m in Sources */,
 				06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */,
 				06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */,

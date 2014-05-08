@@ -24,7 +24,7 @@ PODS:
   - Facebook-iOS-SDK (3.14.0):
     - Bolts
   - HexColors (2.2.1)
-  - JSQMessagesViewController (5.0.0):
+  - JSQMessagesViewController (HEAD based on 5.0.0):
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.5.0)
   - MFSideMenu (0.5.4)
@@ -39,7 +39,7 @@ DEPENDENCIES:
   - AOTutorial
   - APParallaxHeader
   - Facebook-iOS-SDK
-  - JSQMessagesViewController
+  - JSQMessagesViewController (HEAD)
   - MFSideMenu
   - MPNotificationView
   - Parse-iOS-SDK

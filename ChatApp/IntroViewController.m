@@ -80,7 +80,7 @@
                 [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-                MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[NearChatViewController alloc] init] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+                MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
                 //    FriendsChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
                 [UIView transitionWithView:self.view.window duration:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                     self.view.window.rootViewController = vc;

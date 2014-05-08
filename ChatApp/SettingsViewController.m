@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import <UIScrollView+APParallaxHeader.h>
+#import <MFSideMenu.h>
+#import "MenuButton.h"
 
 @interface SettingsViewController ()
 
@@ -25,6 +27,7 @@
     
     self.navigationController.navigationBar.translucent = NO;
     
+    [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
     _nameLabel.text = [PFUser currentUser].username;
     
@@ -41,6 +44,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)leftSideMenuButtonPressed:(id)sender
+{
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
 -(void)logout:(id)sender

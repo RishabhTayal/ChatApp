@@ -7,9 +7,10 @@
 //
 
 #import "FriendsChatViewController.h"
-//#import <JSMessage.h>
 #import <Parse/Parse.h>
 #import <JSQMessages.h>
+#import "MenuButton.h"
+#import <MFSideMenu.h>
 
 @interface FriendsChatViewController ()
 
@@ -23,12 +24,11 @@
 
 - (void)viewDidLoad
 {
-//    self.dataSource = self;
-//    self.delegate = self;
-    
     [super viewDidLoad];
     
     self.sender = @"me";
+    
+    [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
     _chatArray = [NSMutableArray new];
     
@@ -39,7 +39,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(loadChat) userInfo:nil repeats:YES];
     [self loadChat];
 }
 
@@ -60,15 +59,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)leftSideMenuButtonPressed:(id)sender
+{
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
+}
+
 -(void)pushNotificationRecieved:(NSNotification*)notification
 {
     [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     
     NSLog(@"%@", notification.userInfo[@"aps"][@"alert"]);
-    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[@"aps"][@"alert"] sender:@"" date:nil];
+    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[@"aps"][@"alert"] sender:@"" date:[NSDate date]];
     [_chatArray addObject:message];
     [self finishReceivingMessage];
-    [self scrollToBottomAnimated:YES];
+//    [self scrollToBottomAnimated:YES];
 }
 
 -(void)loadChat
@@ -86,7 +90,7 @@
         _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
 //        [self.tableView reloadData];
         [self finishReceivingMessage];
-        [self scrollToBottomAnimated:YES];
+//        [self scrollToBottomAnimated:YES];
     }];
 }
 
@@ -139,7 +143,12 @@
 
 -(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [UIImageView new];
+    UIImageView* iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    iv.contentMode = UIViewContentModeScaleAspectFill;
+    iv.clipsToBounds = YES;
+    PFFile *file = [PFUser currentUser][@"picture"];
+    iv.image = [UIImage imageWithData:[file getData]];
+    return iv;
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -176,41 +185,5 @@
     
     return cell;
 }
-
-//
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return _chatArray.count;
-//}
-//
-//-(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return JSBubbleMessageTypeOutgoing;
-//}
-//
-//-(id<JSMessageData>)messageForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    JSMessage* message = _chatArray[indexPath.row];
-//    return message;
-//}
-//
-//-(UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath sender:(NSString *)sender
-//{
-//    return nil;
-//}
-//
-//-(UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    //    JSMessage* message = _chatMessagesArray[indexPath.row];
-//    //    if ([message.sender isEqualToString:@"me"]) {
-//    //        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];
-//    //    }
-//    return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleLightGrayColor]];
-//}
-//
-//-(JSMessageInputViewStyle)inputViewStyle
-//{
-//    return JSMessageInputViewStyleFlat;
-//}
 
 @end
