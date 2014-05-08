@@ -67,13 +67,17 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </pageControl>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ID8-qs-8Uv">
-                    <rect key="frame" x="68" y="509" width="185" height="39"/>
+                    <rect key="frame" x="52" y="509" width="216" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Login with facebook">
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
+                    <inset key="titleEdgeInsets" minX="42" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Login with facebook" backgroundImage="connect_with_facebook_button_bg">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" backgroundImage="connect_with_facebook_button_bg"/>
+                    <state key="highlighted" backgroundImage="connect_with_facebook_button_bg"/>
                     <connections>
                         <action selector="login:" destination="-1" eventType="touchUpInside" id="aFl-UQ-gSp"/>
                     </connections>
@@ -84,4 +88,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="connect_with_facebook_button_bg" width="223" height="47"/>
+    </resources>
 </document>

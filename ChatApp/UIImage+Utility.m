@@ -15,7 +15,7 @@
     CIFilter* gaussianBLurFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
     [gaussianBLurFilter setDefaults];
     [gaussianBLurFilter setValue:[CIImage imageWithCGImage:[self CGImage]] forKey:kCIInputImageKey];
-    [gaussianBLurFilter setValue:@10 forKey:kCIInputRadiusKey];
+    [gaussianBLurFilter setValue:@8 forKey:kCIInputRadiusKey];
     
     CIImage* outImage = [gaussianBLurFilter outputImage];
     CIContext* context = [CIContext contextWithOptions:nil];

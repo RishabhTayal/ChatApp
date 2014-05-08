@@ -12,6 +12,7 @@
 #import <UIScrollView+APParallaxHeader.h>
 #import <MFSideMenu.h>
 #import "MenuButton.h"
+#import "ActivityView.h"
 
 @interface SettingsViewController ()
 
@@ -33,7 +34,7 @@
     
     PFFile* file = [PFUser currentUser][@"picture"];
     UIImage* img = [UIImage imageWithData:[file getData]];
-    [self.tableView addParallaxWithImage:img andHeight:200];
+    [self.tableView addParallaxWithImage:img andHeight:220];
 
     self.title = @"Settings";
     
@@ -53,6 +54,14 @@
 
 -(void)logout:(id)sender
 {
+    [ActivityView showInView:self.navigationController.view loadingMessage:@"Logging out..."];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(performLogout) userInfo:nil repeats:NO];
+}
+
+-(void)performLogout
+{
+    [ActivityView hide];
+    
     [PFUser logOut];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];

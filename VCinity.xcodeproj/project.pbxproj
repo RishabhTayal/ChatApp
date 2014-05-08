@@ -10,6 +10,8 @@
 		0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0608596B19196CD9005F6A75 /* AddressBook.framework */; };
 		06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608596F191991B5005F6A75 /* UIImage+Utility.m */; };
 		06085978191BFB10005F6A75 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 06085977191BFB10005F6A75 /* MenuButton.m */; };
+		0608597D191C27A1005F6A75 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608597B191C27A1005F6A75 /* ActivityView.m */; };
+		0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0608597C191C27A1005F6A75 /* ActivityView.xib */; };
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
 		061E7E4E191880C000A0DF90 /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4D191880C000A0DF90 /* FriendsListViewController.m */; };
@@ -51,6 +53,9 @@
 		0608596F191991B5005F6A75 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
 		06085976191BFB10005F6A75 /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuButton.h; sourceTree = "<group>"; };
 		06085977191BFB10005F6A75 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButton.m; sourceTree = "<group>"; };
+		0608597A191C27A1005F6A75 /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
+		0608597B191C27A1005F6A75 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
+		0608597C191C27A1005F6A75 /* ActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityView.xib; sourceTree = "<group>"; };
 		061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsChatViewController.h; sourceTree = "<group>"; };
 		061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsChatViewController.m; sourceTree = "<group>"; };
 		061E7E4919183D1400A0DF90 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -136,6 +141,24 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		06085979191C25C4005F6A75 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0608597F191C27AC005F6A75 /* Activity View */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		0608597F191C27AC005F6A75 /* Activity View */ = {
+			isa = PBXGroup;
+			children = (
+				0608597A191C27A1005F6A75 /* ActivityView.h */,
+				0608597B191C27A1005F6A75 /* ActivityView.m */,
+				0608597C191C27A1005F6A75 /* ActivityView.xib */,
+			);
+			name = "Activity View";
+			sourceTree = "<group>";
+		};
 		061E7E4419182A1A00A0DF90 /* Near */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +226,7 @@
 		065A15DA1912BCFB00B85D3D /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				06085979191C25C4005F6A75 /* Views */,
 				06085975191BFAE0005F6A75 /* Utilities */,
 				065A1620191412A200B85D3D /* Intro ViewController */,
 				06FD23811917D72100AE7226 /* Settings VC */,
@@ -359,6 +383,7 @@
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
+				0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */,
 				061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +442,7 @@
 				061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */,
 				061E7E4E191880C000A0DF90 /* FriendsListViewController.m in Sources */,
 				061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */,
+				0608597D191C27A1005F6A75 /* ActivityView.m in Sources */,
 				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
 				065A15E11912BCFB00B85D3D /* main.m in Sources */,
 				06085978191BFB10005F6A75 /* MenuButton.m in Sources */,

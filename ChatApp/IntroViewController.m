@@ -12,6 +12,7 @@
 #import "MenuViewController.h"
 #import <MFSideMenu.h>
 #import "NearChatViewController.h"
+#import "ActivityView.h"
 
 @interface IntroViewController ()
 
@@ -37,9 +38,10 @@
     
     //    NSArray* permissions = @[@"user_friends"];
     
+    [ActivityView showInView:self.view loadingMessage:@"Please Wait..."];
     [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
         NSLog(@"%@", user);
-        
+        [ActivityView hide];
         [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
                 NSLog(@"%@", result);

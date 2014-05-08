@@ -102,7 +102,7 @@
     // Configure the cell...
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"Offline Chat";
+            cell.textLabel.text = @"vCinity Chat";
             break;
         case 1:
             cell.textLabel.text = @"Friends";
