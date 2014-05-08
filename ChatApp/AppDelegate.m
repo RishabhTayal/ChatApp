@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "LoginViewController.h"
 #import "NearChatViewController.h"
 #import "FriendsChatViewController.h"
 #import <MFSideMenu/MFSideMenu.h>
@@ -20,9 +19,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-//    [UINavigationBar appearance].barTintColor = [UIColor blueColor];
-
     [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
     [PFFacebookUtils initializeFacebook];
     
@@ -31,7 +27,9 @@
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     
     [UINavigationBar appearance].barTintColor = [UIColor redColor];
-    
+    [UIView appearance].tintColor = [UIColor whiteColor];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {
         [self setMainView];
     } else {

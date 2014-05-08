@@ -62,4 +62,33 @@
     [appDelegate setLoginView];
 }
 
+#pragma mark - UITableView Delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1) {
+        if (indexPath.row == 1) {
+            //Tell a friend
+            UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Mail", @"Message", @"Facebook", @"Twitter", nil];
+            [sheet showInView:self.view.window];
+        }
+    }
+}
+
+#pragma mark - UIAction Sheet Delegate
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        //Mail
+    } else if (buttonIndex == 1) {
+        //Message
+    } else if (buttonIndex == 2) {
+        //Facebook
+    } else if (buttonIndex == 3) {
+        //Twitter
+    }
+}
+
 @end

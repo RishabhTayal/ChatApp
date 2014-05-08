@@ -12,6 +12,7 @@
 #import <JSQMessages.h>
 #import "MenuButton.h"
 #import <MFSideMenu.h>
+#import <Parse/Parse.h>
 
 static NSString* const kServiceName = @"multipeer";
 
@@ -47,13 +48,11 @@ static NSString* const kServiceName = @"multipeer";
 
 - (void)viewDidLoad
 {
-    
-    //    self.delegate = self;
-    //    self.dataSource = self;
-    
     [super viewDidLoad];
     
-    self.sender = @"me";
+    self.title = @"vCinity Chat";
+    
+    self.sender = [[PFUser currentUser] username];
     
     [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
@@ -92,10 +91,11 @@ static NSString* const kServiceName = @"multipeer";
     _browser.delegate = self;
     [_browser startBrowsingForPeers];
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchAdvertiser:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(launchAdvertiser) userInfo:nil repeats:NO];
 }
 
-- (void)launchAdvertiser:(id)sender {
+- (void)launchAdvertiser
+{
     if (!_foundPeer) {
         
         NSLog(@"Advertise");
@@ -148,6 +148,8 @@ static NSString* const kServiceName = @"multipeer";
                 [TSMessage dismissActiveNotification];
                 [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];
             });
+            _foundPeer = NO;
+            [self launchAdvertiser];
         }    break;
         default:
             break;
@@ -170,7 +172,7 @@ static NSString* const kServiceName = @"multipeer";
     
     
     if ([object isKindOfClass:[NSString class]]) {
-        NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString* message = object;
         
         JSQMessage* messageObj = [[JSQMessage alloc] initWithText:message sender:peerID.displayName date:[NSDate date]];
         [_chatMessagesArray addObject:messageObj];
@@ -215,7 +217,7 @@ static NSString* const kServiceName = @"multipeer";
     if (![self.session sendData:data toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:&error]) {
         NSLog(@"%@", error);
     } else {
-        JSQMessage* sentMessage = [[JSQMessage alloc] initWithText:message sender:@"me" date:date];
+        JSQMessage* sentMessage = [[JSQMessage alloc] initWithText:message sender:[[PFUser currentUser] username] date:date];
         [_chatMessagesArray addObject:sentMessage];
         
         [self scrollToBottomAnimated:YES];
@@ -283,7 +285,7 @@ static NSString* const kServiceName = @"multipeer";
 -(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatMessagesArray[indexPath.row];
-    if ([message.sender isEqualToString:@"me"]) {
+    if ([message.sender isEqualToString:[[PFUser currentUser] username]]) {
         return [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     }
     return [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
@@ -291,7 +293,19 @@ static NSString* const kServiceName = @"multipeer";
 
 -(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [UIImageView new];
+    UIImageView* iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    iv.contentMode = UIViewContentModeScaleAspectFill;
+    iv.clipsToBounds = YES;
+    
+    JSQMessage* message = _chatMessagesArray[indexPath.row];
+    if ([message.sender isEqualToString:[PFUser currentUser].username]) {
+        PFFile *file = [PFUser currentUser][@"picture"];
+        iv.image = [UIImage imageWithData:[file getData]];
+    } else {
+        iv.image = [UIImage imageNamed:@"avatar-placeholder"];
+//        iv.image = _friendsImage;
+    }
+    return iv;
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -321,9 +335,9 @@ static NSString* const kServiceName = @"multipeer";
     JSQMessage* msg = [_chatMessagesArray objectAtIndex:indexPath.item];
     
     if ([msg.sender isEqualToString:self.sender]) {
-        cell.textView.textColor = [UIColor blackColor];
-    } else {
         cell.textView.textColor = [UIColor whiteColor];
+    } else {
+        cell.textView.textColor = [UIColor blackColor];
     }
     
     return cell;

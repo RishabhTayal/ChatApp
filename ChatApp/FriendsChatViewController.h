@@ -12,5 +12,6 @@
 @interface FriendsChatViewController:JSQMessagesViewController
 
 @property (strong) NSString* friendId;
+@property (strong) UIImage* friendsImage;
 
 @end

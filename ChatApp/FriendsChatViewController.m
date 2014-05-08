@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
     
-    self.sender = @"me";
+    self.sender = [[PFUser currentUser] username];
 
     _chatArray = [NSMutableArray new];
     
@@ -79,7 +79,6 @@
             [_chatArray addObject:message];
         }
         _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
-//        [self.tableView reloadData];
         [self finishReceivingMessage];
 //        [self scrollToBottomAnimated:YES];
     }];
@@ -118,6 +117,7 @@
 }
 
 #pragma mark - JSQMessages CollectionView Datasource
+
 -(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return [_chatArray objectAtIndex:indexPath.item];
@@ -126,7 +126,7 @@
 -(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.row];
-    if ([message.sender isEqualToString:@"me"]) {
+    if ([message.sender isEqualToString:[[PFUser currentUser] username]]) {
         return [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     }
     return [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
@@ -137,8 +137,14 @@
     UIImageView* iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     iv.contentMode = UIViewContentModeScaleAspectFill;
     iv.clipsToBounds = YES;
-    PFFile *file = [PFUser currentUser][@"picture"];
-    iv.image = [UIImage imageWithData:[file getData]];
+    
+    JSQMessage* message = _chatArray[indexPath.row];
+    if ([message.sender isEqualToString:[PFUser currentUser].username]) {
+        PFFile *file = [PFUser currentUser][@"picture"];
+        iv.image = [UIImage imageWithData:[file getData]];
+    } else {
+        iv.image = _friendsImage;
+    }    
     return iv;
 }
 
@@ -149,7 +155,9 @@
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    JSQMessage* message = _chatArray[indexPath.item];
+    NSAttributedString* attString = [[NSAttributedString alloc] initWithString:message.sender];
+    return attString;
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -175,6 +183,13 @@
     }
     
     return cell;
+}
+
+#pragma mark - JSQMessages collectionview flow layout delegate
+
+-(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return kJSQMessagesCollectionViewCellLabelHeightDefault;
 }
 
 @end

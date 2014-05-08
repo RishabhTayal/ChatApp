@@ -180,10 +180,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 0) {
+        
+        FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        
         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
         chatVC.title = _friendsUsingApp[indexPath.row][@"name"];
         chatVC.friendId = _friendsUsingApp[indexPath.row][@"id"];
+        chatVC.friendsImage = cell.profilePicture.image;
         [self.navigationController pushViewController:chatVC animated:YES];
     }
 }

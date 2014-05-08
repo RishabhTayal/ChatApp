@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 //#import <FacebookSDK/FacebookSDK.h>
 
-@interface SettingsViewController : UITableViewController
+@interface SettingsViewController : UITableViewController<UIActionSheetDelegate>
 
 -(IBAction)logout:(id)sender;
 
