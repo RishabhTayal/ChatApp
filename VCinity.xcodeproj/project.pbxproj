@@ -30,7 +30,6 @@
 		065A15FE1912BCFB00B85D3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 065A15FC1912BCFB00B85D3D /* InfoPlist.strings */; };
 		065A16001912BCFB00B85D3D /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A15FF1912BCFB00B85D3D /* ChatAppTests.m */; };
 		065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */; };
-		065A161D191406C100B85D3D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A161C191406C100B85D3D /* LoginViewController.m */; };
 		065A16281914257700B85D3D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16271914257700B85D3D /* SettingsViewController.m */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
@@ -81,8 +80,6 @@
 		065A15FD1912BCFB00B85D3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		065A15FF1912BCFB00B85D3D /* ChatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAppTests.m; sourceTree = "<group>"; };
 		065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
-		065A161B191406C100B85D3D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		065A161C191406C100B85D3D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		065A16261914257700B85D3D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -206,19 +203,16 @@
 		065A15DA1912BCFB00B85D3D /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
-				0608596D19198BD4005F6A75 /* App Delegate */,
-				065A15E61912BCFB00B85D3D /* Main.storyboard */,
-				06FD23841917F1B800AE7226 /* IntroViewController.h */,
-				06FD23851917F1B800AE7226 /* IntroViewController.m */,
-				061E7E4919183D1400A0DF90 /* MenuViewController.h */,
-				061E7E4A19183D1400A0DF90 /* MenuViewController.m */,
 				06085975191BFAE0005F6A75 /* Utilities */,
-				065A1620191412A200B85D3D /* Login ViewController */,
+				065A1620191412A200B85D3D /* Intro ViewController */,
 				06FD23811917D72100AE7226 /* Settings VC */,
 				065A161F19140B9300B85D3D /* Chat ViewController */,
+				0608596D19198BD4005F6A75 /* App Delegate */,
+				065A15E61912BCFB00B85D3D /* Main.storyboard */,
+				061E7E4919183D1400A0DF90 /* MenuViewController.h */,
+				061E7E4A19183D1400A0DF90 /* MenuViewController.m */,
 				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				061E7E53191922BB00A0DF90 /* chicago1.jpg */,
-				065A162B19145BA900B85D3D /* temp */,
 				065A15DB1912BCFB00B85D3D /* Supporting Files */,
 			);
 			path = ChatApp;
@@ -263,20 +257,13 @@
 			name = "Chat ViewController";
 			sourceTree = "<group>";
 		};
-		065A1620191412A200B85D3D /* Login ViewController */ = {
+		065A1620191412A200B85D3D /* Intro ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				065A161B191406C100B85D3D /* LoginViewController.h */,
-				065A161C191406C100B85D3D /* LoginViewController.m */,
+				06FD23841917F1B800AE7226 /* IntroViewController.h */,
+				06FD23851917F1B800AE7226 /* IntroViewController.m */,
 			);
-			name = "Login ViewController";
-			sourceTree = "<group>";
-		};
-		065A162B19145BA900B85D3D /* temp */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = temp;
+			name = "Intro ViewController";
 			sourceTree = "<group>";
 		};
 		06FD23811917D72100AE7226 /* Settings VC */ = {
@@ -433,7 +420,6 @@
 				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
 				065A15E11912BCFB00B85D3D /* main.m in Sources */,
 				06085978191BFB10005F6A75 /* MenuButton.m in Sources */,
-				065A161D191406C100B85D3D /* LoginViewController.m in Sources */,
 				06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */,
 				06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */,
 			);

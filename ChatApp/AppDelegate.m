@@ -66,10 +66,7 @@
 }
 
 -(void)setLoginView
-{
-//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    LoginViewController* loginVC = [sb instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    
+{    
     NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Some friends description"}, @{@"Header": @"Camping", @"Label": @"Some camping description."}, @{@"Header": @"Beach", @"Label": @"Some Beach Description"}, @{@"Header": @"Concert", @"Label":@"Some Concert Description"}];
     
     IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2", @"bg3", @"bg4"] andInformations:infoArray];
