@@ -3,9 +3,17 @@
 //  http://www.hexedbits.com
 //
 //
-//  The MIT License
+//  Documentation
+//  http://cocoadocs.org/docsets/JSQSystemSoundPlayer
+//
+//
+//  GitHub
+//  https://github.com/jessesquires/JSQSystemSoundPlayer
+//
+//
+//  License
 //  Copyright (c) 2013 Jesse Squires
-//  http://opensource.org/licenses/MIT
+//  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
 #import "JSQSystemSoundPlayer.h"
@@ -85,10 +93,10 @@ void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
     return sharedPlayer;
 }
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
-    if(self) {
+    if (self) {
         _on = [self readSoundPlayerOnFromUserDefaults];
         _sounds = [[NSMutableDictionary alloc] init];
         _completionBlocks = [[NSMutableDictionary alloc] init];
@@ -121,24 +129,24 @@ void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
         return;
     }
     
-    if(!filename || !extension) {
+    if (!filename || !extension) {
         return;
     }
     
-    if(![self.sounds objectForKey:filename]) {
+    if (![self.sounds objectForKey:filename]) {
         [self addSoundIDForAudioFileWithName:filename extension:extension];
     }
 
     SystemSoundID soundID = [self soundIDForFilename:filename];
-    if(soundID) {
-        if(completionBlock) {
+    if (soundID) {
+        if (completionBlock) {
             OSStatus error = AudioServicesAddSystemSoundCompletion(soundID,
                                                                    NULL,
                                                                    NULL,
                                                                    systemServicesSoundCompletion,
                                                                    NULL);
             
-            if(error) {
+            if (error) {
                 [self logError:error withMessage:@"Warning! Completion block could not be added to SystemSoundID."];
             }
             else {
@@ -146,7 +154,7 @@ void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
             }
         }
         
-        if(isAlert) {
+        if (isAlert) {
             AudioServicesPlayAlertSound(soundID);
         }
         else {
@@ -239,6 +247,13 @@ void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
     [_completionBlocks removeObjectForKey:data];
 }
 
+- (void)preloadSoundWithFilename:(NSString *)filename extension:(NSString *)extension
+{
+    if (![self.sounds objectForKey:filename]) {
+        [self addSoundIDForAudioFileWithName:filename extension:extension];
+    }
+}
+
 #pragma mark - Sound data
 
 - (NSData *)dataWithSoundID:(SystemSoundID)soundID
@@ -248,7 +263,7 @@ void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
 
 - (SystemSoundID)soundIDFromData:(NSData *)data
 {
-    if(!data) {
+    if (!data) {
         return 0;
     }
     
@@ -270,7 +285,7 @@ void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
 {
     SystemSoundID soundID = [self createSoundIDWithName:filename
                                               extension:extension];
-    if(soundID) {
+    if (soundID) {
         NSData *data = [self dataWithSoundID:soundID];
         [self.sounds setObject:data forKey:filename];
     }
@@ -306,11 +321,11 @@ void systemServicesSoundCompletion(SystemSoundID  soundID, void *data)
     NSURL *fileURL = [[NSBundle mainBundle] URLForResource:filename
                                              withExtension:extension];
 
-    if([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
         SystemSoundID soundID;
         OSStatus error = AudioServicesCreateSystemSoundID((__bridge CFURLRef)fileURL, &soundID);
 
-        if(error) {
+        if (error) {
             [self logError:error withMessage:@"Warning! SystemSoundID could not be created."];
             return 0;
         }

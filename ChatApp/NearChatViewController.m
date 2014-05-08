@@ -7,10 +7,10 @@
 //
 
 #import "NearChatViewController.h"
-#import "JSMessage.h"
 #import "SettingsViewController.h"
 //#import "TWMessageBarManager.h"
 #import "TSMessage.h"
+#import <JSQMessages.h>
 
 static NSString* const kServiceName = @"multipeer";
 
@@ -47,10 +47,12 @@ static NSString* const kServiceName = @"multipeer";
 - (void)viewDidLoad
 {
     
-    self.delegate = self;
-    self.dataSource = self;
+//    self.delegate = self;
+//    self.dataSource = self;
     
     [super viewDidLoad];
+    
+    self.sender = @"me";
     
     _chatMessagesArray = [NSMutableArray new];
     
@@ -60,7 +62,7 @@ static NSString* const kServiceName = @"multipeer";
     _session = [[MCSession alloc] initWithPeer:_peerID];
     _session.delegate = self;
 
-    self.messageInputView.textView.placeHolder = @"Type a message...";
+//    self.messageInputView.textView.placeHolder = @"Type a message...";
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settingsShow:)];
     //    [self setBackgroundColor:[UIColor whiteColor]];
@@ -159,11 +161,11 @@ static NSString* const kServiceName = @"multipeer";
 {
     NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    JSMessage* messageObj = [[JSMessage alloc] initWithText:message sender:peerID.displayName date:[NSDate date]];
+    JSQMessage* messageObj = [[JSQMessage alloc] initWithText:message sender:peerID.displayName date:[NSDate date]];
     [_chatMessagesArray addObject:messageObj];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
+        [self finishReceivingMessage];
         [self scrollToBottomAnimated:YES];
     });
 }
@@ -191,123 +193,187 @@ static NSString* const kServiceName = @"multipeer";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UITableView Datasource: REQUIRED
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _chatMessagesArray.count;
-}
-
--(void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
-        cell.bubbleView.textView.textColor = [UIColor whiteColor];
-        
-        NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
-        [attrs setValue:[UIColor blueColor] forKey:NSForegroundColorAttributeName];
-        
-        cell.bubbleView.textView.linkTextAttributes = attrs;
-    }
-    
-    if (cell.timestampLabel) {
-        cell.timestampLabel.textColor = [UIColor lightGrayColor];
-        cell.timestampLabel.shadowOffset = CGSizeZero;
-    }
-    
-    if (cell.subtitleLabel) {
-        cell.subtitleLabel.textColor = [UIColor lightGrayColor];
-    }
-    
-    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-}
-
-#pragma mark -
-
--(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    JSMessage* message = _chatMessagesArray[indexPath.row];
-    if ([message.sender isEqualToString:@"me"]) {
-        return JSBubbleMessageTypeOutgoing;
-    }
-    return JSBubbleMessageTypeIncoming;
-}
-
--(JSMessageInputViewStyle)inputViewStyle
-{
-    return JSMessageInputViewStyleFlat;
-}
-
-//-(UIView *)inputView
-//{
-//    InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-//    return inputV;
-//}
-
-#pragma mark - Message View Delegate: REQUIRED
-
--(void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date
+-(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text sender:(NSString *)sender date:(NSDate *)date
 {
     NSLog(@"sent");
     NSString* message = text;
     NSData* data = [message dataUsingEncoding:NSUTF8StringEncoding];
-    
+
     NSError* error = nil;
     if (![self.session sendData:data toPeers:[self.session connectedPeers] withMode:MCSessionSendDataReliable error:&error]) {
         NSLog(@"%@", error);
     } else {
-        JSMessage* sentMessage = [[JSMessage alloc] initWithText:message sender:@"me" date:date];
+        JSQMessage* sentMessage = [[JSQMessage alloc] initWithText:message sender:@"me" date:date];
         [_chatMessagesArray addObject:sentMessage];
-        
-        [self.tableView reloadData];
+
         [self scrollToBottomAnimated:YES];
     }
-    [self finishSend];
+    [self finishSendingMessage];
 }
 
-#pragma mark - Messages view data source: REQUIRED
-
--(id<JSMessageData>)messageForRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)didPressAccessoryButton:(UIButton *)sender
 {
-    JSMessage* message = _chatMessagesArray[indexPath.row];
-    
-    return message;
+    NSLog(@"Camera pressed!");
 }
 
--(UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type forRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - JSQMessages CollectionView Datasource
+-(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSMessage* message = _chatMessagesArray[indexPath.row];
+    return [_chatMessagesArray objectAtIndex:indexPath.item];
+}
+
+-(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessage* message = _chatMessagesArray[indexPath.row];
     if ([message.sender isEqualToString:@"me"]) {
-        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];
+        return [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     }
-    return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleLightGrayColor]];
+    return [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 }
 
--(UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath sender:(NSString *)sender
+-(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [UIImageView new];
+}
+
+-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
 }
 
--(BOOL)shouldDisplayTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        JSMessage* firstMessgae = _chatMessagesArray[0];
-        _lastShownTimeStamp = firstMessgae.date;
-        return YES;
-    }
-    JSMessage* message = _chatMessagesArray[indexPath.row];
-    
-    NSTimeInterval timeDiff = [message.date timeIntervalSinceDate:_lastShownTimeStamp];
-    
-    double mins = floor(timeDiff/60);
-    NSLog(@"%@", message.date);
-    NSLog(@"%@", _lastShownTimeStamp);
-    NSLog(@"%f", mins);
-    double secs = round(timeDiff - mins * 60);
-    if (mins > 1) {
-        _lastShownTimeStamp = message.date;
-        return YES;
-    }
-    return NO;
+    return nil;
 }
+
+-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return _chatMessagesArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessagesCollectionViewCell* cell = (JSQMessagesCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
+    JSQMessage* msg = [_chatMessagesArray objectAtIndex:indexPath.item];
+    
+    if ([msg.sender isEqualToString:self.sender]) {
+        cell.textView.textColor = [UIColor blackColor];
+    } else {
+        cell.textView.textColor = [UIColor whiteColor];
+    }
+    
+    return cell;
+}
+
+
+#pragma mark - JSQMessages collection view flow layout delegate
+
+//#pragma mark - UITableView Datasource: REQUIRED
+//
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return _chatMessagesArray.count;
+//}
+//
+//-(void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
+//        cell.bubbleView.textView.textColor = [UIColor whiteColor];
+//        
+//        NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
+//        [attrs setValue:[UIColor blueColor] forKey:NSForegroundColorAttributeName];
+//        
+//        cell.bubbleView.textView.linkTextAttributes = attrs;
+//    }
+//    
+//    if (cell.timestampLabel) {
+//        cell.timestampLabel.textColor = [UIColor lightGrayColor];
+//        cell.timestampLabel.shadowOffset = CGSizeZero;
+//    }
+//    
+//    if (cell.subtitleLabel) {
+//        cell.subtitleLabel.textColor = [UIColor lightGrayColor];
+//    }
+//    
+//    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
+//}
+//
+//#pragma mark -
+//
+//-(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    JSMessage* message = _chatMessagesArray[indexPath.row];
+//    if ([message.sender isEqualToString:@"me"]) {
+//        return JSBubbleMessageTypeOutgoing;
+//    }
+//    return JSBubbleMessageTypeIncoming;
+//}
+//
+//-(JSMessageInputViewStyle)inputViewStyle
+//{
+//    return JSMessageInputViewStyleFlat;
+//}
+//
+////-(UIView *)inputView
+////{
+////    InputView *inputV = [[InputView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+////    return inputV;
+////}
+//
+//#pragma mark - Message View Delegate: REQUIRED
+//
+
+//
+//#pragma mark - Messages view data source: REQUIRED
+//
+//-(id<JSMessageData>)messageForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    JSMessage* message = _chatMessagesArray[indexPath.row];
+//    
+//    return message;
+//}
+//
+//-(UIImageView *)bubbleImageViewWithType:(JSBubbleMessageType)type forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    JSMessage* message = _chatMessagesArray[indexPath.row];
+//    if ([message.sender isEqualToString:@"me"]) {
+//        return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleBlueColor]];
+//    }
+//    return [JSBubbleImageViewFactory bubbleImageViewForType:type color:[UIColor js_bubbleLightGrayColor]];
+//}
+//
+//-(UIImageView *)avatarImageViewForRowAtIndexPath:(NSIndexPath *)indexPath sender:(NSString *)sender
+//{
+//    return nil;
+//}
+//
+//-(BOOL)shouldDisplayTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (indexPath.row == 0) {
+//        JSMessage* firstMessgae = _chatMessagesArray[0];
+//        _lastShownTimeStamp = firstMessgae.date;
+//        return YES;
+//    }
+//    JSMessage* message = _chatMessagesArray[indexPath.row];
+//    
+//    NSTimeInterval timeDiff = [message.date timeIntervalSinceDate:_lastShownTimeStamp];
+//    
+//    double mins = floor(timeDiff/60);
+//    NSLog(@"%@", message.date);
+//    NSLog(@"%@", _lastShownTimeStamp);
+//    NSLog(@"%f", mins);
+//    double secs = round(timeDiff - mins * 60);
+//    if (mins > 1) {
+//        _lastShownTimeStamp = message.date;
+//        return YES;
+//    }
+//    return NO;
+//}
 
 @end

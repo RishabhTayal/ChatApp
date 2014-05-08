@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <JSMessagesViewController/JSMessagesViewController.h>
+//#import <JSMessagesViewController/JSMessagesViewController.h>
 
-@interface FriendsChatViewController : JSMessagesViewController<JSMessagesViewDataSource, JSMessagesViewDelegate>
+@interface FriendsChatViewController:UIViewController
 
 @property (strong) NSString* friendId;
 

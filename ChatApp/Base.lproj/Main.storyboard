@@ -47,7 +47,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="e6J-CD-DPY" customClass="FBLoginView">
-                                <rect key="frame" x="35" y="487.00000078797984" width="250" height="46"/>
+                                <rect key="frame" x="35" y="487" width="250" height="46.000001627703234"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
