@@ -9,6 +9,7 @@
 #import "FriendsChatViewController.h"
 //#import <JSMessage.h>
 #import <Parse/Parse.h>
+#import <JSQMessages.h>
 
 @interface FriendsChatViewController ()
 
@@ -26,6 +27,8 @@
 //    self.delegate = self;
     
     [super viewDidLoad];
+    
+    self.sender = @"me";
     
     _chatArray = [NSMutableArray new];
     
@@ -56,17 +59,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//
-//-(void)pushNotificationRecieved:(NSNotification*)notification
-//{
-//    [JSMessageSoundEffect playMessageReceivedSound];
-//    
-//    NSLog(@"%@", notification.userInfo[@"aps"][@"alert"]);
-//    JSMessage* message = [[JSMessage alloc] initWithText:notification.userInfo[@"aps"][@"alert"] sender:@"" date:nil];
-//    [_chatArray addObject:message];
-//    [self.tableView reloadData];
-//    [self scrollToBottomAnimated:YES];
-//}
+
+-(void)pushNotificationRecieved:(NSNotification*)notification
+{
+    [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+    
+    NSLog(@"%@", notification.userInfo[@"aps"][@"alert"]);
+    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[@"aps"][@"alert"] sender:@"" date:nil];
+    [_chatArray addObject:message];
+    [self finishReceivingMessage];
+    [self scrollToBottomAnimated:YES];
+}
 
 -(void)loadChat
 {
@@ -76,49 +79,109 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [_chatArray removeAllObjects];
         
-//        for (PFObject* object in objects) {
-//            JSMessage* message = [[JSMessage alloc] initWithText:object[@"msg"] sender:object[@"name"] date:object.createdAt];
-//            [_chatArray addObject:message];
-//        }
-//        _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
+        for (PFObject* object in objects) {
+            JSQMessage* message = [[JSQMessage alloc] initWithText:object[@"msg"] sender:object[@"name"] date:object.createdAt];
+            [_chatArray addObject:message];
+        }
+        _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
 //        [self.tableView reloadData];
-//        [self scrollToBottomAnimated:YES];
+        [self finishReceivingMessage];
+        [self scrollToBottomAnimated:YES];
+    }];
+}
+
+-(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text sender:(NSString *)sender date:(NSDate *)date
+{
+    JSQMessage* message = [[JSQMessage alloc] initWithText:text sender:sender date:date];
+    [_chatArray addObject:message];
+    
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    
+    NSArray* recipients = @[_friendId];
+    PFQuery* pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"owner" containedIn:recipients];
+    
+    PFPush *push = [[PFPush alloc] init];
+    [push setQuery:pushQuery];
+    [push setMessage:text];
+    [push sendPushInBackground];
+    
+    PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];
+    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:@"msg"];
+    [sendObjects setObject:[PFUser currentUser].username forKey:@"name"];
+    [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSLog(@"save");
     }];
     
+    [self scrollToBottomAnimated:YES];
+    [self finishSendingMessage];
 }
-//
-//-(void)didSendText:(NSString *)text fromSender:(NSString *)sender onDate:(NSDate *)date
-//{
-//    JSMessage* message = [[JSMessage alloc] initWithText:text sender:sender date:date];
-//    [_chatArray addObject:message];
-//    
-//    [JSMessageSoundEffect playMessageSentSound];
-//    
-//    NSArray* recipients = @[_friendId];
-//    PFQuery* pushQuery = [PFInstallation query];
-//    [pushQuery whereKey:@"owner" containedIn:recipients];
-//    
-//    PFPush *push = [[PFPush alloc] init];
-//    [push setQuery:pushQuery];
-//    [push setMessage:text];
-//    [push sendPushInBackground];
-//    
-//    PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];
-//    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:@"msg"];
-//    [sendObjects setObject:[PFUser currentUser].username forKey:@"name"];
-//    [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        NSLog(@"save");
-//    }];
-//    
-//    [self.tableView reloadData];
-//    [self scrollToBottomAnimated:YES];
-//    [self finishSend];
-//}
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(void)didPressAccessoryButton:(UIButton *)sender
+{
+    NSLog(@"Camera pressed!");
+}
+
+#pragma mark - JSQMessages CollectionView Datasource
+-(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [_chatArray objectAtIndex:indexPath.item];
+}
+
+-(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessage* message = _chatArray[indexPath.row];
+    if ([message.sender isEqualToString:@"me"]) {
+        return [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
+    }
+    return [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+}
+
+-(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [UIImageView new];
+}
+
+-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return _chatArray.count;
 }
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSQMessagesCollectionViewCell* cell = (JSQMessagesCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
+    JSQMessage* msg = [_chatArray objectAtIndex:indexPath.item];
+    
+    if ([msg.sender isEqualToString:self.sender]) {
+        cell.textView.textColor = [UIColor blackColor];
+    } else {
+        cell.textView.textColor = [UIColor whiteColor];
+    }
+    
+    return cell;
+}
+
+//
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return _chatArray.count;
+//}
 //
 //-(JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
 //{

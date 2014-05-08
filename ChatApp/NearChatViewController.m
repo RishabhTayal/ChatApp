@@ -61,21 +61,9 @@ static NSString* const kServiceName = @"multipeer";
     _peerID = [[MCPeerID alloc] initWithDisplayName:name];
     _session = [[MCSession alloc] initWithPeer:_peerID];
     _session.delegate = self;
-
-//    self.messageInputView.textView.placeHolder = @"Type a message...";
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(settingsShow:)];
-    //    [self setBackgroundColor:[UIColor whiteColor]];
     
     _foundPeer = false;
     [self startBrowsing];
-}
-
--(void)settingsShow:(id)sender
-{
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SettingsViewController* settVC = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:settVC] animated:YES  completion:nil];
 }
 
 #pragma mark -

@@ -165,18 +165,18 @@
         NSLog(@"%@", object);
     }];
 }
-//
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    
-//    if (indexPath.section == 0) {
-//        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
-//        chatVC.title = _friendsUsingApp[indexPath.row][@"name"];
-//        chatVC.friendId = _friendsUsingApp[indexPath.row][@"id"];
-//        [self.navigationController pushViewController:chatVC animated:YES];
-//    }
-//}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0) {
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
+        chatVC.title = _friendsUsingApp[indexPath.row][@"name"];
+        chatVC.friendId = _friendsUsingApp[indexPath.row][@"id"];
+        [self.navigationController pushViewController:chatVC animated:YES];
+    }
+}
 
 @end

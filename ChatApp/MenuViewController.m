@@ -125,7 +125,7 @@
         {
             if (!_near)
                 _near = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
-            array = [[NSMutableArray alloc] initWithObjects:_near, nil];
+            array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_near], nil];
         }
             break;
         case 1:
