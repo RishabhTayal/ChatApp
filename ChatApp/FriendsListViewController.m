@@ -13,6 +13,8 @@
 #import <UIImageView+AFNetworking.h>
 #import <Parse/Parse.h>
 #import <AddressBook/AddressBook.h>
+#import "MenuButton.h"
+#import <MFSideMenu.h>
 
 @interface FriendsListViewController ()
 
@@ -37,6 +39,8 @@
     [super viewDidLoad];
     
     self.title = @"Friends";
+
+    [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
     _friendsUsingApp = [NSMutableArray new];
     
@@ -62,6 +66,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)leftSideMenuButtonPressed:(id)sender
+{
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
 -(NSArray*)getAllDeviceContacts

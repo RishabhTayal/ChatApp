@@ -30,6 +30,8 @@
     
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     
+    [UINavigationBar appearance].barTintColor = [UIColor redColor];
+    
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {
         [self setMainView];
     } else {

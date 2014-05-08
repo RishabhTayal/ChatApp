@@ -9,8 +9,6 @@
 #import "FriendsChatViewController.h"
 #import <Parse/Parse.h>
 #import <JSQMessages.h>
-#import "MenuButton.h"
-#import <MFSideMenu.h>
 
 @interface FriendsChatViewController ()
 
@@ -27,9 +25,7 @@
     [super viewDidLoad];
     
     self.sender = @"me";
-    
-    [MenuButton setupLeftMenuBarButtonOnViewController:self];
-    
+
     _chatArray = [NSMutableArray new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationRecieved:) name:@"notification" object:nil];
@@ -57,11 +53,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void)leftSideMenuButtonPressed:(id)sender
-{
-    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
 -(void)pushNotificationRecieved:(NSNotification*)notification
