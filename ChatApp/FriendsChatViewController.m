@@ -177,9 +177,9 @@
     JSQMessage* msg = [_chatArray objectAtIndex:indexPath.item];
     
     if ([msg.sender isEqualToString:self.sender]) {
-        cell.textView.textColor = [UIColor blackColor];
-    } else {
         cell.textView.textColor = [UIColor whiteColor];
+    } else {
+        cell.textView.textColor = [UIColor blackColor];
     }
     
     return cell;

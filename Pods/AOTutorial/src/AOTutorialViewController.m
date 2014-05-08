@@ -9,13 +9,13 @@
 #import "AOTutorialViewController.h"
 
 #define headerLeftMargin    20.0f
-#define headerFontSize      15.0f
+#define headerFontSize      20.0f
 
 #define headerFontType      @"Helvetica"
 #define headerColor         [UIColor whiteColor]
 
 #define labelLeftMargin     40.0f
-#define labelFontSize       12.0f
+#define labelFontSize       15.0f
 #define labelFontType       @"Helvetica-Light"
 #define labelColor          [UIColor whiteColor]
 

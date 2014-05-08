@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <AOTutorialViewController.h>
-//#import <FacebookSDK/FacebookSDK.h>
 
 @interface IntroViewController : AOTutorialViewController
 
