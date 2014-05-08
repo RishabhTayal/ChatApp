@@ -141,6 +141,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="ZJQ-Kb-g52">
                                                     <rect key="frame" x="251" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="toggleSound:" destination="Mne-tu-0Wt" eventType="valueChanged" id="XT1-po-9Ug"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -155,6 +158,9 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="5ju-fo-NCa">
                                                     <rect key="frame" x="251" y="6" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="toggleInAppVibrate:" destination="Mne-tu-0Wt" eventType="valueChanged" id="CO1-N9-TYg"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In-App Vibrate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TwJ-n9-p9e">
                                                     <rect key="frame" x="20" y="11" width="111" height="21"/>
@@ -276,7 +282,9 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="inAppVibrateSwitch" destination="5ju-fo-NCa" id="2I5-GZ-WZ1"/>
                         <outlet property="nameLabel" destination="aAo-xh-web" id="7Tn-OQ-o0Y"/>
+                        <outlet property="soundSwitch" destination="ZJQ-Kb-g52" id="axd-gv-mpp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvp-ea-Scs" userLabel="First Responder" sceneMemberID="firstResponder"/>

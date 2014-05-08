@@ -18,6 +18,9 @@
 
 @property (strong) IBOutlet UILabel* nameLabel;
 
+@property (strong) IBOutlet UISwitch* inAppVibrateSwitch;
+@property (strong) IBOutlet UISwitch* soundSwitch;
+
 @end
 
 @implementation SettingsViewController
@@ -38,6 +41,9 @@
 
     self.title = @"Settings";
     
+    [_inAppVibrateSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]];
+    [_soundSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue]];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -50,6 +56,16 @@
 -(void)leftSideMenuButtonPressed:(id)sender
 {
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
+}
+
+-(IBAction)toggleInAppVibrate:(UISwitch*)sender
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:kUDInAppVibrate];
+}
+
+-(IBAction)toggleSound:(UISwitch*)sender
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:kUDSound];
 }
 
 -(void)logout:(id)sender

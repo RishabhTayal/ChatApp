@@ -16,4 +16,8 @@
 #define kUDKeyUserLocLongitude @"user_longitude"
 #define kUDKeyUserLocLatitude @"user_latitude"
 
+//Setting UserDefaults
+#define kUDInAppVibrate @"inAppVibrate"
+#define kUDSound @"sound"
+
 #endif

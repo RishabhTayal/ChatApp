@@ -164,12 +164,16 @@ static NSString* const kServiceName = @"multipeer";
 -(void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
     
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
+        [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue] == YES) {
+        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+    }
+    
     NSKeyedUnarchiver* unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
     //    unArchiver.requiresSecureCoding = YES;
     id object = [unArchiver decodeObject];
     [unArchiver finishDecoding];
-    
-    
     
     if ([object isKindOfClass:[NSString class]]) {
         NSString* message = object;
@@ -207,6 +211,10 @@ static NSString* const kServiceName = @"multipeer";
 {
     NSLog(@"sent");
     NSString* message = text;
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue] == YES) {
+        [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    }
     
     NSMutableData* data = [[NSMutableData alloc] init];
     NSKeyedArchiver* archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];

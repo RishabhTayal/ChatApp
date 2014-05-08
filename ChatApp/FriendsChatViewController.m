@@ -25,7 +25,7 @@
     [super viewDidLoad];
     
     self.sender = [[PFUser currentUser] username];
-
+    
     _chatArray = [NSMutableArray new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationRecieved:) name:@"notification" object:nil];
@@ -57,13 +57,17 @@
 
 -(void)pushNotificationRecieved:(NSNotification*)notification
 {
-    [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
+        [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue] == YES) {
+        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+    }
     
     NSLog(@"%@", notification.userInfo[@"aps"][@"alert"]);
     JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[@"aps"][@"alert"] sender:@"" date:[NSDate date]];
     [_chatArray addObject:message];
     [self finishReceivingMessage];
-//    [self scrollToBottomAnimated:YES];
+    //    [self scrollToBottomAnimated:YES];
 }
 
 -(void)loadChat
@@ -80,7 +84,7 @@
         }
         _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
         [self finishReceivingMessage];
-//        [self scrollToBottomAnimated:YES];
+        //        [self scrollToBottomAnimated:YES];
     }];
 }
 
@@ -89,7 +93,9 @@
     JSQMessage* message = [[JSQMessage alloc] initWithText:text sender:sender date:date];
     [_chatArray addObject:message];
     
-    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue] == YES) {
+        [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    }
     
     NSArray* recipients = @[_friendId];
     PFQuery* pushQuery = [PFInstallation query];
@@ -144,7 +150,7 @@
         iv.image = [UIImage imageWithData:[file getData]];
     } else {
         iv.image = _friendsImage;
-    }    
+    }
     return iv;
 }
 
