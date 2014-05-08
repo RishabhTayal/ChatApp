@@ -61,11 +61,13 @@
 -(IBAction)toggleInAppVibrate:(UISwitch*)sender
 {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:kUDInAppVibrate];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(IBAction)toggleSound:(UISwitch*)sender
 {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:kUDInAppSound];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)logout:(id)sender
@@ -95,7 +97,7 @@
     if (indexPath.section == 1) {
         if (indexPath.row == 1) {
             //Tell a friend
-            UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Mail", @"Message", @"Facebook", @"Twitter", nil];
+            UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Message", @"Mail", @"Facebook", @"Twitter", nil];
             [sheet showInView:self.view.window];
         }
     }
@@ -107,13 +109,39 @@
 {
     if (buttonIndex == 0) {
         //Mail
+        if ([MFMessageComposeViewController canSendText]) {
+            MFMessageComposeViewController* messageVC = [[MFMessageComposeViewController alloc] init];
+            messageVC.messageComposeDelegate = self;
+            messageVC.view.tintColor = [UIColor whiteColor];
+            messageVC.body = @"Share with friends";
+            [self presentViewController:messageVC animated:YES completion:nil];
+        }
     } else if (buttonIndex == 1) {
         //Message
+        if ([MFMailComposeViewController canSendMail]) {
+            MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
+            mailVC.mailComposeDelegate = self;
+            mailVC.view.tintColor = [UIColor whiteColor];
+            [mailVC setSubject:@"vCinity App"];
+            [mailVC setToRecipients:@[@"email@example.com"]];
+            [mailVC setMessageBody:@"share the app with friends" isHTML:NO];
+            [self presentViewController:mailVC animated:YES completion:nil];
+        }
     } else if (buttonIndex == 2) {
         //Facebook
     } else if (buttonIndex == 3) {
         //Twitter
     }
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

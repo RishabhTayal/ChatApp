@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <FacebookSDK/FacebookSDK.h>
+#import <MessageUI/MessageUI.h>
 
-@interface SettingsViewController : UITableViewController<UIActionSheetDelegate>
+@interface SettingsViewController : UITableViewController<UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 
 -(IBAction)logout:(id)sender;
 
