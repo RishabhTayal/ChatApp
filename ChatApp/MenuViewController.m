@@ -51,8 +51,11 @@
     
     UIImageView* navImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     PFFile* file = [PFUser currentUser][@"picture"];
-    UIImage* image = [UIImage imageWithData:[file getData]];
-    navImage.image = image;
+    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        navImage.image = [UIImage imageWithData:data];
+    }];
+//    UIImage* image = [UIImage imageWithData:[file getData]];
+//    navImage.image = image;
     navImage.contentMode = UIViewContentModeScaleAspectFill;
     navImage.clipsToBounds = YES;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navImage];

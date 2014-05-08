@@ -147,7 +147,9 @@
     JSQMessage* message = _chatArray[indexPath.row];
     if ([message.sender isEqualToString:[PFUser currentUser].username]) {
         PFFile *file = [PFUser currentUser][@"picture"];
-        iv.image = [UIImage imageWithData:[file getData]];
+        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            iv.image = [UIImage imageWithData:data];
+        }];
     } else {
         iv.image = _friendsImage;
     }
