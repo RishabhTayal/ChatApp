@@ -18,6 +18,6 @@
 
 //Setting UserDefaults
 #define kUDInAppVibrate @"inAppVibrate"
-#define kUDSound @"sound"
+#define kUDInAppSound @"inAppSound"
 
 #endif

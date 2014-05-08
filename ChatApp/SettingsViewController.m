@@ -42,7 +42,7 @@
     self.title = @"Settings";
     
     [_inAppVibrateSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]];
-    [_soundSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue]];
+    [_soundSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue]];
     
     // Do any additional setup after loading the view.
 }
@@ -65,7 +65,7 @@
 
 -(IBAction)toggleSound:(UISwitch*)sender
 {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:kUDSound];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:kUDInAppSound];
 }
 
 -(void)logout:(id)sender

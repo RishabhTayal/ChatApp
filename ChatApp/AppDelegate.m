@@ -33,8 +33,8 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDInAppVibrate];
     }
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] == nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDSound];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDInAppSound];
     }
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {

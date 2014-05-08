@@ -59,7 +59,7 @@
 {
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
         [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
-    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue] == YES) {
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     }
     
@@ -93,7 +93,7 @@
     JSQMessage* message = [[JSQMessage alloc] initWithText:text sender:sender date:date];
     [_chatArray addObject:message];
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue] == YES) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
     }
     

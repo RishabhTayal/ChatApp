@@ -166,7 +166,7 @@ static NSString* const kServiceName = @"multipeer";
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
         [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
-    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue] == YES) {
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     }
     
@@ -212,7 +212,7 @@ static NSString* const kServiceName = @"multipeer";
     NSLog(@"sent");
     NSString* message = text;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDSound] boolValue] == YES) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
     }
     
