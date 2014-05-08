@@ -21,6 +21,9 @@
 
 - (void)awakeFromNib
 {
+    _inviteButton.layer.cornerRadius = 15;
+    _inviteButton.layer.borderColor = [UIColor redColor].CGColor;
+    _inviteButton.layer.borderWidth = 1;
     // Initialization code
 }
 

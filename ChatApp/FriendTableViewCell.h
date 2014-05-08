@@ -12,5 +12,6 @@
 
 @property (strong) IBOutlet UILabel* friendName;
 @property (strong) IBOutlet UIImageView* profilePicture;
+@property (strong) IBOutlet UIButton* inviteButton;
 
 @end
