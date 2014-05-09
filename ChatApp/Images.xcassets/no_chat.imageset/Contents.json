@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "connect_with_facebook_button_bg.png"
+      "filename" : "no_chat.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "connect_with_facebook_button_bg@2x.png"
+      "filename" : "no_chat@2x.png"
     }
   ],
   "info" : {
