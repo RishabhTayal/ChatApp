@@ -24,6 +24,9 @@
     _inviteButton.layer.cornerRadius = 15;
     _inviteButton.layer.borderColor = [UIColor redColor].CGColor;
     _inviteButton.layer.borderWidth = 1;
+    
+    _profilePicture.layer.cornerRadius = _profilePicture.frame.size.height/2;
+    _profilePicture.layer.masksToBounds = YES;
     // Initialization code
 }
 

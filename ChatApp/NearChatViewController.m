@@ -8,11 +8,12 @@
 
 #import "NearChatViewController.h"
 #import "SettingsViewController.h"
-#import "TSMessage.h"
+//#import "TSMessage.h"
 #import <JSQMessages.h>
 #import "MenuButton.h"
 #import <MFSideMenu.h>
 #import <Parse/Parse.h>
+#import "NotificationView.h"
 
 static NSString* const kServiceName = @"multipeer";
 
@@ -65,6 +66,12 @@ static NSString* const kServiceName = @"multipeer";
     _session.delegate = self;
     
     _foundPeer = false;
+//    [self startBrowsing];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     [self startBrowsing];
 }
 
@@ -85,7 +92,8 @@ static NSString* const kServiceName = @"multipeer";
 {
     NSLog(@"browse");
     
-    [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];
+    [NotificationView showInViewController:self withText:@"No nearby users" hide:NO];
+//    [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];
     
     _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:kServiceName];
     _browser.delegate = self;
@@ -137,16 +145,16 @@ static NSString* const kServiceName = @"multipeer";
         case MCSessionStateConnected:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [TSMessage dismissActiveNotification];
-                [TSMessage showNotificationInViewController:self title:[NSString stringWithFormat:@"connected to %d users", [_session connectedPeers].count] subtitle:nil type:TSMessageNotificationTypeSuccess duration:1.0 canBeDismissedByUser:YES];
+//                [TSMessage dismissActiveNotification];
+//                [TSMessage showNotificationInViewController:self title:[NSString stringWithFormat:@"connected to %d users", [_session connectedPeers].count] subtitle:nil type:TSMessageNotificationTypeSuccess duration:1.0 canBeDismissedByUser:YES];
             });
         }
             break;
         case MCSessionStateNotConnected:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [TSMessage dismissActiveNotification];
-                [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];
+//                [TSMessage dismissActiveNotification];
+//                [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];
             });
             _foundPeer = NO;
             [self launchAdvertiser];

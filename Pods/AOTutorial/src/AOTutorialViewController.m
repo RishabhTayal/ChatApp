@@ -234,7 +234,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         } else {
             
             header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + headerLeftMargin,
-                                                               SCREEN_HEIGHT - 120.0f - lSize.height,
+                                                               SCREEN_HEIGHT - 170.0f - lSize.height,
                                                                SCREEN_WIDTH - (headerLeftMargin * 2),
                                                                hSize.height + 5.0f)];
             

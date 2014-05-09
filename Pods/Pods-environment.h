@@ -72,12 +72,6 @@
 #define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 14
 #define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 0
 
-// HexColors
-#define COCOAPODS_POD_AVAILABLE_HexColors
-#define COCOAPODS_VERSION_MAJOR_HexColors 2
-#define COCOAPODS_VERSION_MINOR_HexColors 2
-#define COCOAPODS_VERSION_PATCH_HexColors 1
-
 // JSQMessagesViewController
 #define COCOAPODS_POD_AVAILABLE_JSQMessagesViewController
 #define COCOAPODS_VERSION_MAJOR_JSQMessagesViewController 5
@@ -107,10 +101,4 @@
 #define COCOAPODS_VERSION_MAJOR_Parse_iOS_SDK 1
 #define COCOAPODS_VERSION_MINOR_Parse_iOS_SDK 2
 #define COCOAPODS_VERSION_PATCH_Parse_iOS_SDK 19
-
-// TSMessages
-#define COCOAPODS_POD_AVAILABLE_TSMessages
-#define COCOAPODS_VERSION_MAJOR_TSMessages 0
-#define COCOAPODS_VERSION_MINOR_TSMessages 9
-#define COCOAPODS_VERSION_PATCH_TSMessages 7
 

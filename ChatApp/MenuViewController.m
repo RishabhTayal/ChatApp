@@ -50,6 +50,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIImageView* navImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+    navImage.layer.cornerRadius = navImage.frame.size.height / 2;
+    navImage.layer.masksToBounds = YES;
     PFFile* file = [PFUser currentUser][@"picture"];
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         navImage.image = [UIImage imageWithData:data];

@@ -143,6 +143,8 @@
     UIImageView* iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     iv.contentMode = UIViewContentModeScaleAspectFill;
     iv.clipsToBounds = YES;
+    iv.layer.cornerRadius = iv.frame.size.height / 2;
+    iv.layer.masksToBounds = YES;
     
     JSQMessage* message = _chatArray[indexPath.row];
     if ([message.sender isEqualToString:[PFUser currentUser].username]) {
