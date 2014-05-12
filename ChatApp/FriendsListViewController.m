@@ -169,7 +169,9 @@
     
     NSLog(@"Invite at path %d", indexPath.row);
     
-    NSDictionary* params = @{@"toEmail": @"rtayal11@gmail.com", @"toName": @"Rishabh", @"fromEmail": @"ChatApp_Admin@example.com", @"fromName": @"ChatApp Admin", @"text": @"email text", @"subject": @"Email Subject"};
+    NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
+    NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
+    NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [[PFUser currentUser] username], @"text": @"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391", @"subject": @"vCinity App for iPhone"};
     [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
         NSLog(@"%@", object);
     }];

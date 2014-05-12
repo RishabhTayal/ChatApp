@@ -10,7 +10,7 @@
 
 @interface NotificationView : UIView
 
-+(void)hide:(UIView*)view;
-+(void)showInViewController:(UIViewController*)controller withText:(NSString*)text hide:(BOOL)hide;
++(void)hide;
++(void)showInViewController:(UIViewController *)controller withText:(NSString *)text hideAfterDelay:(CGFloat)delay;
 
 @end

@@ -8,7 +8,6 @@
 
 #import "NearChatViewController.h"
 #import "SettingsViewController.h"
-//#import "TSMessage.h"
 #import <JSQMessages.h>
 #import "MenuButton.h"
 #import <MFSideMenu.h>
@@ -68,7 +67,7 @@ static NSString* const kServiceName = @"multipeer";
     self.inputToolbar.contentView.leftBarButtonItem = nil;
     
     _foundPeer = false;
-//    [self startBrowsing];
+    //    [self startBrowsing];
     
 }
 
@@ -95,8 +94,7 @@ static NSString* const kServiceName = @"multipeer";
 {
     NSLog(@"browse");
     
-    [NotificationView showInViewController:self withText:@"No nearby users" hide:NO];
-//    [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];
+    [NotificationView showInViewController:self withText:@"No nearby users" hideAfterDelay:0];
     
     _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:_peerID serviceType:kServiceName];
     _browser.delegate = self;
@@ -148,19 +146,23 @@ static NSString* const kServiceName = @"multipeer";
         case MCSessionStateConnected:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-//                [TSMessage dismissActiveNotification];
-//                [TSMessage showNotificationInViewController:self title:[NSString stringWithFormat:@"connected to %d users", [_session connectedPeers].count] subtitle:nil type:TSMessageNotificationTypeSuccess duration:1.0 canBeDismissedByUser:YES];
+                [NotificationView hide];
+                [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d users", [_session connectedPeers].count] hideAfterDelay:3];
             });
         }
             break;
         case MCSessionStateNotConnected:
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-//                [TSMessage dismissActiveNotification];
-//                [TSMessage showNotificationInViewController:self title:@"No nearby users" subtitle:nil type:TSMessageNotificationTypeError duration:TSMessageNotificationDurationEndless canBeDismissedByUser:NO];
-            });
-            _foundPeer = NO;
-            [self launchAdvertiser];
+            if (session.connectedPeers.count == 0) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [NotificationView hide];
+                    [NotificationView showInViewController:self withText:@"No nearby users" hideAfterDelay:0];
+                });
+                _foundPeer = NO;
+                [self launchAdvertiser];
+            }
+            
         }    break;
         default:
             break;
@@ -322,7 +324,7 @@ static NSString* const kServiceName = @"multipeer";
         iv.image = [UIImage imageWithData:[file getData]];
     } else {
         iv.image = [UIImage imageNamed:@"avatar-placeholder"];
-//        iv.image = _friendsImage;
+        //        iv.image = _friendsImage;
     }
     return iv;
 }

@@ -10,11 +10,11 @@
 
 @implementation NotificationView
 
-+(void)showInViewController:(UIViewController *)controller withText:(NSString *)text hide:(BOOL)hide
++(void)showInViewController:(UIViewController *)controller withText:(NSString *)text hideAfterDelay:(CGFloat)delay
 {
     CGRect frame = CGRectMake(0, 0, 320, 25);
     frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame) - frame.size.height;
-    NotificationView* view = [[NotificationView alloc] init];
+    NotificationView* view = [NotificationView sharedInstance];
     view.frame = frame;
     
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, frame.size.height)];
@@ -37,17 +37,29 @@
         view.frame = frame;
 
     } completion:^(BOOL finished) {
-        if (hide) {
-            [[NotificationView class] performSelector:@selector(hide:) withObject:view afterDelay:5];
+        if (delay != 0) {
+            [[NotificationView class] performSelector:@selector(hide) withObject:nil afterDelay:delay];
         }
     }];
 }
 
-+(void)hide:(UIView*)view
++(void)hide
 {
+    NotificationView* view = [NotificationView sharedInstance];
     [UIView animateWithDuration:0.4 animations:^{
         view.frame = CGRectMake(0, -40, 320, 40);
     }];
+}
+
++(id)sharedInstance {
+    static dispatch_once_t p = 0;
+    
+    __strong static id _sharedObject = nil;
+    
+    dispatch_once(&p, ^{
+        _sharedObject = [[self alloc] init];
+    });
+    return _sharedObject;
 }
 
 @end
