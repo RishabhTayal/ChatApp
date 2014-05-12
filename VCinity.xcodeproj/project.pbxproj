@@ -358,7 +358,7 @@
 				ORGANIZATIONNAME = "Rishabh Tayal";
 				TargetAttributes = {
 					065A15D01912BCFB00B85D3D = {
-						DevelopmentTeam = DPSPGQZJSK;
+						DevelopmentTeam = GJ7VFS8326;
 					};
 					065A15F11912BCFB00B85D3D = {
 						TestTargetID = 065A15D01912BCFB00B85D3D;
@@ -602,14 +602,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: rishabh tayal (GJ7VFS8326)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: rishabh tayal (GJ7VFS8326)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = VCinity;
-				PROVISIONING_PROFILE = "F57FDDE2-2B76-4F13-9256-EBCF4F75627D";
+				PROVISIONING_PROFILE = "7CA6D684-D0FB-4BB8-985F-03B791C36753";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

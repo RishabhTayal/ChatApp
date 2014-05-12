@@ -12,17 +12,19 @@
 
 +(void)showInViewController:(UIViewController *)controller withText:(NSString *)text hide:(BOOL)hide
 {
-    CGRect frame = CGRectMake(0, 0, 320, 30);
+    CGRect frame = CGRectMake(0, 0, 320, 25);
     frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame) - frame.size.height;
     NotificationView* view = [[NotificationView alloc] init];
     view.frame = frame;
     
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, frame.size.height)];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 16e0, frame.size.height)];
     label.text = text;
-    label.textColor = [UIColor blackColor];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont systemFontOfSize:12];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor lightGrayColor];
     label.layer.cornerRadius = 5;
+    label.layer.masksToBounds = YES;
     CGPoint center = CGPointMake(view.center.x, label.center.y);
     label.center = center;
     
