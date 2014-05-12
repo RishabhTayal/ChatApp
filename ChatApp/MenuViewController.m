@@ -13,6 +13,8 @@
 #import <MFSideMenu.h>
 #import "UIImage+Utility.h"
 #import <Parse/Parse.h>
+#import "ActivityView.h"
+#import "AppDelegate.h"
 
 @interface MenuViewController ()
 
@@ -81,7 +83,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 3;
+    return 4;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,8 +114,11 @@
         case 1:
             cell.textLabel.text = @"Friends";
             break;
-        default:
+            case 2:
             cell.textLabel.text = @"Settings";
+            break;
+        default:
+            cell.textLabel.text = @"Logout";
             break;
     }
     return cell;
@@ -131,6 +136,8 @@
             if (!_near)
                 _near = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_near], nil];
+            self.menuContainerViewController.centerViewController = array[0];
+            [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
         }
             break;
         case 1:
@@ -138,20 +145,48 @@
             if (!_friends)
                 _friends = [sb instantiateViewControllerWithIdentifier:@"FriendsListViewController"];
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_friends], nil];
+            self.menuContainerViewController.centerViewController = array[0];
+            [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
         }
             break;
-        default:
+            case 2:
         {
             if (!_settings)
                 _settings = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_settings], nil];
+            self.menuContainerViewController.centerViewController = array[0];
+            [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+        }
+            break;
+        default:
+        {
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Logout", nil];
+            [sheet showInView:self.view.window];
         }
             break;
     }
-//    UINavigationController* nav = self.menuContainerViewController.centerViewController;
-//    nav.viewControllers = array;
-    self.menuContainerViewController.centerViewController = array[0];
-    [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [ActivityView showInView:self.navigationController.view loadingMessage:@"Logging out..."];
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(performLogout) userInfo:nil repeats:NO];
+    }
+}
+
+-(void)performLogout
+{
+    [ActivityView hide];
+    
+    [PFUser logOut];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [appDelegate setLoginView];
 }
 
 @end

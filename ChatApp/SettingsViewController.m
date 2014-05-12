@@ -70,26 +70,6 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(void)logout:(id)sender
-{
-    UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Logout", nil];
-    sheet.tag = ActionSheetTypeLogout;
-    [sheet showInView:self.view.window];
-}
-
--(void)performLogout
-{
-    [ActivityView hide];
-    
-    [PFUser logOut];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate setLoginView];
-}
-
 #pragma mark - UITableView Delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -135,11 +115,6 @@
             //Facebook
         } else if (buttonIndex == 3) {
             //Twitter
-        }
-    } else if (actionSheet.tag == ActionSheetTypeLogout) {
-        if (buttonIndex == 0) {
-            [ActivityView showInView:self.navigationController.view loadingMessage:@"Logging out..."];
-            [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(performLogout) userInfo:nil repeats:NO];
         }
     }
 }

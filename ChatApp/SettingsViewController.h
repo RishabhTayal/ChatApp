@@ -16,6 +16,6 @@ typedef enum {
 
 @interface SettingsViewController : UITableViewController<UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 
--(IBAction)logout:(id)sender;
+//-(IBAction)logout:(id)sender;
 
 @end
