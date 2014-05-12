@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
+typedef enum {
+    ActionSheetTypeShare = 100,
+    ActionSheetTypeLogout
+}ActionSheetType;
+
 @interface SettingsViewController : UITableViewController<UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 
 -(IBAction)logout:(id)sender;

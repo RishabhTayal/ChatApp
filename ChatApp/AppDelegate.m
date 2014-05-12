@@ -76,7 +76,7 @@
     
     IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2", @"bg3", @"bg4"] andInformations:infoArray];
     
-    [intro setHeaderImage:[UIImage imageNamed:@"PhotoButton"]];
+    [intro setHeaderImage:[UIImage imageNamed:@"logo"]];
     [intro setButtons:AOTutorialButtonLogin];
 
     UIButton* loginButton = [UIButton buttonWithType:UIButtonTypeCustom];

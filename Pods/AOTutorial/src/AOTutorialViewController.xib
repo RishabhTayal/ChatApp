@@ -37,6 +37,10 @@
                         <outlet property="delegate" destination="-1" id="3Nc-H8-RRx"/>
                     </connections>
                 </scrollView>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="50a-yb-Td1" userLabel="Logo">
+                    <rect key="frame" x="109" y="75" width="100" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AH5-dt-s8y">
                     <rect key="frame" x="56" y="518" width="100" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
@@ -58,10 +62,6 @@
                         <action selector="dismiss:" destination="-1" eventType="touchUpInside" id="2Ib-PV-HIJ"/>
                     </connections>
                 </button>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="50a-yb-Td1" userLabel="Logo">
-                    <rect key="frame" x="40" y="54" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <pageControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="Bwo-0s-TBS">
                     <rect key="frame" x="42" y="443" width="236" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -96,6 +96,6 @@
         </view>
     </objects>
     <resources>
-        <image name="connect_with_facebook_button_bg" width="223" height="47"/>
+        <image name="connect_with_facebook_button_bg" width="224" height="47"/>
     </resources>
 </document>
