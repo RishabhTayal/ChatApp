@@ -188,7 +188,8 @@
         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
         chatVC.title = _friendsUsingApp[indexPath.row][@"name"];
-        chatVC.friendId = _friendsUsingApp[indexPath.row][@"id"];
+        chatVC.friendDict = _friendsUsingApp[indexPath.row];
+//        chatVC.friendId = _friendsUsingApp[indexPath.row][@"id"];
         chatVC.friendsImage = cell.profilePicture.image;
         [self.navigationController pushViewController:chatVC animated:YES];
     }

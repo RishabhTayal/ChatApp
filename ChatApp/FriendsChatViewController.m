@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
     
-    self.sender = [[PFUser currentUser] username];
+    self.sender = [PFUser currentUser][@"fbID"];
     
     _chatArray = [NSMutableArray new];
     
@@ -74,14 +74,23 @@
 
 -(void)loadChat
 {
-    PFQuery *query = [[PFQuery alloc] initWithClassName:@"Wechat"];
+    PFQuery *innerQuery = [[PFQuery alloc] initWithClassName:@"Wechat"];
+    [innerQuery whereKey:@"sender" equalTo:[PFUser currentUser][@"fbID"]];
+    [innerQuery whereKey:@"receiver" equalTo:_friendDict[@"id"]];
+    
+    PFQuery* innerQuery2 = [[PFQuery alloc] initWithClassName:@"Wechat"];
+    [innerQuery2 whereKey:@"sender" equalTo:_friendDict[@"id"]];
+    [innerQuery2 whereKey:@"receiver" equalTo:[PFUser currentUser][@"fbID"]];
+    
+    PFQuery* query = [PFQuery orQueryWithSubqueries:@[innerQuery, innerQuery2]];
     query.limit = 10;
+
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [_chatArray removeAllObjects];
         
         for (PFObject* object in objects) {
-            JSQMessage* message = [[JSQMessage alloc] initWithText:object[@"msg"] sender:object[@"name"] date:object.createdAt];
+            JSQMessage* message = [[JSQMessage alloc] initWithText:object[@"msg"] sender:object[@"sender"] date:object.createdAt];
             [_chatArray addObject:message];
         }
         _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
@@ -99,7 +108,7 @@
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
     }
     
-    NSArray* recipients = @[_friendId];
+    NSArray* recipients = @[_friendDict[@"id"]];
     PFQuery* pushQuery = [PFInstallation query];
     [pushQuery whereKey:@"owner" containedIn:recipients];
     
@@ -110,7 +119,8 @@
     
     PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];
     [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:@"msg"];
-    [sendObjects setObject:[PFUser currentUser].username forKey:@"name"];
+    [sendObjects setObject:[PFUser currentUser][@"fbID"] forKey:@"sender"];
+    [sendObjects setObject:_friendDict[@"id"] forKey:@"receiver"];
     [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSLog(@"save");
     }];
@@ -134,7 +144,7 @@
 -(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.row];
-    if ([message.sender isEqualToString:[[PFUser currentUser] username]]) {
+    if ([message.sender isEqualToString:[PFUser currentUser][@"fbID"]]) {
         return [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     }
     return [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
@@ -149,7 +159,7 @@
     iv.layer.masksToBounds = YES;
     
     JSQMessage* message = _chatArray[indexPath.row];
-    if ([message.sender isEqualToString:[PFUser currentUser].username]) {
+    if ([message.sender isEqualToString:[PFUser currentUser][@"fbID"]]) {
         PFFile *file = [PFUser currentUser][@"picture"];
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             iv.image = [UIImage imageWithData:data];
@@ -168,8 +178,13 @@
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.item];
-    NSAttributedString* attString = [[NSAttributedString alloc] initWithString:message.sender];
-    return attString;
+    if ([message.sender isEqualToString:[PFUser currentUser][@"fbID"]]) {
+        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
+        return attString;
+    } else {
+        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:_friendDict[@"name"]];
+        return attString;
+    }
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
