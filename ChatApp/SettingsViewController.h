@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import <Accounts/Accounts.h>
+#import <Social/Social.h>
 
 typedef enum {
     ActionSheetTypeShare = 100,

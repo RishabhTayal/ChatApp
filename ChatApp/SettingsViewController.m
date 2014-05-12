@@ -76,12 +76,28 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1) {
-        if (indexPath.row == 1) {
+        if (indexPath.row == 0) {
             //Tell a friend
             UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Message", @"Mail", @"Facebook", @"Twitter", nil];
             sheet.tag = ActionSheetTypeShare;
             [sheet showInView:self.view.window];
+        } else if (indexPath.row == 1) {
+            MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
+            mailVC.mailComposeDelegate = self;
+            mailVC.view.tintColor = [UIColor whiteColor];
+            [mailVC setSubject:@"Help me."];
+            [mailVC setToRecipients:@[@"contact@appikon.com"]];
+//            [mailVC setMessageBody:@"" isHTML:NO];
+            [self presentViewController:mailVC animated:YES completion:nil];
         }
+    }
+    if (indexPath.section == 2) {
+        MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
+        mailVC.mailComposeDelegate = self;
+        mailVC.view.tintColor = [UIColor whiteColor];
+        [mailVC setSubject:@"Feedback for vCinity App."];
+        [mailVC setToRecipients:@[@"contact@appikon.com"]];
+        [self presentViewController:mailVC animated:YES completion:nil];
     }
 }
 
@@ -97,7 +113,7 @@
                 MFMessageComposeViewController* messageVC = [[MFMessageComposeViewController alloc] init];
                 messageVC.messageComposeDelegate = self;
                 messageVC.view.tintColor = [UIColor whiteColor];
-                messageVC.body = @"Share with friends";
+                messageVC.body = @"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391";
                 [self presentViewController:messageVC animated:YES completion:nil];
             }
         } else if (buttonIndex == 1) {
@@ -106,15 +122,26 @@
                 MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
                 mailVC.mailComposeDelegate = self;
                 mailVC.view.tintColor = [UIColor whiteColor];
-                [mailVC setSubject:@"vCinity App"];
-                [mailVC setToRecipients:@[@"email@example.com"]];
-                [mailVC setMessageBody:@"share the app with friends" isHTML:NO];
+                [mailVC setSubject:@"vCinity App for iPhone"];
+                [mailVC setMessageBody:@"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391" isHTML:NO];
                 [self presentViewController:mailVC animated:YES completion:nil];
             }
         } else if (buttonIndex == 2) {
             //Facebook
+            if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+                SLComposeViewController* sheet = [[SLComposeViewController alloc] init];
+                sheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+                [sheet setInitialText:@"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391"];
+                [self presentViewController:sheet animated:YES completion:nil];
+            }
         } else if (buttonIndex == 3) {
             //Twitter
+            if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+                SLComposeViewController* sheet = [[SLComposeViewController alloc] init];
+                sheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+                [sheet setInitialText:@"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391"];
+                [self presentViewController:sheet animated:YES completion:nil];
+            }
         }
     }
 }

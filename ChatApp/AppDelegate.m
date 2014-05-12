@@ -25,9 +25,10 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
-    
+
+    //Don't add [[uiview apperance].tintcolor
     [UINavigationBar appearance].barTintColor = [UIColor redColor];
-    [UIView appearance].tintColor = [UIColor whiteColor];
+    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
 
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] == nil) {
@@ -72,7 +73,7 @@
 
 -(void)setLoginView
 {    
-    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Some friends description"}, @{@"Header": @"Camping", @"Label": @"Some camping description."}, @{@"Header": @"Beach", @"Label": @"Some Beach Description"}, @{@"Header": @"Concert", @"Label":@"Some Concert Description"}];
+    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your facebook friends."}, @{@"Header": @"Camping with family/friends?", @"Label": @"Chat with nearby people even when no network is available."}, @{@"Header": @"Take it to the beach", @"Label": @""}, @{@"Header": @"Attending a concert?", @"Label":@"Connect with other people."}];
     
     IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2", @"bg3", @"bg4"] andInformations:infoArray];
     
