@@ -17,7 +17,7 @@
     NotificationView* view = [[NotificationView alloc] init];
     view.frame = frame;
     
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 16e0, frame.size.height)];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 160, frame.size.height)];
     label.text = text;
     label.textColor = [UIColor whiteColor];
     label.font = [UIFont systemFontOfSize:12];

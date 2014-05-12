@@ -28,6 +28,8 @@
     
     _chatArray = [NSMutableArray new];
     
+    self.inputToolbar.contentView.leftBarButtonItem = nil;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationRecieved:) name:@"notification" object:nil];
     // Do any additional setup after loading the view.
 }

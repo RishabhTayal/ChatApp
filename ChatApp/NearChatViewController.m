@@ -65,8 +65,11 @@ static NSString* const kServiceName = @"multipeer";
     _session = [[MCSession alloc] initWithPeer:_peerID];
     _session.delegate = self;
     
+    self.inputToolbar.contentView.leftBarButtonItem = nil;
+    
     _foundPeer = false;
 //    [self startBrowsing];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated

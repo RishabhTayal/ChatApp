@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "personSquare.png"
+      "filename" : "loadingSpinnerRed.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "personSquare@2x.png"
+      "filename" : "loadingSpinnerRed@2x.png"
     }
   ],
   "info" : {
