@@ -14,8 +14,20 @@
 #import "IntroViewController.h"
 #import <Parse/Parse.h>
 #import "MenuViewController.h"
+#import <iRate/iRate.h>
 
 @implementation AppDelegate
+
++(void)initialize
+{
+    [iRate sharedInstance].onlyPromptIfLatestVersion = NO;
+    
+    [iRate sharedInstance].eventsUntilPrompt = 5;
+    
+    [iRate sharedInstance].daysUntilPrompt = 0;
+    [iRate sharedInstance].remindPeriod = 0;
+//    [iRate sharedInstance].previewMode = YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

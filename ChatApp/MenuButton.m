@@ -16,7 +16,8 @@
     UIButton* barButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [barButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
     [barButton setFrame:CGRectMake(0, 0, 20, 20)];
-    [barButton addTarget:vc action:@selector(leftSideMenuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    SEL selector  = sel_registerName("leftSideMenuButtonPressed:");
+    [barButton addTarget:vc action:selector forControlEvents:UIControlEventTouchUpInside];
     [vc.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:barButton]];
 }
 

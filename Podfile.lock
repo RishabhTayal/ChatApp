@@ -23,6 +23,7 @@ PODS:
   - Bolts (1.1.0)
   - Facebook-iOS-SDK (3.14.1):
     - Bolts
+  - iRate (1.10.2)
   - JSQMessagesViewController (5.0.1):
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.5.0)
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - AOTutorial
   - APParallaxHeader
   - Facebook-iOS-SDK
+  - iRate
   - JSQMessagesViewController
   - MFSideMenu
   - MPNotificationView
@@ -47,6 +49,7 @@ SPEC CHECKSUMS:
   APParallaxHeader: 860acb07f0339095b72d67a3947b5747d597dd16
   Bolts: dc620a31cf67c29bce3e3d14a07a12e797a1a154
   Facebook-iOS-SDK: 97e68fb37468bee2d90201fd0c9e4dccce5683d9
+  iRate: eb8ca35519dd57a586e4c72bb5135ccb6abee908
   JSQMessagesViewController: 11aaf450f5ffe88102b7a24c8ef1475fabcd7a88
   JSQSystemSoundPlayer: 6dbac8dcc33e3add6facb3e59451a0249aece17d
   MFSideMenu: f59e25c080097a701e108459c207fb22e1f62c30
