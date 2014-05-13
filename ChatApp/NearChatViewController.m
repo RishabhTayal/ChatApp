@@ -336,7 +336,8 @@ static NSString* const kServiceName = @"multipeer";
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    JSQMessage* messgae = [_chatMessagesArray objectAtIndex:indexPath.item];
+    return [[NSAttributedString alloc] initWithString:messgae.sender];
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -363,6 +364,14 @@ static NSString* const kServiceName = @"multipeer";
     
     return cell;
 }
+
+#pragma mark - JSQMessages collectionview flow layout delegate
+
+-(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+}
+
 //
 //-(void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
 //{
