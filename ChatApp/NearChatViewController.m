@@ -58,7 +58,7 @@ static NSString* const kServiceName = @"multipeer";
     
     _chatMessagesArray = [NSMutableArray new];
     
-    NSString* name = [NSString stringWithFormat:@"%@ %@", [[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserFirstName], [[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLastName]];
+    NSString* name = [PFUser currentUser].username;
     
     _peerID = [[MCPeerID alloc] initWithDisplayName:name];
     _session = [[MCSession alloc] initWithPeer:_peerID];
