@@ -31,6 +31,7 @@ PODS:
   - MPNotificationView (1.1.0)
   - Parse-iOS-SDK (1.2.19):
     - Facebook-iOS-SDK (~> 3.7)
+  - UINavigationBar+Addition (1.0.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - MFSideMenu
   - MPNotificationView
   - Parse-iOS-SDK
+  - UINavigationBar+Addition
 
 SPEC CHECKSUMS:
   AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
@@ -54,5 +56,6 @@ SPEC CHECKSUMS:
   MFSideMenu: f59e25c080097a701e108459c207fb22e1f62c30
   MPNotificationView: fff59b369312e946f5abdb71e5aff2c4a827eedf
   Parse-iOS-SDK: 48e366fb9a8956c4e50d93cfd16243176938fae1
+  UINavigationBar+Addition: 61609ae85b650093dd39331686f15a1d83d21823
 
 COCOAPODS: 0.32.1

@@ -102,6 +102,12 @@
 #define COCOAPODS_VERSION_MINOR_Parse_iOS_SDK 2
 #define COCOAPODS_VERSION_PATCH_Parse_iOS_SDK 19
 
+// UINavigationBar+Addition
+#define COCOAPODS_POD_AVAILABLE_UINavigationBar_Addition
+#define COCOAPODS_VERSION_MAJOR_UINavigationBar_Addition 1
+#define COCOAPODS_VERSION_MINOR_UINavigationBar_Addition 0
+#define COCOAPODS_VERSION_PATCH_UINavigationBar_Addition 0
+
 // iRate
 #define COCOAPODS_POD_AVAILABLE_iRate
 #define COCOAPODS_VERSION_MAJOR_iRate 1
