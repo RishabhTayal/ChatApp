@@ -15,6 +15,7 @@
 #import <Parse/Parse.h>
 #import "MenuViewController.h"
 #import <iRate/iRate.h>
+#import "SessionController.h"
 
 @implementation AppDelegate
 
@@ -102,12 +103,17 @@
 
 -(void)setMainView
 {
+   
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     NearChatViewController* nearVC = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
     MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:nearVC] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
-//    FriendsChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
+    
+    _sessionController = [[SessionController alloc] initWithDelegate:nearVC];
+    
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
+    
+
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

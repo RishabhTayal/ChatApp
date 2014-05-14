@@ -14,6 +14,7 @@
 #import <Parse/Parse.h>
 #import "NotificationView.h"
 #import <UINavigationBar+Addition/UINavigationBar+Addition.h>
+#import "AppDelegate.h"
 
 @interface NearChatViewController ()
 
@@ -37,7 +38,9 @@
     
     _chatMessagesArray = [NSMutableArray new];
     
-    _sessionController = [[SessionController alloc] initWithDelegate:self];
+//    _sessionController = [[SessionController alloc] initWithDelegate:self];
+    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    _sessionController = appDelegate.sessionController;
     
     self.sender = _sessionController.displayName;
     
@@ -45,7 +48,9 @@
     
     [self.navigationController.navigationBar hideBottomHairline];
     
-    [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
+    if (_sessionController.connectedPeers.count == 0 ) {
+        [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated
