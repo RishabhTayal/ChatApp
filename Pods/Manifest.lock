@@ -36,7 +36,6 @@ DEPENDENCIES:
   - AFNetworking
   - AOTutorial
   - APParallaxHeader
-  - Facebook-iOS-SDK
   - iRate
   - JSQMessagesViewController
   - MFSideMenu
