@@ -23,8 +23,6 @@
     label.font = [UIFont systemFontOfSize:12];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor redColor];
-//    label.layer.cornerRadius = 5;
-//    label.layer.masksToBounds = YES;
     CGPoint center = CGPointMake(view.center.x, label.center.y);
     label.center = center;
     
