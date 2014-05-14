@@ -13,7 +13,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, MPNotificationViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic)SessionController* sessionController;
+@property (strong, nonatomic) SessionController* sessionController;
 
 -(void)setLoginView;
 

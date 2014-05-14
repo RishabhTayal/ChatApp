@@ -134,7 +134,11 @@
         case 0:
         {
             if (!_near)
+            {
                 _near = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
+                AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                appDelegate.sessionController.delegate = _near;
+            }
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_near], nil];
             self.menuContainerViewController.centerViewController = array[0];
             [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
