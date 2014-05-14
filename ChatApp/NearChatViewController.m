@@ -68,9 +68,6 @@ static NSString* const kServiceName = @"multipeer";
     self.inputToolbar.contentView.leftBarButtonItem = nil;
     
     [self.navigationController.navigationBar hideBottomHairline];
-//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setBackgroundColor:[UIColor redColor]];
-//    self.navigationController.navigationBar.shadowImage = [UIImage new];
     
     _foundPeer = false;
     //    [self startBrowsing];
