@@ -103,7 +103,8 @@
 
 -(void)setMainView
 {
-   
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     NearChatViewController* nearVC = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
     MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:nearVC] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
@@ -112,8 +113,6 @@
     
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
-    
-
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
