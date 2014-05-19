@@ -133,6 +133,7 @@
     switch (indexPath.row) {
         case 0:
         {
+            //
             if (!_near)
             {
                 _near = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
