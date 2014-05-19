@@ -21,12 +21,12 @@
 
 +(void)initialize
 {
-    [iRate sharedInstance].onlyPromptIfLatestVersion = NO;
-    
-    [iRate sharedInstance].eventsUntilPrompt = 5;
-    
-    [iRate sharedInstance].daysUntilPrompt = 0;
-    [iRate sharedInstance].remindPeriod = 0;
+//    [iRate sharedInstance].onlyPromptIfLatestVersion = NO;
+//    
+//    [iRate sharedInstance].eventsUntilPrompt = 5;
+//    
+//    [iRate sharedInstance].daysUntilPrompt = 0;
+//    [iRate sharedInstance].remindPeriod = 0;
 //    [iRate sharedInstance].previewMode = YES;
 }
 

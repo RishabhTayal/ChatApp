@@ -100,6 +100,9 @@
 		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		065A16261914257700B85D3D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		0697199D19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		0697199E19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0697199F19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		06FD23841917F1B800AE7226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		06FD23851917F1B800AE7226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		184A048636424222948F2C41 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -385,6 +388,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 065A15C81912BCFB00B85D3D;
 			productRefGroup = 065A15D21912BCFB00B85D3D /* Products */;
@@ -498,6 +502,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				065A15DE1912BCFB00B85D3D /* en */,
+				0697199E19266F6900171B7A /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -506,6 +511,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				065A15E71912BCFB00B85D3D /* Base */,
+				0697199D19266F6900171B7A /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -514,6 +520,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				065A15FD1912BCFB00B85D3D /* en */,
+				0697199F19266F6900171B7A /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
