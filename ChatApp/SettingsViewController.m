@@ -13,6 +13,7 @@
 #import <MFSideMenu.h>
 #import "MenuButton.h"
 #import "ActivityView.h"
+#import <IDMPhotoBrowser.h>
 
 @interface SettingsViewController ()
 
@@ -38,6 +39,10 @@
     PFFile* file = [PFUser currentUser][@"picture"];
     UIImage* img = [UIImage imageWithData:[file getData]];
     [self.tableView addParallaxWithImage:img andHeight:220];
+    
+    //Add tap gesture to Parallax View
+    UITapGestureRecognizer* tapGestuere = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(parallaxHeaderTapped:)];
+    [self.tableView.parallaxView addGestureRecognizer:tapGestuere];
     
     self.title = @"Settings";
     
@@ -70,6 +75,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+-(void)parallaxHeaderTapped:(UIGestureRecognizer*)reco
+{
+    UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View profile photo", @"Take Photo", @"Choose From Photos", nil];
+    sheet.tag = ActionSheetTypeHeaderPhoto;
+    [sheet showInView:self.view.window];
+}
+
 #pragma mark - UITableView Delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,7 +99,7 @@
             mailVC.view.tintColor = [UIColor whiteColor];
             [mailVC setSubject:@"Help me."];
             [mailVC setToRecipients:@[@"contact@appikon.com"]];
-//            [mailVC setMessageBody:@"" isHTML:NO];
+            //            [mailVC setMessageBody:@"" isHTML:NO];
             [self presentViewController:mailVC animated:YES completion:nil];
         }
     }
@@ -143,7 +155,52 @@
                 [self presentViewController:sheet animated:YES completion:nil];
             }
         }
+    } else if (actionSheet.tag == ActionSheetTypeHeaderPhoto) {
+        if (buttonIndex == 0) {
+            //View
+            
+            IDMPhoto* photo = [IDMPhoto photoWithImage:self.tableView.parallaxView.imageView.image];
+            IDMPhotoBrowser* photoBrowser = [[IDMPhotoBrowser alloc] initWithPhotos:@[photo] animatedFromView:self.tableView.parallaxView];
+            photoBrowser.scaleImage = self.tableView.parallaxView.imageView.image;
+            [self presentViewController:photoBrowser animated:YES completion:nil];
+            
+        } else if (buttonIndex == 1) {
+            //Take photo
+            UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+            [self presentViewController:imagePicker animated:YES completion:nil];
+            
+        } else if (buttonIndex == 2) {
+            //Choose from library
+            UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        }
     }
+}
+
+#pragma mark - UIImagePickerController Delegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.tableView.parallaxView.imageView.image = info[UIImagePickerControllerOriginalImage];
+        
+        NSData* imgData = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 0.7);
+        PFFile* imageFile = [PFFile fileWithName:@"profile.jpg" data:imgData];
+        [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            
+            [[PFUser currentUser] setObject:imageFile forKey:@"picture"];
+            [[PFUser currentUser] saveInBackground];
+        }];
+    }];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -

@@ -50,28 +50,19 @@
                 [[PFUser currentUser] setObject:result[@"email"] forKey:@"email"];
                 [[PFUser currentUser] saveInBackground];
                 
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                    NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", result[@"id"]]]];
-                    
-                    PFFile* imageFile = [PFFile fileWithName:@"profile.jpg" data:imgData];
-                    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                //If there is no picture for user, download it from Facebook
+                if (![PFUser currentUser][@"picture"]) {
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                        NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", result[@"id"]]]];
                         
-                        [[PFUser currentUser] setObject:imageFile forKey:@"picture"];
-                                            [[PFUser currentUser] saveInBackground];
-//                        PFObject* userPhoto = [PFObject objectWithClassName:@"ProfilePhoto"];
-//                        [userPhoto setObject:imageFile forKey:@"image"];
-                        
-//                        userPhoto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
-                        
-//                        [userPhoto setObject:[PFUser currentUser] forKey:@"user"];
-//                        [userPhoto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//                        
-//                        }];
-                    }];
-                    
-//                    [[PFUser currentUser] setObject:imgData forKey:@"picture"];
-
-                });
+                        PFFile* imageFile = [PFFile fileWithName:@"profile.jpg" data:imgData];
+                        [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            
+                            [[PFUser currentUser] setObject:imageFile forKey:@"picture"];
+                            [[PFUser currentUser] saveInBackground];
+                        }];
+                    });
+                }
                 
                 NSLog(@"%@", [PFUser currentUser][@"fbID"]);
                 [[PFInstallation currentInstallation] setObject:[PFUser currentUser][@"fbID"] forKey:@"owner"];

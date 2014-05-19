@@ -13,10 +13,11 @@
 
 typedef enum {
     ActionSheetTypeShare = 100,
-    ActionSheetTypeLogout
+    ActionSheetTypeLogout,
+    ActionSheetTypeHeaderPhoto
 }ActionSheetType;
 
-@interface SettingsViewController : UITableViewController<UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
+@interface SettingsViewController : UITableViewController<UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 //-(IBAction)logout:(id)sender;
 

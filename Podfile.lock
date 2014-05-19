@@ -21,22 +21,29 @@ PODS:
   - AOTutorial (1.5)
   - APParallaxHeader (0.1.3)
   - Bolts (1.1.0)
+  - DACircularProgress (2.2.0)
   - Facebook-iOS-SDK (3.14.1):
     - Bolts
+  - IDMPhotoBrowser (1.3.5):
+    - AFNetworking (~> 2.2.3)
+    - DACircularProgress (~> 2.2)
+    - SVProgressHUD (~> 1.0)
   - iRate (1.10.2)
-  - JSQMessagesViewController (5.0.1):
+  - JSQMessagesViewController (5.0.2):
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.5.0)
   - MFSideMenu (0.5.4)
   - MPNotificationView (1.1.0)
   - Parse-iOS-SDK (1.2.19):
     - Facebook-iOS-SDK (~> 3.7)
+  - SVProgressHUD (1.0)
   - UINavigationBar+Addition (1.0.0)
 
 DEPENDENCIES:
   - AFNetworking
   - AOTutorial
   - APParallaxHeader
+  - IDMPhotoBrowser
   - iRate
   - JSQMessagesViewController
   - MFSideMenu
@@ -49,13 +56,16 @@ SPEC CHECKSUMS:
   AOTutorial: 70ba7794f7ec20a704cbda988bd02e7ce6b76ee4
   APParallaxHeader: 860acb07f0339095b72d67a3947b5747d597dd16
   Bolts: dc620a31cf67c29bce3e3d14a07a12e797a1a154
+  DACircularProgress: 659d6fd11b5fc099c13ba9350239d9dca324916a
   Facebook-iOS-SDK: 97e68fb37468bee2d90201fd0c9e4dccce5683d9
+  IDMPhotoBrowser: 2730c993f0701338dc8531d08feefc232d394289
   iRate: eb8ca35519dd57a586e4c72bb5135ccb6abee908
-  JSQMessagesViewController: 11aaf450f5ffe88102b7a24c8ef1475fabcd7a88
+  JSQMessagesViewController: d014a6f7fb0e969082c5873a1858f1a55567ed86
   JSQSystemSoundPlayer: 6dbac8dcc33e3add6facb3e59451a0249aece17d
   MFSideMenu: f59e25c080097a701e108459c207fb22e1f62c30
   MPNotificationView: fff59b369312e946f5abdb71e5aff2c4a827eedf
   Parse-iOS-SDK: 48e366fb9a8956c4e50d93cfd16243176938fae1
+  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
   UINavigationBar+Addition: 61609ae85b650093dd39331686f15a1d83d21823
 
 COCOAPODS: 0.32.1

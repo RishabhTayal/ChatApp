@@ -43,6 +43,8 @@ install_resource()
 }
 install_resource "AOTutorial/src/AOTutorialViewController.xib"
 install_resource "Facebook-iOS-SDK/src/FBUserSettingsViewResources.bundle"
+install_resource "IDMPhotoBrowser/Classes/IDMPhotoBrowser.bundle"
+install_resource "IDMPhotoBrowser/Classes/IDMPBLocalizations.bundle"
 install_resource "JSQMessagesViewController/JSQMessagesViewController/Assets/Images/bubble.png"
 install_resource "JSQMessagesViewController/JSQMessagesViewController/Assets/Images/bubble@2x.png"
 install_resource "JSQMessagesViewController/JSQMessagesViewController/Assets/Images/bubble_min.png"
@@ -69,6 +71,7 @@ install_resource "JSQMessagesViewController/JSQMessagesViewController/Views/JSQM
 install_resource "JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesLoadEarlierHeaderView.xib"
 install_resource "JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesToolbarContentView.xib"
 install_resource "JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesTypingIndicatorFooterView.xib"
+install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
 install_resource "iRate/iRate/iRate.bundle"
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

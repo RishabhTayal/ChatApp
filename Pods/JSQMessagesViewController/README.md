@@ -40,6 +40,10 @@ pod 'JSQMessagesViewController', :git => 'https://github.com/jessesquires/JSQMes
 
 ## Getting Started
 
+````
+#import <JSQMessagesViewController/JSQMessages.h>    // import all headers
+````
+
 * **Demo project**
   * There's a fucking sweet demo project: `JSQMessages.xcworkspace`.
   * Run `pod install` first.
@@ -95,9 +99,12 @@ Check out my work at [Hexed Bits](http://bit.ly/0x29A).
 ## Apps using this library
 
 * [Hemoglobe](http://bit.ly/hemoglobeapp)
+* [ClassDojo](https://itunes.apple.com/us/app/classdojo/id552602056)
 * [Schools App](https://itunes.apple.com/us/app/schools-app/id495845755)
+* [Kytt](https://itunes.apple.com/de/app/kytt-neue-leute-in-der-umgebung/id848959696)
 * [Spark Social](https://itunes.apple.com/us/app/spark-social/id823785892)
 * [Spabbit](https://itunes.apple.com/us/app/spabbit/id737363908)
+* [Elodie](https://itunes.apple.com/app/elodie/id821610181)
 * [Instaply](https://itunes.apple.com/us/app/instaply/id558562920)
 * [Loopse](https://itunes.apple.com/us/app/loopse-spots-friends-sessions/id704783915)
 * [Oxwall Messenger](https://github.com/tochman/OxwallMessenger)

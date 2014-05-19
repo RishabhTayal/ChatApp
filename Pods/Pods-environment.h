@@ -66,17 +66,29 @@
 #define COCOAPODS_VERSION_MINOR_Bolts 1
 #define COCOAPODS_VERSION_PATCH_Bolts 0
 
+// DACircularProgress
+#define COCOAPODS_POD_AVAILABLE_DACircularProgress
+#define COCOAPODS_VERSION_MAJOR_DACircularProgress 2
+#define COCOAPODS_VERSION_MINOR_DACircularProgress 2
+#define COCOAPODS_VERSION_PATCH_DACircularProgress 0
+
 // Facebook-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_Facebook_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Facebook_iOS_SDK 3
 #define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 14
 #define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 1
 
+// IDMPhotoBrowser
+#define COCOAPODS_POD_AVAILABLE_IDMPhotoBrowser
+#define COCOAPODS_VERSION_MAJOR_IDMPhotoBrowser 1
+#define COCOAPODS_VERSION_MINOR_IDMPhotoBrowser 3
+#define COCOAPODS_VERSION_PATCH_IDMPhotoBrowser 5
+
 // JSQMessagesViewController
 #define COCOAPODS_POD_AVAILABLE_JSQMessagesViewController
 #define COCOAPODS_VERSION_MAJOR_JSQMessagesViewController 5
 #define COCOAPODS_VERSION_MINOR_JSQMessagesViewController 0
-#define COCOAPODS_VERSION_PATCH_JSQMessagesViewController 1
+#define COCOAPODS_VERSION_PATCH_JSQMessagesViewController 2
 
 // JSQSystemSoundPlayer
 #define COCOAPODS_POD_AVAILABLE_JSQSystemSoundPlayer
@@ -101,6 +113,12 @@
 #define COCOAPODS_VERSION_MAJOR_Parse_iOS_SDK 1
 #define COCOAPODS_VERSION_MINOR_Parse_iOS_SDK 2
 #define COCOAPODS_VERSION_PATCH_Parse_iOS_SDK 19
+
+// SVProgressHUD
+#define COCOAPODS_POD_AVAILABLE_SVProgressHUD
+#define COCOAPODS_VERSION_MAJOR_SVProgressHUD 1
+#define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
+#define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
 
 // UINavigationBar+Addition
 #define COCOAPODS_POD_AVAILABLE_UINavigationBar_Addition
