@@ -4,7 +4,7 @@ inhibit_all_warnings!
 
 pod 'AFNetworking'
 pod 'JSQMessagesViewController'
-pod 'AOTutorial'
+pod 'AOTutorial', '1.5'
 pod 'Parse-iOS-SDK'
 pod 'MFSideMenu'
 pod 'MPNotificationView'
