@@ -27,7 +27,7 @@
     
     [iRate sharedInstance].daysUntilPrompt = 0;
     [iRate sharedInstance].remindPeriod = 0;
-    [iRate sharedInstance].previewMode = YES;
+    [iRate sharedInstance].previewMode = NO;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
