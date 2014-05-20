@@ -52,20 +52,20 @@ DEPENDENCIES:
   - UINavigationBar+Addition
 
 SPEC CHECKSUMS:
-  AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
-  AOTutorial: 70ba7794f7ec20a704cbda988bd02e7ce6b76ee4
-  APParallaxHeader: 860acb07f0339095b72d67a3947b5747d597dd16
-  Bolts: dc620a31cf67c29bce3e3d14a07a12e797a1a154
-  DACircularProgress: 659d6fd11b5fc099c13ba9350239d9dca324916a
-  Facebook-iOS-SDK: 97e68fb37468bee2d90201fd0c9e4dccce5683d9
-  IDMPhotoBrowser: 2730c993f0701338dc8531d08feefc232d394289
-  iRate: eb8ca35519dd57a586e4c72bb5135ccb6abee908
-  JSQMessagesViewController: d014a6f7fb0e969082c5873a1858f1a55567ed86
-  JSQSystemSoundPlayer: 6dbac8dcc33e3add6facb3e59451a0249aece17d
-  MFSideMenu: f59e25c080097a701e108459c207fb22e1f62c30
-  MPNotificationView: fff59b369312e946f5abdb71e5aff2c4a827eedf
-  Parse-iOS-SDK: 48e366fb9a8956c4e50d93cfd16243176938fae1
-  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
-  UINavigationBar+Addition: 61609ae85b650093dd39331686f15a1d83d21823
+  AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
+  AOTutorial: 03fa3064183e2f141deba2aa59f9b01d45cee44e
+  APParallaxHeader: 266806ff19b9ed3fa9d75b3678fb0b031cb14cbe
+  Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
+  DACircularProgress: 3b41941891a56dc6aa17971f5322a9a38a6f446e
+  Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
+  IDMPhotoBrowser: d691bcdf470553e165f8eb982c5cd8e9a58bcdef
+  iRate: 7d204971bab2f727195b868e32e05216fe257681
+  JSQMessagesViewController: aa5af4abfc1694cdd0938a85bdeb2778d11440bf
+  JSQSystemSoundPlayer: 0e636d5fd51e071fb708a0fec04e3d05175d9d27
+  MFSideMenu: fca49243c818323a2758af4c23ce81a0b17497d7
+  MPNotificationView: 8643128aff9cc0f197a40fd7e6951a1b72649602
+  Parse-iOS-SDK: 5e1f7e649a02f1cc19e73cc95bd43d7778848314
+  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  UINavigationBar+Addition: 75b1b709f000aa7de774df19d4fd9098ba939a51
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1
