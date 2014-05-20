@@ -32,9 +32,13 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)login:(id)sender
+-(void)loginWithTwitter:(id)sender
 {
-    NSLog(@"login");
+}
+
+-(void)loginWithFacebook:(id)sender
+{
+    NSLog(@"login with facebook");
     
     //    NSArray* permissions = @[@"user_friends"];
     

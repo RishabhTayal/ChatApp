@@ -89,7 +89,9 @@ typedef NSUInteger AOTutorialButton;
  */
 
 
-- (IBAction)login:(id)sender;
+- (IBAction)loginWithFacebook:(id)sender;
+
+-(IBAction)loginWithTwitter:(id)sender;
 
 /**
  * Callback for Dismiss button being touched up

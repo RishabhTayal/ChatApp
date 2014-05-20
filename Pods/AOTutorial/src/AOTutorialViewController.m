@@ -352,7 +352,12 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     
 }
 
-- (IBAction)login:(id)sender
+- (IBAction)loginWithFacebook:(id)sender
+{
+    
+}
+
+-(IBAction)loginWithTwitter:(id)sender
 {
     
 }
