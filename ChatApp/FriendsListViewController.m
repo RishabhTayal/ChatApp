@@ -118,6 +118,8 @@
         CFRelease(people);
     }
     
+    
+    
     return allcontacts;
 }
 

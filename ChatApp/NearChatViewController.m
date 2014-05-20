@@ -47,15 +47,15 @@
     self.inputToolbar.contentView.leftBarButtonItem = nil;
     
     [self.navigationController.navigationBar hideBottomHairline];
-    
-    if (_sessionController.connectedPeers.count == 0 ) {
-        [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    if (_sessionController.connectedPeers.count == 0 ) {
+        [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
+    }
 }
 
 - (void)didReceiveMemoryWarning

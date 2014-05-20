@@ -65,8 +65,7 @@
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     }
     
-    NSLog(@"%@", notification.userInfo[@"aps"][@"alert"]);
-    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[@"aps"][@"alert"] sender:@"" date:[NSDate date]];
+    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[@"message"] sender:notification.userInfo[@"sender"] date:[NSDate date]];
     [_chatArray addObject:message];
     [self finishReceivingMessage];
     //    [self scrollToBottomAnimated:YES];
@@ -114,7 +113,10 @@
     
     PFPush *push = [[PFPush alloc] init];
     [push setQuery:pushQuery];
-    [push setMessage:text];
+    
+    NSDictionary* dict = [NSDictionary dictionaryWithObjects:@[text, _friendDict[@"name"]] forKeys:@[@"message", @"sender"]];
+    [push setData:dict];
+//    [push setMessage:text];
     [push sendPushInBackground];
     
     PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];

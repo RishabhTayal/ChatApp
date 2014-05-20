@@ -21,13 +21,13 @@
 
 +(void)initialize
 {
-//    [iRate sharedInstance].onlyPromptIfLatestVersion = NO;
-//    
-//    [iRate sharedInstance].eventsUntilPrompt = 5;
-//    
-//    [iRate sharedInstance].daysUntilPrompt = 0;
-//    [iRate sharedInstance].remindPeriod = 0;
-//    [iRate sharedInstance].previewMode = YES;
+    [iRate sharedInstance].onlyPromptIfLatestVersion = NO;
+    
+    [iRate sharedInstance].eventsUntilPrompt = 5;
+    
+    [iRate sharedInstance].daysUntilPrompt = 0;
+    [iRate sharedInstance].remindPeriod = 0;
+    [iRate sharedInstance].previewMode = YES;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -74,7 +74,8 @@
     if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         [PFPush handlePush:userInfo];
     } else {
-        MPNotificationView *notification = [MPNotificationView notifyWithText:@"" andDetail:userInfo[@"aps"][@"alert"]];
+        
+        MPNotificationView *notification = [MPNotificationView notifyWithText:userInfo[@"sender"] andDetail:userInfo[@"message"]];
         notification.delegate = self;
     }
 }
