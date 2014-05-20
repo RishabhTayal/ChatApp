@@ -77,7 +77,7 @@ a
 
 -(void)parallaxHeaderTapped:(UIGestureRecognizer*)reco
 {
-    UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View Profile Photo", @"Take Photo", @"Choose From Photos", @"Import from Facebook", nil];
+    UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View profile photo", @"Take Photo", @"Choose From Photos", nil];
     sheet.tag = ActionSheetTypeHeaderPhoto;
     [sheet showInView:self.view.window];
 }
@@ -177,22 +177,6 @@ a
             imagePicker.delegate = self;
             [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
             [self presentViewController:imagePicker animated:YES completion:nil];
-        } else if (buttonIndex == 3) {
-            //Import from Facebook
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", [PFUser currentUser][@"fbID"]]]];
-
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.tableView.parallaxView.imageView.image = [UIImage imageWithData:imgData];
-                });
-                
-                PFFile* imageFile = [PFFile fileWithName:@"profile.jpg" data:imgData];
-                [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    
-                    [[PFUser currentUser] setObject:imageFile forKey:@"picture"];
-                    [[PFUser currentUser] saveInBackground];
-                }];
-            });
         }
     }
 }
