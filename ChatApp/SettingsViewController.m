@@ -14,7 +14,7 @@
 #import "MenuButton.h"
 #import "ActivityView.h"
 #import <IDMPhotoBrowser.h>
-a
+
 @interface SettingsViewController ()
 
 @property (strong) IBOutlet UILabel* nameLabel;
