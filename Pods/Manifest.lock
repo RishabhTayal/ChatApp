@@ -33,7 +33,6 @@ PODS:
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.5.0)
   - MFSideMenu (0.5.4)
-  - MPNotificationView (1.1.0)
   - Parse-iOS-SDK (1.2.19):
     - Facebook-iOS-SDK (~> 3.7)
   - SDWebImage (3.6):
@@ -49,7 +48,6 @@ DEPENDENCIES:
   - iRate
   - JSQMessagesViewController
   - MFSideMenu
-  - MPNotificationView
   - Parse-iOS-SDK
   - SDWebImage (~> 3.6)
   - UINavigationBar+Addition
@@ -66,7 +64,6 @@ SPEC CHECKSUMS:
   JSQMessagesViewController: aa5af4abfc1694cdd0938a85bdeb2778d11440bf
   JSQSystemSoundPlayer: 0e636d5fd51e071fb708a0fec04e3d05175d9d27
   MFSideMenu: fca49243c818323a2758af4c23ce81a0b17497d7
-  MPNotificationView: 8643128aff9cc0f197a40fd7e6951a1b72649602
   Parse-iOS-SDK: 5e1f7e649a02f1cc19e73cc95bd43d7778848314
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50

@@ -1,0 +1,91 @@
+//
+//  InAppNotificationView.m
+//  VCinity
+//
+//  Created by Rishabh Tayal on 5/21/14.
+//  Copyright (c) 2014 Rishabh Tayal. All rights reserved.
+//
+
+#import "InAppNotificationView.h"
+
+@interface InAppNotificationView()
+
+@property (strong) NoificationTouchBlock block;
+
+@property (strong) IBOutlet UIImageView* mainImageView;
+@property (strong) IBOutlet UILabel* headingLabel;
+@property (strong) IBOutlet UILabel* detailLabel;
+
+@end
+
+@implementation InAppNotificationView
+
++(id)sharedInstance {
+    static dispatch_once_t p = 0;
+    
+    __strong static id _sharedObject = nil;
+    
+    dispatch_once(&p, ^{
+//        _sharedObject = [[self alloc] init];
+        _sharedObject = [[NSBundle mainBundle] loadNibNamed:@"InAppNotificationView" owner:self options:nil][0];
+    });
+    return _sharedObject;
+}
+
+-(void)notifyWithText:(NSString *)text detail:(NSString *)detail image:(UIImage *)image duration:(CGFloat)duration andTouchBlock:(NoificationTouchBlock)block
+{
+    self.frame = CGRectMake(0, -80, 320, 80);
+//    self.backgroundColor = [UIColor clearColor];
+//    
+//    UIView* backView = [[UIView alloc] initWithFrame:self.bounds];
+//    backView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.8];
+//    [self addSubview:backView];
+//    
+//    UILabel* mainTextLabel = [[UILabel alloc] init];
+//    mainTextLabel.frame = CGRectMake(0, 5, 320, 30);
+    _headingLabel.text = text;
+//    mainTextLabel.textColor = [UIColor whiteColor];
+//    [self addSubview:mainTextLabel];
+//    
+//    UILabel* detailTextLabel = [[UILabel alloc] init];
+//    detailTextLabel.frame = CGRectMake(0, 20, 320, 30);
+    _detailLabel.text = detail;
+//    detailTextLabel.textColor = [UIColor whiteColor];
+//    [self addSubview:detailTextLabel];
+//    
+//    UIImageView* iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 60, 60)];
+    _mainImageView.image = image;
+    
+    UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+    [mainWindow addSubview:self];
+    
+    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+    [self addGestureRecognizer:gesture];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = self.frame;
+        frame.origin.y = 0;
+        self.frame = frame;
+    }];
+    
+    if (duration != 0) {
+        [self performSelector:@selector(hide) withObject:nil afterDelay:duration];
+    }
+    
+    _block = block;
+}
+
+-(void)tapped
+{
+    [self hide];
+    _block(self);
+}
+
+-(void)hide
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.frame = CGRectMake(0, -80, 320, 80);
+    }];
+}
+
+@end

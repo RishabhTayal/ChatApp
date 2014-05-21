@@ -39,6 +39,8 @@
 		065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */; };
 		065A16281914257700B85D3D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16271914257700B85D3D /* SettingsViewController.m */; };
 		068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */; };
+		068F7333192D275600442F4D /* InAppNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F7332192D275600442F4D /* InAppNotificationView.m */; };
+		068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068F7334192D2F2300442F4D /* InAppNotificationView.xib */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -103,6 +105,9 @@
 		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationTapListener.h; sourceTree = "<group>"; };
 		068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppNotificationTapListener.m; sourceTree = "<group>"; };
+		068F7331192D275600442F4D /* InAppNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationView.h; sourceTree = "<group>"; };
+		068F7332192D275600442F4D /* InAppNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppNotificationView.m; sourceTree = "<group>"; };
+		068F7334192D2F2300442F4D /* InAppNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InAppNotificationView.xib; sourceTree = "<group>"; };
 		0697199D19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		0697199E19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0697199F19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -149,6 +154,9 @@
 				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
 				068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */,
 				068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */,
+				068F7331192D275600442F4D /* InAppNotificationView.h */,
+				068F7332192D275600442F4D /* InAppNotificationView.m */,
+				068F7334192D2F2300442F4D /* InAppNotificationView.xib */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";
@@ -265,7 +273,6 @@
 				065A15E61912BCFB00B85D3D /* Main.storyboard */,
 				061E7E4919183D1400A0DF90 /* MenuViewController.h */,
 				061E7E4A19183D1400A0DF90 /* MenuViewController.m */,
-				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				061E7E53191922BB00A0DF90 /* chicago1.jpg */,
 				065A15DB1912BCFB00B85D3D /* Supporting Files */,
 			);
@@ -275,6 +282,7 @@
 		065A15DB1912BCFB00B85D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				065A15DC1912BCFB00B85D3D /* VCinity-Info.plist */,
 				065A15DD1912BCFB00B85D3D /* InfoPlist.strings */,
 				065A15E01912BCFB00B85D3D /* main.m */,
@@ -413,6 +421,7 @@
 			files = (
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
+				068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
 				0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */,
 				061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */,
@@ -479,6 +488,7 @@
 				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
 				065A15E11912BCFB00B85D3D /* main.m in Sources */,
 				06085978191BFB10005F6A75 /* MenuButton.m in Sources */,
+				068F7333192D275600442F4D /* InAppNotificationView.m in Sources */,
 				06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */,
 				0613983D192413E400C9AB1F /* SessionController.m in Sources */,
 				06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */,

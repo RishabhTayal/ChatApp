@@ -102,12 +102,6 @@
 #define COCOAPODS_VERSION_MINOR_MFSideMenu 5
 #define COCOAPODS_VERSION_PATCH_MFSideMenu 4
 
-// MPNotificationView
-#define COCOAPODS_POD_AVAILABLE_MPNotificationView
-#define COCOAPODS_VERSION_MAJOR_MPNotificationView 1
-#define COCOAPODS_VERSION_MINOR_MPNotificationView 1
-#define COCOAPODS_VERSION_PATCH_MPNotificationView 0
-
 // Parse-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_Parse_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Parse_iOS_SDK 1
