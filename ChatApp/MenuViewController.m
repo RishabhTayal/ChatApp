@@ -187,6 +187,8 @@
     
     [PFUser logOut];
     
+    [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+    
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

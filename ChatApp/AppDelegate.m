@@ -40,8 +40,6 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
-    
     //Don't add [[uiview apperance].tintcolor
     [UINavigationBar appearance].barTintColor = [UIColor redColor];
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
@@ -53,7 +51,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDInAppSound];
     }
-
+    
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {
         [self setMainView];
     } else {
@@ -82,12 +80,14 @@
         [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
         UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
         if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
-        
-            [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
-                [[InAppNotificationView sharedInstance] notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:image duration:3 andTouchBlock:^(InAppNotificationView *view) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
+            
+            if (userInfo[kNotificationSender]) {
+                [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
+                    [[InAppNotificationView sharedInstance] notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:image duration:3 andTouchBlock:^(InAppNotificationView *view) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
+                    }];
                 }];
-            }];
+            }
         }
     }
 }
@@ -112,6 +112,8 @@
 -(void)setMainView
 {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     NearChatViewController* nearVC = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
