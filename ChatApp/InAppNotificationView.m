@@ -11,6 +11,7 @@
 @interface InAppNotificationView()
 
 @property (strong) NoificationTouchBlock block;
+@property (strong) UIWindow* myWindow;
 
 @property (strong) IBOutlet UIImageView* mainImageView;
 @property (strong) IBOutlet UILabel* headingLabel;
@@ -26,7 +27,6 @@
     __strong static id _sharedObject = nil;
     
     dispatch_once(&p, ^{
-//        _sharedObject = [[self alloc] init];
         _sharedObject = [[NSBundle mainBundle] loadNibNamed:@"InAppNotificationView" owner:self options:nil][0];
     });
     return _sharedObject;
@@ -40,9 +40,10 @@
     _detailLabel.text = detail;
     _mainImageView.image = image;
     
-    UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
-    [mainWindow setWindowLevel:UIWindowLevelStatusBar + 1];
-    [mainWindow addSubview:self];
+    _myWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+    _myWindow.windowLevel = UIWindowLevelStatusBar + 1;
+    _myWindow.hidden = NO;
+    [_myWindow addSubview:self];
     
     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
     [self addGestureRecognizer:gesture];
@@ -68,8 +69,7 @@
 
 -(void)hide
 {
-    UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
-    [mainWindow setWindowLevel:UIWindowLevelNormal];
+    [_myWindow setHidden:YES];
     
     [UIView animateWithDuration:0.2 animations:^{
         self.frame = CGRectMake(0, -80, 320, 80);
