@@ -36,7 +36,7 @@
     
     _nameLabel.text = [PFUser currentUser].username;
     
-    PFFile* file = [PFUser currentUser][@"picture"];
+    PFFile* file = [PFUser currentUser][kPFUser_Picture];
     UIImage* img = [UIImage imageWithData:[file getData]];
     [self.tableView addParallaxWithImage:img andHeight:220];
     
@@ -180,7 +180,7 @@
         } else if (buttonIndex == 3) {
             //Import from Facebook
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", [PFUser currentUser][@"fbID"]]]];
+                NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", [PFUser currentUser][kPFUser_FBID]]]];
 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.tableView.parallaxView.imageView.image = [UIImage imageWithData:imgData];
@@ -189,7 +189,7 @@
                 PFFile* imageFile = [PFFile fileWithName:@"profile.jpg" data:imgData];
                 [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     
-                    [[PFUser currentUser] setObject:imageFile forKey:@"picture"];
+                    [[PFUser currentUser] setObject:imageFile forKey:kPFUser_Picture];
                     [[PFUser currentUser] saveInBackground];
                 }];
             });
@@ -208,7 +208,7 @@
         PFFile* imageFile = [PFFile fileWithName:@"profile.jpg" data:imgData];
         [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             
-            [[PFUser currentUser] setObject:imageFile forKey:@"picture"];
+            [[PFUser currentUser] setObject:imageFile forKey:kPFUser_Picture];
             [[PFUser currentUser] saveInBackground];
         }];
     }];

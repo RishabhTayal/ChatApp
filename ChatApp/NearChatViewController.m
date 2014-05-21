@@ -214,7 +214,7 @@
     
     JSQMessage* message = _chatMessagesArray[indexPath.row];
     if ([message.sender isEqualToString:self.sender]) {
-        PFFile *file = [PFUser currentUser][@"picture"];
+        PFFile *file = [PFUser currentUser][kPFUser_Picture];
         iv.image = [UIImage imageWithData:[file getData]];
     } else {
         iv.image = [UIImage imageNamed:@"avatar-placeholder"];

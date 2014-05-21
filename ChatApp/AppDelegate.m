@@ -16,6 +16,7 @@
 #import "MenuViewController.h"
 #import <iRate/iRate.h>
 #import "SessionController.h"
+#import "InAppNotificationTapListener.h"
 
 @implementation AppDelegate
 
@@ -50,7 +51,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDInAppSound];
     }
-    
+
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {
         [self setMainView];
     } else {
@@ -74,17 +75,15 @@
     if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         [PFPush handlePush:userInfo];
     } else {
+        [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
         UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
         if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
-            MPNotificationView *notification = [MPNotificationView notifyWithText:userInfo[@"sender"][@"name"] andDetail:userInfo[@"message"]];
-            notification.delegate = self;
+            
+            [MPNotificationView notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[@"message"] image:nil duration:2 andTouchBlock:^(MPNotificationView *view) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
+            }];
         }
     }
-}
-
--(void)didTapOnNotificationView:(MPNotificationView *)notificationView
-{
-    NSLog(@"tapped");
 }
 
 -(void)setLoginView

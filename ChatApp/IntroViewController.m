@@ -49,32 +49,32 @@
         [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
                 NSLog(@"%@", result);
-                [[PFUser currentUser] setObject:result[@"id"] forKey:@"fbID"];
-                [[PFUser currentUser] setObject:result[@"name"] forKey:@"username"];
-                [[PFUser currentUser] setObject:result[@"email"] forKey:@"email"];
+                [[PFUser currentUser] setObject:result[@"id"] forKey:kPFUser_FBID];
+                [[PFUser currentUser] setObject:result[@"name"] forKey:kPFUser_Username];
+                [[PFUser currentUser] setObject:result[@"email"] forKey:kPFUser_Email];
                 [[PFUser currentUser] saveInBackground];
                 
                 //If there is no picture for user, download it from Facebook
-                if (![PFUser currentUser][@"picture"]) {
+                if (![PFUser currentUser][kPFUser_Picture]) {
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", result[@"id"]]]];
                         
                         PFFile* imageFile = [PFFile fileWithName:@"profile.jpg" data:imgData];
                         [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                             
-                            [[PFUser currentUser] setObject:imageFile forKey:@"picture"];
+                            [[PFUser currentUser] setObject:imageFile forKey:kPFUser_Picture];
                             [[PFUser currentUser] saveInBackground];
                         }];
                     });
                 }
                 
-                NSLog(@"%@", [PFUser currentUser][@"fbID"]);
-                [[PFInstallation currentInstallation] setObject:[PFUser currentUser][@"fbID"] forKey:@"owner"];
+                NSLog(@"%@", [PFUser currentUser][kPFUser_FBID]);
+                [[PFInstallation currentInstallation] setObject:[PFUser currentUser][kPFUser_FBID] forKey:@"owner"];
                 [[PFInstallation currentInstallation] saveInBackground];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDKeyUserLoggedIn];
-                [[NSUserDefaults standardUserDefaults] setObject:user[@"first_name"] forKey:kUDKeyUserFirstName];
-                [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
+//                [[NSUserDefaults standardUserDefaults] setObject:user[@"first_name"] forKey:kUDKeyUserFirstName];
+//                [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
