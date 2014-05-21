@@ -38,12 +38,12 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
-
+    
     //Don't add [[uiview apperance].tintcolor
     [UINavigationBar appearance].barTintColor = [UIColor redColor];
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDInAppVibrate];
     }
@@ -74,9 +74,11 @@
     if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         [PFPush handlePush:userInfo];
     } else {
-        
-        MPNotificationView *notification = [MPNotificationView notifyWithText:userInfo[@"sender"] andDetail:userInfo[@"message"]];
-        notification.delegate = self;
+        UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
+        if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
+            MPNotificationView *notification = [MPNotificationView notifyWithText:userInfo[@"sender"][@"name"] andDetail:userInfo[@"message"]];
+            notification.delegate = self;
+        }
     }
 }
 
@@ -86,14 +88,14 @@
 }
 
 -(void)setLoginView
-{    
+{
     NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your facebook friends."}, @{@"Header": @"Camping with family/friends?", @"Label": @"Chat with nearby people even when no network is available."}, @{@"Header": @"Take it to the beach", @"Label": @""}, @{@"Header": @"Attending a concert?", @"Label":@"Connect with other people."}];
     
     IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2", @"bg3", @"bg4"] andInformations:infoArray];
     
     [intro setHeaderImage:[UIImage imageNamed:@"logo"]];
     [intro setButtons:AOTutorialButtonLogin];
-
+    
     UIButton* loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [intro setLoginButton:loginButton];
     intro.loginButton.layer.cornerRadius = 10;
@@ -131,7 +133,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
