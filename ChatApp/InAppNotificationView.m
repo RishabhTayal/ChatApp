@@ -35,28 +35,17 @@
 -(void)notifyWithText:(NSString *)text detail:(NSString *)detail image:(UIImage *)image duration:(CGFloat)duration andTouchBlock:(NoificationTouchBlock)block
 {
     self.frame = CGRectMake(0, -80, 320, 80);
-//    self.backgroundColor = [UIColor clearColor];
-//    
-//    UIView* backView = [[UIView alloc] initWithFrame:self.bounds];
-//    backView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.8];
-//    [self addSubview:backView];
-//    
-//    UILabel* mainTextLabel = [[UILabel alloc] init];
-//    mainTextLabel.frame = CGRectMake(0, 5, 320, 30);
+    
     _headingLabel.text = text;
-//    mainTextLabel.textColor = [UIColor whiteColor];
-//    [self addSubview:mainTextLabel];
-//    
-//    UILabel* detailTextLabel = [[UILabel alloc] init];
-//    detailTextLabel.frame = CGRectMake(0, 20, 320, 30);
+    
     _detailLabel.text = detail;
-//    detailTextLabel.textColor = [UIColor whiteColor];
-//    [self addSubview:detailTextLabel];
-//    
-//    UIImageView* iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 60, 60)];
+    
     _mainImageView.image = image;
     
     UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+    
+    [mainWindow setWindowLevel:UIWindowLevelStatusBar + 1];
+    
     [mainWindow addSubview:self];
     
     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
@@ -83,6 +72,9 @@
 
 -(void)hide
 {
+    UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+    [mainWindow setWindowLevel:UIWindowLevelNormal];
+    
     [UIView animateWithDuration:0.2 animations:^{
         self.frame = CGRectMake(0, -80, 320, 80);
     }];
