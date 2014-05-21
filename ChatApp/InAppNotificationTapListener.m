@@ -12,6 +12,7 @@
 #import <MFSideMenuContainerViewController.h>
 #import "AppDelegate.h"
 #import "MenuViewController.h"
+#import "UIImage+Utility.h"
 
 @implementation InAppNotificationTapListener
 
@@ -37,7 +38,6 @@
     MFSideMenuContainerViewController* currentVC = ((MFSideMenuContainerViewController*)appDelegate.window.rootViewController);
     UINavigationController* navC = (UINavigationController*)currentVC.leftMenuViewController;
     MenuViewController* menuVC = (MenuViewController*)navC.topViewController;
-    NSLog(@"%@", menuVC.tableView);
     [menuVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     [menuVC tableView:menuVC.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     
@@ -47,9 +47,12 @@
     FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
     chatVC.title = notification.userInfo[kNotificationSender][@"name"];
     
+    [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", notification.userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
+        chatVC.friendsImage = image;
+    }];
+
     chatVC.friendDict = notification.userInfo[kNotificationSender];
     [friendsList.navigationController pushViewController:chatVC animated:YES];
-    NSLog(@"Notification tapped");
 }
 
 @end

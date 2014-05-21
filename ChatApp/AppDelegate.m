@@ -17,6 +17,7 @@
 #import <iRate/iRate.h>
 #import "SessionController.h"
 #import "InAppNotificationTapListener.h"
+#import "UIImage+Utility.h"
 
 @implementation AppDelegate
 
@@ -80,9 +81,11 @@
         [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
         UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
         if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
-            
-            [MPNotificationView notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:nil duration:2 andTouchBlock:^(MPNotificationView *view) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
+        
+            [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
+                [MPNotificationView notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:image duration:2 andTouchBlock:^(MPNotificationView *view) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
+                }];
             }];
         }
     }

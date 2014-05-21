@@ -36,12 +36,14 @@ PODS:
   - MPNotificationView (1.1.0)
   - Parse-iOS-SDK (1.2.19):
     - Facebook-iOS-SDK (~> 3.7)
+  - SDWebImage (3.6):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.6)
   - SVProgressHUD (1.0)
   - UINavigationBar+Addition (1.0.0)
 
 DEPENDENCIES:
-  - AFNetworking
-  - AOTutorial
+  - AOTutorial (= 1.5)
   - APParallaxHeader
   - IDMPhotoBrowser
   - iRate
@@ -49,6 +51,7 @@ DEPENDENCIES:
   - MFSideMenu
   - MPNotificationView
   - Parse-iOS-SDK
+  - SDWebImage (~> 3.6)
   - UINavigationBar+Addition
 
 SPEC CHECKSUMS:
@@ -65,6 +68,7 @@ SPEC CHECKSUMS:
   MFSideMenu: fca49243c818323a2758af4c23ce81a0b17497d7
   MPNotificationView: 8643128aff9cc0f197a40fd7e6951a1b72649602
   Parse-iOS-SDK: 5e1f7e649a02f1cc19e73cc95bd43d7778848314
+  SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
   UINavigationBar+Addition: 75b1b709f000aa7de774df19d4fd9098ba939a51
 
