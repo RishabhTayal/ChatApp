@@ -37,15 +37,11 @@
     self.frame = CGRectMake(0, -80, 320, 80);
     
     _headingLabel.text = text;
-    
     _detailLabel.text = detail;
-    
     _mainImageView.image = image;
     
     UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
-    
     [mainWindow setWindowLevel:UIWindowLevelStatusBar + 1];
-    
     [mainWindow addSubview:self];
     
     UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];

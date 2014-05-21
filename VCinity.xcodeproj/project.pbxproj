@@ -152,11 +152,7 @@
 			children = (
 				065A15E31912BCFB00B85D3D /* AppDelegate.h */,
 				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
-				068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */,
-				068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */,
-				068F7331192D275600442F4D /* InAppNotificationView.h */,
-				068F7332192D275600442F4D /* InAppNotificationView.m */,
-				068F7334192D2F2300442F4D /* InAppNotificationView.xib */,
+				068F7336192D338B00442F4D /* InApp Notificaition */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";
@@ -326,6 +322,18 @@
 				06FD23851917F1B800AE7226 /* IntroViewController.m */,
 			);
 			name = "Intro ViewController";
+			sourceTree = "<group>";
+		};
+		068F7336192D338B00442F4D /* InApp Notificaition */ = {
+			isa = PBXGroup;
+			children = (
+				068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */,
+				068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */,
+				068F7331192D275600442F4D /* InAppNotificationView.h */,
+				068F7332192D275600442F4D /* InAppNotificationView.m */,
+				068F7334192D2F2300442F4D /* InAppNotificationView.xib */,
+			);
+			name = "InApp Notificaition";
 			sourceTree = "<group>";
 		};
 		06FD23811917D72100AE7226 /* Settings VC */ = {

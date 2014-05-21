@@ -11,6 +11,7 @@
 @interface InAppNotificationTapListener : NSObject
 
 +(id)sharedInAppNotificationTapListener;
+
 -(void)startObserving;
 
 @end
