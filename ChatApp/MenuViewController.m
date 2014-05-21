@@ -58,8 +58,8 @@
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         navImage.image = [UIImage imageWithData:data];
     }];
-//    UIImage* image = [UIImage imageWithData:[file getData]];
-//    navImage.image = image;
+    //    UIImage* image = [UIImage imageWithData:[file getData]];
+    //    navImage.image = image;
     navImage.contentMode = UIViewContentModeScaleAspectFill;
     navImage.clipsToBounds = YES;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navImage];
@@ -98,14 +98,14 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectedBackgroundView = [UIView new];
-
+        
     }
     cell.textLabel.textColor = [UIColor lightGrayColor];
     cell.textLabel.highlightedTextColor = [UIColor whiteColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.textLabel.font = [UIFont systemFontOfSize:28];
     cell.backgroundColor = [UIColor clearColor];
-  
+    
     // Configure the cell...
     switch (indexPath.row) {
         case 0:
@@ -114,7 +114,7 @@
         case 1:
             cell.textLabel.text = @"Friends";
             break;
-            case 2:
+        case 2:
             cell.textLabel.text = @"Settings";
             break;
         default:
@@ -133,12 +133,10 @@
     switch (indexPath.row) {
         case 0:
         {
-            //
-            if (!_near)
-            {
+            if (!_near) {
                 _near = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
                 AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                appDelegate.sessionController.delegate = _near;
+                appDelegate.sessionController = [[SessionController alloc] initWithDelegate:_near];
             }
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_near], nil];
             self.menuContainerViewController.centerViewController = array[0];
@@ -154,7 +152,7 @@
             [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
         }
             break;
-            case 2:
+        case 2:
         {
             if (!_settings)
                 _settings = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
