@@ -37,6 +37,7 @@
 //Notification Related Keys
 #define kNotificationSender @"sender"
 #define kNotificationReceiever @"reciever"
-#define kNotificationMessage @"msg"
+#define kNotificationMessage @"message"
+#define kNotificationAlert @"alert"
 
 #endif

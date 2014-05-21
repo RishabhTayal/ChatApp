@@ -74,6 +74,8 @@
     
     if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         [PFPush handlePush:userInfo];
+        [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
     } else {
         [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
         UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;

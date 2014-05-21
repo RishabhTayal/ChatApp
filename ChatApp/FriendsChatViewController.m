@@ -83,7 +83,7 @@
     
     PFQuery* query = [PFQuery orQueryWithSubqueries:@[innerQuery, innerQuery2]];
     query.limit = 10;
-
+    
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [_chatArray removeAllObjects];
@@ -114,8 +114,10 @@
     PFPush *push = [[PFPush alloc] init];
     [push setQuery:pushQuery];
     
-    NSDictionary* dict = [NSDictionary dictionaryWithObjects:@[text, _friendDict, @{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationMessage, kNotificationReceiever, kNotificationSender]];
-    [push setData:dict];
+    NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[_friendDict, @{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationReceiever, kNotificationSender]];
+    [pushData setObject:text forKey:kNotificationMessage];
+    [pushData setObject:[NSString stringWithFormat:@"%@: %@", [PFUser currentUser].username, text] forKey:kNotificationAlert];
+    [push setData:pushData];
     [push sendPushInBackground];
     
     PFObject *sendObjects = [PFObject objectWithClassName:kPFTableName_Chat];
