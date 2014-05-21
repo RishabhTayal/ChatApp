@@ -65,7 +65,7 @@
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     }
     
-    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[@"message"] sender:notification.userInfo[kNotificationSender][@"name"] date:[NSDate date]];
+    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[kNotificationMessage] sender:notification.userInfo[kNotificationSender][@"name"] date:[NSDate date]];
     [_chatArray addObject:message];
     [self finishReceivingMessage];
     //    [self scrollToBottomAnimated:YES];
@@ -73,13 +73,13 @@
 
 -(void)loadChat
 {
-    PFQuery *innerQuery = [[PFQuery alloc] initWithClassName:@"Wechat"];
-    [innerQuery whereKey:@"sender" equalTo:[PFUser currentUser][kPFUser_FBID]];
-    [innerQuery whereKey:@"receiver" equalTo:_friendDict[@"id"]];
+    PFQuery *innerQuery = [[PFQuery alloc] initWithClassName:kPFTableName_Chat];
+    [innerQuery whereKey:kPFChatSender equalTo:[PFUser currentUser][kPFUser_FBID]];
+    [innerQuery whereKey:kPFChatReciever equalTo:_friendDict[@"id"]];
     
-    PFQuery* innerQuery2 = [[PFQuery alloc] initWithClassName:@"Wechat"];
-    [innerQuery2 whereKey:@"sender" equalTo:_friendDict[@"id"]];
-    [innerQuery2 whereKey:@"receiver" equalTo:[PFUser currentUser][kPFUser_FBID]];
+    PFQuery* innerQuery2 = [[PFQuery alloc] initWithClassName:kPFTableName_Chat];
+    [innerQuery2 whereKey:kPFChatSender equalTo:_friendDict[@"id"]];
+    [innerQuery2 whereKey:kPFChatReciever equalTo:[PFUser currentUser][kPFUser_FBID]];
     
     PFQuery* query = [PFQuery orQueryWithSubqueries:@[innerQuery, innerQuery2]];
     query.limit = 10;
@@ -89,7 +89,7 @@
         [_chatArray removeAllObjects];
         
         for (PFObject* object in objects) {
-            JSQMessage* message = [[JSQMessage alloc] initWithText:object[@"msg"] sender:object[@"sender"] date:object.createdAt];
+            JSQMessage* message = [[JSQMessage alloc] initWithText:object[kPFChatMessage] sender:object[kPFChatSender] date:object.createdAt];
             [_chatArray addObject:message];
         }
         _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
@@ -114,14 +114,14 @@
     PFPush *push = [[PFPush alloc] init];
     [push setQuery:pushQuery];
     
-    NSDictionary* dict = [NSDictionary dictionaryWithObjects:@[text, _friendDict, @{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[@"message", kNotificationReceiever, kNotificationSender]];
+    NSDictionary* dict = [NSDictionary dictionaryWithObjects:@[text, _friendDict, @{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationMessage, kNotificationReceiever, kNotificationSender]];
     [push setData:dict];
     [push sendPushInBackground];
     
-    PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];
-    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:@"msg"];
-    [sendObjects setObject:[PFUser currentUser][kPFUser_FBID] forKey:@"sender"];
-    [sendObjects setObject:_friendDict[@"id"] forKey:@"receiver"];
+    PFObject *sendObjects = [PFObject objectWithClassName:kPFTableName_Chat];
+    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:kPFChatMessage];
+    [sendObjects setObject:[PFUser currentUser][kPFUser_FBID] forKey:kPFChatSender];
+    [sendObjects setObject:_friendDict[@"id"] forKey:kPFChatReciever];
     [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSLog(@"save");
     }];

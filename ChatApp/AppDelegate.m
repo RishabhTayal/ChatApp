@@ -79,7 +79,7 @@
         UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
         if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
             
-            [MPNotificationView notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[@"message"] image:nil duration:2 andTouchBlock:^(MPNotificationView *view) {
+            [MPNotificationView notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:nil duration:2 andTouchBlock:^(MPNotificationView *view) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
             }];
         }

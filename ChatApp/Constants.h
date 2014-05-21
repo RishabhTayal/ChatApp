@@ -26,8 +26,17 @@
 #define kPFUser_FBID @"fbID"
 #define kPFUser_Picture @"picture"
 
+//Parse Table Names
+#define kPFTableName_Chat @"Wechat"
+
+//Chat Table Columns
+#define kPFChatSender @"sender"
+#define kPFChatReciever @"receiver"
+#define kPFChatMessage @"msg"
+
 //Notification Related Keys
 #define kNotificationSender @"sender"
 #define kNotificationReceiever @"reciever"
+#define kNotificationMessage @"msg"
 
 #endif
