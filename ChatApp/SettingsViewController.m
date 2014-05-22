@@ -84,6 +84,26 @@
 
 #pragma mark - UITableView Delegate
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == [tableView numberOfSections] - 1) {
+        return 80;
+    }
+    return 0;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == [tableView numberOfSections] - 1) {
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
+        label.text = @"Made with love by Appikon Mobile";
+        label.textColor = [UIColor lightGrayColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        return label;
+    }
+    return nil;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
