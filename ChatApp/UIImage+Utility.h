@@ -13,6 +13,7 @@ typedef void (^ImageDownloadedBloack)(UIImage *image, NSError *error);
 @interface UIImage (Utility)
 
 -(UIImage*)applyGaussianBlur;
+
 +(void)imageForURL:(NSURL*)url imageDownloadBlock:(ImageDownloadedBloack)block;
 
 @end

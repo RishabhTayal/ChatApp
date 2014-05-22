@@ -101,7 +101,7 @@
         
     }
     cell.textLabel.textColor = [UIColor lightGrayColor];
-    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    cell.textLabel.highlightedTextColor = [UIColor redColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.textLabel.font = [UIFont systemFontOfSize:28];
     cell.backgroundColor = [UIColor clearColor];
@@ -109,16 +109,32 @@
     // Configure the cell...
     switch (indexPath.row) {
         case 0:
+        {
             cell.textLabel.text = @"vCinity Chat";
+            cell.imageView.image = [UIImage imageNamed:@"chat-off"];
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"chat-on"];
+        }
             break;
         case 1:
+        {
             cell.textLabel.text = @"Friends";
+            cell.imageView.image = [UIImage imageNamed:@"sillouhette-off"];
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"sillouhette-on"];
+        }
             break;
         case 2:
+        {
             cell.textLabel.text = @"Settings";
+            cell.imageView.image = [UIImage imageNamed:@"settings-off"];
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"settings-on"];
+        }
             break;
         default:
+        {
             cell.textLabel.text = @"Logout";
+            cell.imageView.image = [UIImage imageNamed:@"logout-off"];
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"logout-on"];
+        }
             break;
     }
     return cell;
