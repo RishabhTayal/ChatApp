@@ -28,6 +28,7 @@
 
 //Parse Table Names
 #define kPFTableName_Chat @"Wechat"
+#define kPFTableUser @"User"
 
 //Chat Table Columns
 #define kPFChatSender @"sender"

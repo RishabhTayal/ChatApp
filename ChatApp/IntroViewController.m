@@ -38,16 +38,11 @@
 -(void)loginWithFacebook:(id)sender
 {
     NSLog(@"login with facebook");
-    
-    //    NSArray* permissions = @[@"user_friends"];
-    
     [ActivityView showInView:self.view loadingMessage:@"Please Wait..."];
     [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
-        NSLog(@"%@", user);
         [ActivityView hide];
         [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
             if (!error) {
-                NSLog(@"%@", result);
                 [[PFUser currentUser] setObject:result[@"id"] forKey:kPFUser_FBID];
                 [[PFUser currentUser] setObject:result[@"name"] forKey:kPFUser_Username];
                 [[PFUser currentUser] setObject:result[@"email"] forKey:kPFUser_Email];
@@ -72,7 +67,6 @@
                 
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDKeyUserLoggedIn];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                
                 
                 MFSideMenuContainerViewController* sideMenuVC = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
                 [self.view addSubview:sideMenuVC.view];
