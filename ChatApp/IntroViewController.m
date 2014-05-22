@@ -15,7 +15,6 @@
 #import "ActivityView.h"
 
 @interface IntroViewController ()
-
 @end
 
 @implementation IntroViewController
@@ -68,23 +67,34 @@
                     });
                 }
                 
-                NSLog(@"%@", [PFUser currentUser][kPFUser_FBID]);
                 [[PFInstallation currentInstallation] setObject:[PFUser currentUser][kPFUser_FBID] forKey:@"owner"];
                 [[PFInstallation currentInstallation] saveInBackground];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDKeyUserLoggedIn];
-//                [[NSUserDefaults standardUserDefaults] setObject:user[@"first_name"] forKey:kUDKeyUserFirstName];
-//                [[NSUserDefaults standardUserDefaults] setObject:user[@"last_name"] forKey:kUDKeyUserLastName];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-                MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
-                //    FriendsChatViewController* vc = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
-                [UIView transitionWithView:self.view.window duration:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-                    self.view.window.rootViewController = vc;
-                } completion:nil];
+                
+                MFSideMenuContainerViewController* sideMenuVC = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+                [self.view addSubview:sideMenuVC.view];
+                CATransition* anim = [CATransition animation];
+                [anim setDelegate:self];
+                [anim setDuration:1.5];
+                [anim setTimingFunction:UIViewAnimationCurveEaseInOut];
+                [anim setType:@"rippleEffect"];
+                [anim setFillMode:kCAFillModeRemoved];
+                anim.endProgress = 0.99;
+                [anim setRemovedOnCompletion:NO];
+                
+                [self.view.layer addAnimation:anim forKey:nil];
             }
         }];
     }];
+}
+
+-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    MFSideMenuContainerViewController* sideMenuVC = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+    self.view.window.rootViewController = sideMenuVC;
 }
 
 @end
