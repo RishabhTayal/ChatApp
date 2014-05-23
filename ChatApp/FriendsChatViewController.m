@@ -175,12 +175,20 @@
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    JSQMessage* message = _chatArray[indexPath.item];
+    return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.item];
+    if (indexPath.item - 1 > 0) {
+        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
+        if ([previousMessage.sender isEqualToString:message.sender]) {
+            return nil;
+        }
+    }
+    
     if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
         NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
         return attString;
@@ -216,6 +224,11 @@
 }
 
 #pragma mark - JSQMessages collectionview flow layout delegate
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+}
 
 -(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
