@@ -52,6 +52,12 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [GAI trackWithScreenName:kScreenNameSettings];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

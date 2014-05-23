@@ -14,6 +14,7 @@
 		0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0608597C191C27A1005F6A75 /* ActivityView.xib */; };
 		06085981191C36AC005F6A75 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06085980191C36AC005F6A75 /* MessageUI.framework */; };
 		0608598E191C7ACD005F6A75 /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608598D191C7ACD005F6A75 /* NotificationView.m */; };
+		060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D47EF192FD8040062982B /* GAI+MyGAITracker.m */; };
 		0613983D192413E400C9AB1F /* SessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613983C192413E400C9AB1F /* SessionController.m */; };
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
@@ -67,6 +68,8 @@
 		06085980191C36AC005F6A75 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0608598C191C7ACD005F6A75 /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
 		0608598D191C7ACD005F6A75 /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
+		060D47EE192FD8040062982B /* GAI+MyGAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GAI+MyGAITracker.h"; sourceTree = "<group>"; };
+		060D47EF192FD8040062982B /* GAI+MyGAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GAI+MyGAITracker.m"; sourceTree = "<group>"; };
 		0613983B192413E400C9AB1F /* SessionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionController.h; sourceTree = "<group>"; };
 		0613983C192413E400C9AB1F /* SessionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionController.m; sourceTree = "<group>"; };
 		061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsChatViewController.h; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 				0608596F191991B5005F6A75 /* UIImage+Utility.m */,
 				06085976191BFB10005F6A75 /* MenuButton.h */,
 				06085977191BFB10005F6A75 /* MenuButton.m */,
+				060D47EE192FD8040062982B /* GAI+MyGAITracker.h */,
+				060D47EF192FD8040062982B /* GAI+MyGAITracker.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 			files = (
 				065A15EB1912BCFB00B85D3D /* NearChatViewController.m in Sources */,
 				061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */,
+				060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */,
 				065A15E51912BCFB00B85D3D /* AppDelegate.m in Sources */,
 				061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */,
 				061E7E4E191880C000A0DF90 /* FriendsListViewController.m in Sources */,

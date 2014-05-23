@@ -53,9 +53,7 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    [tracker set:kGAIScreenName value:@"NearChat"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [GAI trackWithScreenName:kScreenNameNearChat];
     
      [self.navigationController.navigationBar hideBottomHairline];
     if (_sessionController.connectedPeers.count == 0 ) {

@@ -37,6 +37,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [GAI trackWithScreenName:kScreenNameFriendsChat];
     [self loadChat];
 }
 
