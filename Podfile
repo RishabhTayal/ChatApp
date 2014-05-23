@@ -6,7 +6,7 @@ inhibit_all_warnings!
 #pod 'MPNotificationView'
 pod 'SDWebImage', '~> 3.6'
 pod 'JSQMessagesViewController'
-pod 'AOTutorial', '1.5'
+#pod 'AOTutorial', '1.5'
 pod 'Parse-iOS-SDK'
 pod 'MFSideMenu'
 pod 'APParallaxHeader'

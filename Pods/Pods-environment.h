@@ -48,12 +48,6 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 2
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 4
 
-// AOTutorial
-#define COCOAPODS_POD_AVAILABLE_AOTutorial
-#define COCOAPODS_VERSION_MAJOR_AOTutorial 1
-#define COCOAPODS_VERSION_MINOR_AOTutorial 5
-#define COCOAPODS_VERSION_PATCH_AOTutorial 0
-
 // APParallaxHeader
 #define COCOAPODS_POD_AVAILABLE_APParallaxHeader
 #define COCOAPODS_VERSION_MAJOR_APParallaxHeader 0

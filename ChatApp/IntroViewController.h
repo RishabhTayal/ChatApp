@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AOTutorialViewController.h>
+#import "AOTutorialViewController.h"
 
 @interface IntroViewController : AOTutorialViewController
 

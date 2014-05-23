@@ -14,6 +14,7 @@
 #import "MenuButton.h"
 #import "ActivityView.h"
 #import <IDMPhotoBrowser.h>
+#import "WebViewController.h"
 
 @interface SettingsViewController ()
 
@@ -263,6 +264,17 @@
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"termsSegue"]) {
+        WebViewController* webViewContr = segue.destinationViewController;
+        webViewContr.title = @"Terms of Use";
+        webViewContr.url = [NSURL URLWithString:@"http://appikon.com/vCinityChat/ToS.html"];
+    }
 }
 
 @end

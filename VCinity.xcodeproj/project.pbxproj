@@ -15,6 +15,9 @@
 		06085981191C36AC005F6A75 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06085980191C36AC005F6A75 /* MessageUI.framework */; };
 		0608598E191C7ACD005F6A75 /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608598D191C7ACD005F6A75 /* NotificationView.m */; };
 		060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D47EF192FD8040062982B /* GAI+MyGAITracker.m */; };
+		060D47F4192FE3610062982B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D47F3192FE3610062982B /* WebViewController.m */; };
+		060D4807192FE9790062982B /* AOTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D4805192FE9790062982B /* AOTutorialViewController.m */; };
+		060D4808192FE9790062982B /* AOTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 060D4806192FE9790062982B /* AOTutorialViewController.xib */; };
 		0613983D192413E400C9AB1F /* SessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613983C192413E400C9AB1F /* SessionController.m */; };
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
@@ -70,6 +73,11 @@
 		0608598D191C7ACD005F6A75 /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
 		060D47EE192FD8040062982B /* GAI+MyGAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GAI+MyGAITracker.h"; sourceTree = "<group>"; };
 		060D47EF192FD8040062982B /* GAI+MyGAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GAI+MyGAITracker.m"; sourceTree = "<group>"; };
+		060D47F2192FE3610062982B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		060D47F3192FE3610062982B /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		060D4804192FE9790062982B /* AOTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTutorialViewController.h; sourceTree = "<group>"; };
+		060D4805192FE9790062982B /* AOTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOTutorialViewController.m; sourceTree = "<group>"; };
+		060D4806192FE9790062982B /* AOTutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AOTutorialViewController.xib; sourceTree = "<group>"; };
 		0613983B192413E400C9AB1F /* SessionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionController.h; sourceTree = "<group>"; };
 		0613983C192413E400C9AB1F /* SessionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionController.m; sourceTree = "<group>"; };
 		061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsChatViewController.h; sourceTree = "<group>"; };
@@ -189,6 +197,15 @@
 				0608597C191C27A1005F6A75 /* ActivityView.xib */,
 			);
 			name = "Activity View";
+			sourceTree = "<group>";
+		};
+		060D47F1192FE34F0062982B /* Web View */ = {
+			isa = PBXGroup;
+			children = (
+				060D47F2192FE3610062982B /* WebViewController.h */,
+				060D47F3192FE3610062982B /* WebViewController.m */,
+			);
+			name = "Web View";
 			sourceTree = "<group>";
 		};
 		061E7E4419182A1A00A0DF90 /* Near */ = {
@@ -323,6 +340,9 @@
 		065A1620191412A200B85D3D /* Intro ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				060D4804192FE9790062982B /* AOTutorialViewController.h */,
+				060D4805192FE9790062982B /* AOTutorialViewController.m */,
+				060D4806192FE9790062982B /* AOTutorialViewController.xib */,
 				06FD23841917F1B800AE7226 /* IntroViewController.h */,
 				06FD23851917F1B800AE7226 /* IntroViewController.m */,
 			);
@@ -344,6 +364,7 @@
 		06FD23811917D72100AE7226 /* Settings VC */ = {
 			isa = PBXGroup;
 			children = (
+				060D47F1192FE34F0062982B /* Web View */,
 				065A16261914257700B85D3D /* SettingsViewController.h */,
 				065A16271914257700B85D3D /* SettingsViewController.m */,
 			);
@@ -432,6 +453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				060D4808192FE9790062982B /* AOTutorialViewController.xib in Resources */,
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */,
@@ -493,6 +515,7 @@
 				061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */,
 				060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */,
 				065A15E51912BCFB00B85D3D /* AppDelegate.m in Sources */,
+				060D4807192FE9790062982B /* AOTutorialViewController.m in Sources */,
 				061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */,
 				061E7E4E191880C000A0DF90 /* FriendsListViewController.m in Sources */,
 				061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */,
@@ -502,6 +525,7 @@
 				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
 				065A15E11912BCFB00B85D3D /* main.m in Sources */,
 				06085978191BFB10005F6A75 /* MenuButton.m in Sources */,
+				060D47F4192FE3610062982B /* WebViewController.m in Sources */,
 				068F7333192D275600442F4D /* InAppNotificationView.m in Sources */,
 				06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */,
 				0613983D192413E400C9AB1F /* SessionController.m in Sources */,
