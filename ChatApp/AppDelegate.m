@@ -102,9 +102,9 @@
 
 -(void)setLoginView
 {
-    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your facebook friends."}, @{@"Header": @"Camping with family/friends?", @"Label": @"Chat with nearby people even when no network is available."}, @{@"Header": @"Take it to the beach", @"Label": @""}, @{@"Header": @"Attending a concert?", @"Label":@"Connect with other people."}];
+    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your facebook friends."}, @{@"Header": @"Camping with family/friends?", @"Label": @"Chat with nearby people even when no network is available."}, @{@"Header": @"Take it to the beach", @"Label": @""}, @{@"Header": @"Attending a concert?", @"Label":@"Connect with other people."}, @{@"Header":@"Attending a Conference?", @"Label":@"Connect with other people seemlessly."}];
     
-    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2", @"bg3", @"bg4"] andInformations:infoArray];
+    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"Intro-bg-1", @"Intro-bg-2", @"Intro-bg-3", @"Intro-bg-4", @"Intro-bg-5"] andInformations:infoArray];
     
     [intro setHeaderImage:[UIImage imageNamed:@"logo"]];
     [intro setButtons:AOTutorialButtonLogin];
