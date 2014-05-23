@@ -35,6 +35,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
+    
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-40631521-4"];
+    
     [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
     [PFFacebookUtils initializeFacebook];
     

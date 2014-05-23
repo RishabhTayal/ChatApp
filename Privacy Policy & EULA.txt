@@ -1,0 +1,197 @@
+Privacy Policy
+
+Effective date: May 23, 2014
+
+Welcome to vCinity ("vCinity," "we," "us" or "our"). vCinity provides an
+easy way to store and access your media, documents and files through our
+mobile application. This Privacy Policy provides our policies and
+procedures for collecting, using, and disclosing your information. Users
+can access the vCinity service (the "Service") through our mobile
+application. This Privacy Policy governs your access and use of the
+vCinity Service, and by using our Service you consent to the collection,
+transfer, processing, storage, disclosure and other uses described in
+this Privacy Policy. All data, media, content, and any of the form of
+information described below are collectively referred to as
+"information." If we decide to change our Privacy Policy, we will post
+those changes on our mobile application so that you are always aware of
+what information we collect, how we use it, and under what circumstances
+we may disclose it.  You should review this Privacy Policy from time to
+time so that you will become aware of any changes.  Continued access or
+use of our Service shall constitute your expressed acceptance of any
+modifications to our Privacy Policy.
+
+1. INFORMATION WE COLLECT
+
+We may collect and store the following information in your use of the
+vCinity Service:
+
+Information you provide us directly:
+
+(A)         Your username, password and e-mail address when you register
+for a vCinity account. (B)         Information that you upload or store
+in the Service. (C)         Communications between you and vCinity. For
+example, we may send you Service-related emails (e.g., account
+verification, changes/updates to features of the Service, technical and
+security notices). Note that you may not opt out of Service-related
+e-mails.
+
+Log Data.   When you use the Service, we automatically record
+information from your Device, its software, and your activity using the
+Services. This may include the Internet Protocol ("IP") address,
+location preferences, identification numbers associated with the device
+through which you accessed the Service, your mobile carrier, date and
+time stamps associated with transactions, system configuration
+information, metadata concerning information stored on the Service, and
+other interactions with the Service.
+
+Cookies.   We currently do not use "cookies" or similar technologies
+like pixels, web beacons, and local storage to collect information.
+However, we may decide to use cookies or similar technologies in the
+future on other platforms and will notify you through a revised Privacy
+Policy if we do.
+
+2. How We Use Personal Information
+
+Personal Information.   In the course of using the Service, we may
+collect personal information that can be used to contact or identify you
+("Personal Information"). Personal Information is or may be used: (i) to
+provide and improve our Service, (ii) to administer your use of the
+Service, (iii) to personalize and improve your experience, and (iv) to
+provide or offer software updates and product announcements. If you no
+longer wish to receive communications from us, please follow the
+"unsubscribe" instructions provided in any of those communications.
+
+Geo-Location Information.   Some mobile devices allow applications to
+access real-time location-based information (for example, GPS). Our
+mobile app does not collect such information from your mobile device at
+any time while you download or use our mobile app but may do so in the
+future with your consent to improve our Service. If you don't want to
+store location data in your photos or videos, please consult the
+documentation for your camera to turn off that feature. Also, some of
+the information we might collect through the mobile application, for
+example IP address, can sometimes be used to approximate a Device's
+location.
+
+By registering for and using the Service you consent to the transfer of
+information to the U.S. or to any other country in which vCinity, its
+Affiliates or Service Providers maintain facilities and the use and
+disclosure of information about you as described in this Privacy Policy.
+
+3. Information Sharing and Disclosure
+
+Your Use.   We will display your Personal Information in your profile
+page and elsewhere on the Service according to the preferences you set
+in your account. Any information you choose to provide should reflect
+how much you want others to know about you. You can review and revise
+your profile information at any time. We do not sell your personal
+information to third parties. Through certain features of the Service,
+you may also have the ability to make some of your information public.
+Public information may be broadly and quickly disseminated.
+
+Service Providers and Others.   We may use certain trusted third party
+companies and individuals to help us provide storage for the Service.
+These third parties may have access to your information only for
+purposes of performing these tasks on our behalf and under obligations
+similar to those in this Privacy Policy. As of the date this policy went
+into effect, we use Amazon's S3 storage service to store some of your
+information. On our servers, we immediately encrypt the content using
+AES256. We then store this some of this content into Amazon S3 servers
+where it is also encrypted in a similar manner.
+
+Compliance with Laws and Law Enforcement Requests; Protection of
+vCinity's Rights.   We may disclose to parties outside vCinity files
+stored in your vCinity and information about you that we collect when we
+have a good faith belief that disclosure is reasonably necessary to (a)
+comply with a law, regulation or compulsory legal request; (b) protect
+the safety of any person from death or serious bodily injury; (c)
+prevent fraud or abuse of vCinity or its users; or (d) to protect
+vCinity's property rights. If we provide your vCinity files to a law
+enforcement agency as set forth above, we will remove vCinity's
+encryption from the files before providing them to law enforcement.
+However, vCinity will not be able to decrypt any files that you
+encrypted prior to storing them on vCinity.
+
+Change of Control.   If we sell or otherwise transfer part or the whole
+of vCinity or our assets to another organization (e.g., in the course of
+a transaction like a merger, acquisition, bankruptcy, dissolution,
+liquidation), your information such as name and email address, and any
+other information collected through the Service may be among the items
+sold or transferred. You will continue to own your information. The
+buyer or transferee will have to honor the commitments we have made in
+this Privacy Policy.
+
+Non-private or Non-Personal Information.   We may disclose your
+non-private, aggregated, or otherwise non-personal information, such as
+usage statistics of our Service.
+
+4. Changing or Deleting Your Information
+
+If you are a registered user, you may review, update, correct or delete
+the Personal Information provided in your registration or account
+profile by changing your "account settings." If your personally
+identifiable information changes, or if you no longer desire our
+service, you may update or delete it by contact us at team@vCinity.me
+with the request. In some cases we may retain copies of your information
+if required by law. For questions about your Personal Information on our
+Service, please contact team@vCinity.me . We will respond to your
+inquiry within 30 days.
+
+5. Data Retention
+
+We will retain your information for as long as your account is active or
+as needed to provide you services. If you wish to cancel your account or
+request that we no longer use your information to provide you services,
+you may delete your account through the mobile app. We may retain and
+use your information as necessary to comply with our legal obligations,
+resolve disputes, and enforce our agreements. Consistent with these
+requirements, we will try to delete your information promptly upon your
+written request. Please note, however, that there might be latency in
+deleting information from our servers and backed-up versions might exist
+after deletion. In addition, we do not delete from our servers files
+that you have in common with other users.
+
+6. Security
+
+The security of your information is important to us. When you store
+information using the Service on, we encrypt the transmission of that
+information using secure socket layer technology (SSLv3).
+
+We follow generally accepted standards to protect the information
+submitted to us, both during transmission and once we receive it. No
+method of electronic transmission or storage is 100% secure, however.
+Therefore, we cannot guarantee its absolute security. Your information
+collected through the Service may be stored and processed in the United
+States or any other country in which vCinity, its Affiliates or Service
+Providers maintain facilities
+
+7. California Privacy Rights
+
+California Civil Code Section 1798.83 permits those customers that are
+California residents to request certain information regarding our
+disclosure of your personal information to other parties for their
+direct marketing purposes.  To make such a request, please send an email
+to team@vCinity.me or write to us at: Lifetime Memori Inc, P.O. Box
+2076, SF, CA 94126.
+
+8. Children's Privacy
+
+vCinity does not knowingly collect or solicit any information from
+anyone under the age of 13 or knowingly allow such persons to register
+for the Service. The Service and its content are not directed at
+children under the age of 13. In the event that we learn that we have
+collected personal information from a child under age 13 without
+parental consent, we will delete that information as quickly as
+possible. If you believe that we might have any information from or
+about a child under 13, please contact us.
+
+9. Contacting Us
+
+If you have any questions about this Privacy Policy, please contact us
+at team@vCinity.me or P.O. Box 2076, SF, CA 94126.
+
+10. Changes to our Privacy Policy
+
+In the future, we may make changes to this Privacy Policy.  The revised
+Privacy Policy will be displayed via a setting on the mobile application
+so that you will know what types of information we gather and the
+categories of other parties with whom we may share the information. 

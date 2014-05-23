@@ -327,6 +327,11 @@ THE SOFTWARE.
    limitations under the License.
 
 
+## GoogleAnalytics-iOS-SDK
+
+Copyright 2009 - 2014 Google, Inc. All rights reserved.
+
+
 ## IDMPhotoBrowser
 
 The MIT License (MIT)

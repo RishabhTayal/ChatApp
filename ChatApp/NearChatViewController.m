@@ -52,6 +52,11 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    [tracker set:kGAIScreenName value:@"NearChat"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
      [self.navigationController.navigationBar hideBottomHairline];
     if (_sessionController.connectedPeers.count == 0 ) {
         [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];

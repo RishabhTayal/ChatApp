@@ -121,6 +121,14 @@
             [mailVC setToRecipients:@[@"contact@appikon.com"]];
             //            [mailVC setMessageBody:@"" isHTML:NO];
             [self presentViewController:mailVC animated:YES completion:nil];
+        } else if(indexPath.row == 2) {
+            //Report an abuse
+            MFMailComposeViewController* issueVC = [[MFMailComposeViewController alloc] init];
+            issueVC.mailComposeDelegate = self;
+            issueVC.view.tintColor = [UIColor whiteColor];
+            [issueVC setSubject:@"Reporting abuse content"];
+            [issueVC setToRecipients:@[@"contact@appikon.com"]];
+            [self presentViewController:issueVC animated:YES completion:nil];
         }
     }
     if (indexPath.section == 2) {
