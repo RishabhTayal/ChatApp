@@ -8,7 +8,7 @@
 
 #import "AOTutorialViewController.h"
 
-#define headerLeftMargin    20.0f
+#define headerLeftMargin    15.0f
 #define headerFontSize      20.0f
 
 #define headerFontType      @"Helvetica"
