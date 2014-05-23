@@ -96,7 +96,7 @@
 {
     if (section == [tableView numberOfSections] - 1) {
         UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
-        label.text = @"Made with love by Appikon Mobile";
+        label.text = @"Made with \ue022 by Appikon Mobile";
         label.textColor = [UIColor lightGrayColor];
         label.textAlignment = NSTextAlignmentCenter;
         return label;
