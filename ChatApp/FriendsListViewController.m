@@ -15,6 +15,7 @@
 #import <AddressBook/AddressBook.h>
 #import "MenuButton.h"
 #import <MFSideMenu.h>
+#import "UIImage+Utility.h"
 
 @interface FriendsListViewController ()
 
@@ -60,6 +61,11 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [GAI trackWithScreenName:kScreenNameFriendsList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,6 +123,8 @@
         CFRelease(addressBook);
         CFRelease(people);
     }
+    
+    
     
     return allcontacts;
 }
@@ -189,7 +197,6 @@
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
         chatVC.title = _friendsUsingApp[indexPath.row][@"name"];
         chatVC.friendDict = _friendsUsingApp[indexPath.row];
-//        chatVC.friendId = _friendsUsingApp[indexPath.row][@"id"];
         chatVC.friendsImage = cell.profilePicture.image;
         [self.navigationController pushViewController:chatVC animated:YES];
     }

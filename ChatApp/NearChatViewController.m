@@ -15,6 +15,8 @@
 #import "NotificationView.h"
 #import <UINavigationBar+Addition/UINavigationBar+Addition.h>
 #import "AppDelegate.h"
+#import "InAppNotificationView.h"
+#import "MenuViewController.h"
 
 @interface NearChatViewController ()
 
@@ -38,24 +40,25 @@
     
     _chatMessagesArray = [NSMutableArray new];
     
-//    _sessionController = [[SessionController alloc] initWithDelegate:self];
+    //    _sessionController = [[SessionController alloc] initWithDelegate:self];
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     _sessionController = appDelegate.sessionController;
     
     self.sender = _sessionController.displayName;
     
     self.inputToolbar.contentView.leftBarButtonItem = nil;
-    
-    [self.navigationController.navigationBar hideBottomHairline];
-    
-    if (_sessionController.connectedPeers.count == 0 ) {
-        [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [GAI trackWithScreenName:kScreenNameNearChat];
+    
+     [self.navigationController.navigationBar hideBottomHairline];
+    if (_sessionController.connectedPeers.count == 0 ) {
+        [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,16 +88,23 @@
 
 -(void)sessionDidRecieveData:(NSData *)data fromPeer:(NSString *)peerName
 {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
-        [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
-    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
-        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-    }
     
     NSKeyedUnarchiver* unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
     //    unArchiver.requiresSecureCoding = YES;
     id object = [unArchiver decodeObject];
     [unArchiver finishDecoding];
+    
+    if ([self shouldShowInAppNotification]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showInappNotificationWithText:peerName detail:object];
+        });
+    }
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
+        [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
+        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+    }
     
     if ([object isKindOfClass:[NSString class]]) {
         NSString* message = object;
@@ -141,7 +151,6 @@
 
 -(void)didPressAccessoryButton:(UIButton *)sender
 {
-    NSLog(@"Camera pressed!");
     UIActionSheet* photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Exisiting Photo", nil];
     [photoSheet showInView:self.view.window];
 }
@@ -214,7 +223,7 @@
     
     JSQMessage* message = _chatMessagesArray[indexPath.row];
     if ([message.sender isEqualToString:self.sender]) {
-        PFFile *file = [PFUser currentUser][@"picture"];
+        PFFile *file = [PFUser currentUser][kPFUser_Picture];
         iv.image = [UIImage imageWithData:[file getData]];
     } else {
         iv.image = [UIImage imageNamed:@"avatar-placeholder"];
@@ -266,51 +275,30 @@
     return kJSQMessagesCollectionViewCellLabelHeightDefault;
 }
 
-//
-//-(void)configureCell:(JSBubbleMessageCell *)cell atIndexPath:(NSIndexPath *)indexPath
-//{
-//    if ([cell messageType] == JSBubbleMessageTypeOutgoing) {
-//        cell.bubbleView.textView.textColor = [UIColor whiteColor];
-//
-//        NSMutableDictionary *attrs = [cell.bubbleView.textView.linkTextAttributes mutableCopy];
-//        [attrs setValue:[UIColor blueColor] forKey:NSForegroundColorAttributeName];
-//
-//        cell.bubbleView.textView.linkTextAttributes = attrs;
-//    }
-//
-//    if (cell.timestampLabel) {
-//        cell.timestampLabel.textColor = [UIColor lightGrayColor];
-//        cell.timestampLabel.shadowOffset = CGSizeZero;
-//    }
-//
-//    if (cell.subtitleLabel) {
-//        cell.subtitleLabel.textColor = [UIColor lightGrayColor];
-//    }
-//
-//    cell.bubbleView.textView.dataDetectorTypes = UIDataDetectorTypeAll;
-//}
-//
-//-(BOOL)shouldDisplayTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.row == 0) {
-//        JSMessage* firstMessgae = _chatMessagesArray[0];
-//        _lastShownTimeStamp = firstMessgae.date;
-//        return YES;
-//    }
-//    JSMessage* message = _chatMessagesArray[indexPath.row];
-//
-//    NSTimeInterval timeDiff = [message.date timeIntervalSinceDate:_lastShownTimeStamp];
-//
-//    double mins = floor(timeDiff/60);
-//    NSLog(@"%@", message.date);
-//    NSLog(@"%@", _lastShownTimeStamp);
-//    NSLog(@"%f", mins);
-//    double secs = round(timeDiff - mins * 60);
-//    if (mins > 1) {
-//        _lastShownTimeStamp = message.date;
-//        return YES;
-//    }
-//    return NO;
-//}
+#pragma mark -
+
+-(BOOL)shouldShowInAppNotification
+{
+    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+    
+    UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)window.rootViewController).centerViewController).visibleViewController;
+    NSLog(@"%@", currentVC);
+    if ([currentVC isKindOfClass:[NearChatViewController class]]) {
+        return NO;
+    }
+    return YES;
+}
+
+-(void)showInappNotificationWithText:(NSString*)text detail:(NSString*)detail
+{
+    [[InAppNotificationView sharedInstance] notifyWithText:text detail:detail image:[UIImage imageNamed:@"avatar-placeholder"] duration:3 andTouchBlock:^(InAppNotificationView *view) {
+        AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        MFSideMenuContainerViewController* currentVC = ((MFSideMenuContainerViewController*)appDelegate.window.rootViewController);
+        UINavigationController* navC = (UINavigationController*)currentVC.leftMenuViewController;
+        MenuViewController* menuVC = (MenuViewController*)navC.topViewController;
+        [menuVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [menuVC tableView:menuVC.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }];
+}
 
 @end

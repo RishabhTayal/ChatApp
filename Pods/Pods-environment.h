@@ -48,12 +48,6 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 2
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 4
 
-// AOTutorial
-#define COCOAPODS_POD_AVAILABLE_AOTutorial
-#define COCOAPODS_VERSION_MAJOR_AOTutorial 1
-#define COCOAPODS_VERSION_MINOR_AOTutorial 5
-#define COCOAPODS_VERSION_PATCH_AOTutorial 0
-
 // APParallaxHeader
 #define COCOAPODS_POD_AVAILABLE_APParallaxHeader
 #define COCOAPODS_VERSION_MAJOR_APParallaxHeader 0
@@ -77,6 +71,12 @@
 #define COCOAPODS_VERSION_MAJOR_Facebook_iOS_SDK 3
 #define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 14
 #define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 1
+
+// GoogleAnalytics-iOS-SDK
+#define COCOAPODS_POD_AVAILABLE_GoogleAnalytics_iOS_SDK
+#define COCOAPODS_VERSION_MAJOR_GoogleAnalytics_iOS_SDK 3
+#define COCOAPODS_VERSION_MINOR_GoogleAnalytics_iOS_SDK 0
+#define COCOAPODS_VERSION_PATCH_GoogleAnalytics_iOS_SDK 7
 
 // IDMPhotoBrowser
 #define COCOAPODS_POD_AVAILABLE_IDMPhotoBrowser
@@ -102,17 +102,23 @@
 #define COCOAPODS_VERSION_MINOR_MFSideMenu 5
 #define COCOAPODS_VERSION_PATCH_MFSideMenu 4
 
-// MPNotificationView
-#define COCOAPODS_POD_AVAILABLE_MPNotificationView
-#define COCOAPODS_VERSION_MAJOR_MPNotificationView 1
-#define COCOAPODS_VERSION_MINOR_MPNotificationView 1
-#define COCOAPODS_VERSION_PATCH_MPNotificationView 0
-
 // Parse-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_Parse_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Parse_iOS_SDK 1
 #define COCOAPODS_VERSION_MINOR_Parse_iOS_SDK 2
 #define COCOAPODS_VERSION_PATCH_Parse_iOS_SDK 19
+
+// SDWebImage
+#define COCOAPODS_POD_AVAILABLE_SDWebImage
+#define COCOAPODS_VERSION_MAJOR_SDWebImage 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage 6
+#define COCOAPODS_VERSION_PATCH_SDWebImage 0
+
+// SDWebImage/Core
+#define COCOAPODS_POD_AVAILABLE_SDWebImage_Core
+#define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
+#define COCOAPODS_VERSION_MINOR_SDWebImage_Core 6
+#define COCOAPODS_VERSION_PATCH_SDWebImage_Core 0
 
 // SVProgressHUD
 #define COCOAPODS_POD_AVAILABLE_SVProgressHUD

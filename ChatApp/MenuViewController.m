@@ -54,12 +54,12 @@
     UIImageView* navImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     navImage.layer.cornerRadius = navImage.frame.size.height / 2;
     navImage.layer.masksToBounds = YES;
-    PFFile* file = [PFUser currentUser][@"picture"];
+    PFFile* file = [PFUser currentUser][kPFUser_Picture];
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         navImage.image = [UIImage imageWithData:data];
     }];
-//    UIImage* image = [UIImage imageWithData:[file getData]];
-//    navImage.image = image;
+    //    UIImage* image = [UIImage imageWithData:[file getData]];
+    //    navImage.image = image;
     navImage.contentMode = UIViewContentModeScaleAspectFill;
     navImage.clipsToBounds = YES;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navImage];
@@ -98,27 +98,43 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectedBackgroundView = [UIView new];
-
+        
     }
     cell.textLabel.textColor = [UIColor lightGrayColor];
-    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    cell.textLabel.highlightedTextColor = [UIColor redColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.textLabel.font = [UIFont systemFontOfSize:28];
     cell.backgroundColor = [UIColor clearColor];
-  
+    
     // Configure the cell...
     switch (indexPath.row) {
         case 0:
+        {
             cell.textLabel.text = @"vCinity Chat";
+            cell.imageView.image = [UIImage imageNamed:@"chat-off"];
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"chat-on"];
+        }
             break;
         case 1:
+        {
             cell.textLabel.text = @"Friends";
+            cell.imageView.image = [UIImage imageNamed:@"sillouhette-off"];
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"sillouhette-on"];
+        }
             break;
-            case 2:
+        case 2:
+        {
             cell.textLabel.text = @"Settings";
+            cell.imageView.image = [UIImage imageNamed:@"settings-off"];
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"settings-on"];
+        }
             break;
         default:
+        {
             cell.textLabel.text = @"Logout";
+            cell.imageView.image = [UIImage imageNamed:@"logout-off"];
+            cell.imageView.highlightedImage = [UIImage imageNamed:@"logout-on"];
+        }
             break;
     }
     return cell;
@@ -133,12 +149,10 @@
     switch (indexPath.row) {
         case 0:
         {
-            //
-            if (!_near)
-            {
+            if (!_near) {
                 _near = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
                 AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                appDelegate.sessionController.delegate = _near;
+                appDelegate.sessionController = [[SessionController alloc] initWithDelegate:_near];
             }
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_near], nil];
             self.menuContainerViewController.centerViewController = array[0];
@@ -154,7 +168,7 @@
             [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
         }
             break;
-            case 2:
+        case 2:
         {
             if (!_settings)
                 _settings = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
@@ -186,6 +200,8 @@
     [ActivityView hide];
     
     [PFUser logOut];
+    
+    [[UIApplication sharedApplication] unregisterForRemoteNotifications];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
     [[NSUserDefaults standardUserDefaults] synchronize];

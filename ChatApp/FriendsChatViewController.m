@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
     
-    self.sender = [PFUser currentUser][@"fbID"];
+    self.sender = [PFUser currentUser][kPFUser_FBID];
     
     _chatArray = [NSMutableArray new];
     
@@ -37,6 +37,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [GAI trackWithScreenName:kScreenNameFriendsChat];
     [self loadChat];
 }
 
@@ -65,8 +66,7 @@
         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
     }
     
-    NSLog(@"%@", notification.userInfo[@"aps"][@"alert"]);
-    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[@"aps"][@"alert"] sender:@"" date:[NSDate date]];
+    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[kNotificationMessage] sender:notification.userInfo[kNotificationSender][@"name"] date:[NSDate date]];
     [_chatArray addObject:message];
     [self finishReceivingMessage];
     //    [self scrollToBottomAnimated:YES];
@@ -74,23 +74,23 @@
 
 -(void)loadChat
 {
-    PFQuery *innerQuery = [[PFQuery alloc] initWithClassName:@"Wechat"];
-    [innerQuery whereKey:@"sender" equalTo:[PFUser currentUser][@"fbID"]];
-    [innerQuery whereKey:@"receiver" equalTo:_friendDict[@"id"]];
+    PFQuery *innerQuery = [[PFQuery alloc] initWithClassName:kPFTableName_Chat];
+    [innerQuery whereKey:kPFChatSender equalTo:[PFUser currentUser][kPFUser_FBID]];
+    [innerQuery whereKey:kPFChatReciever equalTo:_friendDict[@"id"]];
     
-    PFQuery* innerQuery2 = [[PFQuery alloc] initWithClassName:@"Wechat"];
-    [innerQuery2 whereKey:@"sender" equalTo:_friendDict[@"id"]];
-    [innerQuery2 whereKey:@"receiver" equalTo:[PFUser currentUser][@"fbID"]];
+    PFQuery* innerQuery2 = [[PFQuery alloc] initWithClassName:kPFTableName_Chat];
+    [innerQuery2 whereKey:kPFChatSender equalTo:_friendDict[@"id"]];
+    [innerQuery2 whereKey:kPFChatReciever equalTo:[PFUser currentUser][kPFUser_FBID]];
     
     PFQuery* query = [PFQuery orQueryWithSubqueries:@[innerQuery, innerQuery2]];
     query.limit = 10;
-
+    
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [_chatArray removeAllObjects];
         
         for (PFObject* object in objects) {
-            JSQMessage* message = [[JSQMessage alloc] initWithText:object[@"msg"] sender:object[@"sender"] date:object.createdAt];
+            JSQMessage* message = [[JSQMessage alloc] initWithText:object[kPFChatMessage] sender:object[kPFChatSender] date:object.createdAt];
             [_chatArray addObject:message];
         }
         _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
@@ -114,13 +114,17 @@
     
     PFPush *push = [[PFPush alloc] init];
     [push setQuery:pushQuery];
-    [push setMessage:text];
+    
+    NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[_friendDict, @{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationReceiever, kNotificationSender]];
+    [pushData setObject:text forKey:kNotificationMessage];
+    [pushData setObject:[NSString stringWithFormat:@"%@: %@", [PFUser currentUser].username, text] forKey:kNotificationAlert];
+    [push setData:pushData];
     [push sendPushInBackground];
     
-    PFObject *sendObjects = [PFObject objectWithClassName:@"Wechat"];
-    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:@"msg"];
-    [sendObjects setObject:[PFUser currentUser][@"fbID"] forKey:@"sender"];
-    [sendObjects setObject:_friendDict[@"id"] forKey:@"receiver"];
+    PFObject *sendObjects = [PFObject objectWithClassName:kPFTableName_Chat];
+    [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:kPFChatMessage];
+    [sendObjects setObject:[PFUser currentUser][kPFUser_FBID] forKey:kPFChatSender];
+    [sendObjects setObject:_friendDict[@"id"] forKey:kPFChatReciever];
     [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSLog(@"save");
     }];
@@ -144,7 +148,7 @@
 -(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.row];
-    if ([message.sender isEqualToString:[PFUser currentUser][@"fbID"]]) {
+    if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
         return [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     }
     return [JSQMessagesBubbleImageFactory incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
@@ -159,8 +163,8 @@
     iv.layer.masksToBounds = YES;
     
     JSQMessage* message = _chatArray[indexPath.row];
-    if ([message.sender isEqualToString:[PFUser currentUser][@"fbID"]]) {
-        PFFile *file = [PFUser currentUser][@"picture"];
+    if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
+        PFFile *file = [PFUser currentUser][kPFUser_Picture];
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             iv.image = [UIImage imageWithData:data];
         }];
@@ -172,13 +176,21 @@
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    JSQMessage* message = _chatArray[indexPath.item];
+    return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.item];
-    if ([message.sender isEqualToString:[PFUser currentUser][@"fbID"]]) {
+    if (indexPath.item - 1 > 0) {
+        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
+        if ([previousMessage.sender isEqualToString:message.sender]) {
+            return nil;
+        }
+    }
+    
+    if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
         NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
         return attString;
     } else {
@@ -213,6 +225,11 @@
 }
 
 #pragma mark - JSQMessages collectionview flow layout delegate
+
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+}
 
 -(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {

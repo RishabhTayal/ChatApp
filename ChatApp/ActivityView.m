@@ -10,6 +10,7 @@
 
 @interface ActivityView()
 
+@property (strong) IBOutlet UIView* containerView;
 @property (strong) IBOutlet UIImageView* activityIndicator;
 @property (strong) IBOutlet UILabel* loadingMessageLabel;
 
@@ -30,6 +31,10 @@
         activity.loadingMessageLabel.text = loadingMessage;
     }
     activity.alpha = 0;
+    
+    activity.containerView.layer.cornerRadius = 4;
+    activity.containerView.layer.masksToBounds = YES;
+    
     [UIView animateWithDuration:0.2 animations:^{
         [view addSubview:activity];
         activity.alpha = 1;
@@ -76,20 +81,10 @@
     if (self) {
         UIView* view = [[[NSBundle mainBundle] loadNibNamed:@"ActivityView" owner:self options:nil] objectAtIndex:0];
         view.opaque = NO;
-        //        view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.6];
         [self addSubview:view];
         // Initialization code
     }
     return self;
 }
-
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
 
 @end

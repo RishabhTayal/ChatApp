@@ -167,10 +167,9 @@ static NSString * const kMCSessionServiceType = @"vcinityp2p";
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
-    // Decode the incoming data to a UTF8 encoded string
-//    NSString *receivedMessage = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    // Decode the incoming data to a UTF8 encoded strin/
+
     [_delegate sessionDidRecieveData:data fromPeer:peerID.displayName];
-//    NSLog(@"didReceiveData %@ from %@", receivedMessage, peerID.displayName);
 }
 
 - (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress

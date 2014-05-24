@@ -16,34 +16,43 @@
 #import "MenuViewController.h"
 #import <iRate/iRate.h>
 #import "SessionController.h"
+#import "InAppNotificationTapListener.h"
+#import "UIImage+Utility.h"
+#import "InAppNotificationView.h"
 
 @implementation AppDelegate
 
 +(void)initialize
 {
-//    [iRate sharedInstance].onlyPromptIfLatestVersion = NO;
-//    
-//    [iRate sharedInstance].eventsUntilPrompt = 5;
-//    
-//    [iRate sharedInstance].daysUntilPrompt = 0;
-//    [iRate sharedInstance].remindPeriod = 0;
-//    [iRate sharedInstance].previewMode = YES;
+    [iRate sharedInstance].onlyPromptIfLatestVersion = NO;
+    
+    [iRate sharedInstance].eventsUntilPrompt = 5;
+    
+    [iRate sharedInstance].daysUntilPrompt = 0;
+    [iRate sharedInstance].remindPeriod = 0;
+    [iRate sharedInstance].previewMode = NO;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
+    
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-40631521-4"];
+    
     [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
     [PFFacebookUtils initializeFacebook];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
-
     //Don't add [[uiview apperance].tintcolor
     [UINavigationBar appearance].barTintColor = [UIColor redColor];
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDInAppVibrate];
     }
@@ -73,26 +82,33 @@
     
     if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         [PFPush handlePush:userInfo];
+        [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
     } else {
-        MPNotificationView *notification = [MPNotificationView notifyWithText:@"" andDetail:userInfo[@"aps"][@"alert"]];
-        notification.delegate = self;
+        [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
+        UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
+        if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
+            
+            if (userInfo[kNotificationSender]) {
+                [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
+                    [[InAppNotificationView sharedInstance] notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:image duration:3 andTouchBlock:^(InAppNotificationView *view) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
+                    }];
+                }];
+            }
+        }
     }
 }
 
--(void)didTapOnNotificationView:(MPNotificationView *)notificationView
-{
-    NSLog(@"tapped");
-}
-
 -(void)setLoginView
-{    
-    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your facebook friends."}, @{@"Header": @"Camping with family/friends?", @"Label": @"Chat with nearby people even when no network is available."}, @{@"Header": @"Take it to the beach", @"Label": @""}, @{@"Header": @"Attending a concert?", @"Label":@"Connect with other people."}];
+{
+    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your Facebook Friends."}, @{@"Header": @"Camping with Family/Friends?", @"Label": @"Chat with nearby people even when no network is available."}, @{@"Header": @"Take it to the beach", @"Label": @"Make new friends at the beach."}, @{@"Header": @"Attending a Concert?", @"Label":@"Connect with other people."}, @{@"Header":@"Going to a Conference?", @"Label":@"Connect with other people seemlessly."}];
     
-    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"bg1", @"bg2", @"bg3", @"bg4"] andInformations:infoArray];
+    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"Intro-bg-1", @"Intro-bg-2", @"Intro-bg-3", @"Intro-bg-4", @"Intro-bg-5"] andInformations:infoArray];
     
     [intro setHeaderImage:[UIImage imageNamed:@"logo"]];
     [intro setButtons:AOTutorialButtonLogin];
-
+    
     UIButton* loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [intro setLoginButton:loginButton];
     intro.loginButton.layer.cornerRadius = 10;
@@ -105,11 +121,14 @@
 {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    NearChatViewController* nearVC = [sb instantiateViewControllerWithIdentifier:@"NearChatViewController"];
-    MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:nearVC] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     
-    _sessionController = [[SessionController alloc] initWithDelegate:nearVC];
+    MenuViewController* menuVC = [[MenuViewController alloc] init];
+    MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:nil leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:menuVC] rightMenuViewController:nil];
+    [menuVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [menuVC tableView:menuVC.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+//    _sessionController = [[SessionController alloc] initWithDelegate:nearVC];
     
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
@@ -130,7 +149,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 

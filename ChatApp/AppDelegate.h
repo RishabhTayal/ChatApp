@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MPNotificationView.h>
+//#import <MPNotificationView.h>
 #import "SessionController.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, MPNotificationViewDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) SessionController* sessionController;

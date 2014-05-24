@@ -7,6 +7,7 @@
 //
 
 #import "UIImage+Utility.h"
+#import <SDWebImage/SDWebImageManager.h>
 
 @implementation UIImage (Utility)
 
@@ -28,6 +29,17 @@
     CGImageRef cgimg = [context createCGImage:outImage fromRect:rect];
     UIImage* image = [UIImage imageWithCGImage:cgimg];
     return image;
+}
+
++(void)imageForURL:(NSURL *)url imageDownloadBlock:(ImageDownloadedBloack)block
+{
+    NSLog(@"%@", url);
+    
+    [[SDWebImageManager sharedManager] downloadWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+        block(image, error);
+    }];
 }
 
 @end

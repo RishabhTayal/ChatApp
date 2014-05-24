@@ -14,6 +14,7 @@
 #import "MenuButton.h"
 #import "ActivityView.h"
 #import <IDMPhotoBrowser.h>
+#import "WebViewController.h"
 
 @interface SettingsViewController ()
 
@@ -36,7 +37,7 @@
     
     _nameLabel.text = [PFUser currentUser].username;
     
-    PFFile* file = [PFUser currentUser][@"picture"];
+    PFFile* file = [PFUser currentUser][kPFUser_Picture];
     UIImage* img = [UIImage imageWithData:[file getData]];
     [self.tableView addParallaxWithImage:img andHeight:220];
     
@@ -50,6 +51,12 @@
     [_soundSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue]];
     
     // Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [GAI trackWithScreenName:kScreenNameSettings];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,6 +91,26 @@
 
 #pragma mark - UITableView Delegate
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (section == [tableView numberOfSections] - 1) {
+        return 80;
+    }
+    return 0;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == [tableView numberOfSections] - 1) {
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
+        label.text = @"Made with \ue022 by Appikon Mobile";
+        label.textColor = [UIColor lightGrayColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        return label;
+    }
+    return nil;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -101,6 +128,14 @@
             [mailVC setToRecipients:@[@"contact@appikon.com"]];
             //            [mailVC setMessageBody:@"" isHTML:NO];
             [self presentViewController:mailVC animated:YES completion:nil];
+        } else if(indexPath.row == 2) {
+            //Report an abuse
+            MFMailComposeViewController* issueVC = [[MFMailComposeViewController alloc] init];
+            issueVC.mailComposeDelegate = self;
+            issueVC.view.tintColor = [UIColor whiteColor];
+            [issueVC setSubject:@"Reporting abuse content"];
+            [issueVC setToRecipients:@[@"contact@appikon.com"]];
+            [self presentViewController:issueVC animated:YES completion:nil];
         }
     }
     if (indexPath.section == 2) {
@@ -180,7 +215,7 @@
         } else if (buttonIndex == 3) {
             //Import from Facebook
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", [PFUser currentUser][@"fbID"]]]];
+                NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", [PFUser currentUser][kPFUser_FBID]]]];
 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.tableView.parallaxView.imageView.image = [UIImage imageWithData:imgData];
@@ -189,7 +224,7 @@
                 PFFile* imageFile = [PFFile fileWithName:@"profile.jpg" data:imgData];
                 [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     
-                    [[PFUser currentUser] setObject:imageFile forKey:@"picture"];
+                    [[PFUser currentUser] setObject:imageFile forKey:kPFUser_Picture];
                     [[PFUser currentUser] saveInBackground];
                 }];
             });
@@ -208,7 +243,7 @@
         PFFile* imageFile = [PFFile fileWithName:@"profile.jpg" data:imgData];
         [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             
-            [[PFUser currentUser] setObject:imageFile forKey:@"picture"];
+            [[PFUser currentUser] setObject:imageFile forKey:kPFUser_Picture];
             [[PFUser currentUser] saveInBackground];
         }];
     }];
@@ -229,6 +264,17 @@
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"termsSegue"]) {
+        WebViewController* webViewContr = segue.destinationViewController;
+        webViewContr.title = @"Terms of Use";
+        webViewContr.url = [NSURL URLWithString:@"http://appikon.com/vCinityChat/ToS.html"];
+    }
 }
 
 @end

@@ -14,10 +14,14 @@
 		0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0608597C191C27A1005F6A75 /* ActivityView.xib */; };
 		06085981191C36AC005F6A75 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06085980191C36AC005F6A75 /* MessageUI.framework */; };
 		0608598E191C7ACD005F6A75 /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608598D191C7ACD005F6A75 /* NotificationView.m */; };
+		060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D47EF192FD8040062982B /* GAI+MyGAITracker.m */; };
+		060D47F4192FE3610062982B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D47F3192FE3610062982B /* WebViewController.m */; };
+		060D4807192FE9790062982B /* AOTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D4805192FE9790062982B /* AOTutorialViewController.m */; };
+		060D4808192FE9790062982B /* AOTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 060D4806192FE9790062982B /* AOTutorialViewController.xib */; };
+		060D4809192FFFE00062982B /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4D191880C000A0DF90 /* FriendsListViewController.m */; };
 		0613983D192413E400C9AB1F /* SessionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0613983C192413E400C9AB1F /* SessionController.m */; };
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
-		061E7E4E191880C000A0DF90 /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4D191880C000A0DF90 /* FriendsListViewController.m */; };
 		061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E501918818400A0DF90 /* FriendTableViewCell.m */; };
 		061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E53191922BB00A0DF90 /* chicago1.jpg */; };
 		0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642158F19213ACE00FB1F6D /* Accounts.framework */; };
@@ -38,6 +42,9 @@
 		065A16001912BCFB00B85D3D /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A15FF1912BCFB00B85D3D /* ChatAppTests.m */; };
 		065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */; };
 		065A16281914257700B85D3D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16271914257700B85D3D /* SettingsViewController.m */; };
+		068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */; };
+		068F7333192D275600442F4D /* InAppNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F7332192D275600442F4D /* InAppNotificationView.m */; };
+		068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068F7334192D2F2300442F4D /* InAppNotificationView.xib */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -64,10 +71,17 @@
 		06085980191C36AC005F6A75 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0608598C191C7ACD005F6A75 /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
 		0608598D191C7ACD005F6A75 /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
+		060D47EE192FD8040062982B /* GAI+MyGAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GAI+MyGAITracker.h"; sourceTree = "<group>"; };
+		060D47EF192FD8040062982B /* GAI+MyGAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GAI+MyGAITracker.m"; sourceTree = "<group>"; };
+		060D47F2192FE3610062982B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		060D47F3192FE3610062982B /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		060D4804192FE9790062982B /* AOTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTutorialViewController.h; sourceTree = "<group>"; };
+		060D4805192FE9790062982B /* AOTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOTutorialViewController.m; sourceTree = "<group>"; };
+		060D4806192FE9790062982B /* AOTutorialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AOTutorialViewController.xib; sourceTree = "<group>"; };
 		0613983B192413E400C9AB1F /* SessionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionController.h; sourceTree = "<group>"; };
 		0613983C192413E400C9AB1F /* SessionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionController.m; sourceTree = "<group>"; };
 		061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsChatViewController.h; sourceTree = "<group>"; };
-		061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsChatViewController.m; sourceTree = "<group>"; };
+		061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendsChatViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		061E7E4919183D1400A0DF90 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		061E7E4A19183D1400A0DF90 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		061E7E4C191880C000A0DF90 /* FriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsListViewController.h; sourceTree = "<group>"; };
@@ -99,12 +113,17 @@
 		065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		065A16261914257700B85D3D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationTapListener.h; sourceTree = "<group>"; };
+		068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppNotificationTapListener.m; sourceTree = "<group>"; };
+		068F7331192D275600442F4D /* InAppNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationView.h; sourceTree = "<group>"; };
+		068F7332192D275600442F4D /* InAppNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppNotificationView.m; sourceTree = "<group>"; };
+		068F7334192D2F2300442F4D /* InAppNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InAppNotificationView.xib; sourceTree = "<group>"; };
 		0697199D19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		0697199E19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0697199F19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		06FD23841917F1B800AE7226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
-		06FD23851917F1B800AE7226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
+		06FD23851917F1B800AE7226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		184A048636424222948F2C41 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		98C94CC7A30A47D08D7B3D0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -144,6 +163,7 @@
 			children = (
 				065A15E31912BCFB00B85D3D /* AppDelegate.h */,
 				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
+				068F7336192D338B00442F4D /* InApp Notificaition */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";
@@ -155,6 +175,8 @@
 				0608596F191991B5005F6A75 /* UIImage+Utility.m */,
 				06085976191BFB10005F6A75 /* MenuButton.h */,
 				06085977191BFB10005F6A75 /* MenuButton.m */,
+				060D47EE192FD8040062982B /* GAI+MyGAITracker.h */,
+				060D47EF192FD8040062982B /* GAI+MyGAITracker.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -175,6 +197,15 @@
 				0608597C191C27A1005F6A75 /* ActivityView.xib */,
 			);
 			name = "Activity View";
+			sourceTree = "<group>";
+		};
+		060D47F1192FE34F0062982B /* Web View */ = {
+			isa = PBXGroup;
+			children = (
+				060D47F2192FE3610062982B /* WebViewController.h */,
+				060D47F3192FE3610062982B /* WebViewController.m */,
+			);
+			name = "Web View";
 			sourceTree = "<group>";
 		};
 		061E7E4419182A1A00A0DF90 /* Near */ = {
@@ -260,7 +291,6 @@
 				065A15E61912BCFB00B85D3D /* Main.storyboard */,
 				061E7E4919183D1400A0DF90 /* MenuViewController.h */,
 				061E7E4A19183D1400A0DF90 /* MenuViewController.m */,
-				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				061E7E53191922BB00A0DF90 /* chicago1.jpg */,
 				065A15DB1912BCFB00B85D3D /* Supporting Files */,
 			);
@@ -270,6 +300,7 @@
 		065A15DB1912BCFB00B85D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				065A15DC1912BCFB00B85D3D /* VCinity-Info.plist */,
 				065A15DD1912BCFB00B85D3D /* InfoPlist.strings */,
 				065A15E01912BCFB00B85D3D /* main.m */,
@@ -309,15 +340,31 @@
 		065A1620191412A200B85D3D /* Intro ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				060D4804192FE9790062982B /* AOTutorialViewController.h */,
+				060D4805192FE9790062982B /* AOTutorialViewController.m */,
+				060D4806192FE9790062982B /* AOTutorialViewController.xib */,
 				06FD23841917F1B800AE7226 /* IntroViewController.h */,
 				06FD23851917F1B800AE7226 /* IntroViewController.m */,
 			);
 			name = "Intro ViewController";
 			sourceTree = "<group>";
 		};
+		068F7336192D338B00442F4D /* InApp Notificaition */ = {
+			isa = PBXGroup;
+			children = (
+				068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */,
+				068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */,
+				068F7331192D275600442F4D /* InAppNotificationView.h */,
+				068F7332192D275600442F4D /* InAppNotificationView.m */,
+				068F7334192D2F2300442F4D /* InAppNotificationView.xib */,
+			);
+			name = "InApp Notificaition";
+			sourceTree = "<group>";
+		};
 		06FD23811917D72100AE7226 /* Settings VC */ = {
 			isa = PBXGroup;
 			children = (
+				060D47F1192FE34F0062982B /* Web View */,
 				065A16261914257700B85D3D /* SettingsViewController.h */,
 				065A16271914257700B85D3D /* SettingsViewController.m */,
 			);
@@ -406,8 +453,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				060D4808192FE9790062982B /* AOTutorialViewController.xib in Resources */,
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
+				068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
 				0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */,
 				061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */,
@@ -464,15 +513,20 @@
 			files = (
 				065A15EB1912BCFB00B85D3D /* NearChatViewController.m in Sources */,
 				061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */,
+				060D4809192FFFE00062982B /* FriendsListViewController.m in Sources */,
+				060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */,
 				065A15E51912BCFB00B85D3D /* AppDelegate.m in Sources */,
+				060D4807192FE9790062982B /* AOTutorialViewController.m in Sources */,
 				061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */,
-				061E7E4E191880C000A0DF90 /* FriendsListViewController.m in Sources */,
 				061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */,
 				0608597D191C27A1005F6A75 /* ActivityView.m in Sources */,
 				0608598E191C7ACD005F6A75 /* NotificationView.m in Sources */,
+				068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */,
 				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
 				065A15E11912BCFB00B85D3D /* main.m in Sources */,
 				06085978191BFB10005F6A75 /* MenuButton.m in Sources */,
+				060D47F4192FE3610062982B /* WebViewController.m in Sources */,
+				068F7333192D275600442F4D /* InAppNotificationView.m in Sources */,
 				06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */,
 				0613983D192413E400C9AB1F /* SessionController.m in Sources */,
 				06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */,
