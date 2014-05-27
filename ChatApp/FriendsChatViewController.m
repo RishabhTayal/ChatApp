@@ -177,7 +177,15 @@
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.item];
-    return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+    if (indexPath.item - 1 > 0) {
+        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
+        NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
+        int mintues = floor(interval/60);
+        if (mintues >= 1) {
+            return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+        }
+    }
+    return nil;
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
