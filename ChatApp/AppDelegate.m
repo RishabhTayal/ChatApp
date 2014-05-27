@@ -30,13 +30,13 @@
     
     [iRate sharedInstance].daysUntilPrompt = 0;
     [iRate sharedInstance].remindPeriod = 0;
-    [iRate sharedInstance].previewMode = NO;
+    [iRate sharedInstance].previewMode = DEBUGMODE;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [GAI sharedInstance].trackUncaughtExceptions = YES;
-
+    
     [GAI sharedInstance].dispatchInterval = 20;
     
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
@@ -46,7 +46,9 @@
     [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
     [PFFacebookUtils initializeFacebook];
     
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    if (!DEBUGMODE) {
+        [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    }
     
     //Don't add [[uiview apperance].tintcolor
     [UINavigationBar appearance].barTintColor = [UIColor redColor];
@@ -128,7 +130,7 @@
     [menuVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     [menuVC tableView:menuVC.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     
-//    _sessionController = [[SessionController alloc] initWithDelegate:nearVC];
+    //    _sessionController = [[SessionController alloc] initWithDelegate:nearVC];
     
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
