@@ -12,13 +12,13 @@
 
 +(void)trackWithScreenName:(ScreenName)screenName
 {
-#ifdef DEBUG
-    NSLog(@"GA Not trackking");
-#else
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    [tracker set:kGAIScreenName value:ScreenNameString(screenName)];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-#endif
+    if (DEBUGMODE) {
+        NSLog(@"GA Not trackking");
+    } else {
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+        [tracker set:kGAIScreenName value:ScreenNameString(screenName)];
+        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    }
 }
 
 @end
