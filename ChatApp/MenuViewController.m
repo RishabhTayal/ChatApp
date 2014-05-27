@@ -65,6 +65,8 @@
     navImage.contentMode = UIViewContentModeScaleAspectFill;
     navImage.clipsToBounds = YES;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:navImage];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationBadge:) name:@"badgeModified" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,6 +75,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)updateNotificationBadge:(NSNotification*) notification
+{
+    [self.tableView reloadData];
+}
 
 #pragma mark - Table view data source
 
@@ -115,6 +121,30 @@
             cell.textLabel.text = @"vCinity Chat";
             cell.imageView.image = [UIImage imageNamed:@"chat-off"];
             cell.imageView.highlightedImage = [UIImage imageNamed:@"chat-on"];
+            
+            int badge = 0;
+            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+            if ([[defaults objectForKey:kUDBadgeNumberNear] intValue]  > 0) {
+                badge = [[defaults objectForKey:kUDBadgeNumberNear] intValue];
+            }
+            
+            if (badge > 0)
+            {
+                UILabel* badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(180, 10, 30, 30)];
+                badgeLabel.textColor = [UIColor redColor];
+                
+                badgeLabel.text = [NSString stringWithFormat:@"%d", badge];
+                badgeLabel.backgroundColor = [UIColor whiteColor];
+                badgeLabel.textAlignment = NSTextAlignmentCenter;
+                
+                badgeLabel.layer.cornerRadius = badgeLabel.frame.size.height/2;
+                badgeLabel.layer.masksToBounds = YES;
+                
+                cell.accessoryView = badgeLabel;
+            } else {
+                cell.accessoryView = nil;
+            }
+            
         }
             break;
         case 1:
@@ -122,6 +152,29 @@
             cell.textLabel.text = @"Friends";
             cell.imageView.image = [UIImage imageNamed:@"sillouhette-off"];
             cell.imageView.highlightedImage = [UIImage imageNamed:@"sillouhette-on"];
+            
+            int badge = 0;
+            NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+            if ([[defaults objectForKey:kUDBadgeNumberFriends] intValue]  > 0) {
+                badge = [[defaults objectForKey:kUDBadgeNumberFriends] intValue];
+            }
+            
+            if (badge > 0)
+            {
+                UILabel* badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(180, 10, 30, 30)];
+                badgeLabel.textColor = [UIColor redColor];
+                
+                badgeLabel.text = [NSString stringWithFormat:@"%d", badge];
+                badgeLabel.backgroundColor = [UIColor whiteColor];
+                badgeLabel.textAlignment = NSTextAlignmentCenter;
+                
+                badgeLabel.layer.cornerRadius = badgeLabel.frame.size.height/2;
+                badgeLabel.layer.masksToBounds = YES;
+                
+                cell.accessoryView = badgeLabel;
+            } else {
+                cell.accessoryView = nil;
+            }
         }
             break;
         case 2:
@@ -156,7 +209,7 @@
                 AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
                 appDelegate.sessionController = [[SessionController alloc] initWithDelegate:_near];
             }
-            [[MenuButton sharedInstance] resetBadgeNumber];
+            [[MenuButton sharedInstance] setBadgeNumber:0 isNearBadge:YES];
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_near], nil];
             self.menuContainerViewController.centerViewController = array[0];
             [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
@@ -166,7 +219,7 @@
         {
             if (!_friends)
                 _friends = [sb instantiateViewControllerWithIdentifier:@"FriendsListViewController"];
-            [[MenuButton sharedInstance] resetBadgeNumber];
+            [[MenuButton sharedInstance] setBadgeNumber:0 isNearBadge:NO];
             
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_friends], nil];
             self.menuContainerViewController.centerViewController = array[0];

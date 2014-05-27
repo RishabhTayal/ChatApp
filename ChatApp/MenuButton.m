@@ -23,10 +23,10 @@
         UIButton* barButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [barButton setBackgroundImage:[UIImage imageNamed:@"menu-button"] forState:UIControlStateNormal];
         [barButton setFrame:CGRectMake(0, 0, 20, 20)];
-//        SEL selector  = sel_registerName("leftSideMenuButtonPressed:");
+        //        SEL selector  = sel_registerName("leftSideMenuButtonPressed:");
         _sharedObject = [[self alloc] initWithCustomUIButton:barButton];
         [barButton addTarget:_sharedObject action:@selector(leftSideMenuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         [_sharedObject setUI];
     });
     return _sharedObject;
@@ -46,27 +46,45 @@
     [side.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
--(void)setBadgeNumber:(int)badge
+-(void)setBadgeNumber:(int)badge isNearBadge:(BOOL)nearBadge
 {
     BBBadgeBarButtonItem* barButton = self;
     barButton.badgeValue = [NSString stringWithFormat:@"%d", badge];
-    [[NSUserDefaults standardUserDefaults] setObject:barButton.badgeValue forKey:kUDBadgeNumber];
+    if (nearBadge) {
+        [[NSUserDefaults standardUserDefaults] setObject:barButton.badgeValue forKey:kUDBadgeNumberNear];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:barButton.badgeValue forKey:kUDBadgeNumberFriends];
+    }
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self postNotification];
 }
 
 -(void)resetBadgeNumber
 {
     BBBadgeBarButtonItem* barButton = self;
-    barButton.badgeValue = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:kUDBadgeNumber]];
+    barButton.badgeValue = [NSString stringWithFormat:@"%d", [[[NSUserDefaults standardUserDefaults] objectForKey:kUDBadgeNumberNear] intValue] + [[[NSUserDefaults standardUserDefaults] objectForKey:kUDBadgeNumberFriends] intValue]];
 }
 
--(void)increaseBadgeNumber
+-(void)increaseBadgeNumberIsNear:(BOOL)isNearBadge
 {
     BBBadgeBarButtonItem* barButton = self;
-    barButton.badgeValue = [NSString stringWithFormat:@"%d", [[[NSUserDefaults standardUserDefaults] objectForKey:kUDBadgeNumber] intValue] + 1];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    barButton.badgeValue = [NSString stringWithFormat:@"%d", [[defaults objectForKey:kUDBadgeNumberNear] intValue]  + [[defaults objectForKey:kUDBadgeNumberFriends] intValue]+ 1];
     
-    [[NSUserDefaults standardUserDefaults] setObject:barButton.badgeValue forKey:kUDBadgeNumber];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (isNearBadge) {
+        [defaults setObject:[NSNumber numberWithInteger:[[defaults objectForKey:kUDBadgeNumberNear] intValue] + 1] forKey:kUDBadgeNumberNear];
+    } else {
+        [defaults setObject:[NSNumber numberWithInteger:[[defaults objectForKey:kUDBadgeNumberFriends] intValue] + 1] forKey:kUDBadgeNumberFriends];
+    }
+    
+    [defaults synchronize];
+    [self postNotification];
+}
+
+-(void)postNotification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"badgeModified" object:nil];
 }
 
 @end

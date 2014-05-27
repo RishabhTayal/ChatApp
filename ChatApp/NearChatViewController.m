@@ -98,7 +98,7 @@
     
     if ([self shouldShowInAppNotification]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[MenuButton sharedInstance] increaseBadgeNumber];
+            [[MenuButton sharedInstance] increaseBadgeNumberIsNear:YES];
             [self showInappNotificationWithText:peerName detail:object];
         });
     }
@@ -330,7 +330,7 @@
 -(void)showInappNotificationWithText:(NSString*)text detail:(NSString*)detail
 {
     [[InAppNotificationView sharedInstance] notifyWithText:text detail:detail image:[UIImage imageNamed:@"avatar-placeholder"] duration:3 andTouchBlock:^(InAppNotificationView *view) {
-        [[MenuButton sharedInstance] setBadgeNumber:0];
+        [[MenuButton sharedInstance] setBadgeNumber:0 isNearBadge:YES];
         AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
         MFSideMenuContainerViewController* currentVC = ((MFSideMenuContainerViewController*)appDelegate.window.rootViewController);
         UINavigationController* navC = (UINavigationController*)currentVC.leftMenuViewController;

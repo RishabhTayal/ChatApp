@@ -19,6 +19,7 @@
 #import "InAppNotificationTapListener.h"
 #import "UIImage+Utility.h"
 #import "InAppNotificationView.h"
+#import "MenuButton.h"
 
 @implementation AppDelegate
 
@@ -93,6 +94,7 @@
             
             if (userInfo[kNotificationSender]) {
                 [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
+                    [[MenuButton sharedInstance] increaseBadgeNumberIsNear:NO];
                     [[InAppNotificationView sharedInstance] notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:image duration:3 andTouchBlock:^(InAppNotificationView *view) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
                     }];

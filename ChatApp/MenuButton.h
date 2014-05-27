@@ -13,8 +13,8 @@
 
 +(id)sharedInstance;
 
--(void)setBadgeNumber:(int)badge;
+-(void)setBadgeNumber:(int)badge isNearBadge:(BOOL)nearBadge;
 -(void)resetBadgeNumber;
--(void)increaseBadgeNumber;
+-(void)increaseBadgeNumberIsNear:(BOOL)isNearBadge;
 
 @end
