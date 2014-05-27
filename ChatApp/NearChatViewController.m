@@ -17,6 +17,7 @@
 #import "AppDelegate.h"
 #import "InAppNotificationView.h"
 #import "MenuViewController.h"
+#import <BBBadgeBarButtonItem/BBBadgeBarButtonItem.h>
 
 @interface NearChatViewController ()
 
@@ -36,7 +37,8 @@
     
     self.title = @"vCinity Chat";
     
-    [MenuButton setupLeftMenuBarButtonOnViewController:self];
+//    [MenuButton setupLeftMenuBarButtonOnViewController:self];
+    self.navigationItem.leftBarButtonItem = [MenuButton sharedInstance];
     
     _chatMessagesArray = [NSMutableArray new];
     
@@ -96,6 +98,7 @@
     
     if ([self shouldShowInAppNotification]) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [[MenuButton sharedInstance] increaseBadgeNumber];
             [self showInappNotificationWithText:peerName detail:object];
         });
     }
@@ -327,6 +330,7 @@
 -(void)showInappNotificationWithText:(NSString*)text detail:(NSString*)detail
 {
     [[InAppNotificationView sharedInstance] notifyWithText:text detail:detail image:[UIImage imageNamed:@"avatar-placeholder"] duration:3 andTouchBlock:^(InAppNotificationView *view) {
+        [[MenuButton sharedInstance] setBadgeNumber:0];
         AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
         MFSideMenuContainerViewController* currentVC = ((MFSideMenuContainerViewController*)appDelegate.window.rootViewController);
         UINavigationController* navC = (UINavigationController*)currentVC.leftMenuViewController;

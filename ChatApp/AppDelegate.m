@@ -68,6 +68,8 @@
     return YES;
 }
 
+#pragma mark - Notifications
+
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
@@ -99,6 +101,8 @@
         }
     }
 }
+
+#pragma mark -
 
 -(void)setLoginView
 {
@@ -133,6 +137,8 @@
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
 }
+
+#pragma mark -
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {

@@ -33,7 +33,7 @@
     
     self.navigationController.navigationBar.translucent = NO;
     
-    [MenuButton setupLeftMenuBarButtonOnViewController:self];
+    self.navigationItem.leftBarButtonItem = [MenuButton sharedInstance];
     
     _nameLabel.text = [PFUser currentUser].username;
     

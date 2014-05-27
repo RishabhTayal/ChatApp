@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <BBBadgeBarButtonItem.h>
 
-@interface MenuButton : NSObject
+@interface MenuButton : BBBadgeBarButtonItem
 
-+(void)setupLeftMenuBarButtonOnViewController:(UIViewController*)vc;
++(id)sharedInstance;
+
+-(void)setBadgeNumber:(int)badge;
+-(void)resetBadgeNumber;
+-(void)increaseBadgeNumber;
 
 @end

@@ -15,6 +15,8 @@
 #import <Parse/Parse.h>
 #import "ActivityView.h"
 #import "AppDelegate.h"
+#import <BBBadgeBarButtonItem.h>
+#import "MenuButton.h"
 
 @interface MenuViewController ()
 
@@ -154,6 +156,7 @@
                 AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
                 appDelegate.sessionController = [[SessionController alloc] initWithDelegate:_near];
             }
+            [[MenuButton sharedInstance] resetBadgeNumber];
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_near], nil];
             self.menuContainerViewController.centerViewController = array[0];
             [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
@@ -163,6 +166,8 @@
         {
             if (!_friends)
                 _friends = [sb instantiateViewControllerWithIdentifier:@"FriendsListViewController"];
+            [[MenuButton sharedInstance] resetBadgeNumber];
+            
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_friends], nil];
             self.menuContainerViewController.centerViewController = array[0];
             [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
@@ -172,6 +177,7 @@
         {
             if (!_settings)
                 _settings = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+            [[MenuButton sharedInstance] resetBadgeNumber];
             array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_settings], nil];
             self.menuContainerViewController.centerViewController = array[0];
             [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];

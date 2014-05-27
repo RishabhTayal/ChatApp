@@ -41,7 +41,7 @@
     
     self.title = @"Friends";
 
-    [MenuButton setupLeftMenuBarButtonOnViewController:self];
+    self.navigationItem.leftBarButtonItem = [MenuButton sharedInstance];
     
     _friendsUsingApp = [NSMutableArray new];
     

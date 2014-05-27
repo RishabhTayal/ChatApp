@@ -19,6 +19,7 @@
 //Setting UserDefaults
 #define kUDInAppVibrate @"inAppVibrate"
 #define kUDInAppSound @"inAppSound"
+#define kUDBadgeNumber @"badgeNumber"
 
 //PFUser currentUser Keys
 #define kPFUser_Username @"username"
