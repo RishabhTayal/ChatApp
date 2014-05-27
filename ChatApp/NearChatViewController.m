@@ -79,7 +79,12 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if (_sessionController.connectedPeers.count > 0) {
             [NotificationView hide];
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d users", [_sessionController connectedPeers].count] hideAfterDelay:3];
+            if (_sessionController.connectedPeers.count == 1) {
+                            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipient", [_sessionController connectedPeers].count] hideAfterDelay:0];
+            } else {
+                            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipients", [_sessionController connectedPeers].count] hideAfterDelay:0];
+            }
+
         } else {
             [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
         }
