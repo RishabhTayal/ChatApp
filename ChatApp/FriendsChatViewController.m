@@ -177,6 +177,11 @@
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.item];
+    //Show Date if it's the first message
+    if (indexPath.item == 0) {
+        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+    }
+    
     if (indexPath.item - 1 > 0) {
         JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
         NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
@@ -191,6 +196,7 @@
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.item];
+    
     if (indexPath.item - 1 > 0) {
         JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
         if ([previousMessage.sender isEqualToString:message.sender]) {
@@ -236,12 +242,45 @@
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    if ([self shouldShowTitleAtIndex:indexPath isSenderName:NO]) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    return 0;
 }
 
 -(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    if ([self shouldShowTitleAtIndex:indexPath isSenderName:YES]) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    return 0;
+}
+
+#pragma mark - Method checks if label should show
+
+-(BOOL)shouldShowTitleAtIndex:(NSIndexPath*)index isSenderName:(BOOL)isSenderName
+{
+    if (index.item == 0) {
+        return true;
+    }
+    
+    JSQMessage* message = _chatArray[index.item];
+    if (index.item - 1 > 0) {
+        JSQMessage* previousMessage = _chatArray[index.item - 1];
+        
+        if (isSenderName) {
+            if ([message.sender isEqualToString:previousMessage.sender]) {
+                return NO;
+            }
+        } else {
+            NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
+            int mintues = floor(interval/60);
+            if (mintues == 0) {
+                return NO;
+            }
+        }
+    }
+    return YES;
 }
 
 @end

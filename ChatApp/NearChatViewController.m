@@ -55,7 +55,7 @@
     
     [GAI trackWithScreenName:kScreenNameNearChat];
     
-     [self.navigationController.navigationBar hideBottomHairline];
+    [self.navigationController.navigationBar hideBottomHairline];
     if (_sessionController.connectedPeers.count == 0 ) {
         [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
     }
@@ -234,13 +234,37 @@
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
+    JSQMessage* message = _chatMessagesArray[indexPath.item];
+    //Show Date if it's the first message
+    if (indexPath.item == 0) {
+        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+    }
+    
+    if (indexPath.item - 1 > 0) {
+        JSQMessage* previousMessage = _chatMessagesArray[indexPath.item - 1];
+        NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
+        int mintues = floor(interval/60);
+        if (mintues >= 1) {
+            return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+        }
+    }
     return nil;
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* messgae = [_chatMessagesArray objectAtIndex:indexPath.item];
-    return [[NSAttributedString alloc] initWithString:messgae.sender];
+    if (indexPath.item == 0) {
+        return [[NSAttributedString alloc] initWithString:messgae.sender];
+    }
+    
+    if (indexPath.item - 1 > 0) {
+        JSQMessage *previousMessage = _chatMessagesArray[indexPath.item - 1];
+        if ([previousMessage.sender isEqualToString:messgae.sender]) {
+            return nil;
+        }
+    }
+    return [[NSAttributedString alloc] initWithString:messgae.sender];;
 }
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -272,7 +296,18 @@
 
 -(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    if ([self shouldShowTitleAtIndex:indexPath isSenderName:YES]) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    return NO;
+}
+
+-(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self shouldShowTitleAtIndex:indexPath isSenderName:NO]) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    return 0;
 }
 
 #pragma mark -
@@ -299,6 +334,33 @@
         [menuVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
         [menuVC tableView:menuVC.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     }];
+}
+
+#pragma mark - Method checks if label should show
+
+-(BOOL)shouldShowTitleAtIndex:(NSIndexPath*)index isSenderName:(BOOL)isSenderName
+{
+    if (index.item == 0) {
+        return true;
+    }
+    
+    JSQMessage* message = _chatMessagesArray[index.item];
+    if (index.item - 1 > 0) {
+        JSQMessage* previousMessage = _chatMessagesArray[index.item - 1];
+        
+        if (isSenderName) {
+            if ([message.sender isEqualToString:previousMessage.sender]) {
+                return NO;
+            }
+        } else {
+            NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
+            int mintues = floor(interval/60);
+            if (mintues == 0) {
+                return NO;
+            }
+        }
+    }
+    return YES;
 }
 
 @end
