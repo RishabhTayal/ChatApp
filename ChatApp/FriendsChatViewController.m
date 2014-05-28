@@ -266,10 +266,8 @@
     }
     
     JSQMessage* message = _chatArray[index.item];
-    if (index.item - 1 > 0) {
+    if (index.item - 1 >= 0) {
         JSQMessage* previousMessage = _chatArray[index.item - 1];
-        
-        
         NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
         int mintues = floor(interval/60);
         if (mintues == 0) {

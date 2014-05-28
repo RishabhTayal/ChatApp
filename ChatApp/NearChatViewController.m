@@ -264,7 +264,7 @@
         return [[NSAttributedString alloc] initWithString:messgae.sender];
     }
     
-    if (indexPath.item - 1 > 0) {
+    if (indexPath.item - 1 >= 0) {
         JSQMessage *previousMessage = _chatMessagesArray[indexPath.item - 1];
         if ([previousMessage.sender isEqualToString:messgae.sender]) {
             return nil;
@@ -351,7 +351,7 @@
     }
     
     JSQMessage* message = _chatMessagesArray[index.item];
-    if (index.item - 1 > 0) {
+    if (index.item - 1 >= 0) {
         JSQMessage* previousMessage = _chatMessagesArray[index.item - 1];
         
         if (isSenderName) {
