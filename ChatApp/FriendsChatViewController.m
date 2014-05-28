@@ -84,7 +84,7 @@
     [innerQuery2 whereKey:kPFChatReciever equalTo:[PFUser currentUser][kPFUser_FBID]];
     
     PFQuery* query = [PFQuery orQueryWithSubqueries:@[innerQuery, innerQuery2]];
-    query.limit = 10;
+    query.limit = 20;
     
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
