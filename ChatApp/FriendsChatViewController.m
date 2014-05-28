@@ -195,6 +195,7 @@
 
 //-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 //{
+//    return [[NSAttributedString alloc] initWithString:@" "];
 //    JSQMessage* message = _chatArray[indexPath.item];
 //    
 //    if (indexPath.item - 1 > 0) {
@@ -253,7 +254,7 @@
 //    if ([self shouldShowTitleAtIndex:indexPath isSenderName:YES]) {
 //        return kJSQMessagesCollectionViewCellLabelHeightDefault;
 //    }
-//    return 0;
+//    return 1;
 //}
 
 #pragma mark - Method checks if label should show
