@@ -193,25 +193,25 @@
     return nil;
 }
 
--(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
-{
-    JSQMessage* message = _chatArray[indexPath.item];
-    
-    if (indexPath.item - 1 > 0) {
-        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
-        if ([previousMessage.sender isEqualToString:message.sender]) {
-            return nil;
-        }
-    }
-    
-    if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
-        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
-        return attString;
-    } else {
-        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:_friendDict[@"name"]];
-        return attString;
-    }
-}
+//-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    JSQMessage* message = _chatArray[indexPath.item];
+//    
+//    if (indexPath.item - 1 > 0) {
+//        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
+//        if ([previousMessage.sender isEqualToString:message.sender]) {
+//            return nil;
+//        }
+//    }
+//    
+//    if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
+//        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
+//        return attString;
+//    } else {
+//        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:_friendDict[@"name"]];
+//        return attString;
+//    }
+//}
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -242,23 +242,23 @@
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self shouldShowTitleAtIndex:indexPath isSenderName:NO]) {
+    if ([self shouldShowTimeStampAtIndex:indexPath]) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
     return 0;
 }
 
--(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self shouldShowTitleAtIndex:indexPath isSenderName:YES]) {
-        return kJSQMessagesCollectionViewCellLabelHeightDefault;
-    }
-    return 0;
-}
+//-(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([self shouldShowTitleAtIndex:indexPath isSenderName:YES]) {
+//        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+//    }
+//    return 0;
+//}
 
 #pragma mark - Method checks if label should show
 
--(BOOL)shouldShowTitleAtIndex:(NSIndexPath*)index isSenderName:(BOOL)isSenderName
+-(BOOL)shouldShowTimeStampAtIndex:(NSIndexPath*)index
 {
     if (index.item == 0) {
         return true;
@@ -268,16 +268,11 @@
     if (index.item - 1 > 0) {
         JSQMessage* previousMessage = _chatArray[index.item - 1];
         
-        if (isSenderName) {
-            if ([message.sender isEqualToString:previousMessage.sender]) {
-                return NO;
-            }
-        } else {
-            NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
-            int mintues = floor(interval/60);
-            if (mintues == 0) {
-                return NO;
-            }
+        
+        NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
+        int mintues = floor(interval/60);
+        if (mintues == 0) {
+            return NO;
         }
     }
     return YES;
