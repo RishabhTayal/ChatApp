@@ -47,6 +47,7 @@
     self.sender = _sessionController.displayName;
     
     self.inputToolbar.contentView.leftBarButtonItem = nil;
+    self.collectionView.showsVerticalScrollIndicator = NO;
 }
 
 -(void)viewDidAppear:(BOOL)animated

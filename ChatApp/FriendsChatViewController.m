@@ -29,6 +29,7 @@
     _chatArray = [NSMutableArray new];
     
     self.inputToolbar.contentView.leftBarButtonItem = nil;
+    self.collectionView.showsVerticalScrollIndicator = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationRecieved:) name:@"notification" object:nil];
     // Do any additional setup after loading the view.
@@ -95,7 +96,6 @@
         }
         _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
         [self finishReceivingMessage];
-        //        [self scrollToBottomAnimated:YES];
     }];
 }
 
