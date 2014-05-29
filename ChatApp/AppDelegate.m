@@ -31,7 +31,7 @@
     [iRate sharedInstance].daysUntilPrompt = 0;
     [iRate sharedInstance].remindPeriod = 0;
 #warning set previewMode to DEBUGMODE
-//    [iRate sharedInstance].previewMode = DEBUGMODE;
+    //    [iRate sharedInstance].previewMode = DEBUGMODE;
     [iRate sharedInstance].previewMode = NO;
 }
 
@@ -45,7 +45,13 @@
     
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-40631521-4"];
     
-    [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
+    //Use Development DB on Parse for Development mode.
+    if (DEBUGMODE) {
+        [Parse setApplicationId:@"WDzqlRDNdilFgPoLusTBKgmeY0FyFaHr6tCFvmgf" clientKey:@"MvV94eU6Z9r3GlrAEfNIhQsM00jDVWh076jKiUJ7"];
+    } else {
+        [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
+    }
+    
     [PFFacebookUtils initializeFacebook];
     
     if (!DEBUGMODE) {
