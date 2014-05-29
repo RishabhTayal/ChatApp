@@ -139,6 +139,12 @@ static NSString * const kMCSessionServiceType = @"vcinityp2p";
 
 #pragma mark - MCSessionDelegate protocol conformance
 
+-(void)session:(MCSession *)session didReceiveCertificate:(NSArray *)certificate fromPeer:(MCPeerID *)peerID certificateHandler:(void (^)(BOOL))certificateHandler
+{
+    NSLog(@"didReceiveCertificate from peer: %@", peerID.displayName);
+    certificateHandler(YES);
+}
+
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
     NSLog(@"Peer [%@] changed state to %@", peerID.displayName, [self stringForPeerConnectionState:state]);
@@ -254,7 +260,6 @@ static NSString * const kMCSessionServiceType = @"vcinityp2p";
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didReceiveInvitationFromPeer:(MCPeerID *)peerID withContext:(NSData *)context invitationHandler:(void(^)(BOOL accept, MCSession *session))invitationHandler
 {
     NSLog(@"didReceiveInvitationFromPeer %@", peerID.displayName);
-    
     invitationHandler(YES, self.session);
     
 //    [self updateDelegateWithSessionChangeState];
