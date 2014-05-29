@@ -79,15 +79,14 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (_sessionController.connectedPeers.count > 0) {
-            [NotificationView hide];
             if (_sessionController.connectedPeers.count == 1) {
-                            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipient", [_sessionController connectedPeers].count] hideAfterDelay:0];
+                [NotificationView setNotificationText:[NSString stringWithFormat:@"connected to %d recipient", [_sessionController connectedPeers].count]];
             } else {
-                            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipients", [_sessionController connectedPeers].count] hideAfterDelay:0];
+                [NotificationView setNotificationText:[NSString stringWithFormat:@"connected to %d recipients", [_sessionController connectedPeers].count]];
             }
 
         } else {
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
+            [NotificationView setNotificationText:@"No users nearby"];
         }
     });
 }

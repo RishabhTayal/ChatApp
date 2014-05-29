@@ -33,12 +33,26 @@
         CGRect frame = view.frame;
         frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame);
         view.frame = frame;
-
+        
     } completion:^(BOOL finished) {
         if (delay != 0) {
             [[NotificationView class] performSelector:@selector(hide) withObject:nil afterDelay:delay];
         }
     }];
+}
+
++(void)setNotificationText:(NSString*)text
+{
+    NotificationView* view = [NotificationView sharedInstance];
+    UILabel* label = [[view subviews] objectAtIndex:0];
+    
+    CATransition* animation = [CATransition animation];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.type = kCATransitionFade;
+    animation.duration = 0.75;
+    
+    [label.layer addAnimation:animation forKey:kCATransitionFade];
+    label.text = text;
 }
 
 +(void)hide
