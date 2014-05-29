@@ -141,7 +141,7 @@ static NSString * const kMCSessionServiceType = @"vcinityp2p";
 
 -(void)session:(MCSession *)session didReceiveCertificate:(NSArray *)certificate fromPeer:(MCPeerID *)peerID certificateHandler:(void (^)(BOOL))certificateHandler
 {
-    NSLog(@"didReceiveCertificate from peer: %@", peerID.displayName);
+    NSLog(@"didReceiveCertificate %@ from peer: %@", certificateHandler, peerID.displayName);
     certificateHandler(YES);
 }
 
