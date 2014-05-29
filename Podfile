@@ -14,3 +14,7 @@ pod 'iRate'
 pod 'UINavigationBar+Addition'
 pod 'IDMPhotoBrowser'
 pod 'GoogleAnalytics-iOS-SDK'
+
+target :Tests do
+pod 'GHUnitIOS', '~> 0.5.8'
+end

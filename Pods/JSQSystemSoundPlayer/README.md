@@ -1,5 +1,5 @@
 # JSQSystemSoundPlayer 
-[![Build Status](https://secure.travis-ci.org/jessesquires/JSQSystemSoundPlayer.svg)](http://travis-ci.org/jessesquires/JSQSystemSoundPlayer) [![Version Status](https://cocoapod-badges.herokuapp.com/v/JSQSystemSoundPlayer/badge.png)][docsLink] [![license MIT](http://b.repl.ca/v1/license-MIT-blue.png)][mitLink]
+[![Build Status](https://secure.travis-ci.org/jessesquires/JSQSystemSoundPlayer.svg)](http://travis-ci.org/jessesquires/JSQSystemSoundPlayer) [![Version Status](http://img.shields.io/cocoapods/v/JSQSystemSoundPlayer.png)][docsLink] [![license MIT](http://img.shields.io/badge/license-MIT-orange.png)][mitLink]
 
 A fancy Obj-C wrapper for iOS [System Sound Services](https://developer.apple.com/library/ios/documentation/AudioToolbox/Reference/SystemSoundServicesReference/Reference/reference.html).
 
@@ -89,7 +89,7 @@ Support the development of this **free**, open-source library!
 > *Donations made via [Square Cash](https://square.com/cash)*
 > <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$1&body=Thanks for developing JSQSystemSoundPlayer!">Send $1</a> <em>Just saying thanks!</em></h4>
 > <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$5&body=Thanks for developing JSQSystemSoundPlayer!">Send $5</a> <em>This control is great!</em></h4>
-><h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQSystemSoundPlayer!">Send $10</a> <em>This totally saved me time!</em></h4>
+> <h4><a href="mailto:jesse.squires.developer@gmail.com?cc=cash@square.com&subject=$10&body=Thanks for developing JSQSystemSoundPlayer!">Send $10</a> <em>This totally saved me time!</em></h4>
 
 ## Credits
 
