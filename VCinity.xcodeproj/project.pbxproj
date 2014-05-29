@@ -46,6 +46,7 @@
 		0697058F1937AAD5006BB9C5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0697058D1937AAD5006BB9C5 /* InfoPlist.strings */; };
 		069705911937AAD5006BB9C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 069705901937AAD5006BB9C5 /* main.m */; };
 		069705B11937ACE7006BB9C5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 069705B01937ACE7006BB9C5 /* libPods.a */; };
+		069705B41937AE9B006BB9C5 /* MyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 069705B31937AE9B006BB9C5 /* MyTest.m */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -112,6 +113,7 @@
 		069705901937AAD5006BB9C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		069705921937AAD5006BB9C5 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		069705B01937ACE7006BB9C5 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		069705B31937AE9B006BB9C5 /* MyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTest.m; sourceTree = "<group>"; };
 		0697199D19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		0697199E19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				0697058B1937AAD5006BB9C5 /* Supporting Files */,
+				069705B31937AE9B006BB9C5 /* MyTest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				069705911937AAD5006BB9C5 /* main.m in Sources */,
+				069705B41937AE9B006BB9C5 /* MyTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
