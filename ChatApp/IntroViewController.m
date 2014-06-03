@@ -12,7 +12,7 @@
 #import "MenuViewController.h"
 #import <MFSideMenu.h>
 #import "NearChatViewController.h"
-#import "ActivityView.h"s
+#import "ActivityView.h"
 
 @interface IntroViewController ()
 @end
