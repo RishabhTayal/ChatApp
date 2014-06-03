@@ -240,7 +240,7 @@ static NSString * const kMCSessionServiceType = @"vcinityp2p";
         NSLog(@"Not inviting %@", remotePeerName);
     }
     
-//    [self updateDelegateWithSessionChangeState];
+    [self updateDelegateWithSessionChangeState];
 }
 
 - (void)browser:(MCNearbyServiceBrowser *)browser lostPeer:(MCPeerID *)peerID
@@ -262,7 +262,7 @@ static NSString * const kMCSessionServiceType = @"vcinityp2p";
     NSLog(@"didReceiveInvitationFromPeer %@", peerID.displayName);
     invitationHandler(YES, self.session);
     
-//    [self updateDelegateWithSessionChangeState];
+    [self updateDelegateWithSessionChangeState];
 }
 
 - (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didNotStartAdvertisingPeer:(NSError *)error
