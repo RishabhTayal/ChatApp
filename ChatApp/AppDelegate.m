@@ -30,9 +30,7 @@
     
     [iRate sharedInstance].daysUntilPrompt = 0;
     [iRate sharedInstance].remindPeriod = 0;
-#warning set previewMode to DEBUGMODE
-    //    [iRate sharedInstance].previewMode = DEBUGMODE;
-    [iRate sharedInstance].previewMode = NO;
+    [iRate sharedInstance].previewMode = DEBUGMODE;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
