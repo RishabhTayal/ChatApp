@@ -22,5 +22,6 @@ typedef enum
 @interface GAI (MyGAITracker)
 
 +(void)trackWithScreenName:(ScreenName)screenName;
++(void)trackEventWithCategory:(NSString*)category action:(NSString*)action label:(NSString*)label value:(NSNumber*)value;
 
 @end

@@ -165,20 +165,7 @@
     }
 }
 
--(void)inviteFriend:(id)sender
-{
-    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
-    NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
-    
-    NSLog(@"Invite at path %d", indexPath.row);
-    
-    NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
-    NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
-    NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [[PFUser currentUser] username], @"text": @"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391", @"subject": @"vCinity App for iPhone"};
-    [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
-        NSLog(@"%@", object);
-    }];
-}
+#pragma mark -
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -195,6 +182,24 @@
         chatVC.friendsImage = cell.profilePicture.image;
         [self.navigationController pushViewController:chatVC animated:YES];
     }
+}
+
+#pragma mark -
+
+-(void)inviteFriend:(id)sender
+{
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    
+    NSLog(@"Invite at path %d", indexPath.row);
+    
+    NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
+    NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
+    NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [[PFUser currentUser] username], @"text": @"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391", @"subject": @"vCinity App for iPhone"};
+    [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
+        NSLog(@"%@", object);
+        [GAI trackEventWithCategory:@"ui_button" action:@"invite" label:nil value:nil];
+    }];
 }
 
 @end
