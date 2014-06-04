@@ -129,6 +129,7 @@
         NSLog(@"save");
     }];
     
+    [GAI trackEventWithCategory:kGAICategoryButton action:kGAIActionMessageSent label:@"friends" value:nil];
     [self scrollToBottomAnimated:YES];
     [self finishSendingMessage];
 }

@@ -180,6 +180,7 @@
         [_chatMessagesArray addObject:sentMessage];
         
         [self scrollToBottomAnimated:YES];
+        [GAI trackEventWithCategory:kGAICategoryButton action:kGAIActionMessageSent label:@"near_chat" value:nil];
     }
     [self finishSendingMessage];
 }

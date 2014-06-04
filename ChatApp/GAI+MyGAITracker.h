@@ -8,6 +8,9 @@
 
 #import "GAI.h"
 
+#define kGAICategoryButton @"ui_button"
+#define kGAIActionMessageSent @"message_sent"
+
 typedef enum
 {
     kScreenNameNearChat,
