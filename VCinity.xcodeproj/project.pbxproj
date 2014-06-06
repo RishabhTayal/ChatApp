@@ -125,6 +125,11 @@
 		069895E019421C3F00307197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/menu_background.png; sourceTree = "<group>"; };
 		069895E219421C4500307197 /* ar */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ar; path = ar.lproj/menu_background.png; sourceTree = "<group>"; };
 		069895E319421EC100307197 /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = es.lproj/menu_background.png; sourceTree = "<group>"; };
+		069895E41942206300307197 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		069895E51942206300307197 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		069895E61942206300307197 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = fr.lproj/menu_background.png; sourceTree = "<group>"; };
+		069895E71942206400307197 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		069895E81942206400307197 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
 		06FD23841917F1B800AE7226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		06FD23851917F1B800AE7226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -447,6 +452,7 @@
 				Base,
 				es,
 				ar,
+				fr,
 			);
 			mainGroup = 065A15C81912BCFB00B85D3D;
 			productRefGroup = 065A15D21912BCFB00B85D3D /* Products */;
@@ -593,6 +599,7 @@
 				062365AB1942120900F46FD9 /* Base */,
 				062365AD1942121300F46FD9 /* es */,
 				062365AE1942121400F46FD9 /* ar */,
+				069895E51942206300307197 /* fr */,
 			);
 			name = Localizable.strings;
 			path = ..;
@@ -604,6 +611,7 @@
 				065A15DE1912BCFB00B85D3D /* en */,
 				0697199E19266F6900171B7A /* es */,
 				062365A319420F3700F46FD9 /* ar */,
+				069895E71942206400307197 /* fr */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -614,6 +622,7 @@
 				065A15E71912BCFB00B85D3D /* Base */,
 				062365A219420F3700F46FD9 /* ar */,
 				062365A71942112000F46FD9 /* es */,
+				069895E41942206300307197 /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -623,6 +632,7 @@
 			children = (
 				0697058E1937AAD5006BB9C5 /* en */,
 				062365A419420F3800F46FD9 /* ar */,
+				069895E81942206400307197 /* fr */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -633,6 +643,7 @@
 				069895E019421C3F00307197 /* Base */,
 				069895E219421C4500307197 /* ar */,
 				069895E319421EC100307197 /* es */,
+				069895E61942206300307197 /* fr */,
 			);
 			name = menu_background.png;
 			sourceTree = "<group>";
