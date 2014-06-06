@@ -40,13 +40,6 @@
 		068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */; };
 		068F7333192D275600442F4D /* InAppNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F7332192D275600442F4D /* InAppNotificationView.m */; };
 		068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068F7334192D2F2300442F4D /* InAppNotificationView.xib */; };
-		069705871937AAD5006BB9C5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D41912BCFB00B85D3D /* Foundation.framework */; };
-		069705881937AAD5006BB9C5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D61912BCFB00B85D3D /* CoreGraphics.framework */; };
-		069705891937AAD5006BB9C5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D81912BCFB00B85D3D /* UIKit.framework */; };
-		0697058F1937AAD5006BB9C5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0697058D1937AAD5006BB9C5 /* InfoPlist.strings */; };
-		069705911937AAD5006BB9C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 069705901937AAD5006BB9C5 /* main.m */; };
-		069705B11937ACE7006BB9C5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 069705B01937ACE7006BB9C5 /* libPods.a */; };
-		069705B41937AE9B006BB9C5 /* MyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 069705B31937AE9B006BB9C5 /* MyTest.m */; };
 		069895DF19421C3F00307197 /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 069895E119421C3F00307197 /* menu_background.png */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
@@ -83,7 +76,6 @@
 		061E7E501918818400A0DF90 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		062365A219420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		062365A319420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		062365A419420F3800F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		062365A71942112000F46FD9 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/Main.storyboard; sourceTree = "<group>"; };
 		062365AB1942120900F46FD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		062365AD1942121300F46FD9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -114,13 +106,7 @@
 		068F7331192D275600442F4D /* InAppNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationView.h; sourceTree = "<group>"; };
 		068F7332192D275600442F4D /* InAppNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppNotificationView.m; sourceTree = "<group>"; };
 		068F7334192D2F2300442F4D /* InAppNotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InAppNotificationView.xib; sourceTree = "<group>"; };
-		069705861937AAD5006BB9C5 /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0697058C1937AAD5006BB9C5 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
-		0697058E1937AAD5006BB9C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		069705901937AAD5006BB9C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		069705921937AAD5006BB9C5 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		069705B01937ACE7006BB9C5 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		069705B31937AE9B006BB9C5 /* MyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTest.m; sourceTree = "<group>"; };
 		0697199E19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		069895E019421C3F00307197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/menu_background.png; sourceTree = "<group>"; };
 		069895E219421C4500307197 /* ar */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ar; path = ar.lproj/menu_background.png; sourceTree = "<group>"; };
@@ -129,7 +115,6 @@
 		069895E51942206300307197 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		069895E61942206300307197 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = fr.lproj/menu_background.png; sourceTree = "<group>"; };
 		069895E71942206400307197 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		069895E81942206400307197 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
 		06FD23841917F1B800AE7226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		06FD23851917F1B800AE7226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -152,17 +137,6 @@
 				065A15D91912BCFB00B85D3D /* UIKit.framework in Frameworks */,
 				065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */,
 				D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		069705831937AAD5006BB9C5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				069705881937AAD5006BB9C5 /* CoreGraphics.framework in Frameworks */,
-				069705891937AAD5006BB9C5 /* UIKit.framework in Frameworks */,
-				069705871937AAD5006BB9C5 /* Foundation.framework in Frameworks */,
-				069705B11937ACE7006BB9C5 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				065A15DA1912BCFB00B85D3D /* ChatApp */,
-				0697058A1937AAD5006BB9C5 /* Tests */,
 				065A15D31912BCFB00B85D3D /* Frameworks */,
 				065A15D21912BCFB00B85D3D /* Products */,
 				184A048636424222948F2C41 /* Pods.xcconfig */,
@@ -269,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				065A15D11912BCFB00B85D3D /* VCinity.app */,
-				069705861937AAD5006BB9C5 /* Tests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -358,26 +330,6 @@
 			name = "InApp Notificaition";
 			sourceTree = "<group>";
 		};
-		0697058A1937AAD5006BB9C5 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				0697058B1937AAD5006BB9C5 /* Supporting Files */,
-				069705B31937AE9B006BB9C5 /* MyTest.m */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		0697058B1937AAD5006BB9C5 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0697058C1937AAD5006BB9C5 /* Tests-Info.plist */,
-				0697058D1937AAD5006BB9C5 /* InfoPlist.strings */,
-				069705901937AAD5006BB9C5 /* main.m */,
-				069705921937AAD5006BB9C5 /* Tests-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		06FD23811917D72100AE7226 /* Settings VC */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,25 +360,6 @@
 			name = VCinity;
 			productName = ChatApp;
 			productReference = 065A15D11912BCFB00B85D3D /* VCinity.app */;
-			productType = "com.apple.product-type.application";
-		};
-		069705851937AAD5006BB9C5 /* Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 069705AA1937AAD6006BB9C5 /* Build configuration list for PBXNativeTarget "Tests" */;
-			buildPhases = (
-				6B3736D377284B8BABDBDEF6 /* Check Pods Manifest.lock */,
-				069705821937AAD5006BB9C5 /* Sources */,
-				069705831937AAD5006BB9C5 /* Frameworks */,
-				069705841937AAD5006BB9C5 /* Resources */,
-				89136E4666134FEB81EAD58C /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Tests;
-			productName = Tests;
-			productReference = 069705861937AAD5006BB9C5 /* Tests.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -460,7 +393,6 @@
 			projectRoot = "";
 			targets = (
 				065A15D01912BCFB00B85D3D /* VCinity */,
-				069705851937AAD5006BB9C5 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -481,14 +413,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		069705841937AAD5006BB9C5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0697058F1937AAD5006BB9C5 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -505,36 +429,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		6B3736D377284B8BABDBDEF6 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		89136E4666134FEB81EAD58C /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A89842095498485C925C89CF /* Copy Pods Resources */ = {
@@ -581,15 +475,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		069705821937AAD5006BB9C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				069705911937AAD5006BB9C5 /* main.m in Sources */,
-				069705B41937AE9B006BB9C5 /* MyTest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -625,16 +510,6 @@
 				069895E41942206300307197 /* fr */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0697058D1937AAD5006BB9C5 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0697058E1937AAD5006BB9C5 /* en */,
-				062365A419420F3800F46FD9 /* ar */,
-				069895E81942206400307197 /* fr */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		069895E119421C3F00307197 /* menu_background.png */ = {
@@ -759,48 +634,6 @@
 			};
 			name = Release;
 		};
-		069705AB1937AAD6006BB9C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Tests/Tests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		069705AC1937AAD6006BB9C5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
-				INFOPLIST_FILE = "Tests/Tests-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -818,15 +651,6 @@
 			buildConfigurations = (
 				065A16041912BCFB00B85D3D /* Debug */,
 				065A16051912BCFB00B85D3D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		069705AA1937AAD6006BB9C5 /* Build configuration list for PBXNativeTarget "Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				069705AB1937AAD6006BB9C5 /* Debug */,
-				069705AC1937AAD6006BB9C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
