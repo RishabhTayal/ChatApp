@@ -40,8 +40,8 @@
     [super viewDidLoad];
     
     self.title = @"vCinity";
-    
-    UIImage* img = [UIImage imageNamed:@"chicago1.jpg"];
+
+    UIImage* img = [UIImage imageNamed:@"menu_background"];
     UIImage* blurImage = [img applyGaussianBlur];
     UIImageView* iv = [[UIImageView alloc] initWithImage:blurImage];
     iv.contentMode = UIViewContentModeScaleAspectFill;

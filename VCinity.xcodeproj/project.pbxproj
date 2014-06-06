@@ -23,7 +23,6 @@
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
 		061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E501918818400A0DF90 /* FriendTableViewCell.m */; };
-		061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E53191922BB00A0DF90 /* chicago1.jpg */; };
 		062365AA1942120900F46FD9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 062365AC1942120900F46FD9 /* Localizable.strings */; };
 		0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642158F19213ACE00FB1F6D /* Accounts.framework */; };
 		0642159219213AD300FB1F6D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642159119213AD300FB1F6D /* Social.framework */; };
@@ -48,6 +47,7 @@
 		069705911937AAD5006BB9C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 069705901937AAD5006BB9C5 /* main.m */; };
 		069705B11937ACE7006BB9C5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 069705B01937ACE7006BB9C5 /* libPods.a */; };
 		069705B41937AE9B006BB9C5 /* MyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 069705B31937AE9B006BB9C5 /* MyTest.m */; };
+		069895DF19421C3F00307197 /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 069895E119421C3F00307197 /* menu_background.png */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -81,7 +81,6 @@
 		061E7E4D191880C000A0DF90 /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsListViewController.m; sourceTree = "<group>"; };
 		061E7E4F1918818400A0DF90 /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		061E7E501918818400A0DF90 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
-		061E7E53191922BB00A0DF90 /* chicago1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chicago1.jpg; sourceTree = "<group>"; };
 		062365A219420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		062365A319420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		062365A419420F3800F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -123,6 +122,9 @@
 		069705B01937ACE7006BB9C5 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		069705B31937AE9B006BB9C5 /* MyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTest.m; sourceTree = "<group>"; };
 		0697199E19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		069895E019421C3F00307197 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/menu_background.png; sourceTree = "<group>"; };
+		069895E219421C4500307197 /* ar */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ar; path = ar.lproj/menu_background.png; sourceTree = "<group>"; };
+		069895E319421EC100307197 /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = es.lproj/menu_background.png; sourceTree = "<group>"; };
 		06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
 		06FD23841917F1B800AE7226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		06FD23851917F1B800AE7226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -298,7 +300,6 @@
 				065A15E61912BCFB00B85D3D /* Main.storyboard */,
 				061E7E4919183D1400A0DF90 /* MenuViewController.h */,
 				061E7E4A19183D1400A0DF90 /* MenuViewController.m */,
-				061E7E53191922BB00A0DF90 /* chicago1.jpg */,
 				065A15DB1912BCFB00B85D3D /* Supporting Files */,
 			);
 			path = ChatApp;
@@ -310,6 +311,7 @@
 				062365AC1942120900F46FD9 /* Localizable.strings */,
 				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				065A15DC1912BCFB00B85D3D /* VCinity-Info.plist */,
+				069895E119421C3F00307197 /* menu_background.png */,
 				065A15DD1912BCFB00B85D3D /* InfoPlist.strings */,
 				065A15E01912BCFB00B85D3D /* main.m */,
 				065A15E21912BCFB00B85D3D /* VCinity-Prefix.pch */,
@@ -464,12 +466,12 @@
 			files = (
 				060D4808192FE9790062982B /* AOTutorialViewController.xib in Resources */,
 				065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */,
+				069895DF19421C3F00307197 /* menu_background.png in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
 				062365AA1942120900F46FD9 /* Localizable.strings in Resources */,
 				0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */,
-				061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +625,16 @@
 				062365A419420F3800F46FD9 /* ar */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		069895E119421C3F00307197 /* menu_background.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				069895E019421C3F00307197 /* Base */,
+				069895E219421C4500307197 /* ar */,
+				069895E319421EC100307197 /* es */,
+			);
+			name = menu_background.png;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
