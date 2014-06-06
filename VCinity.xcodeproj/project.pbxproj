@@ -24,6 +24,7 @@
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
 		061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E501918818400A0DF90 /* FriendTableViewCell.m */; };
 		061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 061E7E53191922BB00A0DF90 /* chicago1.jpg */; };
+		062365AA1942120900F46FD9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 062365AC1942120900F46FD9 /* Localizable.strings */; };
 		0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642158F19213ACE00FB1F6D /* Accounts.framework */; };
 		0642159219213AD300FB1F6D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642159119213AD300FB1F6D /* Social.framework */; };
 		065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D41912BCFB00B85D3D /* Foundation.framework */; };
@@ -81,6 +82,13 @@
 		061E7E4F1918818400A0DF90 /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		061E7E501918818400A0DF90 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		061E7E53191922BB00A0DF90 /* chicago1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chicago1.jpg; sourceTree = "<group>"; };
+		062365A219420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		062365A319420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		062365A419420F3800F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		062365A71942112000F46FD9 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/Main.storyboard; sourceTree = "<group>"; };
+		062365AB1942120900F46FD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		062365AD1942121300F46FD9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		062365AE1942121400F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0642158F19213ACE00FB1F6D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		0642159119213AD300FB1F6D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		065A15D11912BCFB00B85D3D /* VCinity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VCinity.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,7 +122,6 @@
 		069705921937AAD5006BB9C5 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		069705B01937ACE7006BB9C5 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		069705B31937AE9B006BB9C5 /* MyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTest.m; sourceTree = "<group>"; };
-		0697199D19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		0697199E19266F6900171B7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
 		06FD23841917F1B800AE7226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
@@ -300,6 +307,7 @@
 		065A15DB1912BCFB00B85D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				062365AC1942120900F46FD9 /* Localizable.strings */,
 				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				065A15DC1912BCFB00B85D3D /* VCinity-Info.plist */,
 				065A15DD1912BCFB00B85D3D /* InfoPlist.strings */,
@@ -436,6 +444,7 @@
 				en,
 				Base,
 				es,
+				ar,
 			);
 			mainGroup = 065A15C81912BCFB00B85D3D;
 			productRefGroup = 065A15D21912BCFB00B85D3D /* Products */;
@@ -458,6 +467,7 @@
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
+				062365AA1942120900F46FD9 /* Localizable.strings in Resources */,
 				0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */,
 				061E7E54191922BB00A0DF90 /* chicago1.jpg in Resources */,
 			);
@@ -575,11 +585,23 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		062365AC1942120900F46FD9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				062365AB1942120900F46FD9 /* Base */,
+				062365AD1942121300F46FD9 /* es */,
+				062365AE1942121400F46FD9 /* ar */,
+			);
+			name = Localizable.strings;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		065A15DD1912BCFB00B85D3D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				065A15DE1912BCFB00B85D3D /* en */,
 				0697199E19266F6900171B7A /* es */,
+				062365A319420F3700F46FD9 /* ar */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -588,7 +610,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				065A15E71912BCFB00B85D3D /* Base */,
-				0697199D19266F6900171B7A /* es */,
+				062365A219420F3700F46FD9 /* ar */,
+				062365A71942112000F46FD9 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -597,6 +620,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0697058E1937AAD5006BB9C5 /* en */,
+				062365A419420F3800F46FD9 /* ar */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
