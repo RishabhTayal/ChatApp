@@ -167,6 +167,9 @@
 {
     if (section == [tableView numberOfSections] - 1) {
         UIView* view = [[[NSBundle mainBundle] loadNibNamed:@"SettingsShareView" owner:self options:nil] objectAtIndex:0];
+
+        [_facebookButton.layer setCornerRadius:4];
+        [_facebookButton.layer setMasksToBounds:YES];
         
         [_twitterButton.layer setCornerRadius:4];
         [_twitterButton.layer setMasksToBounds:YES];
