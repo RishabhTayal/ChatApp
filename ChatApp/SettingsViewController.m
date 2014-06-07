@@ -15,6 +15,7 @@
 #import "ActivityView.h"
 #import <IDMPhotoBrowser.h>
 #import "WebViewController.h"
+#import <iRate/iRate.h>
 
 @interface SettingsViewController ()
 
@@ -22,6 +23,14 @@
 
 @property (strong) IBOutlet UISwitch* inAppVibrateSwitch;
 @property (strong) IBOutlet UISwitch* soundSwitch;
+
+@property (strong) IBOutlet UIButton* facebookButton;
+@property (strong) IBOutlet UIButton* twitterButton;
+@property (strong) IBOutlet UIButton* appstoreButton;
+
+-(IBAction)likeOnFacebook:(id)sender;
+-(IBAction)followOnTwitter:(id)sender;
+-(IBAction)reviewOnAppStore:(id)sender;
 
 @end
 
@@ -50,7 +59,14 @@
     [_inAppVibrateSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]];
     [_soundSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue]];
     
-    // Do any additional setup after loading the view.
+     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+  
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -89,12 +105,60 @@
     [sheet showInView:self.view.window];
 }
 
+#pragma mark - Facebook, Twitter, App Store Review
+
+-(IBAction)likeOnFacebook:(id)sender
+{
+    NSURL *facebookURL = [NSURL URLWithString:@"fb://profile/755584617827598"];
+    if ([[UIApplication sharedApplication] canOpenURL:facebookURL]) {
+        [[UIApplication sharedApplication] openURL:facebookURL];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://facebook.com/vCinityChat"]];
+    }
+}
+
+-(IBAction)followOnTwitter:(id)sender
+{
+    NSLog(@"follow");
+    NSArray *urls = [NSArray arrayWithObjects:
+                     @"twitter://user?screen_name={handle}", // Twitter
+                     @"tweetbot:///user_profile/{handle}", // TweetBot
+                     @"echofon:///user_timeline?{handle}", // Echofon
+                     @"twit:///user?screen_name={handle}", // Twittelator Pro
+                     @"x-seesmic://twitter_profile?twitter_screen_name={handle}", // Seesmic
+                     @"x-birdfeed://user?screen_name={handle}", // Birdfeed
+                     @"tweetings:///user?screen_name={handle}", // Tweetings
+                     @"simplytweet:?link=http://twitter.com/{handle}", // SimplyTweet
+                     @"icebird://user?screen_name={handle}", // IceBird
+                     @"fluttr://user/{handle}", // Fluttr
+                     @"http://twitter.com/{handle}",
+                     nil];
+    
+    UIApplication *application = [UIApplication sharedApplication];
+    
+    for (NSString *candidate in urls) {
+        NSURL *url = [NSURL URLWithString:[candidate stringByReplacingOccurrencesOfString:@"{handle}" withString:@"vCinityChat"]];
+        if ([application canOpenURL:url]) {
+            [application openURL:url];
+            // Stop trying after the first URL that succeeds
+            return;
+        }
+    }
+}
+
+-(IBAction)reviewOnAppStore:(id)sender
+{
+    NSLog(@"review on app store");
+    [[iRate sharedInstance] openRatingsPageInAppStore];
+}
+
 #pragma mark - UITableView Delegate
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (section == [tableView numberOfSections] - 1) {
-        return 80;
+        //Get the height from SettingsShareView.Xib
+        return 112;
     }
     return 0;
 }
@@ -102,11 +166,15 @@
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (section == [tableView numberOfSections] - 1) {
-        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 80)];
-        label.text = @"Made with \ue022 by Appikon Mobile";
-        label.textColor = [UIColor lightGrayColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        return label;
+        UIView* view = [[[NSBundle mainBundle] loadNibNamed:@"SettingsShareView" owner:self options:nil] objectAtIndex:0];
+        
+        [_twitterButton.layer setCornerRadius:4];
+        [_twitterButton.layer setMasksToBounds:YES];
+        
+        [_appstoreButton.layer setCornerRadius:4];
+        [_appstoreButton.layer setMasksToBounds:YES];
+        
+        return view;
     }
     return nil;
 }

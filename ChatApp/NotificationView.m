@@ -12,12 +12,12 @@
 
 +(void)showInViewController:(UIViewController *)controller withText:(NSString *)text hideAfterDelay:(CGFloat)delay
 {
-    CGRect frame = CGRectMake(0, 0, 320, 25);
+    CGRect frame = CGRectMake(0, 0, [NotificationView getDeviceWidth], 25);
     frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame) - frame.size.height;
     NotificationView* view = [NotificationView sharedInstance];
     view.frame = frame;
     
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, frame.size.height)];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [NotificationView getDeviceWidth], frame.size.height)];
     label.text = text;
     label.textColor = [UIColor whiteColor];
     label.font = [UIFont systemFontOfSize:12];
@@ -72,6 +72,30 @@
         _sharedObject = [[self alloc] init];
     });
     return _sharedObject;
+}
+
++(CGFloat)getDeviceWidth
+{
+    UIScreen *screen = [UIScreen mainScreen];
+    CGRect fullScreenRect = screen.bounds;
+    BOOL statusBarHidden = [UIApplication sharedApplication].statusBarHidden;
+    
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    
+    //implicitly in Portrait orientation.
+    if(orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft){
+        CGRect temp = CGRectZero;
+        temp.size.width = fullScreenRect.size.height;
+        temp.size.height = fullScreenRect.size.width;
+        fullScreenRect = temp;
+    }
+    
+    if(!statusBarHidden){
+        CGFloat statusBarHeight = 20;//Needs a better solution, FYI statusBarFrame reports wrong in some cases..
+        fullScreenRect.size.height -= statusBarHeight;
+    }
+    
+    return fullScreenRect.size.width;
 }
 
 @end
