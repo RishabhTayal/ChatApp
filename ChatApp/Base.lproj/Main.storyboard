@@ -315,7 +315,7 @@
         <!--Web View Controller-->
         <scene sceneID="oal-ao-6bz">
             <objects>
-                <viewController id="y6y-uG-zLq" customClass="WebViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="WebViewController" storyboardIdentifier="WebViewController" id="y6y-uG-zLq" customClass="WebViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MYn-0Z-XG9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
