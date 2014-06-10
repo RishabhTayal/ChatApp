@@ -110,9 +110,9 @@
 
 -(void)setLoginView
 {
-    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your Facebook Friends when Internet available."}, @{@"Header": @"Camping with Family/Friends?", @"Label": @"Chat with nearby people even when no network is available."}, @{@"Header": @"Take it to the beach", @"Label": @"Make new friends at the beach."}, @{@"Header": @"Attending a Concert?", @"Label":@"Connect with other people."}, @{@"Header":@"Going to a Conference?", @"Label":@"Connect with other people seemlessly."}];
+    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your Facebook Friends when Internet available."}, @{@"Header": @"Camping with Family/Friends?", @"Label": @"Chat with nearby people even when no Internet is available."}, @{@"Header": @"Take it to the beach", @"Label": @"Make new friends at the beach."}, @{@"Header": @"Attending a Concert, Going to a Game?", @"Label":@"Share your thoughts with others."}, @{@"Header":@"Going to a Conference?", @"Label":@"Connect with other people seemlessly."}];
     
-    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"Intro-bg-1", @"Intro-bg-2", @"Intro-bg-3", @"Intro-bg-4", @"Intro-bg-5"] andInformations:infoArray];
+    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"Intro-bg", @"Intro-bg", @"Intro-bg", @"Intro-bg", @"Intro-bg"] andInformations:infoArray];
     
     [intro setHeaderImage:[UIImage imageNamed:@"logo"]];
     [intro setButtons:AOTutorialButtonLogin];
