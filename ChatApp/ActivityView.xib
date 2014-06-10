@@ -23,7 +23,7 @@
                 </imageView>
                 <view alpha="0.79999999999999982" contentMode="scaleToFill" id="dnb-Xg-dPI">
                     <rect key="frame" x="59" y="216" width="203" height="124"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Gb-ka-uWM">
                             <rect key="frame" x="20" y="83" width="163" height="21"/>

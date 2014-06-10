@@ -44,7 +44,11 @@
 +(void)setNotificationText:(NSString*)text
 {
     NotificationView* view = [NotificationView sharedInstance];
-    UILabel* label = [[view subviews] objectAtIndex:0];
+    UILabel* label;
+    
+    if (view.subviews.count > 0) {
+            label = [[view subviews] objectAtIndex:0];
+    }
     
     CATransition* animation = [CATransition animation];
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
