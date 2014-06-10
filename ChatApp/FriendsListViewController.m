@@ -16,11 +16,15 @@
 #import "MenuButton.h"
 #import <MFSideMenu.h>
 #import "UIImage+Utility.h"
+#import "Reachability.h"
+#import "NotificationView.h"
 
 @interface FriendsListViewController ()
 
 @property (strong) NSMutableArray* friendsUsingApp;
 @property (strong) NSMutableArray* friendsNotUsingApp;
+
+@property (strong) Reachability* reachability;
 
 @end
 
@@ -46,21 +50,27 @@
     _friendsUsingApp = [NSMutableArray new];
     
     _friendsNotUsingApp = [NSMutableArray arrayWithArray:[self getAllDeviceContacts]];
-    
-    FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        NSLog(@"%@", result[@"data"]);
-        _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
-        
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-    }];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [GAI trackWithScreenName:kScreenNameFriendsList];
+    
+    _reachability = [Reachability reachabilityForInternetConnection];
+    [self updateInterfaceWithReachabiltity:self.reachability];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    [_reachability startNotifier];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,6 +78,41 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Internet Reachability Methods
+
+-(void)reachabilityChanged:(NSNotification*)notif {
+    Reachability* reach = [notif object];
+    [self updateInterfaceWithReachabiltity:reach];
+}
+
+-(void)updateInterfaceWithReachabiltity:(Reachability*)reachability {
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    switch (status) {
+        case NotReachable:
+        {
+            [NotificationView showInViewController:self withText:@"Need Internet to chat with friends. No Internet found." hideAfterDelay:0];
+        }
+            break;
+        default:
+        {
+            [NotificationView hide];
+            FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
+            [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                NSLog(@"Friends: %@", result[@"data"]);
+                NSLog(@"Error: %@", error);
+                _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
+                
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+                
+            }];
+        }
+            break;
+    }
+}
+
+#pragma mark -
 
 -(void)leftSideMenuButtonPressed:(id)sender
 {
@@ -118,8 +163,6 @@
         CFRelease(addressBook);
         CFRelease(people);
     }
-    
-    
     
     return allcontacts;
 }
