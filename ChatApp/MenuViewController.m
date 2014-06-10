@@ -41,6 +41,8 @@
     
     self.title = @"vCinity";
 
+    self.tableView.scrollsToTop = NO;
+    
     UIImage* img = [UIImage imageNamed:@"menu_background"];
     UIImage* blurImage = [img applyGaussianBlur];
     UIImageView* iv = [[UIImageView alloc] initWithImage:blurImage];
