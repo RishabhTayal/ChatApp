@@ -16,7 +16,7 @@
 #import "MenuButton.h"
 #import <MFSideMenu.h>
 #import "UIImage+Utility.h"
-#import "Reachability.h"
+#import <Reachability/Reachability.h>
 #import "NotificationView.h"
 
 @interface FriendsListViewController ()
@@ -92,7 +92,7 @@
     switch (status) {
         case NotReachable:
         {
-            [NotificationView showInViewController:self withText:@"Need Internet to chat with friends. No Internet found." hideAfterDelay:0];
+            [NotificationView showInViewController:self withText:@"Needs Internet to chat with friends. No Internet found." hideAfterDelay:0];
         }
             break;
         default:
