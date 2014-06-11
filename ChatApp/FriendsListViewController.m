@@ -16,11 +16,15 @@
 #import "MenuButton.h"
 #import <MFSideMenu.h>
 #import "UIImage+Utility.h"
+#import <Reachability/Reachability.h>
+#import "NotificationView.h"
 
 @interface FriendsListViewController ()
 
 @property (strong) NSMutableArray* friendsUsingApp;
 @property (strong) NSMutableArray* friendsNotUsingApp;
+
+@property (strong) Reachability* reachability;
 
 @end
 
@@ -39,33 +43,34 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Friends";
-
+    self.title = NSLocalizedString(@"Friends", nil);
+    
     [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
     _friendsUsingApp = [NSMutableArray new];
     
     _friendsNotUsingApp = [NSMutableArray arrayWithArray:[self getAllDeviceContacts]];
-    
-    FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        NSLog(@"%@", result[@"data"]);
-        _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
-        
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-    }];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [GAI trackWithScreenName:kScreenNameFriendsList];
+    
+    _reachability = [Reachability reachabilityForInternetConnection];
+    [self updateInterfaceWithReachabiltity:self.reachability];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    [_reachability startNotifier];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,6 +78,41 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Internet Reachability Methods
+
+-(void)reachabilityChanged:(NSNotification*)notif {
+    Reachability* reach = [notif object];
+    [self updateInterfaceWithReachabiltity:reach];
+}
+
+-(void)updateInterfaceWithReachabiltity:(Reachability*)reachability {
+    
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    switch (status) {
+        case NotReachable:
+        {
+            [NotificationView showInViewController:self withText:@"Needs Internet to chat with friends. No Internet found." height:NotificationViewHeightDefault hideAfterDelay:0];
+        }
+            break;
+        default:
+        {
+            [NotificationView hide];
+            FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
+            [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                NSLog(@"Friends: %@", result[@"data"]);
+                NSLog(@"Error: %@", error);
+                _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
+                
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+                
+            }];
+        }
+            break;
+    }
+}
+
+#pragma mark -
 
 -(void)leftSideMenuButtonPressed:(id)sender
 {
@@ -124,8 +164,6 @@
         CFRelease(people);
     }
     
-    
-    
     return allcontacts;
 }
 
@@ -140,9 +178,9 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return @"Friends using vCinity";
+        return NSLocalizedString(@"Friends using vCinity", nil);
     }
-    return @"Friends not on vCinity";
+    return NSLocalizedString(@"Friends not on vCinity", nil);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -170,20 +208,7 @@
     }
 }
 
--(void)inviteFriend:(id)sender
-{
-    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
-    NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
-    
-    NSLog(@"Invite at path %d", indexPath.row);
-    
-    NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
-    NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
-    NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [[PFUser currentUser] username], @"text": @"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391", @"subject": @"vCinity App for iPhone"};
-    [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
-        NSLog(@"%@", object);
-    }];
-}
+#pragma mark -
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -200,6 +225,33 @@
         chatVC.friendsImage = cell.profilePicture.image;
         [self.navigationController pushViewController:chatVC animated:YES];
     }
+}
+
+#pragma mark -
+
+-(void)inviteFriend:(id)sender
+{
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+       
+    NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
+    if (DEBUGMODE) {
+        recipientEmail = @"rtayal11@gmail.com";
+    }
+    NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
+    NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [[PFUser currentUser] username], @"text": @"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391", @"subject":@"vCinity Chat App for iPhone"};
+    [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
+        NSLog(@"%@", object);
+        if (!error) {
+            //Show Success
+            [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:NotificationViewHeightTall hideAfterDelay:2];
+            [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
+        } else {
+            //Show Error
+            [NotificationView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:NotificationViewHeightTall hideAfterDelay:2];
+            [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
+        }
+    }];
 }
 
 @end

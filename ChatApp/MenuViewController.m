@@ -41,7 +41,9 @@
     
     self.title = @"vCinity";
     
-    UIImage* img = [UIImage imageNamed:@"chicago1.jpg"];
+    self.tableView.scrollsToTop = NO;
+    
+    UIImage* img = [UIImage imageNamed:@"menu_background"];
     UIImage* blurImage = [img applyGaussianBlur];
     UIImageView* iv = [[UIImageView alloc] initWithImage:blurImage];
     iv.contentMode = UIViewContentModeScaleAspectFill;
@@ -110,28 +112,28 @@
     switch (indexPath.row) {
         case 0:
         {
-            cell.textLabel.text = @"vCinity Chat";
+            cell.textLabel.text = NSLocalizedString(@"vCinity Chat", nil);
             cell.imageView.image = [UIImage imageNamed:@"chat-off"];
             cell.imageView.highlightedImage = [UIImage imageNamed:@"chat-on"];
         }
             break;
         case 1:
         {
-            cell.textLabel.text = @"Friends";
+            cell.textLabel.text = NSLocalizedString(@"Friends", nil);
             cell.imageView.image = [UIImage imageNamed:@"sillouhette-off"];
             cell.imageView.highlightedImage = [UIImage imageNamed:@"sillouhette-on"];
         }
             break;
         case 2:
         {
-            cell.textLabel.text = @"Settings";
+            cell.textLabel.text = NSLocalizedString(@"Settings", nil);
             cell.imageView.image = [UIImage imageNamed:@"settings-off"];
             cell.imageView.highlightedImage = [UIImage imageNamed:@"settings-on"];
         }
             break;
         default:
         {
-            cell.textLabel.text = @"Logout";
+            cell.textLabel.text = NSLocalizedString(@"Logout", nil);
             cell.imageView.image = [UIImage imageNamed:@"logout-off"];
             cell.imageView.highlightedImage = [UIImage imageNamed:@"logout-on"];
         }
@@ -180,7 +182,7 @@
         default:
         {
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Logout", nil];
+            UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Logout", nil), nil];
             [sheet showInView:self.view.window];
         }
             break;

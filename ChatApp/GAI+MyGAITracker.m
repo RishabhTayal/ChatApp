@@ -12,9 +12,23 @@
 
 +(void)trackWithScreenName:(ScreenName)screenName
 {
-    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    [tracker set:kGAIScreenName value:ScreenNameString(screenName)];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    if (DEBUGMODE) {
+        NSLog(@"GA Not trackking");
+    } else {
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+        [tracker set:kGAIScreenName value:ScreenNameString(screenName)];
+        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    }
+}
+
++(void)trackEventWithCategory:(NSString*)category action:(NSString*)action label:(NSString*)label value:(NSNumber*)value
+{
+    if (DEBUGMODE) {
+        NSLog(@"GA Not trackking");
+    } else {
+        id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:value] build]];
+    }
 }
 
 @end

@@ -38,6 +38,16 @@
                ReferencedContainer = "container:VCinity.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0697059B1937AAD5006BB9C5"
+               BuildableName = "TestsTests.xctest"
+               BlueprintName = "TestsTests"
+               ReferencedContainer = "container:VCinity.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

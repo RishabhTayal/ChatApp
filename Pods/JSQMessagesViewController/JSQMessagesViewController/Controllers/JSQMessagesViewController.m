@@ -20,6 +20,8 @@
 
 #import "JSQMessagesKeyboardController.h"
 
+#import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
+
 #import "JSQMessageData.h"
 #import "JSQMessage.h"
 
@@ -170,7 +172,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     _showTypingIndicator = showTypingIndicator;
     
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     [self scrollToBottomAnimated:YES];
 }
 
@@ -182,7 +184,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     _showLoadEarlierMessagesHeader = showLoadEarlierMessagesHeader;
     
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
 #pragma mark - View lifecycle
@@ -201,12 +203,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
     
     if (self.automaticallyScrollsToMostRecentMessage) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self scrollToBottomAnimated:NO];
-            [self.collectionView.collectionViewLayout invalidateLayout];
+            [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
         });
     }
     
@@ -261,7 +263,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
 }
 
 #pragma mark - Messages view controller
@@ -366,10 +368,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    NSAssert(messageData, @"ERROR: messageData must not be nil: %s", __PRETTY_FUNCTION__);
+    NSParameterAssert(messageData != nil);
     
     NSString *messageSender = [messageData sender];
-    NSAssert(messageSender, @"ERROR: messageData sender must not be nil: %s", __PRETTY_FUNCTION__);
+    NSParameterAssert(messageSender != nil);
     
     BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
     
@@ -378,7 +380,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.delegate = self;
     
     NSString *messageText = [messageData text];
-    NSAssert(messageText, @"ERROR: messageData text must not be nil: %s", __PRETTY_FUNCTION__);
+    NSParameterAssert(messageText != nil);
     
     cell.textView.text = messageText;
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];

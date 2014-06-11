@@ -30,23 +30,31 @@
     
     [iRate sharedInstance].daysUntilPrompt = 0;
     [iRate sharedInstance].remindPeriod = 0;
-    [iRate sharedInstance].previewMode = NO;
+    [iRate sharedInstance].previewMode = DEBUGMODE;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-
+    [GAI sharedInstance].trackUncaughtExceptions = !DEBUGMODE;
+    
     [GAI sharedInstance].dispatchInterval = 20;
     
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
     
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-40631521-4"];
     
-    [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
+    //Use Development DB on Parse for Development mode.
+    if (DEBUGMODE) {
+        [Parse setApplicationId:@"WDzqlRDNdilFgPoLusTBKgmeY0FyFaHr6tCFvmgf" clientKey:@"MvV94eU6Z9r3GlrAEfNIhQsM00jDVWh076jKiUJ7"];
+    } else {
+        [Parse setApplicationId:@"BX9jJzuoXisUl4Jo0SfRWMBgo3SkR4aiUimg604X" clientKey:@"zx7SL9h2j97fSmlRdK23XLhpEdeqmrtr24jPawpm"];
+    }
+    
     [PFFacebookUtils initializeFacebook];
     
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    if (!DEBUGMODE) {
+        [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    }
     
     //Don't add [[uiview apperance].tintcolor
     [UINavigationBar appearance].barTintColor = [UIColor redColor];
@@ -102,9 +110,9 @@
 
 -(void)setLoginView
 {
-    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your Facebook Friends."}, @{@"Header": @"Camping with Family/Friends?", @"Label": @"Chat with nearby people even when no network is available."}, @{@"Header": @"Take it to the beach", @"Label": @"Make new friends at the beach."}, @{@"Header": @"Attending a Concert?", @"Label":@"Connect with other people."}, @{@"Header":@"Going to a Conference?", @"Label":@"Connect with other people seemlessly."}];
+    NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your Facebook Friends when Internet available."}, @{@"Header": @"Camping with Family/Friends?", @"Label": @"Chat with nearby people even when Internet is not available."}, @{@"Header": @"Take it to the beach", @"Label": @"Make new friends at the beach."}, @{@"Header": @"Attending a Concert or a Game?", @"Label":@"Share your thoughts with others."}, @{@"Header":@"Going to a Conference?", @"Label":@"Connect with other people seemlessly."}];
     
-    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"Intro-bg-1", @"Intro-bg-2", @"Intro-bg-3", @"Intro-bg-4", @"Intro-bg-5"] andInformations:infoArray];
+    IntroViewController* intro = [[IntroViewController alloc] initWithBackgroundImages:@[@"Intro-bg", @"Intro-bg", @"Intro-bg", @"Intro-bg", @"Intro-bg"] andInformations:infoArray];
     
     [intro setHeaderImage:[UIImage imageNamed:@"logo"]];
     [intro setButtons:AOTutorialButtonLogin];
@@ -128,7 +136,7 @@
     [menuVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     [menuVC tableView:menuVC.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     
-//    _sessionController = [[SessionController alloc] initWithDelegate:nearVC];
+    //    _sessionController = [[SessionController alloc] initWithDelegate:nearVC];
     
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
@@ -160,8 +168,10 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    
+    // Register App Install on Facebook Ads Manager
+    [FBAppEvents activateApp];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

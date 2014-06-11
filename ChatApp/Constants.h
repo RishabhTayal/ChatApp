@@ -9,6 +9,12 @@
 #ifndef ChatApp_Constants_h
 #define ChatApp_Constants_h
 
+#ifdef DEBUG
+#define DEBUGMODE YES
+#else
+#define DEBUGMODE NO
+#endif
+
 //NSUserDefaults Keys
 #define kUDKeyUserLoggedIn @"loggedin"
 //#define kUDKeyUserFirstName @"first_name"

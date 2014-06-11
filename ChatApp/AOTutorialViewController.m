@@ -379,8 +379,8 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     
     if (![[self.backgroundBottomImage image] isEqual:nextImage]) [self.backgroundBottomImage setImage:nextImage];
     
-    [self.backgroundTopImage setAlpha:1-fabs(alpha)];
-    [self.backgroundBottomImage setAlpha:fabs(alpha)];
+//    [self.backgroundTopImage setAlpha:1-fabs(alpha)];
+//    [self.backgroundBottomImage setAlpha:fabs(alpha)];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

@@ -29,6 +29,7 @@
     _chatArray = [NSMutableArray new];
     
     self.inputToolbar.contentView.leftBarButtonItem = nil;
+    self.collectionView.showsVerticalScrollIndicator = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationRecieved:) name:@"notification" object:nil];
     // Do any additional setup after loading the view.
@@ -83,7 +84,7 @@
     [innerQuery2 whereKey:kPFChatReciever equalTo:[PFUser currentUser][kPFUser_FBID]];
     
     PFQuery* query = [PFQuery orQueryWithSubqueries:@[innerQuery, innerQuery2]];
-    query.limit = 10;
+    query.limit = 20;
     
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -95,7 +96,6 @@
         }
         _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
         [self finishReceivingMessage];
-        //        [self scrollToBottomAnimated:YES];
     }];
 }
 
@@ -129,6 +129,7 @@
         NSLog(@"save");
     }];
     
+    [GAI trackEventWithCategory:kGAICategoryButton action:kGAIActionMessageSent label:@"friends" value:nil];
     [self scrollToBottomAnimated:YES];
     [self finishSendingMessage];
 }
@@ -177,27 +178,42 @@
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.item];
-    return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
-}
-
--(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
-{
-    JSQMessage* message = _chatArray[indexPath.item];
-    if (indexPath.item - 1 > 0) {
-        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
-        if ([previousMessage.sender isEqualToString:message.sender]) {
-            return nil;
-        }
+    //Show Date if it's the first message
+    if (indexPath.item == 0) {
+        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
     
-    if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
-        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
-        return attString;
-    } else {
-        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:_friendDict[@"name"]];
-        return attString;
+    if (indexPath.item - 1 > 0) {
+        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
+        NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
+        int mintues = floor(interval/60);
+        if (mintues >= 1) {
+            return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+        }
     }
+    return nil;
 }
+
+//-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return [[NSAttributedString alloc] initWithString:@" "];
+//    JSQMessage* message = _chatArray[indexPath.item];
+//    
+//    if (indexPath.item - 1 > 0) {
+//        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
+//        if ([previousMessage.sender isEqualToString:message.sender]) {
+//            return nil;
+//        }
+//    }
+//    
+//    if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
+//        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
+//        return attString;
+//    } else {
+//        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:_friendDict[@"name"]];
+//        return attString;
+//    }
+//}
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -228,12 +244,38 @@
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    if ([self shouldShowTimeStampAtIndex:indexPath]) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    return 0;
 }
 
--(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+//-(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([self shouldShowTitleAtIndex:indexPath isSenderName:YES]) {
+//        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+//    }
+//    return 1;
+//}
+
+#pragma mark - Method checks if label should show
+
+-(BOOL)shouldShowTimeStampAtIndex:(NSIndexPath*)index
 {
-    return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    if (index.item == 0) {
+        return true;
+    }
+    
+    JSQMessage* message = _chatArray[index.item];
+    if (index.item - 1 >= 0) {
+        JSQMessage* previousMessage = _chatArray[index.item - 1];
+        NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
+        int mintues = floor(interval/60);
+        if (mintues == 0) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 @end

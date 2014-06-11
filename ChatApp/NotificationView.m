@@ -10,17 +10,33 @@
 
 @implementation NotificationView
 
-+(void)showInViewController:(UIViewController *)controller withText:(NSString *)text hideAfterDelay:(CGFloat)delay
++(void)showInViewController:(UIViewController *)controller withText:(NSString *)text height:(NotificationViewHeight)height hideAfterDelay:(CGFloat)delay
 {
-    CGRect frame = CGRectMake(0, 0, 320, 25);
+    CGRect frame = CGRectMake(0, 0, [NotificationView getDeviceWidth], height);
     frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame) - frame.size.height;
     NotificationView* view = [NotificationView sharedInstance];
     view.frame = frame;
     
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, frame.size.height)];
+    for (UIView* subviews in view.subviews) {
+        [subviews removeFromSuperview];
+    }
+    
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [NotificationView getDeviceWidth], frame.size.height)];
     label.text = text;
     label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:12];
+    CGFloat fontSize;
+    switch (height) {
+        case NotificationViewHeightShort:
+            fontSize = 12;
+            break;
+        case NotificationViewHeightTall:
+            fontSize = 16;
+            break;
+        default:
+            fontSize = 12;
+            break;
+    }
+    label.font = [UIFont systemFontOfSize:fontSize];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor redColor];
     CGPoint center = CGPointMake(view.center.x, label.center.y);
@@ -33,12 +49,30 @@
         CGRect frame = view.frame;
         frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame);
         view.frame = frame;
-
+        
     } completion:^(BOOL finished) {
         if (delay != 0) {
             [[NotificationView class] performSelector:@selector(hide) withObject:nil afterDelay:delay];
         }
     }];
+}
+
++(void)setNotificationText:(NSString*)text
+{
+    NotificationView* view = [NotificationView sharedInstance];
+    UILabel* label;
+    
+    if (view.subviews.count > 0) {
+        label = [[view subviews] objectAtIndex:0];
+    }
+    
+    CATransition* animation = [CATransition animation];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.type = kCATransitionFade;
+    animation.duration = 0.75;
+    
+    [label.layer addAnimation:animation forKey:kCATransitionFade];
+    label.text = text;
 }
 
 +(void)hide
@@ -58,6 +92,30 @@
         _sharedObject = [[self alloc] init];
     });
     return _sharedObject;
+}
+
++(CGFloat)getDeviceWidth
+{
+    UIScreen *screen = [UIScreen mainScreen];
+    CGRect fullScreenRect = screen.bounds;
+    BOOL statusBarHidden = [UIApplication sharedApplication].statusBarHidden;
+    
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    
+    //implicitly in Portrait orientation.
+    if(orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft){
+        CGRect temp = CGRectZero;
+        temp.size.width = fullScreenRect.size.height;
+        temp.size.height = fullScreenRect.size.width;
+        fullScreenRect = temp;
+    }
+    
+    if(!statusBarHidden){
+        CGFloat statusBarHeight = 20;//Needs a better solution, FYI statusBarFrame reports wrong in some cases..
+        fullScreenRect.size.height -= statusBarHeight;
+    }
+    
+    return fullScreenRect.size.width;
 }
 
 @end
