@@ -44,7 +44,7 @@
     [super viewDidLoad];
     
     self.title = @"Friends";
-
+    
     [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
     _friendsUsingApp = [NSMutableArray new];
@@ -92,7 +92,7 @@
     switch (status) {
         case NotReachable:
         {
-            [NotificationView showInViewController:self withText:@"Needs Internet to chat with friends. No Internet found." hideAfterDelay:0];
+            [NotificationView showInViewController:self withText:@"Needs Internet to chat with friends. No Internet found." height:NotificationViewHeightDefault hideAfterDelay:0];
         }
             break;
         default:
@@ -237,11 +237,22 @@
     NSLog(@"Invite at path %d", indexPath.row);
     
     NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
+    if (DEBUG) {
+        recipientEmail = @"rtayal11@gmail.com";
+    }
     NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
-    NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [[PFUser currentUser] username], @"text": @"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391", @"subject": @"vCinity App for iPhone"};
+    NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [[PFUser currentUser] username], @"text": @"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391", @"subject":@"vCinity Chat App for iPhone"};
     [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
         NSLog(@"%@", object);
-        [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:nil value:nil];
+        if (!error) {
+            //Show Success
+            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"Invitation sent to %@!", recipientName] height:NotificationViewHeightTall hideAfterDelay:2];
+            [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
+        } else {
+            //Show Error
+            [NotificationView showInViewController:self withText:@"Invitation could not be sent!" height:NotificationViewHeightTall hideAfterDelay:2];
+            [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
+        }
     }];
 }
 

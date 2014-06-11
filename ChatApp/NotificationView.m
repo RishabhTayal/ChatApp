@@ -10,9 +10,9 @@
 
 @implementation NotificationView
 
-+(void)showInViewController:(UIViewController *)controller withText:(NSString *)text hideAfterDelay:(CGFloat)delay
++(void)showInViewController:(UIViewController *)controller withText:(NSString *)text height:(NotificationViewHeight)height hideAfterDelay:(CGFloat)delay
 {
-    CGRect frame = CGRectMake(0, 0, [NotificationView getDeviceWidth], 25);
+    CGRect frame = CGRectMake(0, 0, [NotificationView getDeviceWidth], height);
     frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame) - frame.size.height;
     NotificationView* view = [NotificationView sharedInstance];
     view.frame = frame;
@@ -20,7 +20,19 @@
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [NotificationView getDeviceWidth], frame.size.height)];
     label.text = text;
     label.textColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:12];
+    CGFloat fontSize;
+    switch (height) {
+        case NotificationViewHeightShort:
+            fontSize = 12;
+            break;
+        case NotificationViewHeightTall:
+            fontSize = 16;
+            break;
+        default:
+            fontSize = 12;
+            break;
+    }
+    label.font = [UIFont systemFontOfSize:fontSize];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor redColor];
     CGPoint center = CGPointMake(view.center.x, label.center.y);
@@ -47,7 +59,7 @@
     UILabel* label;
     
     if (view.subviews.count > 0) {
-            label = [[view subviews] objectAtIndex:0];
+        label = [[view subviews] objectAtIndex:0];
     }
     
     CATransition* animation = [CATransition animation];

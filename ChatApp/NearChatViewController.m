@@ -65,12 +65,12 @@
     
     [self.navigationController.navigationBar hideBottomHairline];
     if (_sessionController.connectedPeers.count == 0 ) {
-        [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] hideAfterDelay:0];
+        [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] height:NotificationViewHeightDefault hideAfterDelay:0];
     } else {
         if (_sessionController.connectedPeers.count == 1) {
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipient", [_sessionController connectedPeers].count] hideAfterDelay:0];
+            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipient", [_sessionController connectedPeers].count] height:NotificationViewHeightDefault hideAfterDelay:0];
         } else {
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipients", [_sessionController connectedPeers].count] hideAfterDelay:0];
+            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipients", [_sessionController connectedPeers].count] height:NotificationViewHeightDefault hideAfterDelay:0];
         }
     }
 }
