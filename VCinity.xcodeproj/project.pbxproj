@@ -23,6 +23,7 @@
 		061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */; };
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
 		061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E501918818400A0DF90 /* FriendTableViewCell.m */; };
+		062EA2241948D28A00AA64E5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062EA2231948D28A00AA64E5 /* iAd.framework */; };
 		0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642158F19213ACE00FB1F6D /* Accounts.framework */; };
 		0642159219213AD300FB1F6D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642159119213AD300FB1F6D /* Social.framework */; };
 		065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D41912BCFB00B85D3D /* Foundation.framework */; };
@@ -78,6 +79,7 @@
 		062365A219420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		062365A319420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		062365A71942112000F46FD9 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/Main.storyboard; sourceTree = "<group>"; };
+		062EA2231948D28A00AA64E5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		0642158F19213ACE00FB1F6D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		0642159119213AD300FB1F6D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		065A15D11912BCFB00B85D3D /* VCinity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VCinity.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				062EA2241948D28A00AA64E5 /* iAd.framework in Frameworks */,
 				0642159219213AD300FB1F6D /* Social.framework in Frameworks */,
 				0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */,
 				06085981191C36AC005F6A75 /* MessageUI.framework in Frameworks */,
@@ -252,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				069705B01937ACE7006BB9C5 /* libPods.a */,
+				062EA2231948D28A00AA64E5 /* iAd.framework */,
 				0642159119213AD300FB1F6D /* Social.framework */,
 				0642158F19213ACE00FB1F6D /* Accounts.framework */,
 				06085980191C36AC005F6A75 /* MessageUI.framework */,
