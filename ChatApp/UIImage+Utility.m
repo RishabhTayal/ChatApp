@@ -28,6 +28,7 @@
     
     CGImageRef cgimg = [context createCGImage:outImage fromRect:rect];
     UIImage* image = [UIImage imageWithCGImage:cgimg];
+    CGImageRelease(cgimg);
     return image;
 }
 

@@ -233,9 +233,7 @@
 {
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
-    
-    NSLog(@"Invite at path %d", indexPath.row);
-    
+       
     NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
     if (DEBUGMODE) {
         recipientEmail = @"rtayal11@gmail.com";
