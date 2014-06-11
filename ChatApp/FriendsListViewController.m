@@ -237,7 +237,7 @@
     NSLog(@"Invite at path %d", indexPath.row);
     
     NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
-    if (DEBUG) {
+    if (DEBUGMODE) {
         recipientEmail = @"rtayal11@gmail.com";
     }
     NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
