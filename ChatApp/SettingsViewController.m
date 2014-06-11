@@ -23,7 +23,6 @@
 
 @property (strong) IBOutlet UISwitch* inAppVibrateSwitch;
 @property (strong) IBOutlet UISwitch* soundSwitch;
-@property (strong) IBOutlet UISwitch* syncContactsSwitch;
 
 @property (strong) IBOutlet UIButton* facebookButton;
 @property (strong) IBOutlet UIButton* twitterButton;
@@ -59,7 +58,6 @@
     
     [_inAppVibrateSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]];
     [_soundSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue]];
-    [_syncContactsSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDSyncContactsToServer] boolValue]];
      // Do any additional setup after loading the view.
 }
 
@@ -94,12 +92,6 @@
 -(IBAction)toggleSound:(UISwitch*)sender
 {
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:kUDInAppSound];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(IBAction)toggleSyncContacts:(UISwitch*)sender
-{
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:sender.isOn] forKey:kUDSyncContactsToServer];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

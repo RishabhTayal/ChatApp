@@ -136,8 +136,6 @@
     [menuVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     [menuVC tableView:menuVC.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     
-    //    _sessionController = [[SessionController alloc] initWithDelegate:nearVC];
-    
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
 }

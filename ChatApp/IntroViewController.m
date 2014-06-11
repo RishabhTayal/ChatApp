@@ -53,6 +53,13 @@
         } else {
             [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                 if (!error) {
+                    
+                    if ([[PFUser currentUser] objectForKey:kPFUser_FBID] == NULL) {
+                        //First Time user
+                        NSLog(@"First Time");
+                        [self notifyFriendsViaPushThatIJoined];
+                    }
+                    
                     [[PFUser currentUser] setObject:result[@"id"] forKey:kPFUser_FBID];
                     [[PFUser currentUser] setObject:result[@"name"] forKey:kPFUser_Username];
                     [[PFUser currentUser] setObject:result[@"email"] forKey:kPFUser_Email];
@@ -100,6 +107,27 @@
 {
     MFSideMenuContainerViewController* sideMenuVC = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
     self.view.window.rootViewController = sideMenuVC;
+}
+
+-(void)notifyFriendsViaPushThatIJoined
+{
+    FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        NSLog(@"Error: %@", error);
+        
+        NSArray* friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
+
+        NSArray* recipients = [friendsUsingApp valueForKey:@"id"];
+        PFQuery* pushQuery = [PFInstallation query];
+        [pushQuery whereKey:@"owner" containedIn:recipients];
+        
+        PFPush *push = [[PFPush alloc] init];
+        [push setQuery:pushQuery];
+        
+        [push setMessage:[NSString stringWithFormat:@"Your friend %@ just joined vCinity! Start Chatting with them now.", [PFUser currentUser].username]];
+        [push sendPushInBackground];
+    }];
+    
 }
 
 @end
