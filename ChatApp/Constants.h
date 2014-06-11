@@ -17,20 +17,18 @@
 
 //NSUserDefaults Keys
 #define kUDKeyUserLoggedIn @"loggedin"
-//#define kUDKeyUserFirstName @"first_name"
-//#define kUDKeyUserLastName @"last_name"
-//#define kUDKeyUserLocLongitude @"user_longitude"
-//#define kUDKeyUserLocLatitude @"user_latitude"
 
 //Setting UserDefaults
 #define kUDInAppVibrate @"inAppVibrate"
 #define kUDInAppSound @"inAppSound"
+#define kUDSyncContactsToServer @"syncContactsToServer"
 
 //PFUser currentUser Keys
 #define kPFUser_Username @"username"
 #define kPFUser_Email @"email"
 #define kPFUser_FBID @"fbID"
 #define kPFUser_Picture @"picture"
+#define kPFUser_Contacts @"contacts"
 
 //Parse Table Names
 #define kPFTableName_Chat @"Wechat"
