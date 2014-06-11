@@ -54,7 +54,7 @@
     UITapGestureRecognizer* tapGestuere = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(parallaxHeaderTapped:)];
     [self.tableView.parallaxView addGestureRecognizer:tapGestuere];
     
-    self.title = @"Settings";
+    self.title = NSLocalizedString(@"Settings", nil);
     
     [_inAppVibrateSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]];
     [_soundSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue]];
@@ -100,7 +100,7 @@
 
 -(void)parallaxHeaderTapped:(UIGestureRecognizer*)reco
 {
-    UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"View Profile Photo", @"Take Photo", @"Choose From Photos", @"Import from Facebook", nil];
+    UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"View Profile Photo", nil), NSLocalizedString(@"Take Photo", nil), NSLocalizedString(@"Choose Exisiting Photo", nil), NSLocalizedString(@"Import from Facebook", nil), nil];
     sheet.tag = ActionSheetTypeHeaderPhoto;
     [sheet showInView:self.view.window];
 }
@@ -188,7 +188,7 @@
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             //Tell a friend
-            UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Message", @"Mail", @"Facebook", @"Twitter", nil];
+            UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Message", nil), NSLocalizedString(@"Mail", nil), NSLocalizedString(@"Facebook", nil), NSLocalizedString(@"Twitter", nil), nil];
             sheet.tag = ActionSheetTypeShare;
             [sheet showInView:self.view.window];
         } else if (indexPath.row == 1) {

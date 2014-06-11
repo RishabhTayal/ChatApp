@@ -43,7 +43,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Friends";
+    self.title = NSLocalizedString(@"Friends", nil);
     
     [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
@@ -178,9 +178,9 @@
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return @"Friends using vCinity";
+        return NSLocalizedString(@"Friends using vCinity", nil);
     }
-    return @"Friends not on vCinity";
+    return NSLocalizedString(@"Friends not on vCinity", nil);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -246,11 +246,11 @@
         NSLog(@"%@", object);
         if (!error) {
             //Show Success
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"Invitation sent to %@!", recipientName] height:NotificationViewHeightTall hideAfterDelay:2];
+            [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:NotificationViewHeightTall hideAfterDelay:2];
             [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
         } else {
             //Show Error
-            [NotificationView showInViewController:self withText:@"Invitation could not be sent!" height:NotificationViewHeightTall hideAfterDelay:2];
+            [NotificationView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:NotificationViewHeightTall hideAfterDelay:2];
             [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
         }
     }];

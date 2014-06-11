@@ -1,0 +1,31 @@
+/*
+ File.strings
+ VCinity
+ 
+ Created by Rishabh Tayal on 6/11/14.
+ Copyright (c) 2014 Rishabh Tayal. All rights reserved.
+ */
+
+"vCinity Chat" = "vCinity Chat";
+"Friends" = "Friends";
+"Settings" = "Settings";
+"Logout" = "Logout";
+
+"No users nearby" = "No users nearby";
+"Connected to %d recipient" = "Connected to %d recipient";
+"Connected to %d recipients" = "Connected to %d recipients";
+
+"Friends using vCinity" = "Friends using vCinity";
+"Friends not on vCinity" = "Friends not on vCinity";
+"Invitation sent to %@!" = "Invitation sent to %@!";
+"Invitation could not be sent!" = "Invitation could not be sent!";
+
+"Cancel" = "Cancel";
+"Take Photo" = "Take Photo";
+"Choose Exisiting Photo" = "Choose Exisiting Photo";
+"View Profile Photo" = "View Profile Photo";
+"Import from Facebook" = "Import from Facebook";
+"Message" = "Message";
+"Mail" = "Mail";
+"Facebook" = "Facebook";
+"Twitter" = "Twitter";

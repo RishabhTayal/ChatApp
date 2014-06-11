@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"vCinity Chat";
+    self.title = NSLocalizedString(@"vCinity Chat", nil);
     
     [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
@@ -65,12 +65,12 @@
     
     [self.navigationController.navigationBar hideBottomHairline];
     if (_sessionController.connectedPeers.count == 0 ) {
-        [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"No users nearby"] height:NotificationViewHeightDefault hideAfterDelay:0];
+        [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"No users nearby", nil)] height:NotificationViewHeightDefault hideAfterDelay:0];
     } else {
         if (_sessionController.connectedPeers.count == 1) {
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipient", [_sessionController connectedPeers].count] height:NotificationViewHeightDefault hideAfterDelay:0];
+            [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipient", nil), [_sessionController connectedPeers].count] height:NotificationViewHeightDefault hideAfterDelay:0];
         } else {
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:@"connected to %d recipients", [_sessionController connectedPeers].count] height:NotificationViewHeightDefault hideAfterDelay:0];
+            [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipients", nil), [_sessionController connectedPeers].count] height:NotificationViewHeightDefault hideAfterDelay:0];
         }
     }
 }
@@ -93,13 +93,13 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if (_sessionController.connectedPeers.count > 0) {
             if (_sessionController.connectedPeers.count == 1) {
-                [NotificationView setNotificationText:[NSString stringWithFormat:@"connected to %d recipient", [_sessionController connectedPeers].count]];
+                [NotificationView setNotificationText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipient", nil), [_sessionController connectedPeers].count]];
             } else {
-                [NotificationView setNotificationText:[NSString stringWithFormat:@"connected to %d recipients", [_sessionController connectedPeers].count]];
+                [NotificationView setNotificationText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipients", nil), [_sessionController connectedPeers].count]];
             }
             
         } else {
-            [NotificationView setNotificationText:@"No users nearby"];
+            [NotificationView setNotificationText:NSLocalizedString(@"No users nearby", nil)];
         }
     });
 }
@@ -187,7 +187,7 @@
 
 -(void)didPressAccessoryButton:(UIButton *)sender
 {
-    UIActionSheet* photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Exisiting Photo", nil];
+    UIActionSheet* photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Take Photo", nil), NSLocalizedString(@"Choose Exisiting Photo", nil), nil];
     [photoSheet showInView:self.view.window];
 }
 

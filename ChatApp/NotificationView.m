@@ -17,6 +17,10 @@
     NotificationView* view = [NotificationView sharedInstance];
     view.frame = frame;
     
+    for (UIView* subviews in view.subviews) {
+        [subviews removeFromSuperview];
+    }
+    
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [NotificationView getDeviceWidth], frame.size.height)];
     label.text = text;
     label.textColor = [UIColor whiteColor];
