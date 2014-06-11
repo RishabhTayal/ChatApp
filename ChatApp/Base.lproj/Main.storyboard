@@ -308,6 +308,7 @@
                     </tableView>
                     <connections>
                         <outlet property="inAppVibrateSwitch" destination="5ju-fo-NCa" id="2I5-GZ-WZ1"/>
+                        <outlet property="nameLabel" destination="wy3-fX-u95" id="Jep-yr-zdz"/>
                         <outlet property="soundSwitch" destination="ZJQ-Kb-g52" id="axd-gv-mpp"/>
                     </connections>
                 </tableViewController>
