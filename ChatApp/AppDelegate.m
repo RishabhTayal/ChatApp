@@ -133,6 +133,7 @@
     
     MenuViewController* menuVC = [[MenuViewController alloc] init];
     MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:nil leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:menuVC] rightMenuViewController:nil];
+    vc.menuSlideAnimationEnabled = YES;
     [menuVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     [menuVC tableView:menuVC.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     

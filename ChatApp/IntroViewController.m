@@ -86,6 +86,7 @@
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     
                     MFSideMenuContainerViewController* sideMenuVC = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+                    sideMenuVC.menuSlideAnimationEnabled = YES;
                     [self.view addSubview:sideMenuVC.view];
                     CATransition* anim = [CATransition animation];
                     [anim setDelegate:self];
@@ -106,6 +107,7 @@
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     MFSideMenuContainerViewController* sideMenuVC = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+    sideMenuVC.menuSlideAnimationEnabled = YES;
     self.view.window.rootViewController = sideMenuVC;
 }
 
