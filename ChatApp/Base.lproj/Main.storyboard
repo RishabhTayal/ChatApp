@@ -33,6 +33,20 @@
             </objects>
             <point key="canvasLocation" x="1093" y="266"/>
         </scene>
+        <!--Group Info View Controller-->
+        <scene sceneID="OM5-Qh-IPk">
+            <objects>
+                <viewController restorationIdentifier="GroupInfoViewController" storyboardIdentifier="GroupInfoViewController" id="cOc-um-f67" customClass="GroupInfoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Qt-Zg-mOf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qLr-xm-cC4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1623" y="3"/>
+        </scene>
         <!--Friends List View Controller-->
         <scene sceneID="MAE-pD-GVw">
             <objects>

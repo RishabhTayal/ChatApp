@@ -9,6 +9,7 @@
 #import "FriendsChatViewController.h"
 #import <Parse/Parse.h>
 #import <JSQMessages.h>
+#import "GroupInfoViewController.h"
 
 @interface FriendsChatViewController ()
 
@@ -30,6 +31,11 @@
     self.collectionView.showsVerticalScrollIndicator = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationRecieved:) name:@"notification" object:nil];
+    if (_isGroupChat) {
+        UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+        [infoButton addTarget:self action:@selector(showGroupChatInfo:) forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -138,6 +144,13 @@
         _chatArray = [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
         [self finishReceivingMessage];
     }];
+}
+
+-(void)showGroupChatInfo:(id)sender
+{
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    GroupInfoViewController* groupInfoVC = [sb instantiateViewControllerWithIdentifier:@"GroupInfoViewController"];
+    [self.navigationController pushViewController:groupInfoVC animated:YES];
 }
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text sender:(NSString *)sender date:(NSDate *)date

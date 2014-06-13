@@ -38,6 +38,9 @@
     [_tokenFieldView.tokenField setPromptText:NSLocalizedString(@"Add People:", nil)];
     _tokenFieldView.forcePickSearchResult = YES;
     
+    _groupPhotoButton.layer.cornerRadius = _groupPhotoButton.frame.size.height/2;
+    _groupPhotoButton.layer.masksToBounds = YES;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelClicked:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Create", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(createGroup:)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -245,7 +248,7 @@
 
 -(UIImage*)downScaleImage:(UIImage*)image
 {
-    CGSize newSize = CGSizeMake(320, 320);
+    CGSize newSize = CGSizeMake(200, (200 * image.size.height) / image.size.width);
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
