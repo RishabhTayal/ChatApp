@@ -40,6 +40,7 @@ PODS:
     - SDWebImage/Core
   - SDWebImage/Core (3.6)
   - SVProgressHUD (1.0)
+  - TITokenField (0.9.5)
   - UINavigationBar+Addition (1.0.0)
 
 DEPENDENCIES:
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - Parse-iOS-SDK
   - Reachability
   - SDWebImage (~> 3.6)
+  - TITokenField
   - UINavigationBar+Addition
 
 SPEC CHECKSUMS:
@@ -70,6 +72,7 @@ SPEC CHECKSUMS:
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  TITokenField: 5806434c695cd7e8ee9d7df126f318db652d6943
   UINavigationBar+Addition: 75b1b709f000aa7de774df19d4fd9098ba939a51
 
 COCOAPODS: 0.33.1

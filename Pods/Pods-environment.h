@@ -132,6 +132,12 @@
 #define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
 #define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
 
+// TITokenField
+#define COCOAPODS_POD_AVAILABLE_TITokenField
+#define COCOAPODS_VERSION_MAJOR_TITokenField 0
+#define COCOAPODS_VERSION_MINOR_TITokenField 9
+#define COCOAPODS_VERSION_PATCH_TITokenField 5
+
 // UINavigationBar+Addition
 #define COCOAPODS_POD_AVAILABLE_UINavigationBar_Addition
 #define COCOAPODS_VERSION_MAJOR_UINavigationBar_Addition 1

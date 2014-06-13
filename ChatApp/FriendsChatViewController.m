@@ -14,8 +14,6 @@
 
 @property (strong) NSMutableArray* chatArray;
 
-@property (strong) NSTimer* timer;
-
 @end
 
 @implementation FriendsChatViewController
@@ -39,18 +37,11 @@
 {
     [super viewDidAppear:animated];
     [GAI trackWithScreenName:kScreenNameFriendsChat];
-    [self loadChat];
-}
-
--(void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    [_timer invalidate];
-}
-
--(void)dealloc
-{
-    
+    if (_isGroupChat) {
+        [self loadGroupChat];
+    } else {
+        [self loadFriendsChat];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,19 +52,23 @@
 
 -(void)pushNotificationRecieved:(NSNotification*)notification
 {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
-        [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
-    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
-        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+    if (notification.userInfo[kNotificationMessage] != NULL) {
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
+            [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
+        } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
+            [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+        }
+        
+        JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[kNotificationMessage] sender:notification.userInfo[kNotificationSender][@"name"] date:[NSDate date]];
+        [_chatArray addObject:message];
+        [self finishReceivingMessage];
+        
     }
-    
-    JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[kNotificationMessage] sender:notification.userInfo[kNotificationSender][@"name"] date:[NSDate date]];
-    [_chatArray addObject:message];
-    [self finishReceivingMessage];
     //    [self scrollToBottomAnimated:YES];
 }
 
--(void)loadChat
+-(void)loadFriendsChat
 {
     PFQuery *innerQuery = [[PFQuery alloc] initWithClassName:kPFTableName_Chat];
     [innerQuery whereKey:kPFChatSender equalTo:[PFUser currentUser][kPFUser_FBID]];
@@ -99,6 +94,52 @@
     }];
 }
 
+-(void)loadGroupChat
+{
+    PFObject* groupObject = (PFObject*) _friendDict;
+    
+    //Get Members
+    PFRelation* membersRelation = [groupObject relationForKey:kPFGroupMembers];
+    [[membersRelation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        _groupMembers = [NSMutableArray new];
+        for (PFUser* member in objects) {
+            NSLog(@"%@", member);
+            
+            NSMutableDictionary* dict = [NSMutableDictionary new];
+            [dict setObject:member[kPFUser_FBID] forKey:kPFUser_FBID];
+            [dict setObject:member[kPFUser_Username] forKey:kPFUser_Username];
+            
+            PFFile* file = member[kPFUser_Picture];
+            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                UIImage* img = [UIImage imageWithData:data];
+                [dict setObject:img forKey:kPFUser_Picture];
+                [_groupMembers addObject:dict];
+                [self finishReceivingMessage];
+            }];
+        }
+    }];
+    
+    //Get Chats
+    PFRelation* chatRelation = [groupObject relationForKey:@"chats"];
+    
+    PFQuery* chatQuery = [chatRelation query];
+    chatQuery.limit = 20;
+    
+    [chatQuery orderByDescending:@"createdAt"];
+    
+    [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [_chatArray removeAllObjects];
+        
+        for (PFObject* chat in objects) {
+            JSQMessage* message = [[JSQMessage alloc] initWithText:chat[kPFChatMessage] sender:chat[kPFChatSender] date:chat.createdAt];
+            [_chatArray addObject:message];
+        }
+        _chatArray = [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
+        [self finishReceivingMessage];
+    }];
+}
+
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text sender:(NSString *)sender date:(NSDate *)date
 {
     JSQMessage* message = [[JSQMessage alloc] initWithText:text sender:sender date:date];
@@ -108,7 +149,26 @@
         [JSQSystemSoundPlayer jsq_playMessageSentSound];
     }
     
+    if (_isGroupChat) {
+        [self sendChatToGroup:text];
+    } else {
+        [self sendChatToFriend:text];
+    }
+    
+    [GAI trackEventWithCategory:kGAICategoryButton action:kGAIActionMessageSent label:@"friends" value:nil];
+    [self scrollToBottomAnimated:YES];
+    [self finishSendingMessage];
+}
+
+-(void)didPressAccessoryButton:(UIButton *)sender
+{
+    NSLog(@"Camera pressed!");
+}
+
+-(void)sendChatToFriend:(NSString*)text
+{
     NSArray* recipients = @[_friendDict[@"id"]];
+    
     PFQuery* pushQuery = [PFInstallation query];
     [pushQuery whereKey:@"owner" containedIn:recipients];
     
@@ -128,15 +188,40 @@
     [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSLog(@"save");
     }];
-    
-    [GAI trackEventWithCategory:kGAICategoryButton action:kGAIActionMessageSent label:@"friends" value:nil];
-    [self scrollToBottomAnimated:YES];
-    [self finishSendingMessage];
 }
 
--(void)didPressAccessoryButton:(UIButton *)sender
+-(void)sendChatToGroup:(NSString*)text
 {
-    NSLog(@"Camera pressed!");
+    PFObject* object = (PFObject*)_friendDict;
+    PFRelation* relation = [object relationForKey:kPFGroupMembers];
+    [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        PFQuery* pushQuery = [PFInstallation query];
+        [pushQuery whereKey:@"owner" containedIn:[objects valueForKey:kPFUser_FBID]];
+        [pushQuery whereKey:@"owner" notEqualTo:[PFUser currentUser][kPFUser_FBID]];
+        
+        PFPush *push = [[PFPush alloc] init];
+        [push setQuery:pushQuery];
+        
+        NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
+        [pushData setObject:text forKey:kNotificationMessage];
+        [pushData setObject:[NSString stringWithFormat:@"%@ @ \"%@\": %@", [PFUser currentUser].username, _friendDict[kPFGroupName] ,text] forKey:kNotificationAlert];
+        [push setData:pushData];
+        [push sendPushInBackground];
+        
+        PFObject* object = [PFObject objectWithClassName:kPFTableName_Chat];
+        [object setObject:text forKey:kPFChatMessage];
+        [object setObject:[PFUser currentUser][kPFUser_FBID] forKey:kPFChatSender];
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                PFObject* groupObject = (PFObject*) _friendDict;
+                PFRelation* relation = [groupObject relationForKey:@"chats"];
+                [relation addObject:object];
+                [groupObject saveEventually];
+            }
+        }];
+        
+    }];
 }
 
 #pragma mark - JSQMessages CollectionView Datasource
@@ -170,7 +255,15 @@
             iv.image = [UIImage imageWithData:data];
         }];
     } else {
-        iv.image = _friendsImage;
+        if (_isGroupChat) {
+            for (NSDictionary* dict in _groupMembers) {
+                if ([dict[kPFUser_FBID] isEqualToString:message.sender]) {
+                    iv.image = dict[kPFUser_Picture];
+                }
+            }
+        } else {
+            iv.image = _friendsImage;
+        }
     }
     return iv;
 }
@@ -178,42 +271,29 @@
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessage* message = _chatArray[indexPath.item];
-    //Show Date if it's the first message
-    if (indexPath.item == 0) {
-        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
-    }
-    
-    if (indexPath.item - 1 > 0) {
-        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
-        NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
-        int mintues = floor(interval/60);
-        if (mintues >= 1) {
-            return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+    return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+}
+
+-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_isGroupChat) {
+        
+        JSQMessage* message = _chatArray[indexPath.item];
+        
+        if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
+            NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
+            return attString;
+        } else {
+            for (NSDictionary* dict  in _groupMembers) {
+                if ([dict[kPFUser_FBID] isEqualToString:message.sender]) {
+                    NSAttributedString* attString = [[NSAttributedString alloc] initWithString:dict[kPFUser_Username]];
+                    return attString;
+                }
+            }
         }
     }
     return nil;
 }
-
-//-(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return [[NSAttributedString alloc] initWithString:@" "];
-//    JSQMessage* message = _chatArray[indexPath.item];
-//    
-//    if (indexPath.item - 1 > 0) {
-//        JSQMessage* previousMessage = _chatArray[indexPath.item - 1];
-//        if ([previousMessage.sender isEqualToString:message.sender]) {
-//            return nil;
-//        }
-//    }
-//    
-//    if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
-//        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
-//        return attString;
-//    } else {
-//        NSAttributedString* attString = [[NSAttributedString alloc] initWithString:_friendDict[@"name"]];
-//        return attString;
-//    }
-//}
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -250,15 +330,33 @@
     return 0;
 }
 
-//-(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if ([self shouldShowTitleAtIndex:indexPath isSenderName:YES]) {
-//        return kJSQMessagesCollectionViewCellLabelHeightDefault;
-//    }
-//    return 1;
-//}
+-(CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_isGroupChat) {
+        if ([self shouldShowTimeStampAtIndex:indexPath]) {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault;
+        }
+    }
+    return 0;
+}
 
 #pragma mark - Method checks if label should show
+
+-(BOOL)shouldShowTitleAtIndex:(NSIndexPath*)index
+{
+    if (index.item == 0) {
+        return true;
+    }
+    
+    JSQMessage* message = _chatArray[index.item];
+    if (index.item - 1 >= 0) {
+        JSQMessage* previousMessage = _chatArray[index.item - 1];
+        if ([message.sender isEqualToString:previousMessage.sender]) {
+            return false;
+        }
+    }
+    return true;
+}
 
 -(BOOL)shouldShowTimeStampAtIndex:(NSIndexPath*)index
 {
@@ -271,7 +369,7 @@
         JSQMessage* previousMessage = _chatArray[index.item - 1];
         NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
         int mintues = floor(interval/60);
-        if (mintues == 0) {
+        if (mintues < 5) {
             return NO;
         }
     }

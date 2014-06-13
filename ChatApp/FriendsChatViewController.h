@@ -11,8 +11,10 @@
 
 @interface FriendsChatViewController:JSQMessagesViewController
 
-//@property (strong) NSString* friendId;
 @property (strong) UIImage* friendsImage;
 @property (strong) NSDictionary* friendDict;
+
+@property (assign) BOOL isGroupChat;
+@property (strong) NSMutableArray* groupMembers;
 
 @end

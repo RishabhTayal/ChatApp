@@ -58,7 +58,8 @@
     
     [_inAppVibrateSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]];
     [_soundSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue]];
-     // Do any additional setup after loading the view.
+    
+    // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -18,9 +18,11 @@
 #import "UIImage+Utility.h"
 #import <Reachability/Reachability.h>
 #import "NotificationView.h"
+#import "CreateGroupViewController.h"
 
 @interface FriendsListViewController ()
 
+@property (strong) NSMutableArray* groups;
 @property (strong) NSMutableArray* friendsUsingApp;
 @property (strong) NSMutableArray* friendsNotUsingApp;
 
@@ -49,7 +51,9 @@
     
     _friendsUsingApp = [NSMutableArray new];
     
-    _friendsNotUsingApp = [NSMutableArray arrayWithArray:[self getAllDeviceContacts]];
+    [NSThread detachNewThreadSelector:@selector(getAllDeviceContacts) toTarget:self withObject:nil];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New Group", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(createNewGroup:)];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -59,10 +63,7 @@
     
     _reachability = [Reachability reachabilityForInternetConnection];
     [self updateInterfaceWithReachabiltity:self.reachability];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityChanged:)
-                                                 name:kReachabilityChangedNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
     [_reachability startNotifier];
 }
@@ -86,8 +87,8 @@
     [self updateInterfaceWithReachabiltity:reach];
 }
 
--(void)updateInterfaceWithReachabiltity:(Reachability*)reachability {
-    
+-(void)updateInterfaceWithReachabiltity:(Reachability*)reachability
+{
     NetworkStatus status = [reachability currentReachabilityStatus];
     switch (status) {
         case NotReachable:
@@ -104,12 +105,32 @@
                 NSLog(@"Error: %@", error);
                 _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
                 
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }];
+            
+            //Get groups
+            PFQuery* query = [PFQuery queryWithClassName:kPFTableGroup];
+            [query whereKey:kPFGroupMembers equalTo:[PFUser currentUser]];
+            [query orderByDescending:@"updatedAt"];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                NSLog(@"%@", objects);
+                _groups = [[NSMutableArray alloc] initWithArray:objects];
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-                
             }];
         }
             break;
     }
+}
+
+#pragma mark -
+
+-(void)createNewGroup:(id)sender
+{
+    NSLog(@"Create group");
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CreateGroupViewController* createGroupVC = [sb instantiateViewControllerWithIdentifier:@"CreateGroupViewController"];
+    createGroupVC.friendsArray = _friendsUsingApp;
+    [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:createGroupVC] animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -119,7 +140,7 @@
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
--(NSArray*)getAllDeviceContacts
+-(void)getAllDeviceContacts
 {
     NSMutableArray* allcontacts = [NSMutableArray new];
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(nil, nil);
@@ -164,7 +185,10 @@
         CFRelease(people);
     }
     
-    return allcontacts;
+    _friendsNotUsingApp = [NSMutableArray arrayWithArray:allcontacts];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+    });
 }
 
 #pragma mark - Table view data source
@@ -172,12 +196,15 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
+        return NSLocalizedString(@"Groups", nil);
+    }
+    if (section == 1) {
         return NSLocalizedString(@"Friends using vCinity", nil);
     }
     return NSLocalizedString(@"Friends not on vCinity", nil);
@@ -187,6 +214,9 @@
 {
     // Return the number of rows in the section.
     if (section == 0) {
+        return _groups.count;
+    }
+    if (section == 1) {
         return _friendsUsingApp.count;
     }
     return _friendsNotUsingApp.count;
@@ -196,6 +226,15 @@
 {
     // Configure the cell...
     if (indexPath.section == 0) {
+        FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
+        cell.friendName.text = _groups[indexPath.row][@"name"];
+        PFFile* file = [_groups objectAtIndex:indexPath.row][@"photo"];
+        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            [cell.profilePicture setImage:[UIImage imageWithData:data]];
+        }];
+        return cell;
+    }
+    if (indexPath.section == 1) {
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         cell.friendName.text = _friendsUsingApp[indexPath.row][@"name"];
         [cell.profilePicture setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", _friendsUsingApp[indexPath.row][@"id"]]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
@@ -213,8 +252,21 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     if (indexPath.section == 0) {
+        
+        FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
+        chatVC.title = _groups[indexPath.row][@"name"];
+        chatVC.friendDict = _groups[indexPath.row];
+        chatVC.friendsImage = cell.profilePicture.image;
+        chatVC.isGroupChat = YES;
+        [self.navigationController pushViewController:chatVC animated:YES];
+    }
+
+    if (indexPath.section == 1) {
         
         FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         
@@ -223,6 +275,7 @@
         chatVC.title = _friendsUsingApp[indexPath.row][@"name"];
         chatVC.friendDict = _friendsUsingApp[indexPath.row];
         chatVC.friendsImage = cell.profilePicture.image;
+        chatVC.isGroupChat = NO;
         [self.navigationController pushViewController:chatVC animated:YES];
     }
 }
@@ -233,7 +286,7 @@
 {
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
-       
+    
     NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
     if (DEBUGMODE) {
         recipientEmail = @"rtayal11@gmail.com";

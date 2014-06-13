@@ -32,11 +32,16 @@
 //Parse Table Names
 #define kPFTableName_Chat @"Wechat"
 #define kPFTableUser @"User"
+#define kPFTableGroup @"Groups"
 
 //Chat Table Columns
 #define kPFChatSender @"sender"
 #define kPFChatReciever @"receiver"
 #define kPFChatMessage @"msg"
+
+#define kPFGroupName @"name"
+#define kPFGroupPhoto @"photo"
+#define kPFGroupMembers @"members"
 
 //Notification Related Keys
 #define kNotificationSender @"sender"
