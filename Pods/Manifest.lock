@@ -23,6 +23,7 @@ PODS:
   - DACircularProgress (2.2.0)
   - Facebook-iOS-SDK (3.14.1):
     - Bolts
+  - Google-AdMob-Ads-SDK (6.8.0)
   - GoogleAnalytics-iOS-SDK (3.0.7)
   - IDMPhotoBrowser (1.3.5):
     - AFNetworking (~> 2.2.3)
@@ -40,11 +41,13 @@ PODS:
     - SDWebImage/Core
   - SDWebImage/Core (3.6)
   - SVProgressHUD (1.0)
+  - SWTableViewCell (0.3.0)
   - TITokenField (0.9.5)
   - UINavigationBar+Addition (1.0.0)
 
 DEPENDENCIES:
   - APParallaxHeader
+  - Google-AdMob-Ads-SDK
   - GoogleAnalytics-iOS-SDK
   - IDMPhotoBrowser
   - iRate
@@ -53,6 +56,7 @@ DEPENDENCIES:
   - Parse-iOS-SDK
   - Reachability
   - SDWebImage (~> 3.6)
+  - SWTableViewCell
   - TITokenField
   - UINavigationBar+Addition
 
@@ -62,6 +66,7 @@ SPEC CHECKSUMS:
   Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
   DACircularProgress: 3b41941891a56dc6aa17971f5322a9a38a6f446e
   Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
+  Google-AdMob-Ads-SDK: ec4a2941cc0aabaf06bf4a709216d3e94ad7b46b
   GoogleAnalytics-iOS-SDK: bb285d8eef15a682f1b82971becd0d22edd0e53b
   IDMPhotoBrowser: d691bcdf470553e165f8eb982c5cd8e9a58bcdef
   iRate: 7d204971bab2f727195b868e32e05216fe257681
@@ -72,6 +77,7 @@ SPEC CHECKSUMS:
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  SWTableViewCell: 1725f7607ce4c154264c18aeb78e4636b11b0b29
   TITokenField: 5806434c695cd7e8ee9d7df126f318db652d6943
   UINavigationBar+Addition: 75b1b709f000aa7de774df19d4fd9098ba939a51
 

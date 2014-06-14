@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SWTableViewCell/SWTableViewCell.h>
 
-@interface FriendsListViewController : UITableViewController
+@interface FriendsListViewController : UITableViewController<SWTableViewCellDelegate>
 
 -(IBAction)inviteFriend:(id)sender;
 

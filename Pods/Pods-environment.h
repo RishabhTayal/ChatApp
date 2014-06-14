@@ -72,6 +72,12 @@
 #define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 14
 #define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 1
 
+// Google-AdMob-Ads-SDK
+#define COCOAPODS_POD_AVAILABLE_Google_AdMob_Ads_SDK
+#define COCOAPODS_VERSION_MAJOR_Google_AdMob_Ads_SDK 6
+#define COCOAPODS_VERSION_MINOR_Google_AdMob_Ads_SDK 8
+#define COCOAPODS_VERSION_PATCH_Google_AdMob_Ads_SDK 0
+
 // GoogleAnalytics-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_GoogleAnalytics_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_GoogleAnalytics_iOS_SDK 3
@@ -131,6 +137,12 @@
 #define COCOAPODS_VERSION_MAJOR_SVProgressHUD 1
 #define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
 #define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
+
+// SWTableViewCell
+#define COCOAPODS_POD_AVAILABLE_SWTableViewCell
+#define COCOAPODS_VERSION_MAJOR_SWTableViewCell 0
+#define COCOAPODS_VERSION_MINOR_SWTableViewCell 3
+#define COCOAPODS_VERSION_PATCH_SWTableViewCell 0
 
 // TITokenField
 #define COCOAPODS_POD_AVAILABLE_TITokenField
