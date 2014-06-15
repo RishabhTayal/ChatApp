@@ -18,5 +18,6 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 #import "GAI+MyGAITracker.h"
+#import "CoreData+MagicalRecord.h"
 
 #endif

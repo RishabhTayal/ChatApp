@@ -108,6 +108,18 @@
 #define COCOAPODS_VERSION_MINOR_MFSideMenu 5
 #define COCOAPODS_VERSION_PATCH_MFSideMenu 4
 
+// MagicalRecord
+#define COCOAPODS_POD_AVAILABLE_MagicalRecord
+#define COCOAPODS_VERSION_MAJOR_MagicalRecord 2
+#define COCOAPODS_VERSION_MINOR_MagicalRecord 2
+#define COCOAPODS_VERSION_PATCH_MagicalRecord 0
+
+// MagicalRecord/Core
+#define COCOAPODS_POD_AVAILABLE_MagicalRecord_Core
+#define COCOAPODS_VERSION_MAJOR_MagicalRecord_Core 2
+#define COCOAPODS_VERSION_MINOR_MagicalRecord_Core 2
+#define COCOAPODS_VERSION_PATCH_MagicalRecord_Core 0
+
 // Parse-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_Parse_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Parse_iOS_SDK 1
@@ -137,12 +149,6 @@
 #define COCOAPODS_VERSION_MAJOR_SVProgressHUD 1
 #define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
 #define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
-
-// SWTableViewCell
-#define COCOAPODS_POD_AVAILABLE_SWTableViewCell
-#define COCOAPODS_VERSION_MAJOR_SWTableViewCell 0
-#define COCOAPODS_VERSION_MINOR_SWTableViewCell 3
-#define COCOAPODS_VERSION_PATCH_SWTableViewCell 0
 
 // TITokenField
 #define COCOAPODS_POD_AVAILABLE_TITokenField

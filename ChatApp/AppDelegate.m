@@ -73,6 +73,9 @@
     } else {
         [self setLoginView];
     }
+    
+    [MagicalRecord setupCoreDataStackWithStoreNamed:@"VCinityModel"];
+    
     return YES;
 }
 

@@ -19,6 +19,8 @@
 #import <Reachability/Reachability.h>
 #import "NotificationView.h"
 #import "CreateGroupViewController.h"
+#import "Group.h"
+#import "Friend.h"
 
 @interface FriendsListViewController ()
 
@@ -59,7 +61,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     
     [_reachability startNotifier];
-
+    
     [self updateInterfaceWithReachabiltity:self.reachability];
     
     UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
@@ -90,7 +92,8 @@
 -(void)refreshTable:(UIRefreshControl*)refreshControl
 {
     [refreshControl endRefreshing];
-    [self updateInterfaceWithReachabiltity:_reachability];
+    [self loadGroupsFromServer];
+    //    [self updateInterfaceWithReachabiltity:_reachability];
 }
 
 #pragma mark - Internet Reachability Methods
@@ -112,25 +115,100 @@
         default:
         {
             [NotificationView hide];
-            FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
-            [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                NSLog(@"Error: %@", error);
-                _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
-                
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }];
+           
+            NSArray* friendsArray = [Friend MR_findAll];
+            if (friendsArray.count == 0) {
+                [self loadFriendsFromFacebook];
+            } else {
+                _friendsUsingApp = [NSMutableArray arrayWithArray:friendsArray];
+            }
+            
+            NSArray* array = [Group MR_findAll];
+            if (array.count == 0) {
+                [self loadGroupsFromServer];
+            } else {
+                _groups = [NSMutableArray arrayWithArray:array];
+            }
             
             //Get groups
-            PFQuery* query = [PFQuery queryWithClassName:kPFTableGroup];
-            [query whereKey:kPFGroupMembers equalTo:[PFUser currentUser]];
-            [query orderByDescending:@"updatedAt"];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                _groups = [[NSMutableArray alloc] initWithArray:objects];
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }];
         }
             break;
     }
+}
+
+-(void)loadFriendsFromFacebook
+{
+    FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        NSLog(@"Error: %@", error);
+        for (NSDictionary* object in result[@"data"]) {
+            NSArray* existingFriendArray = [Friend MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"fbId = %@", object[@"id"]]];
+            if (existingFriendArray.count > 0) {
+                Friend* existingFriend = [existingFriendArray objectAtIndex:0];
+                if (![existingFriend.fbId isEqualToString:object[@"id"]]) {
+                    Friend* friend = [Friend MR_createEntity];
+                    friend.fbId = object[@"id"];
+                    friend.name = object[@"name"];
+                    //                    group.image = object[kPFGroupPhoto];
+                }
+            } else {
+                Friend* friend = [Friend MR_createEntity];
+                friend.fbId = object[@"id"];
+                friend.name = object[@"name"];
+
+                //                group.image = object[kPFGroupPhoto];
+            }
+        }
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+                NSLog(@"You successfully saved your context.");
+            } else if (error) {
+                NSLog(@"Error saving context: %@", error.description);
+            }
+        }];
+//        _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
+//        
+//        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+    
+}
+
+-(void)loadGroupsFromServer
+{
+    PFQuery* query = [PFQuery queryWithClassName:kPFTableGroup];
+    [query whereKey:kPFGroupMembers equalTo:[PFUser currentUser]];
+    [query orderByDescending:@"updatedAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        //        BOOL shouldSave = false;
+        for (PFObject* object in objects) {
+            NSArray* existingGroupArray = [Group MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"groupId = %@", object.objectId]];
+            if (existingGroupArray.count > 0) {
+                Group* existingGroup = [existingGroupArray objectAtIndex:0];
+                if (![existingGroup.groupId isEqualToString:object.objectId]) {
+                    Group* group = [Group MR_createEntity];
+                    group.groupId = object.objectId;
+                    group.name = object[kPFGroupName];
+                    //                    group.image = object[kPFGroupPhoto];
+                }
+            } else {
+                Group* group = [Group MR_createEntity];
+                group.groupId = object.objectId;
+                group.name = object[kPFGroupName];
+                //                group.image = object[kPFGroupPhoto];
+            }
+        }
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+                NSLog(@"You successfully saved your context.");
+            } else if (error) {
+                NSLog(@"Error saving context: %@", error.description);
+            }
+        }];
+        //        _groups = [[NSMutableArray alloc] initWithArray:objects];
+        //        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+    
 }
 
 #pragma mark -
@@ -238,13 +316,11 @@
     // Configure the cell...
     if (indexPath.section == 0) {
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
-        cell.friendName.text = _groups[indexPath.row][@"name"];
-        PFFile* file = [_groups objectAtIndex:indexPath.row][@"photo"];
+        cell.friendName.text = ((Group*)_groups[indexPath.row]).name;
+        PFFile* file = ((Group*) [_groups objectAtIndex:indexPath.row]).image;
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             [cell.profilePicture setImage:[UIImage imageWithData:data]];
         }];
-        cell.rightUtilityButtons = [self rightButtons];
-        cell.delegate = self;
         return cell;
     }
     if (indexPath.section == 1) {
@@ -265,11 +341,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
     if (indexPath.section == 0) {
         
         FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-        
         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
         chatVC.title = _groups[indexPath.row][@"name"];
@@ -278,7 +353,7 @@
         chatVC.isGroupChat = YES;
         [self.navigationController pushViewController:chatVC animated:YES];
     }
-
+    
     if (indexPath.section == 1) {
         
         FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
@@ -292,109 +367,127 @@
         [self.navigationController pushViewController:chatVC animated:YES];
     }
 }
-
-
-- (NSArray *)rightButtons
-{
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                                title:@"More"];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
-                                                title:@"Delete"];
-    
-    return rightUtilityButtons;
-}
-
-#pragma mark - SWTableViewCell Delegate
-
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state
-{
-    switch (state) {
-        case 0:
-            NSLog(@"utility buttons closed");
-            break;
-        case 1:
-            NSLog(@"left utility buttons open");
-            break;
-        case 2:
-            NSLog(@"right utility buttons open");
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index
-{
-    switch (index) {
-        case 0:
-            NSLog(@"left button 0 was pressed");
-            break;
-        case 1:
-            NSLog(@"left button 1 was pressed");
-            break;
-        case 2:
-            NSLog(@"left button 2 was pressed");
-            break;
-        case 3:
-            NSLog(@"left btton 3 was pressed");
-        default:
-            break;
-    }
-}
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
-{
-    switch (index) {
-        case 0:
-        {
-            NSLog(@"More button was pressed");
-            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"More more more" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
-            [alertTest show];
-            
-            [cell hideUtilityButtonsAnimated:YES];
-            break;
-        }
-        case 1:
-        {
-            // Delete button was pressed
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-            
-            [_groups removeObjectAtIndex:cellIndexPath.row];
-            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
-{
-    // allow just one cell's utility button to be open at once
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
-- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
-{
-    switch (state) {
-        case 1:
-            // set to NO to disable all left utility buttons appearing
-            return YES;
-            break;
-        case 2:
-            // set to NO to disable all right utility buttons appearing
-            return YES;
-            break;
-        default:
-            break;
-    }
-    
-    return YES;
-}
+//- (NSArray *)rightButtons
+//{
+//    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+//    [rightUtilityButtons sw_addUtilityButtonWithColor:
+//     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
+//                                                title:@"More"];
+//    [rightUtilityButtons sw_addUtilityButtonWithColor:
+//     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+//                                                title:@"Delete"];
+//
+//    return rightUtilityButtons;
+//}
+//
+//#pragma mark - SWTableViewCell Delegate
+//
+//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return @"Delete";
+//}
+//- (NSString *)tableView:(UITableView *)tableView titleForMoreOptionButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return @"More";
+//}
+//- (void)tableView:(UITableView *)tableView moreOptionButtonPressedInRowAtIndexPath:(NSIndexPath *)indexPath {
+//    // Called when "MORE" button is pushed.
+//    NSLog(@"MORE button pushed in row at: %@", indexPath.description);
+//    // Hide more- and delete-confirmation view
+//    [tableView.visibleCells enumerateObjectsUsingBlock:^(MSCMoreOptionTableViewCell *cell, NSUInteger idx, BOOL *stop) {
+//        if ([[tableView indexPathForCell:cell] isEqual:indexPath]) {
+//            [cell hideDeleteConfirmation];
+//        }
+//    }];
+//}
+
+//- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state
+//{
+//    switch (state) {
+//        case 0:
+//            NSLog(@"utility buttons closed");
+//            break;
+//        case 1:
+//            NSLog(@"left utility buttons open");
+//            break;
+//        case 2:
+//            NSLog(@"right utility buttons open");
+//            break;
+//        default:
+//            break;
+//    }
+//}
+//
+//- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index
+//{
+//    switch (index) {
+//        case 0:
+//            NSLog(@"left button 0 was pressed");
+//            break;
+//        case 1:
+//            NSLog(@"left button 1 was pressed");
+//            break;
+//        case 2:
+//            NSLog(@"left button 2 was pressed");
+//            break;
+//        case 3:
+//            NSLog(@"left btton 3 was pressed");
+//        default:
+//            break;
+//    }
+//}
+//
+//- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+//{
+//    switch (index) {
+//        case 0:
+//        {
+//            NSLog(@"More button was pressed");
+//            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"More more more" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+//            [alertTest show];
+//
+//            [cell hideUtilityButtonsAnimated:YES];
+//            break;
+//        }
+//        case 1:
+//        {
+//            // Delete button was pressed
+//            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+//
+//            [_groups removeObjectAtIndex:cellIndexPath.row];
+//            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+//}
+//
+//- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
+//{
+//    // allow just one cell's utility button to be open at once
+//    return YES;
+//}
+//
+//- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
+//{
+//    switch (state) {
+//        case 1:
+//            // set to NO to disable all left utility buttons appearing
+//            return YES;
+//            break;
+//        case 2:
+//            // set to NO to disable all right utility buttons appearing
+//            return YES;
+//            break;
+//        default:
+//            break;
+//    }
+//
+//    return YES;
+//}
 
 #pragma mark -
 

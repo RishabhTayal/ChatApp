@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SWTableViewCell/SWTableViewCell.h>
 
-@interface FriendTableViewCell : SWTableViewCell
+@interface FriendTableViewCell : UITableViewCell
 
 @property (strong) IBOutlet UILabel* friendName;
 @property (strong) IBOutlet UIImageView* profilePicture;

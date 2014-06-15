@@ -33,6 +33,9 @@ PODS:
   - JSQMessagesViewController (5.0.4):
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.5.2)
+  - MagicalRecord (2.2):
+    - MagicalRecord/Core
+  - MagicalRecord/Core (2.2)
   - MFSideMenu (0.5.4)
   - Parse-iOS-SDK (1.2.19):
     - Facebook-iOS-SDK (~> 3.7)
@@ -41,7 +44,6 @@ PODS:
     - SDWebImage/Core
   - SDWebImage/Core (3.6)
   - SVProgressHUD (1.0)
-  - SWTableViewCell (0.3.0)
   - TITokenField (0.9.5)
   - UINavigationBar+Addition (1.0.0)
 
@@ -52,11 +54,11 @@ DEPENDENCIES:
   - IDMPhotoBrowser
   - iRate
   - JSQMessagesViewController
+  - MagicalRecord
   - MFSideMenu
   - Parse-iOS-SDK
   - Reachability
   - SDWebImage (~> 3.6)
-  - SWTableViewCell
   - TITokenField
   - UINavigationBar+Addition
 
@@ -72,12 +74,12 @@ SPEC CHECKSUMS:
   iRate: 7d204971bab2f727195b868e32e05216fe257681
   JSQMessagesViewController: 70be735cbe86b74961870d1d9a2948af7ea2da9d
   JSQSystemSoundPlayer: c24914bc96ff5365b5d28b59d7ecffd60d1c5587
+  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
   MFSideMenu: fca49243c818323a2758af4c23ce81a0b17497d7
   Parse-iOS-SDK: 5e1f7e649a02f1cc19e73cc95bd43d7778848314
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
-  SWTableViewCell: 1725f7607ce4c154264c18aeb78e4636b11b0b29
   TITokenField: 5806434c695cd7e8ee9d7df126f318db652d6943
   UINavigationBar+Addition: 75b1b709f000aa7de774df19d4fd9098ba939a51
 
