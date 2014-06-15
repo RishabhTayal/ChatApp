@@ -54,18 +54,22 @@
     [NSThread detachNewThreadSelector:@selector(getAllDeviceContacts) toTarget:self withObject:nil];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New Group", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(createNewGroup:)];
+    _reachability = [Reachability reachabilityForInternetConnection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
+    [_reachability startNotifier];
+
+    [self updateInterfaceWithReachabiltity:self.reachability];
+    
+    UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
+    [self.tableView addSubview:refreshControl];
+    [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [GAI trackWithScreenName:kScreenNameFriendsList];
-    
-    _reachability = [Reachability reachabilityForInternetConnection];
-    [self updateInterfaceWithReachabiltity:self.reachability];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    
-    [_reachability startNotifier];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -78,6 +82,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)refreshTable:(UIRefreshControl*)refreshControl
+{
+    [refreshControl endRefreshing];
+    [self updateInterfaceWithReachabiltity:_reachability];
 }
 
 #pragma mark - Internet Reachability Methods
@@ -101,7 +111,6 @@
             [NotificationView hide];
             FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
             [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                NSLog(@"Friends: %@", result[@"data"]);
                 NSLog(@"Error: %@", error);
                 _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
                 
@@ -113,7 +122,6 @@
             [query whereKey:kPFGroupMembers equalTo:[PFUser currentUser]];
             [query orderByDescending:@"updatedAt"];
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                NSLog(@"%@", objects);
                 _groups = [[NSMutableArray alloc] initWithArray:objects];
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             }];
