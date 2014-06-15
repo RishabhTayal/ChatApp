@@ -27,6 +27,7 @@
 @property (strong) NSMutableArray* friendsNotUsingApp;
 
 @property (strong) Reachability* reachability;
+@property (strong) GADInterstitial* interstitial;
 
 @end
 
@@ -64,6 +65,8 @@
     UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
     [self.tableView addSubview:refreshControl];
     [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
+    
+    [self loadInterstitial];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -418,6 +421,38 @@
             [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
         }
     }];
+}
+
+
+#pragma mark - GADRequest implementation
+
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            GAD_SIMULATOR_ID,
+                            @"4a4d13e777b61b0f28cb678991220815"
+                            ];
+    return request;
+}
+
+-(void)loadInterstitial
+{
+    _interstitial = [[GADInterstitial alloc] init];
+    _interstitial.delegate = self;
+    
+    _interstitial.adUnitID = @"ca-app-pub-8353175505649532/7101209039";
+    [_interstitial loadRequest:[self request]];
+}
+
+-(void)interstitialDidReceiveAd:(GADInterstitial *)ad
+{
+    NSLog(@"Google Ads recieved");
+    [_interstitial presentFromRootViewController:self];
 }
 
 @end

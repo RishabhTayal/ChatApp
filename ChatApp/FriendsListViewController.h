@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <SWTableViewCell/SWTableViewCell.h>
+#import <GADInterstitial.h>
 
-@interface FriendsListViewController : UITableViewController<SWTableViewCellDelegate>
+@interface FriendsListViewController : UITableViewController<SWTableViewCellDelegate, GADInterstitialDelegate>
 
 -(IBAction)inviteFriend:(id)sender;
 
