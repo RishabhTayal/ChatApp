@@ -141,36 +141,23 @@
     FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         NSLog(@"Error: %@", error);
+        [Friend MR_truncateAll];
         for (NSDictionary* object in result[@"data"]) {
-            NSArray* existingFriendArray = [Friend MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"fbId = %@", object[@"id"]]];
-            if (existingFriendArray.count > 0) {
-                Friend* existingFriend = [existingFriendArray objectAtIndex:0];
-                if (![existingFriend.fbId isEqualToString:object[@"id"]]) {
-                    Friend* friend = [Friend MR_createEntity];
-                    friend.fbId = object[@"id"];
-                    friend.name = object[@"name"];
-                    //                    group.image = object[kPFGroupPhoto];
-                }
-            } else {
-                Friend* friend = [Friend MR_createEntity];
-                friend.fbId = object[@"id"];
-                friend.name = object[@"name"];
-                
-                //                group.image = object[kPFGroupPhoto];
-            }
+            Friend* friend = [Friend MR_createEntity];
+            friend.fbId = object[@"id"];
+            friend.name = object[@"name"];
         }
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
+                _friendsUsingApp = [NSMutableArray arrayWithArray:[Friend MR_findAll]];
+                
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
             } else if (error) {
                 NSLog(@"Error saving context: %@", error.description);
             }
         }];
-        //        _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
-        //
-        //        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
-    
 }
 
 -(void)loadGroupsFromServer
@@ -339,7 +326,8 @@
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
         Group* group = (Group*)_groups[indexPath.row];
         chatVC.title = group.name;
-        chatVC.friendDict = _groups[indexPath.row];
+//        chatVC.friendDict = _groups[indexPath.row];
+        chatVC.groupObj = group;
         chatVC.friendsImage = cell.profilePicture.image;
         chatVC.isGroupChat = YES;
         [self.navigationController pushViewController:chatVC animated:YES];
@@ -353,7 +341,8 @@
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
         Friend* friend = (Friend*)_friendsUsingApp[indexPath.row];
         chatVC.title = friend.name;
-        chatVC.friendDict = _friendsUsingApp[indexPath.row];
+//        chatVC.friendDict = _friendsUsingApp[indexPath.row];
+        chatVC.friendObj = friend;
         chatVC.friendsImage = cell.profilePicture.image;
         chatVC.isGroupChat = NO;
         [self.navigationController pushViewController:chatVC animated:YES];

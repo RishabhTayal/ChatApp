@@ -78,10 +78,10 @@
 {
     PFQuery *innerQuery = [[PFQuery alloc] initWithClassName:kPFTableName_Chat];
     [innerQuery whereKey:kPFChatSender equalTo:[PFUser currentUser][kPFUser_FBID]];
-    [innerQuery whereKey:kPFChatReciever equalTo:_friendDict[@"id"]];
+    [innerQuery whereKey:kPFChatReciever equalTo:_friendObj.fbId];
     
     PFQuery* innerQuery2 = [[PFQuery alloc] initWithClassName:kPFTableName_Chat];
-    [innerQuery2 whereKey:kPFChatSender equalTo:_friendDict[@"id"]];
+    [innerQuery2 whereKey:kPFChatSender equalTo:_friendObj.fbId];
     [innerQuery2 whereKey:kPFChatReciever equalTo:[PFUser currentUser][kPFUser_FBID]];
     
     PFQuery* query = [PFQuery orQueryWithSubqueries:@[innerQuery, innerQuery2]];
@@ -102,47 +102,50 @@
 
 -(void)loadGroupChat
 {
-    PFObject* groupObject = (PFObject*) _friendDict;
-    
-    //Get Members
-    PFRelation* membersRelation = [groupObject relationForKey:kPFGroupMembers];
-    [[membersRelation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        
-        _groupMembers = [NSMutableArray new];
-        for (PFUser* member in objects) {
-            NSLog(@"%@", member);
+    PFQuery* query = [PFQuery queryWithClassName:kPFTableGroup];
+    [query getObjectWithId:_groupObj.groupId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        PFObject* groupObject = (PFObject*) [objects firstObject];
+        //Get Members
+        PFRelation* membersRelation = [groupObject relationForKey:kPFGroupMembers];
+        [[membersRelation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
-            NSMutableDictionary* dict = [NSMutableDictionary new];
-            [dict setObject:member[kPFUser_FBID] forKey:kPFUser_FBID];
-            [dict setObject:member[kPFUser_Username] forKey:kPFUser_Username];
-            
-            PFFile* file = member[kPFUser_Picture];
-            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                UIImage* img = [UIImage imageWithData:data];
-                [dict setObject:img forKey:kPFUser_Picture];
-                [_groupMembers addObject:dict];
-                [self finishReceivingMessage];
-            }];
-        }
-    }];
-    
-    //Get Chats
-    PFRelation* chatRelation = [groupObject relationForKey:@"chats"];
-    
-    PFQuery* chatQuery = [chatRelation query];
-    chatQuery.limit = 20;
-    
-    [chatQuery orderByDescending:@"createdAt"];
-    
-    [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        [_chatArray removeAllObjects];
+            _groupMembers = [NSMutableArray new];
+            for (PFUser* member in objects) {
+                NSLog(@"%@", member);
+                
+                NSMutableDictionary* dict = [NSMutableDictionary new];
+                [dict setObject:member[kPFUser_FBID] forKey:kPFUser_FBID];
+                [dict setObject:member[kPFUser_Username] forKey:kPFUser_Username];
+                
+                PFFile* file = member[kPFUser_Picture];
+                [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    UIImage* img = [UIImage imageWithData:data];
+                    [dict setObject:img forKey:kPFUser_Picture];
+                    [_groupMembers addObject:dict];
+                    [self finishReceivingMessage];
+                }];
+            }
+        }];
         
-        for (PFObject* chat in objects) {
-            JSQMessage* message = [[JSQMessage alloc] initWithText:chat[kPFChatMessage] sender:chat[kPFChatSender] date:chat.createdAt];
-            [_chatArray addObject:message];
-        }
-        _chatArray = [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
-        [self finishReceivingMessage];
+        //Get Chats
+        PFRelation* chatRelation = [groupObject relationForKey:@"chats"];
+        
+        PFQuery* chatQuery = [chatRelation query];
+        chatQuery.limit = 20;
+        
+        [chatQuery orderByDescending:@"createdAt"];
+        
+        [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            [_chatArray removeAllObjects];
+            
+            for (PFObject* chat in objects) {
+                JSQMessage* message = [[JSQMessage alloc] initWithText:chat[kPFChatMessage] sender:chat[kPFChatSender] date:chat.createdAt];
+                [_chatArray addObject:message];
+            }
+            _chatArray = [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
+            [self finishReceivingMessage];
+        }];
     }];
 }
 
@@ -180,7 +183,7 @@
 
 -(void)sendChatToFriend:(NSString*)text
 {
-    NSArray* recipients = @[_friendDict[@"id"]];
+    NSArray* recipients = @[_friendObj.fbId];
     
     PFQuery* pushQuery = [PFInstallation query];
     [pushQuery whereKey:@"owner" containedIn:recipients];
@@ -188,16 +191,17 @@
     PFPush *push = [[PFPush alloc] init];
     [push setQuery:pushQuery];
     
-    NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[_friendDict, @{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationReceiever, kNotificationSender]];
-    [pushData setObject:text forKey:kNotificationMessage];
-    [pushData setObject:[NSString stringWithFormat:@"%@: %@", [PFUser currentUser].username, text] forKey:kNotificationAlert];
-    [push setData:pushData];
+    //    NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[_friendDict, @{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationReceiever, kNotificationSender]];
+    //    [pushData setObject:text forKey:kNotificationMessage];
+    //    [pushData setObject:[NSString stringWithFormat:@"%@: %@", [PFUser currentUser].username, text] forKey:kNotificationAlert];
+    //    [push setData:pushData];
+    [push setMessage:@"a"];
     [push sendPushInBackground];
     
     PFObject *sendObjects = [PFObject objectWithClassName:kPFTableName_Chat];
     [sendObjects setObject:[NSString stringWithFormat:@"%@", text] forKey:kPFChatMessage];
     [sendObjects setObject:[PFUser currentUser][kPFUser_FBID] forKey:kPFChatSender];
-    [sendObjects setObject:_friendDict[@"id"] forKey:kPFChatReciever];
+    [sendObjects setObject:_friendObj.fbId forKey:kPFChatReciever];
     [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSLog(@"save");
     }];
@@ -205,35 +209,43 @@
 
 -(void)sendChatToGroup:(NSString*)text
 {
-    PFObject* object = (PFObject*)_friendDict;
-    PFRelation* relation = [object relationForKey:kPFGroupMembers];
-    [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    //    PFObject* object = (PFObject*)_friendDict;
+    PFQuery* query = [PFQuery queryWithClassName:kPFTableGroup];
+    [query getObjectWithId:_groupObj.groupId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        PFObject* groupObject = (PFObject*)[objects firstObject];
         
-        PFQuery* pushQuery = [PFInstallation query];
-        [pushQuery whereKey:@"owner" containedIn:[objects valueForKey:kPFUser_FBID]];
-        [pushQuery whereKey:@"owner" notEqualTo:[PFUser currentUser][kPFUser_FBID]];
         
-        PFPush *push = [[PFPush alloc] init];
-        [push setQuery:pushQuery];
-        
-        NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
-        [pushData setObject:text forKey:kNotificationMessage];
-        [pushData setObject:[NSString stringWithFormat:@"%@ @ \"%@\": %@", [PFUser currentUser].username, _friendDict[kPFGroupName] ,text] forKey:kNotificationAlert];
-        [push setData:pushData];
-        [push sendPushInBackground];
-        
-        PFObject* object = [PFObject objectWithClassName:kPFTableName_Chat];
-        [object setObject:text forKey:kPFChatMessage];
-        [object setObject:[PFUser currentUser][kPFUser_FBID] forKey:kPFChatSender];
-        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                PFObject* groupObject = (PFObject*) _friendDict;
-                PFRelation* relation = [groupObject relationForKey:@"chats"];
-                [relation addObject:object];
-                [groupObject saveEventually];
-            }
+        PFRelation* relation = [groupObject relationForKey:kPFGroupMembers];
+        [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            
+            PFQuery* pushQuery = [PFInstallation query];
+            [pushQuery whereKey:@"owner" containedIn:[objects valueForKey:kPFUser_FBID]];
+            [pushQuery whereKey:@"owner" notEqualTo:[PFUser currentUser][kPFUser_FBID]];
+            
+            PFPush *push = [[PFPush alloc] init];
+            [push setQuery:pushQuery];
+            
+            //        NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
+            //        [pushData setObject:text forKey:kNotificationMessage];
+            //        [pushData setObject:[NSString stringWithFormat:@"%@ @ \"%@\": %@", [PFUser currentUser].username, _friendDict[kPFGroupName] ,text] forKey:kNotificationAlert];
+            //        [push setData:pushData];
+            [push setMessage:@"a"];
+            [push sendPushInBackground];
+            
+            PFObject* object = [PFObject objectWithClassName:kPFTableName_Chat];
+            [object setObject:text forKey:kPFChatMessage];
+            [object setObject:[PFUser currentUser][kPFUser_FBID] forKey:kPFChatSender];
+            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    //                PFObject* groupObject = (PFObject*) _friendDict;
+                    PFRelation* relation = [groupObject relationForKey:@"chats"];
+                    [relation addObject:object];
+                    [groupObject saveEventually];
+                }
+            }];
+            
         }];
-        
     }];
 }
 

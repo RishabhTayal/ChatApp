@@ -51,7 +51,7 @@
         chatVC.friendsImage = image;
     }];
 
-    chatVC.friendDict = notification.userInfo[kNotificationSender];
+    chatVC.friendObj = notification.userInfo[kNotificationSender];
     [friendsList.navigationController pushViewController:chatVC animated:YES];
 }
 
