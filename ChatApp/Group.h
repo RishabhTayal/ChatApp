@@ -14,6 +14,7 @@
 @property (retain) NSString* name;
 @property (retain) NSString* imageurl;
 @property (retain) id members;
+@property (retain) NSDate* updatedAt;
 
 @end
 

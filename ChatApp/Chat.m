@@ -14,6 +14,7 @@
 @dynamic jsmessage;
 @dynamic groupId;
 @dynamic friendId;
+@dynamic updatedAt;
 
 @end
 

@@ -15,6 +15,7 @@
 //@property (retain) NSString* sender;
 @property (retain) NSString* groupId;
 @property (retain) NSString* friendId;
+@property (retain) NSDate* updatedAt;
 
 @end
 

@@ -15,6 +15,7 @@
 @dynamic name;
 @dynamic imageurl;
 @dynamic members;
+@dynamic updatedAt;
 
 @end
 

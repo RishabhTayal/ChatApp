@@ -41,7 +41,7 @@
         if ([Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId].count == 0) {
             [self loadGroupChat];
         } else {
-            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId] reverseObjectEnumerator] allObjects]];
+            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
             [self finishReceivingMessage];
             Chat* chat = _chatArray[0];
             NSLog(@"%@", chat);
@@ -50,7 +50,7 @@
         if ([Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId].count == 0) {
             [self loadFriendsChat];
         } else {
-            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId] reverseObjectEnumerator] allObjects]];
+            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
             [self finishReceivingMessage];
         }
         //        [self loadFriendsChat];
@@ -104,15 +104,17 @@
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [_chatArray removeAllObjects];
-        [Chat MR_truncateAll];
+        
+        [Chat MR_deleteAllMatchingPredicate:[NSPredicate predicateWithFormat:@"friendId = %@", _friendObj.fbId]];
         for (PFObject* object in objects) {
             JSQMessage* message = [[JSQMessage alloc] initWithText:object[kPFChatMessage] sender:object[kPFChatSender] date:object.createdAt];
             Chat* chatObj = [Chat MR_createEntity];
             [_chatArray addObject:message];
             chatObj.jsmessage = message;
             chatObj.friendId = _friendObj.fbId;
+            chatObj.updatedAt = object.createdAt;
             [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
-                _chatArray =  [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId] reverseObjectEnumerator] allObjects]];
+                _chatArray =  [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
                 [self finishReceivingMessage];
             }];
         }
@@ -129,7 +131,7 @@
         PFRelation* membersRelation = [groupObject relationForKey:kPFGroupMembers];
         [[membersRelation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
-           NSMutableArray* tempMembersArray = [NSMutableArray new];
+            NSMutableArray* tempMembersArray = [NSMutableArray new];
             for (PFUser* member in objects) {
                 NSLog(@"%@", member);
                 
@@ -160,16 +162,16 @@
         
         [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             [_chatArray removeAllObjects];
-#warning Replace truncate all.
-            [Chat MR_truncateAll];
+            [Chat MR_deleteAllMatchingPredicate:[NSPredicate predicateWithFormat:@"groupId = %@", _groupObj.groupId]];
             for (PFObject* chat in objects) {
                 JSQMessage* message = [[JSQMessage alloc] initWithText:chat[kPFChatMessage] sender:chat[kPFChatSender] date:chat.createdAt];
                 Chat* chatObj = [Chat MR_createEntity];
                 chatObj.jsmessage = message;
                 chatObj.groupId = _groupObj.groupId;
+                chatObj.updatedAt = chat.createdAt;
                 //chatObj.chatGroup
                 [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
-                    _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId] reverseObjectEnumerator] allObjects]];
+                    _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
                     [self finishReceivingMessage];
                 }];
                 //                [_chatArray addObject:message];
@@ -192,6 +194,7 @@
     Chat* chatObj = [Chat MR_createEntity];
     chatObj.jsmessage = message;
     chatObj.groupId = _groupObj.groupId;
+    chatObj.updatedAt = message.date;
     [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
         [_chatArray addObject:chatObj];
         [self scrollToBottomAnimated:YES];
@@ -209,7 +212,7 @@
     }
     
     [GAI trackEventWithCategory:kGAICategoryButton action:kGAIActionMessageSent label:@"friends" value:nil];
-  
+    
 }
 
 -(void)didPressAccessoryButton:(UIButton *)sender

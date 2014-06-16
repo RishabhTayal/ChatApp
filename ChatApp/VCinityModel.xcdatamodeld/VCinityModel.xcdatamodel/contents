@@ -3,7 +3,8 @@
     <entity name="Chat" syncable="YES">
         <attribute name="friendId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="groupId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="jsmessage" optional="YES" attributeType="Transformable" valueTransformerName="JSMessage" syncable="YES"/>
+        <attribute name="jsmessage" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <entity name="Friend" syncable="YES">
         <attribute name="fbId" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,12 +13,13 @@
     <entity name="Group" syncable="YES">
         <attribute name="groupId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageurl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="members" optional="YES" attributeType="Transformable" valueTransformerName="Members" syncable="YES"/>
+        <attribute name="members" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chat" positionX="-108" positionY="-349" width="128" height="88"/>
+        <element name="Chat" positionX="-108" positionY="-349" width="128" height="105"/>
         <element name="Friend" positionX="-299" positionY="-136" width="128" height="73"/>
-        <element name="Group" positionX="-297" positionY="-364" width="128" height="103"/>
+        <element name="Group" positionX="-297" positionY="-364" width="128" height="118"/>
     </elements>
 </model>

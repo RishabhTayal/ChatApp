@@ -172,12 +172,13 @@
             Group* group = [Group MR_createEntity];
             group.groupId = object.objectId;
             group.name = object[kPFGroupName];
+            group.updatedAt = object.updatedAt;
             group.imageurl = ((PFFile*) object[kPFGroupPhoto]).url;
         }
         [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
-                _groups = [[NSMutableArray alloc] initWithArray:[Group MR_findAll]];
+                _groups = [[NSMutableArray alloc] initWithArray:[Group MR_findAllSortedBy:@"updatedAt" ascending:YES]];
                 
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             } else if (error) {
