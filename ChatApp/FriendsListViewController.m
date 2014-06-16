@@ -146,7 +146,7 @@
             friend.fbId = object[@"id"];
             friend.name = object[@"name"];
         }
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
                 _friendsUsingApp = [NSMutableArray arrayWithArray:[Friend MR_findAll]];
@@ -174,7 +174,7 @@
             group.name = object[kPFGroupName];
             group.imageurl = ((PFFile*) object[kPFGroupPhoto]).url;
         }
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
                 _groups = [[NSMutableArray alloc] initWithArray:[Group MR_findAll]];
@@ -324,7 +324,7 @@
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
         Group* group = (Group*)_groups[indexPath.row];
         chatVC.title = group.name;
-//        chatVC.friendDict = _groups[indexPath.row];
+        //        chatVC.friendDict = _groups[indexPath.row];
         chatVC.groupObj = group;
         chatVC.friendsImage = cell.profilePicture.image;
         chatVC.isGroupChat = YES;
@@ -339,7 +339,7 @@
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
         Friend* friend = (Friend*)_friendsUsingApp[indexPath.row];
         chatVC.title = friend.name;
-//        chatVC.friendDict = _friendsUsingApp[indexPath.row];
+        //        chatVC.friendDict = _friendsUsingApp[indexPath.row];
         chatVC.friendObj = friend;
         chatVC.friendsImage = cell.profilePicture.image;
         chatVC.isGroupChat = NO;

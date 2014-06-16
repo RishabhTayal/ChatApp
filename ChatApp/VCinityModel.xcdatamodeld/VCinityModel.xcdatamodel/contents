@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Chat" syncable="YES">
+        <attribute name="friendId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="groupId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jsmessage" optional="YES" attributeType="Transformable" valueTransformerName="JSMessage" syncable="YES"/>
     </entity>
@@ -14,7 +15,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chat" positionX="-108" positionY="-349" width="128" height="73"/>
+        <element name="Chat" positionX="-108" positionY="-349" width="128" height="88"/>
         <element name="Friend" positionX="-299" positionY="-136" width="128" height="73"/>
         <element name="Group" positionX="-297" positionY="-364" width="128" height="88"/>
     </elements>

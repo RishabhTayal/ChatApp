@@ -36,6 +36,25 @@
         [infoButton addTarget:self action:@selector(showGroupChatInfo:) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
     }
+    
+    if (_isGroupChat) {
+        if ([Chat MR_findAll].count == 0) {
+            [self loadGroupChat];
+        } else {
+            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findAll] reverseObjectEnumerator] allObjects]];
+            [self finishReceivingMessage];
+            Chat* chat = _chatArray[0];
+            NSLog(@"%@", chat);
+        }
+    } else {
+        if ([Chat MR_findAll].count == 0) {
+            [self loadFriendsChat];
+        } else {
+            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findAll] reverseObjectEnumerator] allObjects]];
+            [self finishReceivingMessage];
+        }
+        //        [self loadFriendsChat];
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -43,18 +62,6 @@
 {
     [super viewDidAppear:animated];
     [GAI trackWithScreenName:kScreenNameFriendsChat];
-    if (_isGroupChat) {
-        if ([Chat MR_findAll].count == 0) {
-            [self loadGroupChat];
-        } else {
-            _chatArray = [[NSMutableArray alloc] initWithArray:[Chat MR_findAll]];
-            [self finishReceivingMessage];
-            Chat* chat = _chatArray[0];
-            NSLog(@"%@", chat);
-        }
-    } else {
-        [self loadFriendsChat];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,13 +104,18 @@
     [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [_chatArray removeAllObjects];
-        
+        [Chat MR_truncateAll];
         for (PFObject* object in objects) {
             JSQMessage* message = [[JSQMessage alloc] initWithText:object[kPFChatMessage] sender:object[kPFChatSender] date:object.createdAt];
+            Chat* chatObj = [Chat MR_createEntity];
             [_chatArray addObject:message];
+            chatObj.jsmessage = message;
+            chatObj.friendId = _friendObj.fbId;
+            [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
+                _chatArray =  [[NSMutableArray alloc] initWithArray:[[[Chat MR_findAll] reverseObjectEnumerator] allObjects]];
+                [self finishReceivingMessage];
+            }];
         }
-        _chatArray =  [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
-        [self finishReceivingMessage];
     }];
 }
 
@@ -152,7 +164,7 @@
                 chatObj.jsmessage = message;
                 chatObj.groupId = _groupObj.groupId;
                 //chatObj.chatGroup
-                [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
                     NSLog(@"%@", ((JSQMessage*)((Chat*)[Chat MR_findAll][0]).jsmessage).text);
                     _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findAll] reverseObjectEnumerator] allObjects]];
                     [self finishReceivingMessage];
@@ -173,7 +185,14 @@
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text sender:(NSString *)sender date:(NSDate *)date
 {
     JSQMessage* message = [[JSQMessage alloc] initWithText:text sender:sender date:date];
-    [_chatArray addObject:message];
+    
+    Chat* chatObj = [Chat MR_createEntity];
+    chatObj.jsmessage = message;
+    chatObj.groupId = _groupObj.groupId;
+    [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
+        NSLog(@"%@", ((JSQMessage*)((Chat*)[Chat MR_findAll][0]).jsmessage).text);
+        [_chatArray addObject:chatObj];
+    }];
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
         [JSQSystemSoundPlayer jsq_playMessageSentSound];

@@ -13,6 +13,7 @@
 
 @dynamic jsmessage;
 @dynamic groupId;
+@dynamic friendId;
 
 @end
 

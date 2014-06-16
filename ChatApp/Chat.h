@@ -14,6 +14,7 @@
 @property (retain) id jsmessage;
 //@property (retain) NSString* sender;
 @property (retain) NSString* groupId;
+@property (retain) NSString* friendId;
 
 @end
 
