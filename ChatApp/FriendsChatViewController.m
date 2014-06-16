@@ -44,7 +44,14 @@
     [super viewDidAppear:animated];
     [GAI trackWithScreenName:kScreenNameFriendsChat];
     if (_isGroupChat) {
-        [self loadGroupChat];
+        if ([Chat MR_findAll].count == 0) {
+            [self loadGroupChat];
+        } else {
+            _chatArray = [[NSMutableArray alloc] initWithArray:[Chat MR_findAll]];
+            [self finishReceivingMessage];
+            Chat* chat = _chatArray[0];
+            NSLog(@"%@", chat);
+        }
     } else {
         [self loadFriendsChat];
     }
@@ -138,13 +145,20 @@
         
         [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             [_chatArray removeAllObjects];
-            
+            [Chat MR_truncateAll];
             for (PFObject* chat in objects) {
                 JSQMessage* message = [[JSQMessage alloc] initWithText:chat[kPFChatMessage] sender:chat[kPFChatSender] date:chat.createdAt];
-                [_chatArray addObject:message];
+                Chat* chatObj = [Chat MR_createEntity];
+                chatObj.jsmessage = message;
+                chatObj.groupId = _groupObj.groupId;
+                //chatObj.chatGroup
+                [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                    NSLog(@"%@", ((JSQMessage*)((Chat*)[Chat MR_findAll][0]).jsmessage).text);
+                    _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findAll] reverseObjectEnumerator] allObjects]];
+                    [self finishReceivingMessage];
+                }];
+                //                [_chatArray addObject:message];
             }
-            _chatArray = [[NSMutableArray alloc] initWithArray:[[_chatArray reverseObjectEnumerator] allObjects]];
-            [self finishReceivingMessage];
         }];
     }];
 }
@@ -244,7 +258,6 @@
                     [groupObject saveEventually];
                 }
             }];
-            
         }];
     }];
 }
@@ -253,12 +266,13 @@
 
 -(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [_chatArray objectAtIndex:indexPath.item];
+    JSQMessage* message = ((Chat*) _chatArray[indexPath.item]).jsmessage;
+    return message;
 }
 
 -(UIImageView *)collectionView:(JSQMessagesCollectionView *)collectionView bubbleImageViewForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage* message = _chatArray[indexPath.row];
+    JSQMessage* message = ((Chat*) _chatArray[indexPath.row]).jsmessage;
     if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
         return [JSQMessagesBubbleImageFactory outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     }
@@ -273,7 +287,7 @@
     iv.layer.cornerRadius = iv.frame.size.height / 2;
     iv.layer.masksToBounds = YES;
     
-    JSQMessage* message = _chatArray[indexPath.row];
+    JSQMessage* message = ((Chat*)_chatArray[indexPath.row]).jsmessage;
     if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
         PFFile *file = [PFUser currentUser][kPFUser_Picture];
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -295,7 +309,7 @@
 
 -(NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSQMessage* message = _chatArray[indexPath.item];
+    JSQMessage* message = ((Chat*) _chatArray[indexPath.item]).jsmessage;
     return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
 }
 
@@ -303,7 +317,7 @@
 {
     if (_isGroupChat) {
         
-        JSQMessage* message = _chatArray[indexPath.item];
+        JSQMessage* message = ((Chat*)_chatArray[indexPath.item]).jsmessage;
         
         if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
             NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
@@ -334,7 +348,7 @@
 {
     JSQMessagesCollectionViewCell* cell = (JSQMessagesCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    JSQMessage* msg = [_chatArray objectAtIndex:indexPath.item];
+    JSQMessage* msg = ((Chat*) [_chatArray objectAtIndex:indexPath.item]).jsmessage;
     
     if ([msg.sender isEqualToString:self.sender]) {
         cell.textView.textColor = [UIColor whiteColor];
@@ -373,9 +387,9 @@
         return true;
     }
     
-    JSQMessage* message = _chatArray[index.item];
+    JSQMessage* message = ((Chat*) _chatArray[index.item]).jsmessage;
     if (index.item - 1 >= 0) {
-        JSQMessage* previousMessage = _chatArray[index.item - 1];
+        JSQMessage* previousMessage = ((Chat*) _chatArray[index.item - 1]).jsmessage;
         if ([message.sender isEqualToString:previousMessage.sender]) {
             return false;
         }
@@ -389,9 +403,9 @@
         return true;
     }
     
-    JSQMessage* message = _chatArray[index.item];
+    JSQMessage* message = ((Chat*)_chatArray[index.item]).jsmessage;
     if (index.item - 1 >= 0) {
-        JSQMessage* previousMessage = _chatArray[index.item - 1];
+        JSQMessage* previousMessage = ((Chat*) _chatArray[index.item - 1]).jsmessage;
         NSTimeInterval interval = [message.date timeIntervalSinceDate:previousMessage.date];
         int mintues = floor(interval/60);
         if (mintues < 5) {

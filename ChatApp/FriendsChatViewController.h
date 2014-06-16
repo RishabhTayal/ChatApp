@@ -10,6 +10,7 @@
 #import <JSQMessagesViewController.h>
 #import "Friend.h"
 #import "Group.h"
+#import "Chat.h"
 
 @interface FriendsChatViewController:JSQMessagesViewController
 

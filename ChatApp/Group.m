@@ -14,5 +14,6 @@
 @dynamic groupId;
 @dynamic name;
 @dynamic imageurl;
+@dynamic groupChat;
 
 @end

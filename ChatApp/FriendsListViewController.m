@@ -123,14 +123,13 @@
                 _friendsUsingApp = [NSMutableArray arrayWithArray:friendsArray];
             }
             
+            //Get groups
             NSArray* array = [Group MR_findAll];
             if (array.count == 0) {
                 [self loadGroupsFromServer];
             } else {
                 _groups = [NSMutableArray arrayWithArray:array];
             }
-            
-            //Get groups
         }
             break;
     }
@@ -186,7 +185,6 @@
             }
         }];
     }];
-    
 }
 
 #pragma mark -

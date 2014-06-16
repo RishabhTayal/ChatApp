@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0603F77C194F62CE003544BF /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 0603F77B194F62CE003544BF /* Chat.m */; };
 		0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0608596B19196CD9005F6A75 /* AddressBook.framework */; };
 		06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608596F191991B5005F6A75 /* UIImage+Utility.m */; };
 		06085978191BFB10005F6A75 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 06085977191BFB10005F6A75 /* MenuButton.m */; };
@@ -54,6 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0603F77A194F62CE003544BF /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
+		0603F77B194F62CE003544BF /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 		0608596B19196CD9005F6A75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0608596E191991B5005F6A75 /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
 		0608596F191991B5005F6A75 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
@@ -372,6 +375,8 @@
 		06E0B6EA194F51E500159C93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0603F77A194F62CE003544BF /* Chat.h */,
+				0603F77B194F62CE003544BF /* Chat.m */,
 				06E0B6E0194D7DA100159C93 /* Group.h */,
 				06E0B6E1194D7DA100159C93 /* Group.m */,
 				06E0B6E5194D99F200159C93 /* Friend.h */,
@@ -518,6 +523,7 @@
 				0608597D191C27A1005F6A75 /* ActivityView.m in Sources */,
 				0608598E191C7ACD005F6A75 /* NotificationView.m in Sources */,
 				062EA23E194A08A600AA64E5 /* CreateGroupViewController.m in Sources */,
+				0603F77C194F62CE003544BF /* Chat.m in Sources */,
 				068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */,
 				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
 				06E0B6AA194B947E00159C93 /* UIDevice-Hardware.m in Sources */,
