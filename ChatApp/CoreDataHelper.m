@@ -13,7 +13,9 @@
 +(void)savePersistentCompletionBlock:(CompletionHandler)completion
 {
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-        completion(success, error);
+        if (completion) {
+            completion(success, error);
+        }
     }];
 }
 

@@ -38,19 +38,19 @@
     }
     
     if (_isGroupChat) {
-        if ([Chat MR_findAll].count == 0) {
+        if ([Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId].count == 0) {
             [self loadGroupChat];
         } else {
-            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findAll] reverseObjectEnumerator] allObjects]];
+            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId] reverseObjectEnumerator] allObjects]];
             [self finishReceivingMessage];
             Chat* chat = _chatArray[0];
             NSLog(@"%@", chat);
         }
     } else {
-        if ([Chat MR_findAll].count == 0) {
+        if ([Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId].count == 0) {
             [self loadFriendsChat];
         } else {
-            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findAll] reverseObjectEnumerator] allObjects]];
+            _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId] reverseObjectEnumerator] allObjects]];
             [self finishReceivingMessage];
         }
         //        [self loadFriendsChat];
@@ -112,7 +112,7 @@
             chatObj.jsmessage = message;
             chatObj.friendId = _friendObj.fbId;
             [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
-                _chatArray =  [[NSMutableArray alloc] initWithArray:[[[Chat MR_findAll] reverseObjectEnumerator] allObjects]];
+                _chatArray =  [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId] reverseObjectEnumerator] allObjects]];
                 [self finishReceivingMessage];
             }];
         }
@@ -129,7 +129,7 @@
         PFRelation* membersRelation = [groupObject relationForKey:kPFGroupMembers];
         [[membersRelation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
-            _groupMembers = [NSMutableArray new];
+           NSMutableArray* tempMembersArray = [NSMutableArray new];
             for (PFUser* member in objects) {
                 NSLog(@"%@", member);
                 
@@ -141,10 +141,13 @@
                 [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     UIImage* img = [UIImage imageWithData:data];
                     [dict setObject:img forKey:kPFUser_Picture];
-                    [_groupMembers addObject:dict];
+                    [tempMembersArray addObject:dict];
                     [self finishReceivingMessage];
                 }];
             }
+            
+            _groupObj.members = tempMembersArray;
+            [CoreDataHelper savePersistentCompletionBlock:nil];
         }];
         
         //Get Chats
@@ -157,6 +160,7 @@
         
         [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             [_chatArray removeAllObjects];
+#warning Replace truncate all.
             [Chat MR_truncateAll];
             for (PFObject* chat in objects) {
                 JSQMessage* message = [[JSQMessage alloc] initWithText:chat[kPFChatMessage] sender:chat[kPFChatSender] date:chat.createdAt];
@@ -165,8 +169,7 @@
                 chatObj.groupId = _groupObj.groupId;
                 //chatObj.chatGroup
                 [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
-                    NSLog(@"%@", ((JSQMessage*)((Chat*)[Chat MR_findAll][0]).jsmessage).text);
-                    _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findAll] reverseObjectEnumerator] allObjects]];
+                    _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId] reverseObjectEnumerator] allObjects]];
                     [self finishReceivingMessage];
                 }];
                 //                [_chatArray addObject:message];
@@ -190,8 +193,9 @@
     chatObj.jsmessage = message;
     chatObj.groupId = _groupObj.groupId;
     [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
-        NSLog(@"%@", ((JSQMessage*)((Chat*)[Chat MR_findAll][0]).jsmessage).text);
         [_chatArray addObject:chatObj];
+        [self scrollToBottomAnimated:YES];
+        [self finishSendingMessage];
     }];
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
@@ -205,8 +209,7 @@
     }
     
     [GAI trackEventWithCategory:kGAICategoryButton action:kGAIActionMessageSent label:@"friends" value:nil];
-    [self scrollToBottomAnimated:YES];
-    [self finishSendingMessage];
+  
 }
 
 -(void)didPressAccessoryButton:(UIButton *)sender
@@ -314,7 +317,7 @@
         }];
     } else {
         if (_isGroupChat) {
-            for (NSDictionary* dict in _groupMembers) {
+            for (NSDictionary* dict in _groupObj.members) {
                 if ([dict[kPFUser_FBID] isEqualToString:message.sender]) {
                     iv.image = dict[kPFUser_Picture];
                 }
@@ -342,7 +345,7 @@
             NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
             return attString;
         } else {
-            for (NSDictionary* dict  in _groupMembers) {
+            for (NSDictionary* dict in _groupObj.members) {
                 if ([dict[kPFUser_FBID] isEqualToString:message.sender]) {
                     NSAttributedString* attString = [[NSAttributedString alloc] initWithString:dict[kPFUser_Username]];
                     return attString;

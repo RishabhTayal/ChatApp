@@ -19,6 +19,6 @@
 @property (strong) Group* groupObj;
 
 @property (assign) BOOL isGroupChat;
-@property (strong) NSMutableArray* groupMembers;
+//@property (strong) NSMutableArray* groupMembers;
 
 @end

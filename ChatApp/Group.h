@@ -13,6 +13,10 @@
 @property (retain) NSString* groupId;
 @property (retain) NSString* name;
 @property (retain) NSString* imageurl;
-@property (retain) NSManagedObject* groupChat;
+@property (retain) id members;
+
+@end
+
+@interface Members : NSValueTransformer
 
 @end
