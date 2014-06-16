@@ -180,23 +180,13 @@
     [query orderByDescending:@"updatedAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
-        //        BOOL shouldSave = false;
+        [Group MR_truncateAll];
+        
         for (PFObject* object in objects) {
-            NSArray* existingGroupArray = [Group MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"groupId = %@", object.objectId]];
-            if (existingGroupArray.count > 0) {
-                Group* existingGroup = [existingGroupArray objectAtIndex:0];
-                if (![existingGroup.groupId isEqualToString:object.objectId]) {
-                    Group* group = [Group MR_createEntity];
-                    group.groupId = object.objectId;
-                    group.name = object[kPFGroupName];
-                    //                    group.image = object[kPFGroupPhoto];
-                }
-            } else {
                 Group* group = [Group MR_createEntity];
                 group.groupId = object.objectId;
                 group.name = object[kPFGroupName];
-                //                group.image = object[kPFGroupPhoto];
-            }
+//                group.image = object[kPFGroupPhoto];
         }
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
@@ -325,8 +315,9 @@
     }
     if (indexPath.section == 1) {
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-        cell.friendName.text = _friendsUsingApp[indexPath.row][@"name"];
-        [cell.profilePicture setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", _friendsUsingApp[indexPath.row][@"id"]]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
+        Friend* friend = ((Friend*) _friendsUsingApp[indexPath.row]);
+        cell.friendName.text = friend.name;
+        [cell.profilePicture setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", friend.fbId]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
         return cell;
     } else {
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friendNotUsingAppCell"];
