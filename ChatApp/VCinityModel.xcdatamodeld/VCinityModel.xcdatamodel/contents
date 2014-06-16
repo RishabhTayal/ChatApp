@@ -10,12 +10,12 @@
     </entity>
     <entity name="Group" syncable="YES">
         <attribute name="groupId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="imageurl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Group" positionX="-63" positionY="-18" width="128" height="88"/>
         <element name="Chats" positionX="115" positionY="-12" width="128" height="75"/>
         <element name="Friend" positionX="45" positionY="18" width="128" height="73"/>
+        <element name="Group" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

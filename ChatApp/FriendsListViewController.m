@@ -115,7 +115,7 @@
         default:
         {
             [NotificationView hide];
-           
+            
             NSArray* friendsArray = [Friend MR_findAll];
             if (friendsArray.count == 0) {
                 [self loadFriendsFromFacebook];
@@ -155,7 +155,7 @@
                 Friend* friend = [Friend MR_createEntity];
                 friend.fbId = object[@"id"];
                 friend.name = object[@"name"];
-
+                
                 //                group.image = object[kPFGroupPhoto];
             }
         }
@@ -166,9 +166,9 @@
                 NSLog(@"Error saving context: %@", error.description);
             }
         }];
-//        _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
-//        
-//        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+        //        _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
+        //
+        //        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
     
 }
@@ -183,20 +183,21 @@
         [Group MR_truncateAll];
         
         for (PFObject* object in objects) {
-                Group* group = [Group MR_createEntity];
-                group.groupId = object.objectId;
-                group.name = object[kPFGroupName];
-//                group.image = object[kPFGroupPhoto];
+            Group* group = [Group MR_createEntity];
+            group.groupId = object.objectId;
+            group.name = object[kPFGroupName];
+            group.imageurl = ((PFFile*) object[kPFGroupPhoto]).url;
         }
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
             if (success) {
                 NSLog(@"You successfully saved your context.");
+                _groups = [[NSMutableArray alloc] initWithArray:[Group MR_findAll]];
+                
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             } else if (error) {
                 NSLog(@"Error saving context: %@", error.description);
             }
         }];
-        //        _groups = [[NSMutableArray alloc] initWithArray:objects];
-        //        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
     
 }
@@ -306,11 +307,9 @@
     // Configure the cell...
     if (indexPath.section == 0) {
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
-        cell.friendName.text = ((Group*)_groups[indexPath.row]).name;
-        PFFile* file = ((Group*) [_groups objectAtIndex:indexPath.row]).image;
-        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            [cell.profilePicture setImage:[UIImage imageWithData:data]];
-        }];
+        Group* group = _groups[indexPath.row];
+        cell.friendName.text = group.name;
+        [cell.profilePicture setImageWithURL:[NSURL URLWithString:group.imageurl]];
         return cell;
     }
     if (indexPath.section == 1) {
@@ -338,7 +337,8 @@
         FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
-        chatVC.title = _groups[indexPath.row][@"name"];
+        Group* group = (Group*)_groups[indexPath.row];
+        chatVC.title = group.name;
         chatVC.friendDict = _groups[indexPath.row];
         chatVC.friendsImage = cell.profilePicture.image;
         chatVC.isGroupChat = YES;
@@ -351,7 +351,8 @@
         
         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
-        chatVC.title = _friendsUsingApp[indexPath.row][@"name"];
+        Friend* friend = (Friend*)_friendsUsingApp[indexPath.row];
+        chatVC.title = friend.name;
         chatVC.friendDict = _friendsUsingApp[indexPath.row];
         chatVC.friendsImage = cell.profilePicture.image;
         chatVC.isGroupChat = NO;

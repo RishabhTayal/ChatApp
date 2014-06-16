@@ -295,6 +295,7 @@
 		065A15DA1912BCFB00B85D3D /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				06E0B6EA194F51E500159C93 /* Model */,
 				06085979191C25C4005F6A75 /* Views */,
 				06085975191BFAE0005F6A75 /* Utilities */,
 				065A1620191412A200B85D3D /* Intro ViewController */,
@@ -364,12 +365,19 @@
 				062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */,
 				06E0B6AB194B981B00159C93 /* GroupInfoViewController.h */,
 				06E0B6AC194B981B00159C93 /* GroupInfoViewController.m */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
+		06E0B6EA194F51E500159C93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 				06E0B6E0194D7DA100159C93 /* Group.h */,
 				06E0B6E1194D7DA100159C93 /* Group.m */,
 				06E0B6E5194D99F200159C93 /* Friend.h */,
 				06E0B6E6194D99F200159C93 /* Friend.m */,
 			);
-			name = Group;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		06FD23811917D72100AE7226 /* Settings VC */ = {

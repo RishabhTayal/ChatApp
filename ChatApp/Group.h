@@ -12,6 +12,6 @@
 
 @property (retain) NSString* groupId;
 @property (retain) NSString* name;
-@property (retain) id image;
+@property (retain) NSString* imageurl;
 
 @end

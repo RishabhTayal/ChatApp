@@ -7,11 +7,12 @@
 //
 
 #import "Group.h"
+#import <Parse/Parse.h>
 
 @implementation Group
 
 @dynamic groupId;
 @dynamic name;
-@dynamic image;
+@dynamic imageurl;
 
 @end
