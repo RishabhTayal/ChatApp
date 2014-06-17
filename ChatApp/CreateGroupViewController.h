@@ -11,6 +11,4 @@
 
 @interface CreateGroupViewController : UIViewController<TITokenFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (strong) NSArray* friendsArray;
-
 @end

@@ -9,6 +9,7 @@
 #import "CreateGroupViewController.h"
 #import <Parse/Parse.h>
 #import "ActivityView.h"
+#import "Friend.h"
 
 @interface CreateGroupViewController ()
 {
@@ -19,6 +20,7 @@
 @property (strong) IBOutlet UIButton* groupPhotoButton;
 
 @property (strong) TITokenFieldView* tokenFieldView;
+@property (strong) NSArray* friendsArray;
 
 @property (assign) BOOL imagePicked;
 
@@ -31,6 +33,8 @@
     [super viewDidLoad];
     
     _tokenFieldView = [[TITokenFieldView alloc] initWithFrame:CGRectMake(0, 160, 320, 300)];
+    _friendsArray = [Friend MR_findAll];
+    
     [_tokenFieldView setSourceArray:_friendsArray];
     [self.view addSubview:_tokenFieldView];
     
@@ -100,10 +104,9 @@
         }];
     }];
     
-    
     //Save Group Memebers
     PFQuery* query = [PFUser query];
-    [query whereKey:kPFUser_FBID containedIn:[_tokenFieldView.tokenField.tokenObjects valueForKey:@"id"]];
+    [query whereKey:kPFUser_FBID containedIn:[_tokenFieldView.tokenField.tokenObjects valueForKey:@"fbId"]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         PFRelation* relation = [groupObject relationForKey:kPFGroupMembers];
         for (PFUser* user in objects) {
@@ -219,9 +222,10 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = [object objectForKey:@"name"];
-    cell.detailTextLabel.text = [object  objectForKey:@"email"];
-    cell.imageView.image = [object objectForKey:@"photo"];
+    Friend* friend = (Friend*)object;
+    cell.textLabel.text = friend.name;
+//    cell.detailTextLabel.text = friend
+//    cell.imageView.image = [object objectForKey:@"photo"];
     
     return cell;
 }
@@ -229,7 +233,8 @@
 -(NSString *)tokenField:(TITokenField *)tokenField displayStringForRepresentedObject:(id)object
 {
     //    [_contacts removeObject:object];
-    return [object objectForKey:@"name"];
+    Friend* friend = (Friend*)object;
+    return friend.name;
 }
 
 -(BOOL)tokenField:(TITokenField *)field shouldUseCustomSearchForSearchString:(NSString *)searchString

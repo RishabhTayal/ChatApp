@@ -195,7 +195,6 @@
     NSLog(@"Create group");
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CreateGroupViewController* createGroupVC = [sb instantiateViewControllerWithIdentifier:@"CreateGroupViewController"];
-    createGroupVC.friendsArray = _friendsUsingApp;
     [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:createGroupVC] animated:YES completion:nil];
 }
 
