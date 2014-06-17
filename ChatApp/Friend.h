@@ -10,6 +10,7 @@
 
 @interface Friend : NSManagedObject
 
+//Dont change the property name
 @property (retain) NSString* fbId;
 @property (retain) NSString* name;
 
