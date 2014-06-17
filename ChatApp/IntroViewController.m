@@ -53,7 +53,9 @@
         } else {
             [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                 if (!error) {
-                    
+
+                    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+
                     if ([[PFUser currentUser] objectForKey:kPFUser_FBID] == NULL) {
                         //First Time user
                         NSLog(@"First Time");

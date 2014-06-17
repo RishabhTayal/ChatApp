@@ -88,23 +88,28 @@
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:userInfo];
-    
-    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
-        [PFPush handlePush:userInfo];
-        [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
-    } else {
-        [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
-        UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
-        if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
-            
-            if (userInfo[kNotificationSender]) {
-                [[InAppNotificationView sharedInstance] notifyWithUserInfo:userInfo andTouchBlock:^(InAppNotificationView *view) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
-                }];
+    if (userInfo[kNotificationPayload]) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:userInfo];
+        
+        if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+            [PFPush handlePush:userInfo];
+            [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
+        } else {
+            [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
+            UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
+            if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
+                
+                if (userInfo[kNotificationSender]) {
+                    [[InAppNotificationView sharedInstance] notifyWithUserInfo:userInfo andTouchBlock:^(InAppNotificationView *view) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
+                    }];
+                }
             }
         }
+    } else {
+        [PFPush handlePush:userInfo];
     }
 }
 
@@ -184,7 +189,7 @@
 -(void)updateInstallation
 {
     PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
-//    [currentInstallation setDeviceTokenFromData:deviceToken];
+    //    [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation setChannels:@[@"channel"]];
     [currentInstallation saveInBackground];
 }
