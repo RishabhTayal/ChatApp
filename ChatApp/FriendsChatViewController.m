@@ -43,8 +43,6 @@
         } else {
             _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
             [self finishReceivingMessage];
-            Chat* chat = _chatArray[0];
-            NSLog(@"%@", chat);
         }
     } else {
         if ([Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId].count == 0) {
@@ -53,7 +51,6 @@
             _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
             [self finishReceivingMessage];
         }
-        //        [self loadFriendsChat];
     }
     // Do any additional setup after loading the view.
 }
@@ -80,12 +77,26 @@
             [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
         }
         
-        JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[kNotificationMessage] sender:notification.userInfo[kNotificationSender][@"name"] date:[NSDate date]];
-        [_chatArray addObject:message];
-        [self finishReceivingMessage];
+        BOOL shouldAdd;
+        if (_isGroupChat) {
+            if ([notification.userInfo[kNotificationSender][@"id"] isEqualToString:_groupObj.groupId]) {
+                shouldAdd = true;
+            }
+        } else {
+            if ([notification.userInfo[kNotificationSender][@"id"] isEqualToString:_friendObj.fbId] && ![notification.userInfo[kNotificationPayload][kNotificationPayloadIsGroupChat] boolValue]) {
+                shouldAdd = true;
+            }
+        }
         
+        if (shouldAdd) {
+            JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[kNotificationMessage] sender:notification.userInfo[kNotificationSender][@"id"] date:[NSDate date]];
+            Chat* chatObj = [Chat MR_createEntity];
+            chatObj.jsmessage = message;
+            chatObj.updatedAt = message.date;
+            [_chatArray addObject:chatObj];
+            [self finishReceivingMessage];
+        }
     }
-    //    [self scrollToBottomAnimated:YES];
 }
 
 -(void)loadFriendsChat
@@ -109,7 +120,6 @@
         for (PFObject* object in objects) {
             JSQMessage* message = [[JSQMessage alloc] initWithText:object[kPFChatMessage] sender:object[kPFChatSender] date:object.createdAt];
             Chat* chatObj = [Chat MR_createEntity];
-            [_chatArray addObject:message];
             chatObj.jsmessage = message;
             chatObj.friendId = _friendObj.fbId;
             chatObj.updatedAt = object.createdAt;
@@ -133,8 +143,6 @@
             
             NSMutableArray* tempMembersArray = [NSMutableArray new];
             for (PFUser* member in objects) {
-                NSLog(@"%@", member);
-                
                 NSMutableDictionary* dict = [NSMutableDictionary new];
                 [dict setObject:member[kPFUser_FBID] forKey:kPFUser_FBID];
                 [dict setObject:member[kPFUser_Username] forKey:kPFUser_Username];
@@ -174,7 +182,6 @@
                     _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
                     [self finishReceivingMessage];
                 }];
-                //                [_chatArray addObject:message];
             }
         }];
     }];
@@ -230,11 +237,12 @@
     PFPush *push = [[PFPush alloc] init];
     [push setQuery:pushQuery];
     
-    //    NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[_friendDict, @{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationReceiever, kNotificationSender]];
-    //    [pushData setObject:text forKey:kNotificationMessage];
-    //    [pushData setObject:[NSString stringWithFormat:@"%@: %@", [PFUser currentUser].username, text] forKey:kNotificationAlert];
-    //    [push setData:pushData];
-    [push setMessage:@"a"];
+    NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
+    [pushData setObject:text forKey:kNotificationMessage];
+    [pushData setObject:[NSString stringWithFormat:@"%@: %@", [PFUser currentUser].username, text] forKey:kNotificationAlert];
+    [pushData setObject:[NSNumber numberWithBool:YES] forKey:@"groupMessage"];
+    [pushData setObject:[NSDictionary dictionaryWithObjects:@[[NSNumber numberWithBool:NO]] forKeys:@[kNotificationPayloadIsGroupChat]] forKey:kNotificationPayload];
+    [push setData:pushData];
     [push sendPushInBackground];
     
     PFObject *sendObjects = [PFObject objectWithClassName:kPFTableName_Chat];
@@ -265,11 +273,11 @@
             PFPush *push = [[PFPush alloc] init];
             [push setQuery:pushQuery];
             
-            //        NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
-            //        [pushData setObject:text forKey:kNotificationMessage];
-            //        [pushData setObject:[NSString stringWithFormat:@"%@ @ \"%@\": %@", [PFUser currentUser].username, _friendDict[kPFGroupName] ,text] forKey:kNotificationAlert];
-            //        [push setData:pushData];
-            [push setMessage:@"a"];
+            NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
+            [pushData setObject:text forKey:kNotificationMessage];
+            [pushData setObject:[NSString stringWithFormat:@"%@ @ \"%@\": %@", [PFUser currentUser].username, groupObject[kPFGroupName] ,text] forKey:kNotificationAlert];
+            [pushData setObject:[NSDictionary dictionaryWithObjects:@[[NSNumber numberWithBool:YES], _groupObj.groupId] forKeys:@[kNotificationPayloadIsGroupChat, kNotificationPayloadGroupId]] forKey:kNotificationPayload];
+            [push setData:pushData];
             [push sendPushInBackground];
             
             PFObject* object = [PFObject objectWithClassName:kPFTableName_Chat];

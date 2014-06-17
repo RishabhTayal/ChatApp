@@ -17,7 +17,6 @@
 #import <iRate/iRate.h>
 #import "SessionController.h"
 #import "InAppNotificationTapListener.h"
-#import "UIImage+Utility.h"
 #import "InAppNotificationView.h"
 
 @implementation AppDelegate
@@ -101,10 +100,8 @@
         if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
             
             if (userInfo[kNotificationSender]) {
-                [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
-                    [[InAppNotificationView sharedInstance] notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:image duration:3 andTouchBlock:^(InAppNotificationView *view) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
-                    }];
+                [[InAppNotificationView sharedInstance] notifyWithUserInfo:userInfo andTouchBlock:^(InAppNotificationView *view) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
                 }];
             }
         }

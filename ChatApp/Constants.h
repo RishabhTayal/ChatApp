@@ -45,8 +45,11 @@
 
 //Notification Related Keys
 #define kNotificationSender @"sender"
-#define kNotificationReceiever @"reciever"
+//#define kNotificationReceiever @"reciever"
 #define kNotificationMessage @"message"
 #define kNotificationAlert @"alert"
+#define kNotificationPayload @"payload"
+#define kNotificationPayloadIsGroupChat @"isGroupChat"
+#define kNotificationPayloadGroupId @"groupId"
 
 #endif

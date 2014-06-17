@@ -7,10 +7,13 @@
 //
 
 #import "InAppNotificationView.h"
+#import "Group.h"
+#import "Friend.h"
+#import "UIImage+Utility.h"
 
 @interface InAppNotificationView()
 
-@property (strong) NoificationTouchBlock block;
+@property (strong) NotificationTouchBlock block;
 @property (strong) UIWindow* myWindow;
 
 @property (strong) IBOutlet UIImageView* mainImageView;
@@ -32,7 +35,21 @@
     return _sharedObject;
 }
 
--(void)notifyWithText:(NSString *)text detail:(NSString *)detail image:(UIImage *)image duration:(CGFloat)duration andTouchBlock:(NoificationTouchBlock)block
+-(void)notifyWithUserInfo:(NSDictionary *)userInfo andTouchBlock:(NotificationTouchBlock)block
+{
+    if ([userInfo[kNotificationPayload][kNotificationPayloadIsGroupChat] boolValue] == TRUE) {
+        Group* group = [[Group MR_findByAttribute:@"groupId" withValue:userInfo[kNotificationPayload][kNotificationPayloadGroupId]] firstObject];
+        [UIImage imageForURL:[NSURL URLWithString:group.imageurl] imageDownloadBlock:^(UIImage *image, NSError *error) {
+            [self notifyWithText:[NSString stringWithFormat:@"%@ @ \"%@\":", userInfo[kNotificationSender][@"name"], group.name] detail:userInfo[kNotificationMessage] image:image duration:3 andTouchBlock:block];
+        }];
+    } else {
+        [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
+            [[InAppNotificationView sharedInstance] notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:image duration:3 andTouchBlock:block];
+        }];
+    }
+}
+
+-(void)notifyWithText:(NSString *)text detail:(NSString *)detail image:(UIImage *)image duration:(CGFloat)duration andTouchBlock:(NotificationTouchBlock)block
 {
     self.frame = CGRectMake(0, -80, 320, 80);
     

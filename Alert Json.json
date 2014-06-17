@@ -1,0 +1,26 @@
+Friend Chat
+{
+	"message": "F",
+	"sender": { 
+				"id": "10152962890122715", 
+				"name": "Rishabh Tayal" 
+			  }, 
+	"alert": "Rishabh Tayal: F",
+	"payload": {
+					"isGroupChat": "No",
+			   }
+}
+
+Group Chat
+{ 
+	"message": "D", 
+	"sender": { 
+				"id": "10152962890122715", 
+				"name": "Rishabh Tayal"
+			   },
+	 "alert": "Rishabh Tayal @ \"Rt\": D"
+	 "payload": {
+					"isGroupChat": "Yes",
+					"groupId": "abcdef"
+			   }
+}
