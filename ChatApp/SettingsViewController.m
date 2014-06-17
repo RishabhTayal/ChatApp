@@ -29,6 +29,8 @@
 @property (strong) IBOutlet UIButton* twitterButton;
 @property (strong) IBOutlet UIButton* appstoreButton;
 
+@property (strong) IBOutlet UILabel* appVersionLabel;
+
 -(IBAction)likeOnFacebook:(id)sender;
 -(IBAction)followOnTwitter:(id)sender;
 -(IBAction)reviewOnAppStore:(id)sender;
@@ -157,7 +159,7 @@
 {
     if (section == [tableView numberOfSections] - 1) {
         //Get the height from SettingsShareView.Xib
-        return 112;
+        return 140;
     }
     return 0;
 }
@@ -175,6 +177,11 @@
         
         [_appstoreButton.layer setCornerRadius:4];
         [_appstoreButton.layer setMasksToBounds:YES];
+        
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+        NSString *minorVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
+        _appVersionLabel.text = [NSString stringWithFormat:@"Version %@ (%@)", majorVersion, minorVersion];
         
         return view;
     }
