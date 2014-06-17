@@ -15,7 +15,7 @@
 		0608597D191C27A1005F6A75 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608597B191C27A1005F6A75 /* ActivityView.m */; };
 		0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0608597C191C27A1005F6A75 /* ActivityView.xib */; };
 		06085981191C36AC005F6A75 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06085980191C36AC005F6A75 /* MessageUI.framework */; };
-		0608598E191C7ACD005F6A75 /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608598D191C7ACD005F6A75 /* NotificationView.m */; };
+		0608598E191C7ACD005F6A75 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608598D191C7ACD005F6A75 /* DropDownView.m */; };
 		060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D47EF192FD8040062982B /* GAI+MyGAITracker.m */; };
 		060D47F4192FE3610062982B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D47F3192FE3610062982B /* WebViewController.m */; };
 		060D4807192FE9790062982B /* AOTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D4805192FE9790062982B /* AOTutorialViewController.m */; };
@@ -69,8 +69,8 @@
 		0608597B191C27A1005F6A75 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		0608597C191C27A1005F6A75 /* ActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityView.xib; sourceTree = "<group>"; };
 		06085980191C36AC005F6A75 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		0608598C191C7ACD005F6A75 /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
-		0608598D191C7ACD005F6A75 /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
+		0608598C191C7ACD005F6A75 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
+		0608598D191C7ACD005F6A75 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
 		060D47EE192FD8040062982B /* GAI+MyGAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GAI+MyGAITracker.h"; sourceTree = "<group>"; };
 		060D47EF192FD8040062982B /* GAI+MyGAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GAI+MyGAITracker.m"; sourceTree = "<group>"; };
 		060D47F2192FE3610062982B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -231,8 +231,8 @@
 			children = (
 				065A15E91912BCFB00B85D3D /* NearChatViewController.h */,
 				065A15EA1912BCFB00B85D3D /* NearChatViewController.m */,
-				0608598C191C7ACD005F6A75 /* NotificationView.h */,
-				0608598D191C7ACD005F6A75 /* NotificationView.m */,
+				0608598C191C7ACD005F6A75 /* DropDownView.h */,
+				0608598D191C7ACD005F6A75 /* DropDownView.m */,
 				0613983B192413E400C9AB1F /* SessionController.h */,
 				0613983C192413E400C9AB1F /* SessionController.m */,
 			);
@@ -526,7 +526,7 @@
 				061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */,
 				061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */,
 				0608597D191C27A1005F6A75 /* ActivityView.m in Sources */,
-				0608598E191C7ACD005F6A75 /* NotificationView.m in Sources */,
+				0608598E191C7ACD005F6A75 /* DropDownView.m in Sources */,
 				062EA23E194A08A600AA64E5 /* CreateGroupViewController.m in Sources */,
 				0603F77C194F62CE003544BF /* Chat.m in Sources */,
 				068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */,

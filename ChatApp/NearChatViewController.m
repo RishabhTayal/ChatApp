@@ -12,7 +12,7 @@
 #import "MenuButton.h"
 #import <MFSideMenu.h>
 #import <Parse/Parse.h>
-#import "NotificationView.h"
+#import "DropDownView.h"
 #import <UINavigationBar+Addition/UINavigationBar+Addition.h>
 #import "AppDelegate.h"
 #import "InAppNotificationView.h"
@@ -65,12 +65,12 @@
     
     [self.navigationController.navigationBar hideBottomHairline];
     if (_sessionController.connectedPeers.count == 0 ) {
-        [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"No users nearby", nil)] height:NotificationViewHeightDefault hideAfterDelay:0];
+        [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"No users nearby", nil)] height:DropDownViewHeightDefault hideAfterDelay:0];
     } else {
         if (_sessionController.connectedPeers.count == 1) {
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipient", nil), [_sessionController connectedPeers].count] height:NotificationViewHeightDefault hideAfterDelay:0];
+            [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipient", nil), [_sessionController connectedPeers].count] height:DropDownViewHeightDefault hideAfterDelay:0];
         } else {
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipients", nil), [_sessionController connectedPeers].count] height:NotificationViewHeightDefault hideAfterDelay:0];
+            [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipients", nil), [_sessionController connectedPeers].count] height:DropDownViewHeightDefault hideAfterDelay:0];
         }
     }
 }
@@ -93,13 +93,13 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if (_sessionController.connectedPeers.count > 0) {
             if (_sessionController.connectedPeers.count == 1) {
-                [NotificationView setNotificationText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipient", nil), [_sessionController connectedPeers].count]];
+                [DropDownView setNotificationText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipient", nil), [_sessionController connectedPeers].count]];
             } else {
-                [NotificationView setNotificationText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipients", nil), [_sessionController connectedPeers].count]];
+                [DropDownView setNotificationText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipients", nil), [_sessionController connectedPeers].count]];
             }
             
         } else {
-            [NotificationView setNotificationText:NSLocalizedString(@"No users nearby", nil)];
+            [DropDownView setNotificationText:NSLocalizedString(@"No users nearby", nil)];
         }
     });
 }

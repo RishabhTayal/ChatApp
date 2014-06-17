@@ -6,30 +6,30 @@
 //  Copyright (c) 2014 Rishabh Tayal. All rights reserved.
 //
 
-#import "NotificationView.h"
+#import "DropDownView.h"
 
-@implementation NotificationView
+@implementation DropDownView
 
-+(void)showInViewController:(UIViewController *)controller withText:(NSString *)text height:(NotificationViewHeight)height hideAfterDelay:(CGFloat)delay
++(void)showInViewController:(UIViewController *)controller withText:(NSString *)text height:(DropDownViewHeight)height hideAfterDelay:(CGFloat)delay
 {
-    CGRect frame = CGRectMake(0, 0, [NotificationView getDeviceWidth], height);
+    CGRect frame = CGRectMake(0, 0, [DropDownView getDeviceWidth], height);
     frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame) - frame.size.height;
-    NotificationView* view = [NotificationView sharedInstance];
+    DropDownView* view = [DropDownView sharedInstance];
     view.frame = frame;
     
     for (UIView* subviews in view.subviews) {
         [subviews removeFromSuperview];
     }
     
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [NotificationView getDeviceWidth], frame.size.height)];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [DropDownView getDeviceWidth], frame.size.height)];
     label.text = text;
     label.textColor = [UIColor whiteColor];
     CGFloat fontSize;
     switch (height) {
-        case NotificationViewHeightShort:
+        case DropDownViewHeightShort:
             fontSize = 12;
             break;
-        case NotificationViewHeightTall:
+        case DropDownViewHeightTall:
             fontSize = 16;
             break;
         default:
@@ -52,14 +52,14 @@
         
     } completion:^(BOOL finished) {
         if (delay != 0) {
-            [[NotificationView class] performSelector:@selector(hide) withObject:nil afterDelay:delay];
+            [[DropDownView class] performSelector:@selector(hide) withObject:nil afterDelay:delay];
         }
     }];
 }
 
 +(void)setNotificationText:(NSString*)text
 {
-    NotificationView* view = [NotificationView sharedInstance];
+    DropDownView* view = [DropDownView sharedInstance];
     UILabel* label;
     
     if (view.subviews.count > 0) {
@@ -77,7 +77,7 @@
 
 +(void)hide
 {
-    NotificationView* view = [NotificationView sharedInstance];
+    DropDownView* view = [DropDownView sharedInstance];
     [UIView animateWithDuration:0.4 animations:^{
         view.frame = CGRectMake(0, -40, 320, 40);
     }];

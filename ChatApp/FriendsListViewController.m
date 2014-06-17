@@ -17,7 +17,7 @@
 #import <MFSideMenu.h>
 #import "UIImage+Utility.h"
 #import <Reachability/Reachability.h>
-#import "NotificationView.h"
+#import "DropDownView.h"
 #import "CreateGroupViewController.h"
 #import "Group.h"
 #import "Friend.h"
@@ -109,12 +109,12 @@
     switch (status) {
         case NotReachable:
         {
-            [NotificationView showInViewController:self withText:@"Needs Internet to chat with friends. No Internet found." height:NotificationViewHeightDefault hideAfterDelay:0];
+            [DropDownView showInViewController:self withText:@"Needs Internet to chat with friends. No Internet found." height:DropDownViewHeightDefault hideAfterDelay:0];
         }
             break;
         default:
         {
-            [NotificationView hide];
+            [DropDownView hide];
             
             NSArray* friendsArray = [Friend MR_findAll];
             if (friendsArray.count == 0) {
@@ -486,11 +486,11 @@
         NSLog(@"%@", object);
         if (!error) {
             //Show Success
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:NotificationViewHeightTall hideAfterDelay:2];
+            [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:DropDownViewHeightTall hideAfterDelay:2];
             [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
         } else {
             //Show Error
-            [NotificationView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:NotificationViewHeightTall hideAfterDelay:2];
+            [DropDownView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:DropDownViewHeightTall hideAfterDelay:2];
             [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
         }
     }];
