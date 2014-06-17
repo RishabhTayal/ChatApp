@@ -2,8 +2,6 @@ platform:ios, '7.0'
 
 inhibit_all_warnings!
 
-#pod 'AFNesworking'
-#pod 'MPNotificationView'
 pod 'SDWebImage', '~> 3.6'
 pod 'JSQMessagesViewController'
 #pod 'AOTutorial', '1.5'
