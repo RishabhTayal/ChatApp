@@ -16,12 +16,13 @@
 "Connected to %d recipients" = "المتلقين %d متصلة";
 
 "New Group" = "المجموعة الجديدة";
+"Groups" = "مجموعات";
 "Friends using vCinity" = "الأصدقاء باستخدام vCinity";
 "Friends not on vCinity" = "أصدقاء لا على vCinity";
 "Invitation sent to %@!" = "أرسلت دعوة إلى %@!";
 "Invitation could not be sent!" = "!تعذر إرسال دعوة";
 
-"Add People" = "إضافة أشخاص";
+"Add People:" = "إضافة أشخاص";
 "Create" = "Create";
 
 "Cancel" = "إلغاء";

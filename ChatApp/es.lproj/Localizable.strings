@@ -16,12 +16,13 @@
 "Connected to %d recipients" = "Conectado a %d destinatarios";
 
 "New Group" = "Nuevo Grupo";
+"Groups" = "Grupos";
 "Friends using vCinity" = "Amigos que usan vCinity";
 "Friends not on vCinity" = "No amigos sobre vCinity";
 "Invitation sent to %@!" = "Invitación enviada a %@!";
 "Invitation could not be sent!" = "Invitación no se pudo enviar!";
 
-"Add People" = "Agregar Personas";
+"Add People:" = "Agregar Personas";
 "Create" = "Create";
 
 "Cancel" = "Cancelar";
