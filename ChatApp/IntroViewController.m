@@ -45,26 +45,29 @@
 {
     NSLog(@"login with facebook");
     [ActivityView showInView:self.view loadingMessage:@"Please Wait..."];
-    [PFFacebookUtils logInWithPermissions:nil block:^(PFUser *user, NSError *error) {
+    NSArray* permissions = @[@"email", @"user_friends"];
+    
+    [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
         [ActivityView hide];
-        if (user == nil) {
+        if (!user) {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Facebook error" message:@"To use you Facebook account with this app, open Settings > Facebook and make sure this app is turned on." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
         } else {
             [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                 if (!error) {
-
+                    
                     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
-
+                    
                     if ([[PFUser currentUser] objectForKey:kPFUser_FBID] == NULL) {
-                        //First Time user
                         NSLog(@"First Time");
                         [self notifyFriendsViaPushThatIJoined];
                     }
                     
                     [[PFUser currentUser] setObject:result[@"id"] forKey:kPFUser_FBID];
                     [[PFUser currentUser] setObject:result[@"name"] forKey:kPFUser_Username];
-                    [[PFUser currentUser] setObject:result[@"email"] forKey:kPFUser_Email];
+                    if (result[@"email"] != NULL) {
+                        [[PFUser currentUser] setObject:result[@"email"] forKey:kPFUser_Email];
+                    }
                     [[PFUser currentUser] saveInBackground];
                     
                     //If there is no picture for user, download it from Facebook
@@ -117,10 +120,8 @@
 {
     FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        NSLog(@"Error: %@", error);
-        
         NSArray* friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
-
+        
         NSArray* recipients = [friendsUsingApp valueForKey:@"id"];
         PFQuery* pushQuery = [PFInstallation query];
         [pushQuery whereKey:@"owner" containedIn:recipients];
@@ -131,7 +132,6 @@
         [push setMessage:[NSString stringWithFormat:@"Your friend %@ just joined vCinity! Start Chatting with them now.", [PFUser currentUser].username]];
         [push sendPushInBackground];
     }];
-    
 }
 
 @end
