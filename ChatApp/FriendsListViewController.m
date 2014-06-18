@@ -136,10 +136,11 @@
 }
 
 -(void)loadFriendsFromFacebook
-{
-    FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
+{  
+    FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends?fields=installed" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         NSLog(@"Error: %@", error);
+        [GAI trackEventWithCategory:@"ui_event" action:@"facebook_friends" label:[PFUser currentUser][kPFUser_FBID] value:[NSNumber numberWithInt:[result[@"data"] count]]];
         [Friend MR_truncateAll];
         for (NSDictionary* object in result[@"data"]) {
             Friend* friend = [Friend MR_createEntity];
