@@ -27,6 +27,8 @@
 		061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E501918818400A0DF90 /* FriendTableViewCell.m */; };
 		062EA2241948D28A00AA64E5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062EA2231948D28A00AA64E5 /* iAd.framework */; };
 		062EA23E194A08A600AA64E5 /* CreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */; };
+		0641F1191951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0641F1171951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m */; };
+		0641F11A1951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */; };
 		0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642158F19213ACE00FB1F6D /* Accounts.framework */; };
 		0642159219213AD300FB1F6D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642159119213AD300FB1F6D /* Social.framework */; };
 		065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D41912BCFB00B85D3D /* Foundation.framework */; };
@@ -94,6 +96,9 @@
 		062EA2231948D28A00AA64E5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		062EA23C194A08A600AA64E5 /* CreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupViewController.h; sourceTree = "<group>"; };
 		062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupViewController.m; sourceTree = "<group>"; };
+		0641F1161951E7A100FCC691 /* CreateGroupFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupFriendsTableViewCell.h; sourceTree = "<group>"; };
+		0641F1171951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupFriendsTableViewCell.m; sourceTree = "<group>"; };
+		0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupFriendsTableViewCell.xib; sourceTree = "<group>"; };
 		0642158F19213ACE00FB1F6D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		0642159119213AD300FB1F6D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		065A15D11912BCFB00B85D3D /* VCinity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VCinity.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,6 +266,16 @@
 			name = "Friends List";
 			sourceTree = "<group>";
 		};
+		0641F11B1951E7A500FCC691 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0641F1161951E7A100FCC691 /* CreateGroupFriendsTableViewCell.h */,
+				0641F1171951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m */,
+				0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		065A15C81912BCFB00B85D3D = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +384,7 @@
 		06E0B6AE194B982200159C93 /* Group */ = {
 			isa = PBXGroup;
 			children = (
+				0641F11B1951E7A500FCC691 /* Cell */,
 				062EA23C194A08A600AA64E5 /* CreateGroupViewController.h */,
 				062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */,
 				06E0B6AB194B981B00159C93 /* GroupInfoViewController.h */,
@@ -470,6 +486,7 @@
 				068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
 				0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */,
+				0641F11A1951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib in Resources */,
 				068FAA2A19435B9A009ECC44 /* SettingsShareView.xib in Resources */,
 				069CFA8F1948B222008E493E /* Localizable.strings in Resources */,
 			);
@@ -516,6 +533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06E0B6AD194B981B00159C93 /* GroupInfoViewController.m in Sources */,
+				0641F1191951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m in Sources */,
 				065A15EB1912BCFB00B85D3D /* NearChatViewController.m in Sources */,
 				061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */,
 				060D4809192FFFE00062982B /* FriendsListViewController.m in Sources */,

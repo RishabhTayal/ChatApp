@@ -10,6 +10,8 @@
 #import <Parse/Parse.h>
 #import "ActivityView.h"
 #import "Friend.h"
+#import "UIImageView+AFNetworking.h"
+#import "CreateGroupFriendsTableViewCell.h"
 
 @interface CreateGroupViewController ()
 {
@@ -46,8 +48,7 @@
     _groupPhotoButton.layer.masksToBounds = YES;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelClicked:)];
-//TODO: Implement Group Info
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Create", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(createGroup:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Create", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(createGroup:)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -219,14 +220,15 @@
 
 -(UITableViewCell *)tokenField:(TITokenField *)tokenField resultsTableView:(UITableView *)tableView cellForRepresentedObject:(id)object
 {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    CreateGroupFriendsTableViewCell* cell = (CreateGroupFriendsTableViewCell*) [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"CreateGroupFriendsTableViewCell" owner:self options:nil] objectAtIndex:0];
     }
+    
     Friend* friend = (Friend*)object;
-    cell.textLabel.text = friend.name;
+    cell.nameLabel.text = friend.name;
 //    cell.detailTextLabel.text = friend
-//    cell.imageView.image = [object objectForKey:@"photo"];
+    [cell.thumbImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", friend.fbId]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
     
     return cell;
 }

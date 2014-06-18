@@ -32,9 +32,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationRecieved:) name:@"notification" object:nil];
     if (_isGroupChat) {
-        UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-        [infoButton addTarget:self action:@selector(showGroupChatInfo:) forControlEvents:UIControlEventTouchUpInside];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+        //TODO: Implement Group Info
+//        UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+//        [infoButton addTarget:self action:@selector(showGroupChatInfo:) forControlEvents:UIControlEventTouchUpInside];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
     }
     
     if (_isGroupChat) {

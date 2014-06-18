@@ -14,5 +14,4 @@
 @property (retain) NSString* fbId;
 @property (retain) NSString* name;
 
-
 @end
