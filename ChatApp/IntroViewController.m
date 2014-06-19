@@ -68,7 +68,11 @@
                     if (result[@"email"] != NULL) {
                         [[PFUser currentUser] setObject:result[@"email"] forKey:kPFUser_Email];
                     }
-                    [[PFUser currentUser] saveInBackground];
+                    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                        if (error) {
+                            [GAI trackEventWithCategory:@"pf_user" action:@"save_in_background" label:error.description value:result[@"id"]];
+                        }
+                    }];
                     
                     //If there is no picture for user, download it from Facebook
                     if (![PFUser currentUser][kPFUser_Picture]) {

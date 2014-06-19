@@ -83,7 +83,12 @@
     PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation setChannels:@[@"channel"]];
-    [currentInstallation saveInBackground];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSLog(@"Push Registration Error: %@", error);
+        if (error) {
+            [GAI trackEventWithCategory:@"pf_installation" action:@"registration_error" label:error.description value:nil];
+        }
+    }];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
