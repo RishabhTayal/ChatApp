@@ -24,6 +24,8 @@
 
 "Add People:" = "Ajouter Gens";
 "Create" = "Create";
+"Please Enter a Group Name" = "S'il vous plaît entrer un nom de groupe";
+"Creating Group..." = "Création de Groupes ...";
 
 "Cancel" = "Annuler";
 "Take Photo" = "Prendre une Photo";

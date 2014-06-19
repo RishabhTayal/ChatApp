@@ -24,6 +24,8 @@
 
 "Add People:" = "Agregar Personas";
 "Create" = "Create";
+"Please Enter a Group Name" = "Por favor ingrese un nombre de grupo";
+"Creating Group..." = "Creación de Grupo...";
 
 "Cancel" = "Cancelar";
 "Take Photo" = "Tomar la Foto";

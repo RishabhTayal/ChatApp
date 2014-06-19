@@ -12,6 +12,7 @@
 #import "Friend.h"
 #import "UIImageView+AFNetworking.h"
 #import "CreateGroupFriendsTableViewCell.h"
+#import "DropDownView.h"
 
 @interface CreateGroupViewController ()
 {
@@ -86,51 +87,55 @@
 
 -(void)createGroup:(id)sender
 {
-    [self.view endEditing:NO];
-    [ActivityView showInView:self.view loadingMessage:@"Creating Group..."];
-    PFObject* groupObject = [PFObject objectWithClassName:kPFTableGroup];
-    groupObject[kPFGroupName] = _groupNameTF.text;
-    
-    //Save Group Photo
-    PFFile* file;
-    if (_imagePicked) {
-        file = [PFFile fileWithName:@"groupPhoto" data:UIImagePNGRepresentation(_groupPhotoButton.imageView.image)];
+    if (_groupNameTF.text.length == 0) {
+        [DropDownView showInViewController:self withText:NSLocalizedString(@"Please Enter a Group Name", nil) height:DropDownViewHeightTall hideAfterDelay:3];
     } else {
-        file = [PFFile fileWithName:@"groupPhoto" data:UIImagePNGRepresentation([UIImage imageNamed:@"logo-grey-scale"])];
-    }
-    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        groupObject[kPFGroupPhoto] = file;
-        [groupObject saveEventually:^(BOOL succeeded, NSError *error) {
-            [ActivityView hide];            
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }];
-    }];
-    
-    //Save Group Memebers
-    PFQuery* query = [PFUser query];
-    [query whereKey:kPFUser_FBID containedIn:[_tokenFieldView.tokenField.tokenObjects valueForKey:@"fbId"]];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        PFRelation* relation = [groupObject relationForKey:kPFGroupMembers];
-        for (PFUser* user in objects) {
-            [relation addObject:user];
+        [self.view endEditing:NO];
+        [ActivityView showInView:self.view loadingMessage:NSLocalizedString(@"Creating Group...", nil)];
+        PFObject* groupObject = [PFObject objectWithClassName:kPFTableGroup];
+        groupObject[kPFGroupName] = _groupNameTF.text;
+        
+        //Save Group Photo
+        PFFile* file;
+        if (_imagePicked) {
+            file = [PFFile fileWithName:@"groupPhoto" data:UIImagePNGRepresentation(_groupPhotoButton.imageView.image)];
+        } else {
+            file = [PFFile fileWithName:@"groupPhoto" data:UIImagePNGRepresentation([UIImage imageNamed:@"logo-grey-scale"])];
         }
-        [relation addObject:[PFUser currentUser]];
-        [groupObject saveEventually:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-            }
+        [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            groupObject[kPFGroupPhoto] = file;
+            [groupObject saveEventually:^(BOOL succeeded, NSError *error) {
+                [ActivityView hide];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
         }];
         
-        //Send push notifications to group members
-        PFQuery* pushQuery = [PFInstallation query];
-        [pushQuery whereKey:@"owner" containedIn:[objects valueForKey:kPFUser_FBID]];
-        [pushQuery whereKey:@"owner" notEqualTo:[PFUser currentUser][kPFUser_FBID]];
-        
-        PFPush *push = [[PFPush alloc] init];
-        [push setQuery:pushQuery];
-        
-        [push setMessage:[NSString stringWithFormat:@"%@ invited you to group \"%@\".", [PFUser currentUser].username, _groupNameTF.text]];
-        [push sendPushInBackground];
-    }];
+        //Save Group Memebers
+        PFQuery* query = [PFUser query];
+        [query whereKey:kPFUser_FBID containedIn:[_tokenFieldView.tokenField.tokenObjects valueForKey:@"fbId"]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            PFRelation* relation = [groupObject relationForKey:kPFGroupMembers];
+            for (PFUser* user in objects) {
+                [relation addObject:user];
+            }
+            [relation addObject:[PFUser currentUser]];
+            [groupObject saveEventually:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                }
+            }];
+            
+            //Send push notifications to group members
+            PFQuery* pushQuery = [PFInstallation query];
+            [pushQuery whereKey:@"owner" containedIn:[objects valueForKey:kPFUser_FBID]];
+            [pushQuery whereKey:@"owner" notEqualTo:[PFUser currentUser][kPFUser_FBID]];
+            
+            PFPush *push = [[PFPush alloc] init];
+            [push setQuery:pushQuery];
+            
+            [push setMessage:[NSString stringWithFormat:@"%@ invited you to group \"%@\".", [PFUser currentUser].username, _groupNameTF.text]];
+            [push sendPushInBackground];
+        }];
+    }
 }
 
 -(void)cancelClicked:(id)sender
@@ -227,7 +232,7 @@
     
     Friend* friend = (Friend*)object;
     cell.nameLabel.text = friend.name;
-//    cell.detailTextLabel.text = friend
+    //    cell.detailTextLabel.text = friend
     [cell.thumbImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", friend.fbId]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
     
     return cell;
