@@ -135,6 +135,8 @@
     }
 }
 
+#pragma mark -
+
 -(void)loadFriendsFromFacebook
 {  
     FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends?fields=installed" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
@@ -508,6 +510,7 @@
                             // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
                             // the console when the app is launched.
                             GAD_SIMULATOR_ID,
+                            @"4a4d13e777b61b0f28cb678991220815"
                             ];
     return request;
 }

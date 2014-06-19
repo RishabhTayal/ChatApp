@@ -44,6 +44,8 @@
         } else {
             _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"groupId" withValue:_groupObj.groupId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
             [self finishReceivingMessage];
+            //TODO: Test Chat Loading Scenario
+            [self loadGroupChat];
         }
     } else {
         if ([Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId].count == 0) {
@@ -72,15 +74,9 @@
 {
     if (notification.userInfo[kNotificationMessage] != NULL) {
         
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
-            [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
-        } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
-            [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-        }
-        
-        BOOL shouldAdd;
+        BOOL shouldAdd = NO;
         if (_isGroupChat) {
-            if ([notification.userInfo[kNotificationSender][@"id"] isEqualToString:_groupObj.groupId]) {
+            if ([notification.userInfo[kNotificationPayload][kNotificationPayloadGroupId] isEqualToString:_groupObj.groupId]) {
                 shouldAdd = true;
             }
         } else {
@@ -90,6 +86,13 @@
         }
         
         if (shouldAdd) {
+            
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]== YES) {
+                [JSQSystemSoundPlayer jsq_playMessageReceivedAlert];
+            } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
+                [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+            }
+
             JSQMessage* message = [[JSQMessage alloc] initWithText:notification.userInfo[kNotificationMessage] sender:notification.userInfo[kNotificationSender][@"id"] date:[NSDate date]];
             Chat* chatObj = [Chat MR_createEntity];
             chatObj.jsmessage = message;
@@ -153,7 +156,8 @@
                     UIImage* img = [UIImage imageWithData:data];
                     [dict setObject:img forKey:kPFUser_Picture];
                     [tempMembersArray addObject:dict];
-                    [self finishReceivingMessage];
+//                    [self finishReceivingMessage];
+                    [self.collectionView reloadData];
                 }];
             }
             
@@ -170,7 +174,6 @@
         [chatQuery orderByDescending:@"createdAt"];
         
         [chatQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            [_chatArray removeAllObjects];
             [Chat MR_deleteAllMatchingPredicate:[NSPredicate predicateWithFormat:@"groupId = %@", _groupObj.groupId]];
             for (PFObject* chat in objects) {
                 JSQMessage* message = [[JSQMessage alloc] initWithText:chat[kPFChatMessage] sender:chat[kPFChatSender] date:chat.createdAt];
