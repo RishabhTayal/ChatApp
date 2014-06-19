@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <TITokenField/TITokenField.h>
+#import "FriendsListViewController.h"
 
 @interface CreateGroupViewController : UIViewController<TITokenFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (strong) FriendsListViewController* friendsListVC;
 
 @end

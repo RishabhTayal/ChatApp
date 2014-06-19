@@ -106,7 +106,9 @@
             groupObject[kPFGroupPhoto] = file;
             [groupObject saveEventually:^(BOOL succeeded, NSError *error) {
                 [ActivityView hide];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [_friendsListVC loadGroupsFromServer];
+                }];
             }];
         }];
         

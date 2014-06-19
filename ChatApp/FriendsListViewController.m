@@ -138,7 +138,7 @@
 #pragma mark -
 
 -(void)loadFriendsFromFacebook
-{  
+{
     FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends?fields=installed" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -198,6 +198,7 @@
     NSLog(@"Create group");
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CreateGroupViewController* createGroupVC = [sb instantiateViewControllerWithIdentifier:@"CreateGroupViewController"];
+    createGroupVC.friendsListVC = self;
     [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:createGroupVC] animated:YES completion:nil];
 }
 
@@ -282,6 +283,9 @@
 {
     // Return the number of rows in the section.
     if (section == 0) {
+        if (_groups.count == 0) {
+            return 1;
+        }
         return _groups.count;
     }
     if (section == 1) {
@@ -295,9 +299,14 @@
     // Configure the cell...
     if (indexPath.section == 0) {
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
-        Group* group = _groups[indexPath.row];
-        cell.friendName.text = group.name;
-        [cell.profilePicture setImageWithURL:[NSURL URLWithString:group.imageurl]];
+        if (_groups.count == 0) {
+            cell.friendName.text = NSLocalizedString(@"Create Group", nil);
+            cell.friendName.textColor = [UIColor blueColor];
+        } else {
+            Group* group = _groups[indexPath.row];
+            cell.friendName.text = group.name;
+            [cell.profilePicture setImageWithURL:[NSURL URLWithString:group.imageurl]];
+        }
         return cell;
     }
     if (indexPath.section == 1) {
@@ -321,17 +330,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 0) {
-        
-        FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
-        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
-        Group* group = (Group*)_groups[indexPath.row];
-        chatVC.title = group.name;
-        //        chatVC.friendDict = _groups[indexPath.row];
-        chatVC.groupObj = group;
-        chatVC.friendsImage = cell.profilePicture.image;
-        chatVC.isGroupChat = YES;
-        [self.navigationController pushViewController:chatVC animated:YES];
+        if (_groups.count == 0) {
+            [self createNewGroup:nil];
+        } else {
+            FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+            UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
+            Group* group = (Group*)_groups[indexPath.row];
+            chatVC.title = group.name;
+            //        chatVC.friendDict = _groups[indexPath.row];
+            chatVC.groupObj = group;
+            chatVC.friendsImage = cell.profilePicture.image;
+            chatVC.isGroupChat = YES;
+            [self.navigationController pushViewController:chatVC animated:YES];
+        }
     }
     
     if (indexPath.section == 1) {

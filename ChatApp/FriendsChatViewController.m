@@ -9,7 +9,7 @@
 #import "FriendsChatViewController.h"
 #import <Parse/Parse.h>
 #import <JSQMessages.h>
-#import "GroupInfoViewController.h"
+//#import "GroupInfoViewController.h"
 
 @interface FriendsChatViewController ()
 
@@ -191,12 +191,13 @@
     }];
 }
 
--(void)showGroupChatInfo:(id)sender
-{
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    GroupInfoViewController* groupInfoVC = [sb instantiateViewControllerWithIdentifier:@"GroupInfoViewController"];
-    [self.navigationController pushViewController:groupInfoVC animated:YES];
-}
+//TODO: uncomment to Implement Group Info Functionality
+//-(void)showGroupChatInfo:(id)sender
+//{
+//    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    GroupInfoViewController* groupInfoVC = [sb instantiateViewControllerWithIdentifier:@"GroupInfoViewController"];
+//    [self.navigationController pushViewController:groupInfoVC animated:YES];
+//}
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text sender:(NSString *)sender date:(NSDate *)date
 {

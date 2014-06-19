@@ -12,5 +12,6 @@
 @interface FriendsListViewController : UITableViewController<GADInterstitialDelegate>
 
 -(IBAction)inviteFriend:(id)sender;
+-(void)loadGroupsFromServer;
 
 @end
