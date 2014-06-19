@@ -303,11 +303,6 @@ THE SOFTWARE.
    limitations under the License.
 
 
-## Google-AdMob-Ads-SDK
-
-Copyright 2009 - 2012 Google, Inc. All rights reserved.
-
-
 ## GoogleAnalytics-iOS-SDK
 
 Copyright 2009 - 2014 Google, Inc. All rights reserved.
