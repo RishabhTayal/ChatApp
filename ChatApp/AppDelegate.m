@@ -84,8 +84,8 @@
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation setChannels:@[@"channel"]];
     [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        NSLog(@"Push Registration Error: %@", error);
         if (error) {
+            NSLog(@"Push Registration Error: %@", error);
             [GAI trackEventWithCategory:@"pf_installation" action:@"registration_error" label:error.description value:nil];
         }
     }];
