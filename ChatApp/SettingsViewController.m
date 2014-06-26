@@ -204,7 +204,7 @@
             [mailVC setSubject:@"vCinity App Support"];
             [mailVC setToRecipients:@[@"contact@appikon.com"]];
             
-            NSString* info = [NSString stringWithFormat:@"Email: %@\n App Version: %@\nDevice: %@\n OS Version: %@", [PFUser currentUser][kPFUser_Email], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"], [UIDevice currentDevice].platformString, [UIDevice currentDevice].systemVersion];
+            NSString* info = [NSString stringWithFormat:@"Email: %@\n App Version: %@\nDevice: %@\n OS Version: %@", [PFUser currentUser][kPFUser_Email], [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [UIDevice currentDevice].platformString, [UIDevice currentDevice].systemVersion];
             [mailVC setMessageBody:[NSString stringWithFormat:@"Please describe the issue you're having here.\n\n//Device Info\n%@", info] isHTML:NO];
             [self presentViewController:mailVC animated:YES completion:nil];
         } else if(indexPath.row == 2) {
