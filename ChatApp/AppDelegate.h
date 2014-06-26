@@ -8,12 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "SessionController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) SessionController* sessionController;
 
+/**
+ *  Location Manager for MilleniaMedia Ads
+ */
+@property (strong, nonatomic) CLLocationManager* locationManager;
+
 -(void)setLoginView;
+
+-(void)displayMillenialAdInViewController:(UIViewController*)controller;
 
 @end

@@ -73,6 +73,9 @@
             [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipients", nil), [_sessionController connectedPeers].count] height:DropDownViewHeightDefault hideAfterDelay:0];
         }
     }
+    
+    AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+    [appDelegate displayMillenialAdInViewController:self];
 }
 
 - (void)didReceiveMemoryWarning

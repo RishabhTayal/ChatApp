@@ -18,6 +18,7 @@
 #import "SessionController.h"
 #import "InAppNotificationTapListener.h"
 #import "InAppNotificationView.h"
+#import <MillennialMedia/MMInterstitial.h>
 
 @implementation AppDelegate
 
@@ -74,6 +75,12 @@
     }
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"VCinityModel"];
+    
+    [MMSDK initialize];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    [self.locationManager startUpdatingLocation];
     
     return YES;
 }
@@ -183,6 +190,16 @@
     [FBAppEvents activateApp];
     
     [self updateInstallation];
+    
+    MMRequest* request = [MMRequest requestWithLocation:self.locationManager.location];
+    
+    [MMInterstitial fetchWithRequest:request apid:kMillenialAppID onCompletion:^(BOOL success, NSError *error) {
+        if (success) {
+            DLog(@"Ad Available");
+        } else {
+            DLog(@"Error Fetching ad: %@", error);
+        }
+    }];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -197,6 +214,49 @@
     //    [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation setChannels:@[@"channel"]];
     [currentInstallation saveInBackground];
+}
+
+-(void)displayMillenialAdInViewController:(UIViewController*)controller
+{
+    if ([self shouldDisplayAd])
+    {
+        if ([MMInterstitial isAdAvailableForApid:kMillenialAppID]) {
+            [MMInterstitial displayForApid:kMillenialAppID fromViewController:controller withOrientation:MMOverlayOrientationTypeAll onCompletion:nil];
+        } else {
+            MMRequest* request = [MMRequest requestWithLocation:self.locationManager.location];
+            [MMInterstitial fetchWithRequest:request apid:kMillenialAppID onCompletion:^(BOOL success, NSError *error) {
+                if (success) {
+                    [MMInterstitial displayForApid:kMillenialAppID fromViewController:controller withOrientation:MMOverlayOrientationTypeAll onCompletion:nil];
+                }
+            }];
+        }
+    }
+}
+
+-(BOOL)shouldDisplayAd
+{
+    NSDate* lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:kUDAdLastShownMillenial];
+    if (!lastDate) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownMillenial];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return YES;
+    } else {
+        NSTimeInterval interval = [lastDate timeIntervalSinceNow];
+        int hours = (int)interval/3600;
+        int minutes = (interval - (hours*3600)) / 60;
+        
+#ifdef DEBUG
+#warning Change Minute to 5
+#else
+#error Change Minutes to 5
+#endif
+        if (minutes > 1) {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownMillenial];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end
