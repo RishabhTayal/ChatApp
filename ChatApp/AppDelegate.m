@@ -237,9 +237,9 @@
         int minutes = (interval - (hours*3600)) / 60;
         
 #ifdef DEBUG
-#warning Change Minute to 5
+#warning Change Minute to 10
 #else
-#error Change Minutes to 5
+#error Change Minutes to 10
 #endif
         DLog(@"Ad - Minutes since last shown: %d", minutes);
         if (minutes >= 1) {
