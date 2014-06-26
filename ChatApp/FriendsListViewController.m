@@ -93,6 +93,7 @@
 {
     [refreshControl endRefreshing];
     [self loadGroupsFromServer];
+    [self loadFriendsFromFacebook];
     //    [self updateInterfaceWithReachabiltity:_reachability];
 }
 
