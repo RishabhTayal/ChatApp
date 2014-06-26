@@ -142,7 +142,7 @@
 {
     FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends?fields=installed" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         [GAI trackEventWithCategory:@"ui_event" action:@"facebook_friends" label:[PFUser currentUser][kPFUser_FBID] value:[NSNumber numberWithInt:[result[@"data"] count]]];
         [Friend MR_truncateAll];
         for (NSDictionary* object in result[@"data"]) {
@@ -152,12 +152,12 @@
         }
         [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
             if (success) {
-                NSLog(@"You successfully saved your context.");
+                DLog(@"You successfully saved your context.");
                 _friendsUsingApp = [NSMutableArray arrayWithArray:[Friend MR_findAll]];
                 
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
             } else if (error) {
-                NSLog(@"Error saving context: %@", error.description);
+                DLog(@"Error saving context: %@", error.description);
             }
         }];
     }];
@@ -181,12 +181,12 @@
         }
         [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
             if (success) {
-                NSLog(@"You successfully saved your context.");
+                DLog(@"You successfully saved your context.");
                 _groups = [[NSMutableArray alloc] initWithArray:[Group MR_findAllSortedBy:@"updatedAt" ascending:YES]];
                 
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             } else if (error) {
-                NSLog(@"Error saving context: %@", error.description);
+                DLog(@"Error saving context: %@", error.description);
             }
         }];
     }];
@@ -196,7 +196,7 @@
 
 -(void)createNewGroup:(id)sender
 {
-    NSLog(@"Create group");
+    DLog(@"Create group");
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CreateGroupViewController* createGroupVC = [sb instantiateViewControllerWithIdentifier:@"CreateGroupViewController"];
     createGroupVC.friendsListVC = self;
@@ -389,7 +389,7 @@
 //}
 //- (void)tableView:(UITableView *)tableView moreOptionButtonPressedInRowAtIndexPath:(NSIndexPath *)indexPath {
 //    // Called when "MORE" button is pushed.
-//    NSLog(@"MORE button pushed in row at: %@", indexPath.description);
+//    DLog(@"MORE button pushed in row at: %@", indexPath.description);
 //    // Hide more- and delete-confirmation view
 //    [tableView.visibleCells enumerateObjectsUsingBlock:^(MSCMoreOptionTableViewCell *cell, NSUInteger idx, BOOL *stop) {
 //        if ([[tableView indexPathForCell:cell] isEqual:indexPath]) {
@@ -402,13 +402,13 @@
 //{
 //    switch (state) {
 //        case 0:
-//            NSLog(@"utility buttons closed");
+//            DLog(@"utility buttons closed");
 //            break;
 //        case 1:
-//            NSLog(@"left utility buttons open");
+//            DLog(@"left utility buttons open");
 //            break;
 //        case 2:
-//            NSLog(@"right utility buttons open");
+//            DLog(@"right utility buttons open");
 //            break;
 //        default:
 //            break;
@@ -419,16 +419,16 @@
 //{
 //    switch (index) {
 //        case 0:
-//            NSLog(@"left button 0 was pressed");
+//            DLog(@"left button 0 was pressed");
 //            break;
 //        case 1:
-//            NSLog(@"left button 1 was pressed");
+//            DLog(@"left button 1 was pressed");
 //            break;
 //        case 2:
-//            NSLog(@"left button 2 was pressed");
+//            DLog(@"left button 2 was pressed");
 //            break;
 //        case 3:
-//            NSLog(@"left btton 3 was pressed");
+//            DLog(@"left btton 3 was pressed");
 //        default:
 //            break;
 //    }
@@ -439,7 +439,7 @@
 //    switch (index) {
 //        case 0:
 //        {
-//            NSLog(@"More button was pressed");
+//            DLog(@"More button was pressed");
 //            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"More more more" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
 //            [alertTest show];
 //
@@ -498,7 +498,7 @@
     NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
     NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [[PFUser currentUser] username], @"text": @"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391", @"subject":@"vCinity Chat App for iPhone"};
     [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
-        NSLog(@"%@", object);
+        DLog(@"%@", object);
         if (!error) {
             //Show Success
             [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:DropDownViewHeightTall hideAfterDelay:2];
@@ -539,7 +539,7 @@
 
 -(void)interstitialDidReceiveAd:(GADInterstitial *)ad
 {
-    NSLog(@"Google Ads recieved");
+    DLog(@"Google Ads recieved");
     [_interstitial presentFromRootViewController:self];
 }
 

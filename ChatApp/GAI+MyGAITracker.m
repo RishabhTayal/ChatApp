@@ -13,7 +13,7 @@
 +(void)trackWithScreenName:(ScreenName)screenName
 {
     if (DEBUGMODE) {
-        NSLog(@"GA Not trackking");
+        DLog(@"GA Not trackking");
     } else {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         [tracker set:kGAIScreenName value:ScreenNameString(screenName)];
@@ -24,7 +24,7 @@
 +(void)trackEventWithCategory:(NSString*)category action:(NSString*)action label:(NSString*)label value:(NSNumber*)value
 {
     if (DEBUGMODE) {
-        NSLog(@"GA Not trackking");
+        DLog(@"GA Not trackking");
     } else {
         id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category action:action label:label value:value] build]];

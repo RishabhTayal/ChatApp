@@ -43,7 +43,7 @@
 
 -(void)loginWithFacebook:(id)sender
 {
-    NSLog(@"login with facebook");
+    DLog(@"login with facebook");
     [ActivityView showInView:self.view loadingMessage:@"Please Wait..."];
     NSArray* permissions = @[@"email", @"user_friends"];
     
@@ -59,7 +59,7 @@
                     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
                     
                     if ([[PFUser currentUser] objectForKey:kPFUser_FBID] == NULL) {
-                        NSLog(@"First Time");
+                        DLog(@"First Time");
                         [self notifyFriendsViaPushThatIJoined];
                     }
                     

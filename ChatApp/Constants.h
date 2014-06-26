@@ -15,6 +15,14 @@
 #define DEBUGMODE NO
 #endif
 
+#ifndef DLog
+#ifdef DEBUG
+#define DLog(_format_, ...) NSLog(_format_, ## __VA_ARGS__)
+#else
+#define DLog(_format_, ...)
+#endif
+#endif
+
 //NSUserDefaults Keys
 #define kUDKeyUserLoggedIn @"loggedin"
 

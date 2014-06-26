@@ -120,7 +120,7 @@
 
 -(IBAction)followOnTwitter:(id)sender
 {
-    NSLog(@"follow");
+    DLog(@"follow");
     NSArray *urls = [NSArray arrayWithObjects:
                      @"twitter://user?screen_name={handle}", // Twitter
                      @"tweetbot:///user_profile/{handle}", // TweetBot
@@ -149,7 +149,7 @@
 
 -(IBAction)reviewOnAppStore:(id)sender
 {
-    NSLog(@"review on app store");
+    DLog(@"review on app store");
     [[iRate sharedInstance] openRatingsPageInAppStore];
 }
 

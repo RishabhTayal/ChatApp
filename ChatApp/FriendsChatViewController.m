@@ -229,7 +229,7 @@
 
 -(void)didPressAccessoryButton:(UIButton *)sender
 {
-    NSLog(@"Camera pressed!");
+    DLog(@"Camera pressed!");
 }
 
 -(void)sendChatToFriend:(NSString*)text
@@ -255,7 +255,7 @@
     [sendObjects setObject:[PFUser currentUser][kPFUser_FBID] forKey:kPFChatSender];
     [sendObjects setObject:_friendObj.fbId forKey:kPFChatReciever];
     [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        NSLog(@"save");
+        DLog(@"save");
     }];
 }
 
