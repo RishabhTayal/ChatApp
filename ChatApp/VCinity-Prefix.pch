@@ -23,4 +23,6 @@
 #import "CoreData+MagicalRecord.h"
 #import "CoreDataHelper.h"
 
+#import <pop/POP.h>
+
 #endif

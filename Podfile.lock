@@ -38,6 +38,7 @@ PODS:
   - MFSideMenu (0.5.4)
   - Parse-iOS-SDK (1.2.19):
     - Facebook-iOS-SDK (~> 3.7)
+  - pop (1.0.6)
   - Reachability (3.1.1)
   - SDWebImage (3.6):
     - SDWebImage/Core
@@ -55,6 +56,7 @@ DEPENDENCIES:
   - MagicalRecord
   - MFSideMenu
   - Parse-iOS-SDK
+  - pop (~> 1.0.4)
   - Reachability
   - SDWebImage (~> 3.6)
   - TITokenField
@@ -74,6 +76,7 @@ SPEC CHECKSUMS:
   MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
   MFSideMenu: fca49243c818323a2758af4c23ce81a0b17497d7
   Parse-iOS-SDK: 5e1f7e649a02f1cc19e73cc95bd43d7778848314
+  pop: e518794da38942c05255eb64b36d894e70cb4f00
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50

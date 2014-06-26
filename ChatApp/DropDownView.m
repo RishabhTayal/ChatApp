@@ -45,16 +45,26 @@
     [view addSubview:label];
     [controller.navigationController.navigationBar.superview insertSubview:view belowSubview:controller.navigationController.navigationBar];
     
-    [UIView animateWithDuration:0.4 animations:^{
-        CGRect frame = view.frame;
-        frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame);
-        view.frame = frame;
-        
-    } completion:^(BOOL finished) {
-        if (delay != 0) {
-            [[DropDownView class] performSelector:@selector(hide) withObject:nil afterDelay:delay];
-        }
-    }];
+    
+    POPSpringAnimation* anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionY];
+    anim.velocity = @(100.0);
+    anim.springBounciness = 15.0;
+    anim.toValue = @(76);
+    [view.layer pop_addAnimation:anim forKey:@"slide"];
+    
+    if (delay != 0) {
+        [[DropDownView class] performSelector:@selector(hide) withObject:nil afterDelay:delay];
+    }
+//    [UIView animateWithDuration:0.4 animations:^{
+//        CGRect frame = view.frame;
+//        frame.origin.y = CGRectGetMaxY(controller.navigationController.navigationBar.frame);
+//        view.frame = frame;
+//        
+//    } completion:^(BOOL finished) {
+//        if (delay != 0) {
+//            [[DropDownView class] performSelector:@selector(hide) withObject:nil afterDelay:delay];
+//        }
+//    }];
 }
 
 +(void)setNotificationText:(NSString*)text
