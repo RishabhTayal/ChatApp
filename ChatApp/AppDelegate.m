@@ -191,15 +191,6 @@
     
     [self updateInstallation];
     
-    MMRequest* request = [MMRequest requestWithLocation:self.locationManager.location];
-    
-    [MMInterstitial fetchWithRequest:request apid:kMillenialAppID onCompletion:^(BOOL success, NSError *error) {
-        if (success) {
-            DLog(@"Ad Available");
-        } else {
-            DLog(@"Error Fetching ad: %@", error);
-        }
-    }];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -241,7 +232,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         return YES;
     } else {
-        NSTimeInterval interval = [lastDate timeIntervalSinceNow];
+        NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:lastDate];
         int hours = (int)interval/3600;
         int minutes = (interval - (hours*3600)) / 60;
         
@@ -250,7 +241,8 @@
 #else
 #error Change Minutes to 5
 #endif
-        if (minutes > 1) {
+        DLog(@"Ad - Minutes since last shown: %d", minutes);
+        if (minutes >= 1) {
             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownMillenial];
             [[NSUserDefaults standardUserDefaults] synchronize];
             return YES;
