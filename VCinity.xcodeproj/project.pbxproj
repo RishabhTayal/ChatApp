@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0603F77C194F62CE003544BF /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 0603F77B194F62CE003544BF /* Chat.m */; };
+		0603F77F194F7563003544BF /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0603F77E194F7563003544BF /* CoreDataHelper.m */; };
 		0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0608596B19196CD9005F6A75 /* AddressBook.framework */; };
 		06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608596F191991B5005F6A75 /* UIImage+Utility.m */; };
 		06085978191BFB10005F6A75 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 06085977191BFB10005F6A75 /* MenuButton.m */; };
 		0608597D191C27A1005F6A75 /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608597B191C27A1005F6A75 /* ActivityView.m */; };
 		0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0608597C191C27A1005F6A75 /* ActivityView.xib */; };
 		06085981191C36AC005F6A75 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06085980191C36AC005F6A75 /* MessageUI.framework */; };
-		0608598E191C7ACD005F6A75 /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608598D191C7ACD005F6A75 /* NotificationView.m */; };
+		0608598E191C7ACD005F6A75 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0608598D191C7ACD005F6A75 /* DropDownView.m */; };
 		060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D47EF192FD8040062982B /* GAI+MyGAITracker.m */; };
 		060D47F4192FE3610062982B /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D47F3192FE3610062982B /* WebViewController.m */; };
 		060D4807192FE9790062982B /* AOTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 060D4805192FE9790062982B /* AOTutorialViewController.m */; };
@@ -24,8 +26,12 @@
 		061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E4A19183D1400A0DF90 /* MenuViewController.m */; };
 		061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E501918818400A0DF90 /* FriendTableViewCell.m */; };
 		062EA2241948D28A00AA64E5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062EA2231948D28A00AA64E5 /* iAd.framework */; };
+		062EA23E194A08A600AA64E5 /* CreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */; };
+		0641F1191951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0641F1171951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m */; };
+		0641F11A1951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */; };
 		0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642158F19213ACE00FB1F6D /* Accounts.framework */; };
 		0642159219213AD300FB1F6D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642159119213AD300FB1F6D /* Social.framework */; };
+		0645FB4B195399F0005FA941 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0645FB4A195399F0005FA941 /* libGoogleAdMobAds.a */; };
 		065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D41912BCFB00B85D3D /* Foundation.framework */; };
 		065A15D71912BCFB00B85D3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D61912BCFB00B85D3D /* CoreGraphics.framework */; };
 		065A15D91912BCFB00B85D3D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D81912BCFB00B85D3D /* UIKit.framework */; };
@@ -43,11 +49,20 @@
 		068FAA2A19435B9A009ECC44 /* SettingsShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FAA2919435B9A009ECC44 /* SettingsShareView.xib */; };
 		069895DF19421C3F00307197 /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 069895E119421C3F00307197 /* menu_background.png */; };
 		069CFA8F1948B222008E493E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 069CFA911948B222008E493E /* Localizable.strings */; };
+		06E0B6AA194B947E00159C93 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */; };
+		06E0B6AD194B981B00159C93 /* GroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6AC194B981B00159C93 /* GroupInfoViewController.m */; };
+		06E0B6DF194D7B0300159C93 /* VCinityModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6DD194D7B0300159C93 /* VCinityModel.xcdatamodeld */; };
+		06E0B6E2194D7DA100159C93 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6E1194D7DA100159C93 /* Group.m */; };
+		06E0B6E7194D99F200159C93 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6E6194D99F200159C93 /* Friend.m */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0603F77A194F62CE003544BF /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
+		0603F77B194F62CE003544BF /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
+		0603F77D194F7563003544BF /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
+		0603F77E194F7563003544BF /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		0608596B19196CD9005F6A75 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		0608596E191991B5005F6A75 /* UIImage+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utility.h"; sourceTree = "<group>"; };
 		0608596F191991B5005F6A75 /* UIImage+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utility.m"; sourceTree = "<group>"; };
@@ -57,8 +72,8 @@
 		0608597B191C27A1005F6A75 /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		0608597C191C27A1005F6A75 /* ActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityView.xib; sourceTree = "<group>"; };
 		06085980191C36AC005F6A75 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		0608598C191C7ACD005F6A75 /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
-		0608598D191C7ACD005F6A75 /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
+		0608598C191C7ACD005F6A75 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
+		0608598D191C7ACD005F6A75 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
 		060D47EE192FD8040062982B /* GAI+MyGAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GAI+MyGAITracker.h"; sourceTree = "<group>"; };
 		060D47EF192FD8040062982B /* GAI+MyGAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GAI+MyGAITracker.m"; sourceTree = "<group>"; };
 		060D47F2192FE3610062982B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -80,8 +95,26 @@
 		062365A319420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		062365A71942112000F46FD9 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/Main.storyboard; sourceTree = "<group>"; };
 		062EA2231948D28A00AA64E5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		062EA23C194A08A600AA64E5 /* CreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupViewController.h; sourceTree = "<group>"; };
+		062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupViewController.m; sourceTree = "<group>"; };
+		0641F1161951E7A100FCC691 /* CreateGroupFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupFriendsTableViewCell.h; sourceTree = "<group>"; };
+		0641F1171951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupFriendsTableViewCell.m; sourceTree = "<group>"; };
+		0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupFriendsTableViewCell.xib; sourceTree = "<group>"; };
 		0642158F19213ACE00FB1F6D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		0642159119213AD300FB1F6D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0645FB3E195399F0005FA941 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		0645FB3F195399F0005FA941 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		0645FB40195399F0005FA941 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		0645FB41195399F0005FA941 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		0645FB42195399F0005FA941 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		0645FB43195399F0005FA941 /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
+		0645FB44195399F0005FA941 /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
+		0645FB45195399F0005FA941 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		0645FB46195399F0005FA941 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		0645FB47195399F0005FA941 /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
+		0645FB48195399F0005FA941 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		0645FB49195399F0005FA941 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		0645FB4A195399F0005FA941 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		065A15D11912BCFB00B85D3D /* VCinity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VCinity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065A15D41912BCFB00B85D3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		065A15D61912BCFB00B85D3D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -120,6 +153,15 @@
 		069CFA961948BEE8008E493E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		069CFA971948BEEB008E493E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
+		06E0B6A8194B947E00159C93 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
+		06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
+		06E0B6AB194B981B00159C93 /* GroupInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupInfoViewController.h; sourceTree = "<group>"; };
+		06E0B6AC194B981B00159C93 /* GroupInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupInfoViewController.m; sourceTree = "<group>"; };
+		06E0B6DE194D7B0300159C93 /* VCinityModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VCinityModel.xcdatamodel; sourceTree = "<group>"; };
+		06E0B6E0194D7DA100159C93 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		06E0B6E1194D7DA100159C93 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		06E0B6E5194D99F200159C93 /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
+		06E0B6E6194D99F200159C93 /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
 		06FD23841917F1B800AE7226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		06FD23851917F1B800AE7226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		184A048636424222948F2C41 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -136,6 +178,7 @@
 				0642159219213AD300FB1F6D /* Social.framework in Frameworks */,
 				0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */,
 				06085981191C36AC005F6A75 /* MessageUI.framework in Frameworks */,
+				0645FB4B195399F0005FA941 /* libGoogleAdMobAds.a in Frameworks */,
 				0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */,
 				065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */,
 				065A15D71912BCFB00B85D3D /* CoreGraphics.framework in Frameworks */,
@@ -154,6 +197,7 @@
 				065A15E31912BCFB00B85D3D /* AppDelegate.h */,
 				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
 				068F7336192D338B00442F4D /* InApp Notificaition */,
+				06E0B6DD194D7B0300159C93 /* VCinityModel.xcdatamodeld */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";
@@ -161,12 +205,16 @@
 		06085975191BFAE0005F6A75 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				06E0B6A8194B947E00159C93 /* UIDevice-Hardware.h */,
+				06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */,
 				0608596E191991B5005F6A75 /* UIImage+Utility.h */,
 				0608596F191991B5005F6A75 /* UIImage+Utility.m */,
 				06085976191BFB10005F6A75 /* MenuButton.h */,
 				06085977191BFB10005F6A75 /* MenuButton.m */,
 				060D47EE192FD8040062982B /* GAI+MyGAITracker.h */,
 				060D47EF192FD8040062982B /* GAI+MyGAITracker.m */,
+				0603F77D194F7563003544BF /* CoreDataHelper.h */,
+				0603F77E194F7563003544BF /* CoreDataHelper.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -203,8 +251,8 @@
 			children = (
 				065A15E91912BCFB00B85D3D /* NearChatViewController.h */,
 				065A15EA1912BCFB00B85D3D /* NearChatViewController.m */,
-				0608598C191C7ACD005F6A75 /* NotificationView.h */,
-				0608598D191C7ACD005F6A75 /* NotificationView.m */,
+				0608598C191C7ACD005F6A75 /* DropDownView.h */,
+				0608598D191C7ACD005F6A75 /* DropDownView.m */,
 				0613983B192413E400C9AB1F /* SessionController.h */,
 				0613983C192413E400C9AB1F /* SessionController.m */,
 			);
@@ -214,6 +262,7 @@
 		061E7E4519182A2500A0DF90 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				06E0B6AE194B982200159C93 /* Group */,
 				061E7E52191881A100A0DF90 /* Friends List */,
 				061E7E4619182A3600A0DF90 /* FriendsChatViewController.h */,
 				061E7E4719182A3600A0DF90 /* FriendsChatViewController.m */,
@@ -230,6 +279,44 @@
 				061E7E501918818400A0DF90 /* FriendTableViewCell.m */,
 			);
 			name = "Friends List";
+			sourceTree = "<group>";
+		};
+		0641F11B1951E7A500FCC691 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0641F1161951E7A100FCC691 /* CreateGroupFriendsTableViewCell.h */,
+				0641F1171951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m */,
+				0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		0641F1431953307800FCC691 /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				0645FB3D195399F0005FA941 /* Google-AdMob */,
+			);
+			name = Vendors;
+			sourceTree = "<group>";
+		};
+		0645FB3D195399F0005FA941 /* Google-AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				0645FB3E195399F0005FA941 /* GADAdMobExtras.h */,
+				0645FB3F195399F0005FA941 /* GADAdNetworkExtras.h */,
+				0645FB40195399F0005FA941 /* GADAdSize.h */,
+				0645FB41195399F0005FA941 /* GADBannerView.h */,
+				0645FB42195399F0005FA941 /* GADBannerViewDelegate.h */,
+				0645FB43195399F0005FA941 /* GADInAppPurchase.h */,
+				0645FB44195399F0005FA941 /* GADInAppPurchaseDelegate.h */,
+				0645FB45195399F0005FA941 /* GADInterstitial.h */,
+				0645FB46195399F0005FA941 /* GADInterstitialDelegate.h */,
+				0645FB47195399F0005FA941 /* GADModules.h */,
+				0645FB48195399F0005FA941 /* GADRequest.h */,
+				0645FB49195399F0005FA941 /* GADRequestError.h */,
+				0645FB4A195399F0005FA941 /* libGoogleAdMobAds.a */,
+			);
+			path = "Google-AdMob";
 			sourceTree = "<group>";
 		};
 		065A15C81912BCFB00B85D3D = {
@@ -274,11 +361,13 @@
 		065A15DA1912BCFB00B85D3D /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				0641F1431953307800FCC691 /* Vendors */,
+				06E0B6EA194F51E500159C93 /* Model */,
 				06085979191C25C4005F6A75 /* Views */,
 				06085975191BFAE0005F6A75 /* Utilities */,
-				065A1620191412A200B85D3D /* Intro ViewController */,
 				06FD23811917D72100AE7226 /* Settings VC */,
 				065A161F19140B9300B85D3D /* Chat ViewController */,
+				065A1620191412A200B85D3D /* Intro ViewController */,
 				0608596D19198BD4005F6A75 /* App Delegate */,
 				065A15E61912BCFB00B85D3D /* Main.storyboard */,
 				061E7E4919183D1400A0DF90 /* MenuViewController.h */,
@@ -336,6 +425,31 @@
 			name = "InApp Notificaition";
 			sourceTree = "<group>";
 		};
+		06E0B6AE194B982200159C93 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				0641F11B1951E7A500FCC691 /* Cell */,
+				062EA23C194A08A600AA64E5 /* CreateGroupViewController.h */,
+				062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */,
+				06E0B6AB194B981B00159C93 /* GroupInfoViewController.h */,
+				06E0B6AC194B981B00159C93 /* GroupInfoViewController.m */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
+		06E0B6EA194F51E500159C93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0603F77A194F62CE003544BF /* Chat.h */,
+				0603F77B194F62CE003544BF /* Chat.m */,
+				06E0B6E0194D7DA100159C93 /* Group.h */,
+				06E0B6E1194D7DA100159C93 /* Group.m */,
+				06E0B6E5194D99F200159C93 /* Friend.h */,
+				06E0B6E6194D99F200159C93 /* Friend.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		06FD23811917D72100AE7226 /* Settings VC */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,7 +493,7 @@
 				ORGANIZATIONNAME = "Rishabh Tayal";
 				TargetAttributes = {
 					065A15D01912BCFB00B85D3D = {
-						DevelopmentTeam = GJ7VFS8326;
+						DevelopmentTeam = CEBY93VF85;
 					};
 				};
 			};
@@ -416,6 +530,7 @@
 				068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
 				0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */,
+				0641F11A1951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib in Resources */,
 				068FAA2A19435B9A009ECC44 /* SettingsShareView.xib in Resources */,
 				069CFA8F1948B222008E493E /* Localizable.strings in Resources */,
 			);
@@ -461,23 +576,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E0B6AD194B981B00159C93 /* GroupInfoViewController.m in Sources */,
+				0641F1191951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m in Sources */,
 				065A15EB1912BCFB00B85D3D /* NearChatViewController.m in Sources */,
 				061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */,
 				060D4809192FFFE00062982B /* FriendsListViewController.m in Sources */,
 				060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */,
 				065A15E51912BCFB00B85D3D /* AppDelegate.m in Sources */,
+				06E0B6E7194D99F200159C93 /* Friend.m in Sources */,
 				060D4807192FE9790062982B /* AOTutorialViewController.m in Sources */,
 				061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */,
 				061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */,
 				0608597D191C27A1005F6A75 /* ActivityView.m in Sources */,
-				0608598E191C7ACD005F6A75 /* NotificationView.m in Sources */,
+				0608598E191C7ACD005F6A75 /* DropDownView.m in Sources */,
+				062EA23E194A08A600AA64E5 /* CreateGroupViewController.m in Sources */,
+				0603F77C194F62CE003544BF /* Chat.m in Sources */,
 				068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */,
 				065A16281914257700B85D3D /* SettingsViewController.m in Sources */,
+				06E0B6AA194B947E00159C93 /* UIDevice-Hardware.m in Sources */,
+				06E0B6E2194D7DA100159C93 /* Group.m in Sources */,
 				065A15E11912BCFB00B85D3D /* main.m in Sources */,
 				06085978191BFB10005F6A75 /* MenuButton.m in Sources */,
 				060D47F4192FE3610062982B /* WebViewController.m in Sources */,
+				0603F77F194F7563003544BF /* CoreDataHelper.m in Sources */,
 				068F7333192D275600442F4D /* InAppNotificationView.m in Sources */,
 				06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */,
+				06E0B6DF194D7B0300159C93 /* VCinityModel.xcdatamodeld in Sources */,
 				0613983D192413E400C9AB1F /* SessionController.m in Sources */,
 				06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */,
 			);
@@ -609,14 +733,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: appikon software private limited (CEBY93VF85)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: appikon software private limited (CEBY93VF85)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChatApp",
+					"$(PROJECT_DIR)/ChatApp/Google-AdMob",
+				);
 				PRODUCT_NAME = VCinity;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "EF1C7320-B465-463C-AC60-F9B43BBAE82C";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -634,8 +763,13 @@
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ChatApp",
+					"$(PROJECT_DIR)/ChatApp/Google-AdMob",
+				);
 				PRODUCT_NAME = VCinity;
-				PROVISIONING_PROFILE = "ACF9EADA-9AD8-4F85-9F2F-721B47D06AF8";
+				PROVISIONING_PROFILE = "9E07F504-C379-4C99-93A4-F9195FA239C5";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -663,6 +797,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		06E0B6DD194D7B0300159C93 /* VCinityModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				06E0B6DE194D7B0300159C93 /* VCinityModel.xcdatamodel */,
+			);
+			currentVersion = 06E0B6DE194D7B0300159C93 /* VCinityModel.xcdatamodel */;
+			path = VCinityModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 065A15C91912BCFB00B85D3D /* Project object */;
 }

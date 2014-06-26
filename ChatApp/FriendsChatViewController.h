@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import <JSQMessagesViewController.h>
+#import "Friend.h"
+#import "Group.h"
+#import "Chat.h"
 
 @interface FriendsChatViewController:JSQMessagesViewController
 
-//@property (strong) NSString* friendId;
 @property (strong) UIImage* friendsImage;
-@property (strong) NSDictionary* friendDict;
+@property (strong) Friend* friendObj;
+@property (strong) Group* groupObj;
+
+@property (assign) BOOL isGroupChat;
+//@property (strong) NSMutableArray* groupMembers;
 
 @end

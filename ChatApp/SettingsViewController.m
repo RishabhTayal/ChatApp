@@ -16,6 +16,7 @@
 #import <IDMPhotoBrowser.h>
 #import "WebViewController.h"
 #import <iRate/iRate.h>
+#import "UIDevice-Hardware.h"
 
 @interface SettingsViewController ()
 
@@ -27,6 +28,8 @@
 @property (strong) IBOutlet UIButton* facebookButton;
 @property (strong) IBOutlet UIButton* twitterButton;
 @property (strong) IBOutlet UIButton* appstoreButton;
+
+@property (strong) IBOutlet UILabel* appVersionLabel;
 
 -(IBAction)likeOnFacebook:(id)sender;
 -(IBAction)followOnTwitter:(id)sender;
@@ -59,14 +62,12 @@
     [_inAppVibrateSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] boolValue]];
     [_soundSwitch setOn:[[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue]];
     
-     // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-  
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -158,7 +159,7 @@
 {
     if (section == [tableView numberOfSections] - 1) {
         //Get the height from SettingsShareView.Xib
-        return 112;
+        return 140;
     }
     return 0;
 }
@@ -176,6 +177,11 @@
         
         [_appstoreButton.layer setCornerRadius:4];
         [_appstoreButton.layer setMasksToBounds:YES];
+        
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+        NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+        NSString *minorVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
+        _appVersionLabel.text = [NSString stringWithFormat:@"Version %@ (%@)", majorVersion, minorVersion];
         
         return view;
     }
@@ -195,16 +201,18 @@
             MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
             mailVC.mailComposeDelegate = self;
             mailVC.view.tintColor = [UIColor whiteColor];
-            [mailVC setSubject:@"Help me."];
+            [mailVC setSubject:@"vCinity App Support"];
             [mailVC setToRecipients:@[@"contact@appikon.com"]];
-            //            [mailVC setMessageBody:@"" isHTML:NO];
+            
+            NSString* info = [NSString stringWithFormat:@"Email: %@\n App Version: %@\nDevice: %@\n OS Version: %@", [PFUser currentUser][kPFUser_Email], [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"], [UIDevice currentDevice].platformString, [UIDevice currentDevice].systemVersion];
+            [mailVC setMessageBody:[NSString stringWithFormat:@"Please describe the issue you're having here.\n\n//Device Info\n%@", info] isHTML:NO];
             [self presentViewController:mailVC animated:YES completion:nil];
         } else if(indexPath.row == 2) {
             //Report an abuse
             MFMailComposeViewController* issueVC = [[MFMailComposeViewController alloc] init];
             issueVC.mailComposeDelegate = self;
             issueVC.view.tintColor = [UIColor whiteColor];
-            [issueVC setSubject:@"Reporting abuse content"];
+            [issueVC setSubject:@"Reporting abuse content from vCinity"];
             [issueVC setToRecipients:@[@"contact@appikon.com"]];
             [self presentViewController:issueVC animated:YES completion:nil];
         }
@@ -240,8 +248,8 @@
                 MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
                 mailVC.mailComposeDelegate = self;
                 mailVC.view.tintColor = [UIColor whiteColor];
-                [mailVC setSubject:@"vCinity App for iPhone"];
-                [mailVC setMessageBody:@"Download vCinity app on AppStore to chat even with no Internet connection. https://itunes.apple.com/app/id875395391" isHTML:NO];
+                [mailVC setSubject:@"vCinity Chat App for iPhone"];
+                [mailVC setMessageBody:@"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391" isHTML:NO];
                 [self presentViewController:mailVC animated:YES completion:nil];
             }
         } else if (buttonIndex == 2) {

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <MPNotificationView.h>
 #import "SessionController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

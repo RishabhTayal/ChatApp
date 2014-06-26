@@ -19,4 +19,10 @@
 #import "GAIFields.h"
 #import "GAI+MyGAITracker.h"
 
+#define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
+#import "CoreData+MagicalRecord.h"
+#import "CoreDataHelper.h"
+
+#import <pop/POP.h>
+
 #endif

@@ -69,8 +69,8 @@
 // Facebook-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_Facebook_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Facebook_iOS_SDK 3
-#define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 14
-#define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 1
+#define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 15
+#define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 0
 
 // GoogleAnalytics-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_GoogleAnalytics_iOS_SDK
@@ -102,6 +102,18 @@
 #define COCOAPODS_VERSION_MINOR_MFSideMenu 5
 #define COCOAPODS_VERSION_PATCH_MFSideMenu 4
 
+// MagicalRecord
+#define COCOAPODS_POD_AVAILABLE_MagicalRecord
+#define COCOAPODS_VERSION_MAJOR_MagicalRecord 2
+#define COCOAPODS_VERSION_MINOR_MagicalRecord 2
+#define COCOAPODS_VERSION_PATCH_MagicalRecord 0
+
+// MagicalRecord/Core
+#define COCOAPODS_POD_AVAILABLE_MagicalRecord_Core
+#define COCOAPODS_VERSION_MAJOR_MagicalRecord_Core 2
+#define COCOAPODS_VERSION_MINOR_MagicalRecord_Core 2
+#define COCOAPODS_VERSION_PATCH_MagicalRecord_Core 0
+
 // Parse-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_Parse_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Parse_iOS_SDK 1
@@ -132,6 +144,12 @@
 #define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
 #define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
 
+// TITokenField
+#define COCOAPODS_POD_AVAILABLE_TITokenField
+#define COCOAPODS_VERSION_MAJOR_TITokenField 0
+#define COCOAPODS_VERSION_MINOR_TITokenField 9
+#define COCOAPODS_VERSION_PATCH_TITokenField 5
+
 // UINavigationBar+Addition
 #define COCOAPODS_POD_AVAILABLE_UINavigationBar_Addition
 #define COCOAPODS_VERSION_MAJOR_UINavigationBar_Addition 1
@@ -143,4 +161,10 @@
 #define COCOAPODS_VERSION_MAJOR_iRate 1
 #define COCOAPODS_VERSION_MINOR_iRate 10
 #define COCOAPODS_VERSION_PATCH_iRate 2
+
+// pop
+#define COCOAPODS_POD_AVAILABLE_pop
+#define COCOAPODS_VERSION_MAJOR_pop 1
+#define COCOAPODS_VERSION_MINOR_pop 0
+#define COCOAPODS_VERSION_PATCH_pop 6
 

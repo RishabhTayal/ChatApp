@@ -45,13 +45,26 @@
     
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
-    chatVC.title = notification.userInfo[kNotificationSender][@"name"];
     
     [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", notification.userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
         chatVC.friendsImage = image;
     }];
 
-    chatVC.friendDict = notification.userInfo[kNotificationSender];
+    NSDictionary* notificationPayload = notification.userInfo[kNotificationPayload];
+    if ([notificationPayload[kNotificationPayloadIsGroupChat] boolValue] == TRUE) {
+        //Group Chat Notificationr
+        Group* group = [[Group MR_findByAttribute:@"groupId" withValue:notificationPayload[kNotificationPayloadGroupId]] firstObject];
+        chatVC.isGroupChat = YES;
+        chatVC.groupObj = group;
+        chatVC.title = group.name;
+    } else {
+        //Friend Chat Notification
+        Friend* friend = [[Friend MR_findByAttribute:@"fbId" withValue:notification.userInfo[kNotificationSender][@"id"]] firstObject];
+        chatVC.isGroupChat = NO;
+        chatVC.friendObj = friend;
+        chatVC.title = notification.userInfo[kNotificationSender][@"name"];
+    }
+
     [friendsList.navigationController pushViewController:chatVC animated:YES];
 }
 

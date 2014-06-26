@@ -17,14 +17,19 @@
 #import <MFSideMenu.h>
 #import "UIImage+Utility.h"
 #import <Reachability/Reachability.h>
-#import "NotificationView.h"
+#import "DropDownView.h"
+#import "CreateGroupViewController.h"
+#import "Group.h"
+#import "Friend.h"
 
 @interface FriendsListViewController ()
 
+@property (strong) NSMutableArray* groups;
 @property (strong) NSMutableArray* friendsUsingApp;
 @property (strong) NSMutableArray* friendsNotUsingApp;
 
 @property (strong) Reachability* reachability;
+@property (strong) GADInterstitial* interstitial;
 
 @end
 
@@ -49,22 +54,27 @@
     
     _friendsUsingApp = [NSMutableArray new];
     
-    _friendsNotUsingApp = [NSMutableArray arrayWithArray:[self getAllDeviceContacts]];
+    [NSThread detachNewThreadSelector:@selector(getAllDeviceContacts) toTarget:self withObject:nil];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New Group", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(createNewGroup:)];
+    _reachability = [Reachability reachabilityForInternetConnection];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    
+    [_reachability startNotifier];
+    
+    [self updateInterfaceWithReachabiltity:self.reachability];
+    
+    UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
+    [self.tableView addSubview:refreshControl];
+    [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
+    
+    [self loadInterstitial];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [GAI trackWithScreenName:kScreenNameFriendsList];
-    
-    _reachability = [Reachability reachabilityForInternetConnection];
-    [self updateInterfaceWithReachabiltity:self.reachability];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityChanged:)
-                                                 name:kReachabilityChangedNotification
-                                               object:nil];
-    
-    [_reachability startNotifier];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -79,6 +89,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)refreshTable:(UIRefreshControl*)refreshControl
+{
+    [refreshControl endRefreshing];
+    [self loadGroupsFromServer];
+    //    [self updateInterfaceWithReachabiltity:_reachability];
+}
+
 #pragma mark - Internet Reachability Methods
 
 -(void)reachabilityChanged:(NSNotification*)notif {
@@ -86,30 +103,103 @@
     [self updateInterfaceWithReachabiltity:reach];
 }
 
--(void)updateInterfaceWithReachabiltity:(Reachability*)reachability {
-    
+-(void)updateInterfaceWithReachabiltity:(Reachability*)reachability
+{
     NetworkStatus status = [reachability currentReachabilityStatus];
     switch (status) {
         case NotReachable:
         {
-            [NotificationView showInViewController:self withText:@"Needs Internet to chat with friends. No Internet found." height:NotificationViewHeightDefault hideAfterDelay:0];
+            [DropDownView showInViewController:self withText:@"Needs Internet to chat with friends. No Internet found." height:DropDownViewHeightDefault hideAfterDelay:0];
         }
             break;
         default:
         {
-            [NotificationView hide];
-            FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
-            [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                NSLog(@"Friends: %@", result[@"data"]);
-                NSLog(@"Error: %@", error);
-                _friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
-                
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-                
-            }];
+            [DropDownView hide];
+            
+            NSArray* friendsArray = [Friend MR_findAll];
+            if (friendsArray.count == 0) {
+                [self loadFriendsFromFacebook];
+            } else {
+                _friendsUsingApp = [NSMutableArray arrayWithArray:friendsArray];
+            }
+            
+            //Get groups
+            NSArray* array = [Group MR_findAll];
+            if (array.count == 0) {
+                [self loadGroupsFromServer];
+            } else {
+                _groups = [NSMutableArray arrayWithArray:array];
+            }
         }
             break;
     }
+}
+
+#pragma mark -
+
+-(void)loadFriendsFromFacebook
+{
+    FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends?fields=installed" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [GAI trackEventWithCategory:@"ui_event" action:@"facebook_friends" label:[PFUser currentUser][kPFUser_FBID] value:[NSNumber numberWithInt:[result[@"data"] count]]];
+        [Friend MR_truncateAll];
+        for (NSDictionary* object in result[@"data"]) {
+            Friend* friend = [Friend MR_createEntity];
+            friend.fbId = object[@"id"];
+            friend.name = object[@"name"];
+        }
+        [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
+            if (success) {
+                NSLog(@"You successfully saved your context.");
+                _friendsUsingApp = [NSMutableArray arrayWithArray:[Friend MR_findAll]];
+                
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+            } else if (error) {
+                NSLog(@"Error saving context: %@", error.description);
+            }
+        }];
+    }];
+}
+
+-(void)loadGroupsFromServer
+{
+    PFQuery* query = [PFQuery queryWithClassName:kPFTableGroup];
+    [query whereKey:kPFGroupMembers equalTo:[PFUser currentUser]];
+    [query orderByDescending:@"updatedAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        [Group MR_truncateAll];
+        
+        for (PFObject* object in objects) {
+            Group* group = [Group MR_createEntity];
+            group.groupId = object.objectId;
+            group.name = object[kPFGroupName];
+            group.updatedAt = object.updatedAt;
+            group.imageurl = ((PFFile*) object[kPFGroupPhoto]).url;
+        }
+        [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
+            if (success) {
+                NSLog(@"You successfully saved your context.");
+                _groups = [[NSMutableArray alloc] initWithArray:[Group MR_findAllSortedBy:@"updatedAt" ascending:YES]];
+                
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+            } else if (error) {
+                NSLog(@"Error saving context: %@", error.description);
+            }
+        }];
+    }];
+}
+
+#pragma mark -
+
+-(void)createNewGroup:(id)sender
+{
+    NSLog(@"Create group");
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    CreateGroupViewController* createGroupVC = [sb instantiateViewControllerWithIdentifier:@"CreateGroupViewController"];
+    createGroupVC.friendsListVC = self;
+    [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:createGroupVC] animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -119,7 +209,7 @@
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
--(NSArray*)getAllDeviceContacts
+-(void)getAllDeviceContacts
 {
     NSMutableArray* allcontacts = [NSMutableArray new];
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(nil, nil);
@@ -164,7 +254,10 @@
         CFRelease(people);
     }
     
-    return allcontacts;
+    _friendsNotUsingApp = [NSMutableArray arrayWithArray:allcontacts];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+    });
 }
 
 #pragma mark - Table view data source
@@ -172,12 +265,15 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
+        return NSLocalizedString(@"Groups", nil);
+    }
+    if (section == 1) {
         return NSLocalizedString(@"Friends using vCinity", nil);
     }
     return NSLocalizedString(@"Friends not on vCinity", nil);
@@ -187,6 +283,12 @@
 {
     // Return the number of rows in the section.
     if (section == 0) {
+        if (_groups.count == 0) {
+            return 1;
+        }
+        return _groups.count;
+    }
+    if (section == 1) {
         return _friendsUsingApp.count;
     }
     return _friendsNotUsingApp.count;
@@ -196,9 +298,22 @@
 {
     // Configure the cell...
     if (indexPath.section == 0) {
+        FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"groupCell"];
+        if (_groups.count == 0) {
+            cell.friendName.text = NSLocalizedString(@"Create Group", nil);
+            cell.friendName.textColor = [UIColor blueColor];
+        } else {
+            Group* group = _groups[indexPath.row];
+            cell.friendName.text = group.name;
+            [cell.profilePicture setImageWithURL:[NSURL URLWithString:group.imageurl]];
+        }
+        return cell;
+    }
+    if (indexPath.section == 1) {
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-        cell.friendName.text = _friendsUsingApp[indexPath.row][@"name"];
-        [cell.profilePicture setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", _friendsUsingApp[indexPath.row][@"id"]]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
+        Friend* friend = ((Friend*) _friendsUsingApp[indexPath.row]);
+        cell.friendName.text = friend.name;
+        [cell.profilePicture setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", friend.fbId]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
         return cell;
     } else {
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friendNotUsingAppCell"];
@@ -215,17 +330,158 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 0) {
+        if (_groups.count == 0) {
+            [self createNewGroup:nil];
+        } else {
+            FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+            UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
+            Group* group = (Group*)_groups[indexPath.row];
+            chatVC.title = group.name;
+            //        chatVC.friendDict = _groups[indexPath.row];
+            chatVC.groupObj = group;
+            chatVC.friendsImage = cell.profilePicture.image;
+            chatVC.isGroupChat = YES;
+            [self.navigationController pushViewController:chatVC animated:YES];
+        }
+    }
+    
+    if (indexPath.section == 1) {
         
         FriendTableViewCell* cell = (FriendTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         
         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         FriendsChatViewController* chatVC = [sb instantiateViewControllerWithIdentifier:@"FriendsChatViewController"];
-        chatVC.title = _friendsUsingApp[indexPath.row][@"name"];
-        chatVC.friendDict = _friendsUsingApp[indexPath.row];
+        Friend* friend = (Friend*)_friendsUsingApp[indexPath.row];
+        chatVC.title = friend.name;
+        //        chatVC.friendDict = _friendsUsingApp[indexPath.row];
+        chatVC.friendObj = friend;
         chatVC.friendsImage = cell.profilePicture.image;
+        chatVC.isGroupChat = NO;
         [self.navigationController pushViewController:chatVC animated:YES];
     }
 }
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+//- (NSArray *)rightButtons
+//{
+//    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+//    [rightUtilityButtons sw_addUtilityButtonWithColor:
+//     [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
+//                                                title:@"More"];
+//    [rightUtilityButtons sw_addUtilityButtonWithColor:
+//     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+//                                                title:@"Delete"];
+//
+//    return rightUtilityButtons;
+//}
+//
+//#pragma mark - SWTableViewCell Delegate
+//
+//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return @"Delete";
+//}
+//- (NSString *)tableView:(UITableView *)tableView titleForMoreOptionButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return @"More";
+//}
+//- (void)tableView:(UITableView *)tableView moreOptionButtonPressedInRowAtIndexPath:(NSIndexPath *)indexPath {
+//    // Called when "MORE" button is pushed.
+//    NSLog(@"MORE button pushed in row at: %@", indexPath.description);
+//    // Hide more- and delete-confirmation view
+//    [tableView.visibleCells enumerateObjectsUsingBlock:^(MSCMoreOptionTableViewCell *cell, NSUInteger idx, BOOL *stop) {
+//        if ([[tableView indexPathForCell:cell] isEqual:indexPath]) {
+//            [cell hideDeleteConfirmation];
+//        }
+//    }];
+//}
+
+//- (void)swipeableTableViewCell:(SWTableViewCell *)cell scrollingToState:(SWCellState)state
+//{
+//    switch (state) {
+//        case 0:
+//            NSLog(@"utility buttons closed");
+//            break;
+//        case 1:
+//            NSLog(@"left utility buttons open");
+//            break;
+//        case 2:
+//            NSLog(@"right utility buttons open");
+//            break;
+//        default:
+//            break;
+//    }
+//}
+//
+//- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index
+//{
+//    switch (index) {
+//        case 0:
+//            NSLog(@"left button 0 was pressed");
+//            break;
+//        case 1:
+//            NSLog(@"left button 1 was pressed");
+//            break;
+//        case 2:
+//            NSLog(@"left button 2 was pressed");
+//            break;
+//        case 3:
+//            NSLog(@"left btton 3 was pressed");
+//        default:
+//            break;
+//    }
+//}
+//
+//- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+//{
+//    switch (index) {
+//        case 0:
+//        {
+//            NSLog(@"More button was pressed");
+//            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"More more more" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+//            [alertTest show];
+//
+//            [cell hideUtilityButtonsAnimated:YES];
+//            break;
+//        }
+//        case 1:
+//        {
+//            // Delete button was pressed
+//            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+//
+//            [_groups removeObjectAtIndex:cellIndexPath.row];
+//            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+//            break;
+//        }
+//        default:
+//            break;
+//    }
+//}
+//
+//- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
+//{
+//    // allow just one cell's utility button to be open at once
+//    return YES;
+//}
+//
+//- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
+//{
+//    switch (state) {
+//        case 1:
+//            // set to NO to disable all left utility buttons appearing
+//            return YES;
+//            break;
+//        case 2:
+//            // set to NO to disable all right utility buttons appearing
+//            return YES;
+//            break;
+//        default:
+//            break;
+//    }
+//
+//    return YES;
+//}
 
 #pragma mark -
 
@@ -233,7 +489,7 @@
 {
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
-       
+    
     NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
     if (DEBUGMODE) {
         recipientEmail = @"rtayal11@gmail.com";
@@ -244,14 +500,46 @@
         NSLog(@"%@", object);
         if (!error) {
             //Show Success
-            [NotificationView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:NotificationViewHeightTall hideAfterDelay:2];
+            [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:DropDownViewHeightTall hideAfterDelay:2];
             [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
         } else {
             //Show Error
-            [NotificationView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:NotificationViewHeightTall hideAfterDelay:2];
+            [DropDownView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:DropDownViewHeightTall hideAfterDelay:2];
             [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
         }
     }];
+}
+
+
+#pragma mark - GADRequest implementation
+
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            GAD_SIMULATOR_ID,
+                            @"4a4d13e777b61b0f28cb678991220815"
+                            ];
+    return request;
+}
+
+-(void)loadInterstitial
+{
+    _interstitial = [[GADInterstitial alloc] init];
+    _interstitial.delegate = self;
+    
+    _interstitial.adUnitID = @"ca-app-pub-8353175505649532/7101209039";
+    [_interstitial loadRequest:[self request]];
+}
+
+-(void)interstitialDidReceiveAd:(GADInterstitial *)ad
+{
+    NSLog(@"Google Ads recieved");
+    [_interstitial presentFromRootViewController:self];
 }
 
 @end

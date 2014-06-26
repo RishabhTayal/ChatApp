@@ -15,6 +15,9 @@
 #import <Parse/Parse.h>
 #import "ActivityView.h"
 #import "AppDelegate.h"
+#import "Friend.h"
+#import "Group.h"
+#import "Chat.h"
 
 @interface MenuViewController ()
 
@@ -201,6 +204,9 @@
 {
     [ActivityView hide];
     
+    [Friend MR_truncateAll];
+    [Group MR_truncateAll];
+    [Chat MR_truncateAll];
     [PFUser logOut];
     
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];

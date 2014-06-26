@@ -17,7 +17,6 @@
 #import <iRate/iRate.h>
 #import "SessionController.h"
 #import "InAppNotificationTapListener.h"
-#import "UIImage+Utility.h"
 #import "InAppNotificationView.h"
 
 @implementation AppDelegate
@@ -30,7 +29,7 @@
     
     [iRate sharedInstance].daysUntilPrompt = 0;
     [iRate sharedInstance].remindPeriod = 0;
-    [iRate sharedInstance].previewMode = DEBUGMODE;
+    [iRate sharedInstance].previewMode = NO;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -73,6 +72,9 @@
     } else {
         [self setLoginView];
     }
+    
+    [MagicalRecord setupCoreDataStackWithStoreNamed:@"VCinityModel"];
+    
     return YES;
 }
 
@@ -81,30 +83,38 @@
     PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation setChannels:@[@"channel"]];
-    [currentInstallation saveInBackground];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            NSLog(@"Push Registration Error: %@", error);
+            [GAI trackEventWithCategory:@"pf_installation" action:@"registration_error" label:error.description value:nil];
+        }
+    }];
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:userInfo];
-    
-    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
-        [PFPush handlePush:userInfo];
-        [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
-    } else {
-        [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
-        UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
-        if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
-            
-            if (userInfo[kNotificationSender]) {
-                [UIImage imageForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", userInfo[kNotificationSender][@"id"]]] imageDownloadBlock:^(UIImage *image, NSError *error) {
-                    [[InAppNotificationView sharedInstance] notifyWithText:userInfo[kNotificationSender][@"name"] detail:userInfo[kNotificationMessage] image:image duration:3 andTouchBlock:^(InAppNotificationView *view) {
+    if (userInfo[kNotificationPayload]) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"notification" object:nil userInfo:userInfo];
+        
+        if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+            [PFPush handlePush:userInfo];
+            [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
+        } else {
+            [[InAppNotificationTapListener sharedInAppNotificationTapListener] startObserving];
+            UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)self.window.rootViewController).centerViewController).visibleViewController;
+            if (! [currentVC isKindOfClass:[FriendsChatViewController class]]) {
+                
+                if (userInfo[kNotificationSender]) {
+                    [[InAppNotificationView sharedInstance] notifyWithUserInfo:userInfo andTouchBlock:^(InAppNotificationView *view) {
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"notificationTapped" object:nil userInfo:userInfo];
                     }];
-                }];
+                }
             }
         }
+    } else {
+        [PFPush handlePush:userInfo];
     }
 }
 
@@ -133,10 +143,9 @@
     
     MenuViewController* menuVC = [[MenuViewController alloc] init];
     MFSideMenuContainerViewController* vc = [MFSideMenuContainerViewController containerWithCenterViewController:nil leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:menuVC] rightMenuViewController:nil];
+    vc.menuSlideAnimationEnabled = YES;
     [menuVC.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     [menuVC tableView:menuVC.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    
-    //    _sessionController = [[SessionController alloc] initWithDelegate:nearVC];
     
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
@@ -172,12 +181,22 @@
     
     // Register App Install on Facebook Ads Manager
     [FBAppEvents activateApp];
+    
+    [self updateInstallation];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)updateInstallation
+{
+    PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
+    //    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation setChannels:@[@"channel"]];
+    [currentInstallation saveInBackground];
 }
 
 @end

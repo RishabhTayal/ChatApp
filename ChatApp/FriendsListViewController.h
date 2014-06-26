@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GADInterstitial.h"
 
-@interface FriendsListViewController : UITableViewController
+@interface FriendsListViewController : UITableViewController<GADInterstitialDelegate>
 
 -(IBAction)inviteFriend:(id)sender;
+-(void)loadGroupsFromServer;
 
 @end

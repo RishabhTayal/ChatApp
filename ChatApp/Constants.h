@@ -17,14 +17,11 @@
 
 //NSUserDefaults Keys
 #define kUDKeyUserLoggedIn @"loggedin"
-//#define kUDKeyUserFirstName @"first_name"
-//#define kUDKeyUserLastName @"last_name"
-//#define kUDKeyUserLocLongitude @"user_longitude"
-//#define kUDKeyUserLocLatitude @"user_latitude"
 
 //Setting UserDefaults
 #define kUDInAppVibrate @"inAppVibrate"
 #define kUDInAppSound @"inAppSound"
+#define kUDSyncContactsToServer @"syncContactsToServer"
 
 //PFUser currentUser Keys
 #define kPFUser_Username @"username"
@@ -35,16 +32,24 @@
 //Parse Table Names
 #define kPFTableName_Chat @"Wechat"
 #define kPFTableUser @"User"
+#define kPFTableGroup @"Groups"
 
 //Chat Table Columns
 #define kPFChatSender @"sender"
 #define kPFChatReciever @"receiver"
 #define kPFChatMessage @"msg"
 
+#define kPFGroupName @"name"
+#define kPFGroupPhoto @"photo"
+#define kPFGroupMembers @"members"
+
 //Notification Related Keys
 #define kNotificationSender @"sender"
-#define kNotificationReceiever @"reciever"
+//#define kNotificationReceiever @"reciever"
 #define kNotificationMessage @"message"
 #define kNotificationAlert @"alert"
+#define kNotificationPayload @"payload"
+#define kNotificationPayloadIsGroupChat @"isGroupChat"
+#define kNotificationPayloadGroupId @"groupId"
 
 #endif
