@@ -27,21 +27,6 @@
 		061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061E7E501918818400A0DF90 /* FriendTableViewCell.m */; };
 		062EA2241948D28A00AA64E5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062EA2231948D28A00AA64E5 /* iAd.framework */; };
 		062EA23E194A08A600AA64E5 /* CreateGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */; };
-		063B5A57195C77F40090BA1C /* MillennialMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A55195C77F40090BA1C /* MillennialMedia.framework */; };
-		063B5A58195C77F40090BA1C /* SpeechKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A56195C77F40090BA1C /* SpeechKit.framework */; };
-		063B5A5B195C79790090BA1C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A5A195C79790090BA1C /* CoreLocation.framework */; };
-		063B5A5D195C7BB60090BA1C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A5C195C7BB60090BA1C /* MediaPlayer.framework */; };
-		063B5A5F195C7BC90090BA1C /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A5E195C7BC90090BA1C /* EventKit.framework */; };
-		063B5A61195C7D190090BA1C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A60195C7D190090BA1C /* AdSupport.framework */; };
-		063B5A63195C7D200090BA1C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A62195C7D200090BA1C /* AudioToolbox.framework */; };
-		063B5A65195C7D2F0090BA1C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A64195C7D2F0090BA1C /* AVFoundation.framework */; };
-		063B5A67195C7D380090BA1C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A66195C7D380090BA1C /* CFNetwork.framework */; };
-		063B5A69195C7D6B0090BA1C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A68195C7D6B0090BA1C /* MobileCoreServices.framework */; };
-		063B5A6B195C7D730090BA1C /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A6A195C7D730090BA1C /* PassKit.framework */; };
-		063B5A6D195C7D7E0090BA1C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A6C195C7D7E0090BA1C /* QuartzCore.framework */; };
-		063B5A6F195C7D830090BA1C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A6E195C7D830090BA1C /* Security.framework */; };
-		063B5A71195C7D9C0090BA1C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A70195C7D9C0090BA1C /* StoreKit.framework */; };
-		063B5A73195C7DA60090BA1C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063B5A72195C7DA60090BA1C /* SystemConfiguration.framework */; };
 		0641F1191951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0641F1171951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m */; };
 		0641F11A1951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */; };
 		0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642158F19213ACE00FB1F6D /* Accounts.framework */; };
@@ -112,21 +97,6 @@
 		062EA2231948D28A00AA64E5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		062EA23C194A08A600AA64E5 /* CreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupViewController.h; sourceTree = "<group>"; };
 		062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CreateGroupViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		063B5A55195C77F40090BA1C /* MillennialMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MillennialMedia.framework; sourceTree = "<group>"; };
-		063B5A56195C77F40090BA1C /* SpeechKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpeechKit.framework; sourceTree = "<group>"; };
-		063B5A5A195C79790090BA1C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		063B5A5C195C7BB60090BA1C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		063B5A5E195C7BC90090BA1C /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
-		063B5A60195C7D190090BA1C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		063B5A62195C7D200090BA1C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		063B5A64195C7D2F0090BA1C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		063B5A66195C7D380090BA1C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		063B5A68195C7D6B0090BA1C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		063B5A6A195C7D730090BA1C /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
-		063B5A6C195C7D7E0090BA1C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		063B5A6E195C7D830090BA1C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		063B5A70195C7D9C0090BA1C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		063B5A72195C7DA60090BA1C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0641F1161951E7A100FCC691 /* CreateGroupFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupFriendsTableViewCell.h; sourceTree = "<group>"; };
 		0641F1171951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupFriendsTableViewCell.m; sourceTree = "<group>"; };
 		0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupFriendsTableViewCell.xib; sourceTree = "<group>"; };
@@ -204,31 +174,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				063B5A73195C7DA60090BA1C /* SystemConfiguration.framework in Frameworks */,
-				063B5A71195C7D9C0090BA1C /* StoreKit.framework in Frameworks */,
 				0642159219213AD300FB1F6D /* Social.framework in Frameworks */,
-				063B5A6F195C7D830090BA1C /* Security.framework in Frameworks */,
-				063B5A6D195C7D7E0090BA1C /* QuartzCore.framework in Frameworks */,
-				063B5A6B195C7D730090BA1C /* PassKit.framework in Frameworks */,
-				063B5A69195C7D6B0090BA1C /* MobileCoreServices.framework in Frameworks */,
-				063B5A5B195C79790090BA1C /* CoreLocation.framework in Frameworks */,
 				065A15D71912BCFB00B85D3D /* CoreGraphics.framework in Frameworks */,
-				063B5A67195C7D380090BA1C /* CFNetwork.framework in Frameworks */,
-				063B5A65195C7D2F0090BA1C /* AVFoundation.framework in Frameworks */,
-				063B5A63195C7D200090BA1C /* AudioToolbox.framework in Frameworks */,
-				063B5A61195C7D190090BA1C /* AdSupport.framework in Frameworks */,
-				063B5A5F195C7BC90090BA1C /* EventKit.framework in Frameworks */,
-				063B5A5D195C7BB60090BA1C /* MediaPlayer.framework in Frameworks */,
 				062EA2241948D28A00AA64E5 /* iAd.framework in Frameworks */,
 				0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */,
 				06085981191C36AC005F6A75 /* MessageUI.framework in Frameworks */,
 				0645FB4B195399F0005FA941 /* libGoogleAdMobAds.a in Frameworks */,
-				063B5A58195C77F40090BA1C /* SpeechKit.framework in Frameworks */,
 				0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */,
 				065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */,
 				065A15D91912BCFB00B85D3D /* UIKit.framework in Frameworks */,
 				065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */,
-				063B5A57195C77F40090BA1C /* MillennialMedia.framework in Frameworks */,
 				D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,15 +281,6 @@
 			name = "Friends List";
 			sourceTree = "<group>";
 		};
-		063B5A59195C77F70090BA1C /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				063B5A55195C77F40090BA1C /* MillennialMedia.framework */,
-				063B5A56195C77F40090BA1C /* SpeechKit.framework */,
-			);
-			name = Vendor;
-			sourceTree = "<group>";
-		};
 		0641F11B1951E7A500FCC691 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,21 +341,7 @@
 		065A15D31912BCFB00B85D3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				063B5A72195C7DA60090BA1C /* SystemConfiguration.framework */,
-				063B5A70195C7D9C0090BA1C /* StoreKit.framework */,
-				063B5A6E195C7D830090BA1C /* Security.framework */,
-				063B5A6C195C7D7E0090BA1C /* QuartzCore.framework */,
-				063B5A6A195C7D730090BA1C /* PassKit.framework */,
-				063B5A68195C7D6B0090BA1C /* MobileCoreServices.framework */,
-				063B5A66195C7D380090BA1C /* CFNetwork.framework */,
-				063B5A64195C7D2F0090BA1C /* AVFoundation.framework */,
-				063B5A62195C7D200090BA1C /* AudioToolbox.framework */,
-				063B5A60195C7D190090BA1C /* AdSupport.framework */,
-				063B5A5E195C7BC90090BA1C /* EventKit.framework */,
-				063B5A5C195C7BB60090BA1C /* MediaPlayer.framework */,
-				063B5A5A195C79790090BA1C /* CoreLocation.framework */,
 				069705B01937ACE7006BB9C5 /* libPods.a */,
-				063B5A59195C77F70090BA1C /* Vendor */,
 				062EA2231948D28A00AA64E5 /* iAd.framework */,
 				0642159119213AD300FB1F6D /* Social.framework */,
 				0642158F19213ACE00FB1F6D /* Accounts.framework */,

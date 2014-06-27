@@ -75,7 +75,7 @@
     }
     
     AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
-    [appDelegate displayMillenialAdInViewController:self];
+    [appDelegate displayAdMobInViewController:self];
 }
 
 - (void)didReceiveMemoryWarning

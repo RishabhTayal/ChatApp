@@ -18,7 +18,13 @@
 #import "SessionController.h"
 #import "InAppNotificationTapListener.h"
 #import "InAppNotificationView.h"
-#import <MillennialMedia/MMInterstitial.h>
+
+@interface AppDelegate()
+
+@property (strong) GADInterstitial* interstitial;
+@property (strong) UIViewController* adPresentingVC;
+
+@end
 
 @implementation AppDelegate
 
@@ -75,12 +81,6 @@
     }
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"VCinityModel"];
-    
-    [MMSDK initialize];
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    [self.locationManager startUpdatingLocation];
     
     return YES;
 }
@@ -207,48 +207,60 @@
     [currentInstallation saveInBackground];
 }
 
--(void)displayMillenialAdInViewController:(UIViewController*)controller
+-(void)displayAdMobInViewController:(UIViewController*)controller
 {
-    if ([self shouldDisplayAd])
-    {
-        if ([MMInterstitial isAdAvailableForApid:kMillenialAppID]) {
-            [MMInterstitial displayForApid:kMillenialAppID fromViewController:controller withOrientation:MMOverlayOrientationTypeAll onCompletion:nil];
-        } else {
-            MMRequest* request = [MMRequest requestWithLocation:self.locationManager.location];
-            [MMInterstitial fetchWithRequest:request apid:kMillenialAppID onCompletion:^(BOOL success, NSError *error) {
-                if (success) {
-                    [MMInterstitial displayForApid:kMillenialAppID fromViewController:controller withOrientation:MMOverlayOrientationTypeAll onCompletion:nil];
-                }
-            }];
-        }
+    if ([self shouldDisplayAd]) {
+        _interstitial = [[GADInterstitial alloc] init];
+        _interstitial.delegate = self;
+        
+        _interstitial.adUnitID = @"ca-app-pub-8353175505649532/7101209039";
+        [_interstitial loadRequest:[self request]];
+        
+        _adPresentingVC = controller;
     }
 }
 
 -(BOOL)shouldDisplayAd
 {
-    NSDate* lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:kUDAdLastShownMillenial];
+    NSDate* lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:kUDAdLastShownAdMob];
     if (!lastDate) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownMillenial];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownAdMob];
         [[NSUserDefaults standardUserDefaults] synchronize];
         return YES;
     } else {
         NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:lastDate];
         int hours = (int)interval/3600;
         int minutes = (interval - (hours*3600)) / 60;
-        
-#ifdef DEBUG
-#warning Change Minute to 10
-#else
-#error Change Minutes to 10
-#endif
         DLog(@"Ad - Minutes since last shown: %d", minutes);
-        if (minutes >= 1) {
-            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownMillenial];
+        if (minutes >= 2) {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownAdMob];
             [[NSUserDefaults standardUserDefaults] synchronize];
             return YES;
         }
     }
     return NO;
+}
+
+#pragma mark - GADRequest implementation
+
+- (GADRequest *)request {
+    GADRequest *request = [GADRequest request];
+    
+    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+    // you want to receive test ads.
+    request.testDevices = @[
+                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+                            // the console when the app is launched.
+                            GAD_SIMULATOR_ID,
+                            @"4a4d13e777b61b0f28cb678991220815"
+                            ];
+    return request;
+}
+
+-(void)interstitialDidReceiveAd:(GADInterstitial *)ad
+{
+    DLog(@"Google Ads recieved");
+    [_interstitial presentFromRootViewController:_adPresentingVC];
 }
 
 @end

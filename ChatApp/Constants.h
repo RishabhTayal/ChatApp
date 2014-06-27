@@ -31,14 +31,6 @@
 #define kUDInAppSound @"inAppSound"
 #define kUDAdLastShowniAd @"adLastShowniAd"
 #define kUDAdLastShownAdMob @"adLastShownAdMob"
-#define kUDAdLastShownMillenial @"adLastShownMillenial"
-
-#ifdef DEBUG
-#warning Change it to actual ID
-#else
-#error Change it to actual ID
-#endif
-#define kMillenialAppID @"28911"
 
 //PFUser currentUser Keys
 #define kPFUser_Username @"username"

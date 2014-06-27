@@ -61,6 +61,7 @@
                     if ([[PFUser currentUser] objectForKey:kPFUser_FBID] == NULL) {
                         DLog(@"First Time");
                         [self notifyFriendsViaPushThatIJoined];
+                        [self notifyFriendsViaEmailThatIJoined];
                     }
                     
                     [[PFUser currentUser] setObject:result[@"id"] forKey:kPFUser_FBID];
@@ -136,6 +137,14 @@
         [push setMessage:[NSString stringWithFormat:@"Your friend %@ just joined vCinity! Start Chatting with them now.", [PFUser currentUser].username]];
         [push sendPushInBackground];
     }];
+}
+
+-(void)notifyFriendsViaEmailThatIJoined
+{
+//    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//        DLog(@"%@", result[@"data"]);
+//
+//    }];
 }
 
 @end
