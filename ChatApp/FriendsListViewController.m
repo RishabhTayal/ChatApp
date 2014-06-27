@@ -540,7 +540,7 @@
         }];
     } else {
         [DropDownView showInViewController:self withText:NSLocalizedString(@"Not a valid email address", nil) height:DropDownViewHeightTall hideAfterDelay:2];
-    }
+    }   
 }
 
 -(BOOL)NSStringIsValidEmail:(NSString*)checkString
