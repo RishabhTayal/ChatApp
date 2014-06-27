@@ -37,6 +37,7 @@
 #define kPFUser_Email @"email"
 #define kPFUser_FBID @"fbID"
 #define kPFUser_Picture @"picture"
+#define kPFUser_Invited @"invited"
 
 //Parse Table Names
 #define kPFTableName_Chat @"Wechat"

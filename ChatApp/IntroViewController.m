@@ -63,9 +63,8 @@
                         [self notifyFriendsViaPushThatIJoined];
                         [self notifyFriendsViaEmailThatIJoined];
                     }
-#warning change it to name
                     [[PFUser currentUser] setObject:result[@"id"] forKey:kPFUser_FBID];
-                    [[PFUser currentUser] setObject:@"RT" forKey:kPFUser_Name];
+                    [[PFUser currentUser] setObject:result[@"name"] forKey:kPFUser_Name];
                     if (result[@"email"] != NULL) {
                         [[PFUser currentUser] setObject:result[@"email"] forKey:kPFUser_Email];
                     }

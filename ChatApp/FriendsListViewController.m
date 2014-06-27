@@ -31,6 +31,8 @@
 
 @property (strong) Reachability* reachability;
 
+-(BOOL)NSStringIsValidEmail:(NSString*)checkString;
+
 @end
 
 @implementation FriendsListViewController
@@ -256,7 +258,11 @@
         CFRelease(people);
     }
     
-    _friendsNotUsingApp = [NSMutableArray arrayWithArray:allcontacts];
+    NSSortDescriptor* descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+    
+    NSArray* sortDescriptors = [NSArray arrayWithObject:descriptor];
+    [allcontacts sortedArrayUsingDescriptors:sortDescriptors];
+    _friendsNotUsingApp = [NSMutableArray arrayWithArray:[allcontacts sortedArrayUsingDescriptors:sortDescriptors]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
     });
@@ -321,6 +327,15 @@
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friendNotUsingAppCell"];
         cell.friendName.text = _friendsNotUsingApp[indexPath.row][@"name"];
         cell.profilePicture.image = _friendsNotUsingApp[indexPath.row][@"image"];
+        
+        NSArray* array = [PFUser currentUser][kPFUser_Invited];
+        if ([array containsObject:_friendsNotUsingApp[indexPath.row][@"email"] ]) {
+            cell.inviteButton.enabled = false;
+            [cell.inviteButton setTitle:@"Invited" forState:UIControlStateDisabled];
+        } else {
+            cell.inviteButton.enabled = true;
+        }
+        
         return cell;
     }
 }
@@ -496,22 +511,46 @@
     if (DEBUGMODE) {
         recipientEmail = @"rtayal11@gmail.com";
     }
-    NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
-    NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [PFUser currentUser][kPFUser_Name], @"text": @"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391", @"subject":@"vCinity Chat App for iPhone"};
-    [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
-        DLog(@"%@", object);
-        if (!error) {
-            //Show Success
-            [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:DropDownViewHeightTall hideAfterDelay:2];
-            [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
-        } else {
-            //Show Error
-            [DropDownView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:DropDownViewHeightTall hideAfterDelay:2];
-            [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
-        }
-    }];
+    
+    if ([self NSStringIsValidEmail:recipientEmail]) {
+        NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
+        NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [PFUser currentUser][kPFUser_Name], @"text": @"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391", @"subject":@"vCinity Chat App for iPhone"};
+        [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
+            DLog(@"%@", object);
+            if (!error) {
+                //Show Success
+                [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:DropDownViewHeightTall hideAfterDelay:2];
+                [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
+                
+                //Save email to invited coloumn
+                NSMutableArray* array = [PFUser currentUser][kPFUser_Invited];
+                if (!array) {
+                    array = [[NSMutableArray alloc] init];
+                }
+                if (![array containsObject:recipientEmail]) {
+                    [array addObject:recipientEmail];
+                    [[PFUser currentUser] setObject:array forKey:kPFUser_Invited];
+                    [[PFUser currentUser] saveEventually];
+                }
+            } else {
+                //Show Error
+                [DropDownView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:DropDownViewHeightTall hideAfterDelay:2];
+                [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
+            }
+        }];
+    } else {
+        [DropDownView showInViewController:self withText:NSLocalizedString(@"Not a valid email address", nil) height:DropDownViewHeightTall hideAfterDelay:2];
+    }
 }
 
-
+-(BOOL)NSStringIsValidEmail:(NSString*)checkString
+{
+    BOOL stricterFilter = YES; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
 
 @end
