@@ -331,7 +331,7 @@
         NSArray* array = [PFUser currentUser][kPFUser_Invited];
         if ([array containsObject:_friendsNotUsingApp[indexPath.row][@"email"] ]) {
             cell.inviteButton.enabled = false;
-            [cell.inviteButton setTitle:@"Invited" forState:UIControlStateDisabled];
+            [cell.inviteButton setTitle:NSLocalizedString(@"Invited", nil) forState:UIControlStateDisabled];
         } else {
             cell.inviteButton.enabled = true;
         }
