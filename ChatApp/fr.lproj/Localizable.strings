@@ -22,6 +22,7 @@
 "Invitation sent to %@!" = "Invitation envoyée à %@!";
 "Invitation could not be sent!" = "Invitation pas pu être envoyé!";
 "Invited" = "Invité";
+"Not a valid email address" = "Pas une adresse email valide";
 
 "Add People:" = "Ajouter Gens";
 "Create" = "Create";

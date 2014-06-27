@@ -22,6 +22,7 @@
 "Invitation sent to %@!" = "Invitación enviada a %@!";
 "Invitation could not be sent!" = "Invitación no se pudo enviar!";
 "Invited" = "Invitado";
+"Not a valid email address" = "No es una dirección de correo electrónico válida";
 
 "Add People:" = "Agregar Personas";
 "Create" = "Create";
