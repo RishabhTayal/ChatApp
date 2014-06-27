@@ -63,9 +63,9 @@
                         [self notifyFriendsViaPushThatIJoined];
                         [self notifyFriendsViaEmailThatIJoined];
                     }
-                    
+#warning change it to name
                     [[PFUser currentUser] setObject:result[@"id"] forKey:kPFUser_FBID];
-                    [[PFUser currentUser] setObject:result[@"name"] forKey:kPFUser_Username];
+                    [[PFUser currentUser] setObject:@"RT" forKey:kPFUser_Name];
                     if (result[@"email"] != NULL) {
                         [[PFUser currentUser] setObject:result[@"email"] forKey:kPFUser_Email];
                     }
@@ -95,31 +95,32 @@
                     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDKeyUserLoggedIn];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     
-                    MFSideMenuContainerViewController* sideMenuVC = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
-                    sideMenuVC.menuSlideAnimationEnabled = YES;
-                    [self.view addSubview:sideMenuVC.view];
-                    CATransition* anim = [CATransition animation];
-                    [anim setDelegate:self];
-                    [anim setDuration:1.5];
-                    [anim setTimingFunction:UIViewAnimationCurveEaseInOut];
-                    [anim setType:@"rippleEffect"];
-                    [anim setFillMode:kCAFillModeRemoved];
-                    anim.endProgress = 0.99;
-                    [anim setRemovedOnCompletion:NO];
+                    MFSideMenuContainerViewController* sideMenu = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NearChatViewController"]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+                    sideMenu.menuSlideAnimationEnabled = YES;
+                    self.view.window.rootViewController = sideMenu;
                     
-                    [self.view.layer addAnimation:anim forKey:nil];
+//                    CATransition* anim = [CATransition animation];
+//                    [anim setDelegate:self];
+//                    [anim setDuration:1.5];
+//                    [anim setTimingFunction:UIViewAnimationCurveEaseInOut];
+//                    [anim setType:@"rippleEffect"];
+//                    [anim setFillMode:kCAFillModeRemoved];
+//                    anim.endProgress = 0.99;
+//                    [anim setRemovedOnCompletion:NO];
+//                    
+//                    [self.view.layer addAnimation:anim forKey:nil];
                 }
             }];
         }
     }];
 }
 
--(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
-    MFSideMenuContainerViewController* sideMenuVC = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
-    sideMenuVC.menuSlideAnimationEnabled = YES;
-    self.view.window.rootViewController = sideMenuVC;
-}
+//-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+//{
+//     sideMenuVC = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[NearChatViewController alloc] init]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+//    _sideContainer.menuSlideAnimationEnabled = YES;
+//    self.view.window.rootViewController = _sideContainer;
+//}
 
 -(void)notifyFriendsViaPushThatIJoined
 {
@@ -134,7 +135,7 @@
         PFPush *push = [[PFPush alloc] init];
         [push setQuery:pushQuery];
         
-        [push setMessage:[NSString stringWithFormat:@"Your friend %@ just joined vCinity! Start Chatting with them now.", [PFUser currentUser].username]];
+        [push setMessage:[NSString stringWithFormat:@"Your friend %@ just joined vCinity! Start Chatting with them now.", [PFUser currentUser][kPFUser_Name]]];
         [push sendPushInBackground];
     }];
 }

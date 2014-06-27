@@ -134,7 +134,7 @@
             PFPush *push = [[PFPush alloc] init];
             [push setQuery:pushQuery];
             
-            [push setMessage:[NSString stringWithFormat:@"%@ invited you to group \"%@\".", [PFUser currentUser].username, _groupNameTF.text]];
+            [push setMessage:[NSString stringWithFormat:@"%@ invited you to group \"%@\".", [PFUser currentUser][kPFUser_Name], _groupNameTF.text]];
             [push sendPushInBackground];
         }];
     }

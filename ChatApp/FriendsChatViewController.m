@@ -149,7 +149,7 @@
             for (PFUser* member in objects) {
                 NSMutableDictionary* dict = [NSMutableDictionary new];
                 [dict setObject:member[kPFUser_FBID] forKey:kPFUser_FBID];
-                [dict setObject:member[kPFUser_Username] forKey:kPFUser_Username];
+                [dict setObject:member[kPFUser_Name] forKey:kPFUser_Name];
                 
                 PFFile* file = member[kPFUser_Picture];
                 [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -242,9 +242,9 @@
     PFPush *push = [[PFPush alloc] init];
     [push setQuery:pushQuery];
     
-    NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
+    NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser][kPFUser_Name], @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
     [pushData setObject:text forKey:kNotificationMessage];
-    [pushData setObject:[NSString stringWithFormat:@"%@: %@", [PFUser currentUser].username, text] forKey:kNotificationAlert];
+    [pushData setObject:[NSString stringWithFormat:@"%@: %@", [PFUser currentUser][kPFUser_Name], text] forKey:kNotificationAlert];
     [pushData setObject:[NSNumber numberWithBool:YES] forKey:@"groupMessage"];
     [pushData setObject:[NSDictionary dictionaryWithObjects:@[[NSNumber numberWithBool:NO]] forKeys:@[kNotificationPayloadIsGroupChat]] forKey:kNotificationPayload];
     [push setData:pushData];
@@ -278,9 +278,9 @@
             PFPush *push = [[PFPush alloc] init];
             [push setQuery:pushQuery];
             
-            NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser].username, @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
+            NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser][kPFUser_Name], @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
             [pushData setObject:text forKey:kNotificationMessage];
-            [pushData setObject:[NSString stringWithFormat:@"%@ @ \"%@\": %@", [PFUser currentUser].username, groupObject[kPFGroupName] ,text] forKey:kNotificationAlert];
+            [pushData setObject:[NSString stringWithFormat:@"%@ @ \"%@\": %@", [PFUser currentUser][kPFUser_Name], groupObject[kPFGroupName] ,text] forKey:kNotificationAlert];
             [pushData setObject:[NSDictionary dictionaryWithObjects:@[[NSNumber numberWithBool:YES], _groupObj.groupId] forKeys:@[kNotificationPayloadIsGroupChat, kNotificationPayloadGroupId]] forKey:kNotificationPayload];
             [push setData:pushData];
             [push sendPushInBackground];
@@ -358,12 +358,12 @@
         JSQMessage* message = ((Chat*)_chatArray[indexPath.item]).jsmessage;
         
         if ([message.sender isEqualToString:[PFUser currentUser][kPFUser_FBID]]) {
-            NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser].username];
+            NSAttributedString* attString = [[NSAttributedString alloc] initWithString:[PFUser currentUser][kPFUser_Name]];
             return attString;
         } else {
             for (NSDictionary* dict in _groupObj.members) {
                 if ([dict[kPFUser_FBID] isEqualToString:message.sender]) {
-                    NSAttributedString* attString = [[NSAttributedString alloc] initWithString:dict[kPFUser_Username]];
+                    NSAttributedString* attString = [[NSAttributedString alloc] initWithString:dict[kPFUser_Name]];
                     return attString;
                 }
             }

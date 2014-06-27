@@ -74,7 +74,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDInAppSound];
     }
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue] && [PFUser currentUser][kPFUser_Name]) {
         [self setMainView];
     } else {
         [self setLoginView];
@@ -232,7 +232,7 @@
         int hours = (int)interval/3600;
         int minutes = (interval - (hours*3600)) / 60;
         DLog(@"Ad - Minutes since last shown: %d", minutes);
-        if (minutes >= 2) {
+        if (minutes >= 1) {
             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownAdMob];
             [[NSUserDefaults standardUserDefaults] synchronize];
             return YES;
@@ -260,7 +260,9 @@
 -(void)interstitialDidReceiveAd:(GADInterstitial *)ad
 {
     DLog(@"Google Ads recieved");
-    [_interstitial presentFromRootViewController:_adPresentingVC];
+    DLog(@"Presenting on VC: %@", self.window.rootViewController);
+
+    [_interstitial presentFromRootViewController:self.window.rootViewController];
 }
 
 @end

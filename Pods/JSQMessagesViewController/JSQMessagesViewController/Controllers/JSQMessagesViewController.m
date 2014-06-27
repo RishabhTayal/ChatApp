@@ -20,8 +20,6 @@
 
 #import "JSQMessagesKeyboardController.h"
 
-#import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
-
 #import "JSQMessageData.h"
 #import "JSQMessage.h"
 
@@ -40,15 +38,19 @@
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 
+#import <KVOController/FBKVOController.h>
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
 
 
 @interface JSQMessagesViewController () <JSQMessagesInputToolbarDelegate,
-                                         JSQMessagesCollectionViewCellDelegate,
-                                         JSQMessagesKeyboardControllerDelegate,
-                                         UITextViewDelegate>
+JSQMessagesCollectionViewCellDelegate,
+JSQMessagesKeyboardControllerDelegate,
+UITextViewDelegate>
+{
+    FBKVOController* _KVOController;
+}
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -80,7 +82,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)jsq_setCollectionViewInsetsTopValue:(CGFloat)top bottomValue:(CGFloat)bottom;
 
 - (void)jsq_addObservers;
-- (void)jsq_removeObservers;
+/**
+ *  By: Rishabh Tayal: No need to remove overser anymore.
+ */
+//- (void)jsq_removeObservers;
 
 - (void)jsq_registerForNotifications:(BOOL)registerForNotifications;
 
@@ -144,7 +149,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)dealloc
 {
     [self jsq_registerForNotifications:NO];
-    [self jsq_removeObservers];
+    /**
+     *  By: Rishabh Tayal: No need to remove overser anymore.
+     */
+    //    [self jsq_removeObservers];
     
     _collectionView.dataSource = nil;
     _collectionView.delegate = nil;
@@ -172,7 +180,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     _showTypingIndicator = showTypingIndicator;
     
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView.collectionViewLayout invalidateLayout];
     [self scrollToBottomAnimated:YES];
 }
 
@@ -184,7 +192,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     
     _showLoadEarlierMessagesHeader = showLoadEarlierMessagesHeader;
     
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark - View lifecycle
@@ -203,12 +211,12 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 {
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView.collectionViewLayout invalidateLayout];
     
     if (self.automaticallyScrollsToMostRecentMessage) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self scrollToBottomAnimated:NO];
-            [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+            [self.collectionView.collectionViewLayout invalidateLayout];
         });
     }
     
@@ -235,7 +243,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self jsq_removeObservers];
+    /**
+     *  By: Rishabh Tayal: No need to remove overser anymore.
+     */
+    //    [self jsq_removeObservers];
     [self.keyboardController endListeningForKeyboard];
 }
 
@@ -263,7 +274,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 #pragma mark - Messages view controller
@@ -368,10 +379,10 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     id<JSQMessageData> messageData = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    NSParameterAssert(messageData != nil);
+    NSAssert(messageData, @"ERROR: messageData must not be nil: %s", __PRETTY_FUNCTION__);
     
     NSString *messageSender = [messageData sender];
-    NSParameterAssert(messageSender != nil);
+    NSAssert(messageSender, @"ERROR: messageData sender must not be nil: %s", __PRETTY_FUNCTION__);
     
     BOOL isOutgoingMessage = [messageSender isEqualToString:self.sender];
     
@@ -380,7 +391,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     cell.delegate = self;
     
     NSString *messageText = [messageData text];
-    NSParameterAssert(messageText != nil);
+    NSAssert(messageText, @"ERROR: messageData text must not be nil: %s", __PRETTY_FUNCTION__);
     
     cell.textView.text = messageText;
     cell.messageBubbleImageView = [collectionView.dataSource collectionView:collectionView bubbleImageViewForItemAtIndexPath:indexPath];
@@ -592,7 +603,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             CGSize newContentSize = [[change objectForKey:NSKeyValueChangeNewKey] CGSizeValue];
             
             CGFloat dy = newContentSize.height - oldContentSize.height;
-        
+            
             [self jsq_adjustInputToolbarForComposerTextViewContentSizeChange:dy];
             [self jsq_updateCollectionViewInsets];
             if (self.automaticallyScrollsToMostRecentMessage) {
@@ -743,23 +754,40 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 
 - (void)jsq_addObservers
 {
-    [self jsq_removeObservers];
+    /**
+     *  By: Rishabh Tayal: No need to remove overser anymore.
+     */
+    //    [self jsq_removeObservers];
     
-    [self.inputToolbar.contentView.textView addObserver:self
-                                             forKeyPath:NSStringFromSelector(@selector(contentSize))
-                                                options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-                                                context:kJSQMessagesKeyValueObservingContext];
+    _KVOController = [FBKVOController controllerWithObserver:self];
+    
+    [_KVOController observe:self keyPath:NSStringFromSelector(@selector(contentSize)) options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:kJSQMessagesKeyValueObservingContext];
+    
+    /**
+     *  By Rishabh Tayal: Using KVOController to manage key value observing
+     *
+     *  @param @selectorcontentSize
+     *
+     *  @return
+     */
+    //    [self.inputToolbar.contentView.textView addObserver:self
+    //                                             forKeyPath:NSStringFromSelector(@selector(contentSize))
+    //                                                options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+    //                                                context:kJSQMessagesKeyValueObservingContext];
 }
 
-- (void)jsq_removeObservers
-{
-    @try {
-        [self.inputToolbar.contentView.textView removeObserver:self
-                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
-                                                       context:kJSQMessagesKeyValueObservingContext];
-    }
-    @catch (NSException * __unused exception) { }
-}
+/**
+ *  By: Rishabh Tayal: No need to remove overser anymore.
+ */
+//- (void)jsq_removeObservers
+//{
+//    @try {
+//        [self.inputToolbar.contentView.textView removeObserver:self
+//                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
+//                                                       context:kJSQMessagesKeyValueObservingContext];
+//    }
+//    @catch (NSException * __unused exception) { }
+//}
 
 - (void)jsq_registerForNotifications:(BOOL)registerForNotifications
 {

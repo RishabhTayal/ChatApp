@@ -32,6 +32,7 @@ PODS:
   - JSQMessagesViewController (5.0.4):
     - JSQSystemSoundPlayer
   - JSQSystemSoundPlayer (1.5.2)
+  - KVOController (1.0.1)
   - MagicalRecord (2.2):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.2)
@@ -53,6 +54,7 @@ DEPENDENCIES:
   - IDMPhotoBrowser
   - iRate
   - JSQMessagesViewController
+  - KVOController (~> 1.0.1)
   - MagicalRecord
   - MFSideMenu
   - Parse-iOS-SDK
@@ -73,6 +75,7 @@ SPEC CHECKSUMS:
   iRate: 7d204971bab2f727195b868e32e05216fe257681
   JSQMessagesViewController: 70be735cbe86b74961870d1d9a2948af7ea2da9d
   JSQSystemSoundPlayer: c24914bc96ff5365b5d28b59d7ecffd60d1c5587
+  KVOController: e6ad4a058ab0ceed546802361adb89d322a22cf2
   MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
   MFSideMenu: fca49243c818323a2758af4c23ce81a0b17497d7
   Parse-iOS-SDK: 5e1f7e649a02f1cc19e73cc95bd43d7778848314

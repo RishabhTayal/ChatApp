@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D5437FBA4D954966B2332601"
+               BlueprintIdentifier = "23E00E5FB84746B3AEE7841F"
                BuildableName = "libPods-TITokenField.a"
                BlueprintName = "Pods-TITokenField"
                ReferencedContainer = "container:Pods.xcodeproj">

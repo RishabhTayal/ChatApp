@@ -47,7 +47,7 @@
     
     [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
-    _nameLabel.text = [PFUser currentUser].username;
+    _nameLabel.text = [PFUser currentUser][kPFUser_Name];
     
     PFFile* file = [PFUser currentUser][kPFUser_Picture];
     UIImage* img = [UIImage imageWithData:[file getData]];
