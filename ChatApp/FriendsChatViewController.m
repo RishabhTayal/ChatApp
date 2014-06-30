@@ -53,6 +53,7 @@
         } else {
             _chatArray = [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
             [self finishReceivingMessage];
+            [self loadFriendsChat];
         }
     }
     // Do any additional setup after loading the view.

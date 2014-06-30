@@ -96,12 +96,6 @@
 #define COCOAPODS_VERSION_MINOR_JSQSystemSoundPlayer 5
 #define COCOAPODS_VERSION_PATCH_JSQSystemSoundPlayer 2
 
-// KVOController
-#define COCOAPODS_POD_AVAILABLE_KVOController
-#define COCOAPODS_VERSION_MAJOR_KVOController 1
-#define COCOAPODS_VERSION_MINOR_KVOController 0
-#define COCOAPODS_VERSION_PATCH_KVOController 1
-
 // MFSideMenu
 #define COCOAPODS_POD_AVAILABLE_MFSideMenu
 #define COCOAPODS_VERSION_MAJOR_MFSideMenu 0

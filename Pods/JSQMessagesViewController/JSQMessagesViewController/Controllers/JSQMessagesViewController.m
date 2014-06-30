@@ -38,8 +38,6 @@
 #import "NSString+JSQMessages.h"
 #import "UIColor+JSQMessages.h"
 
-#import <KVOController/FBKVOController.h>
-
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
 
@@ -48,9 +46,6 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
 JSQMessagesCollectionViewCellDelegate,
 JSQMessagesKeyboardControllerDelegate,
 UITextViewDelegate>
-{
-    FBKVOController* _KVOController;
-}
 
 @property (weak, nonatomic) IBOutlet JSQMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet JSQMessagesInputToolbar *inputToolbar;
@@ -85,7 +80,7 @@ UITextViewDelegate>
 /**
  *  By: Rishabh Tayal: No need to remove overser anymore.
  */
-//- (void)jsq_removeObservers;
+- (void)jsq_removeObservers;
 
 - (void)jsq_registerForNotifications:(BOOL)registerForNotifications;
 
@@ -152,7 +147,7 @@ UITextViewDelegate>
     /**
      *  By: Rishabh Tayal: No need to remove overser anymore.
      */
-    //    [self jsq_removeObservers];
+    [self jsq_removeObservers];
     
     _collectionView.dataSource = nil;
     _collectionView.delegate = nil;
@@ -246,7 +241,7 @@ UITextViewDelegate>
     /**
      *  By: Rishabh Tayal: No need to remove overser anymore.
      */
-    //    [self jsq_removeObservers];
+    [self jsq_removeObservers];
     [self.keyboardController endListeningForKeyboard];
 }
 
@@ -754,14 +749,14 @@ UITextViewDelegate>
 
 - (void)jsq_addObservers
 {
-    /**
-     *  By: Rishabh Tayal: No need to remove overser anymore.
-     */
-    //    [self jsq_removeObservers];
-    
-    _KVOController = [FBKVOController controllerWithObserver:self];
-    
-    [_KVOController observe:self keyPath:NSStringFromSelector(@selector(contentSize)) options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:kJSQMessagesKeyValueObservingContext];
+//    /**
+//     *  By: Rishabh Tayal: No need to remove overser anymore.
+//     */
+    [self jsq_removeObservers];
+//
+//    _KVOController = [FBKVOController controllerWithObserver:self];
+//    
+//    [_KVOController observe:self keyPath:NSStringFromSelector(@selector(contentSize)) options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:kJSQMessagesKeyValueObservingContext];
     
     /**
      *  By Rishabh Tayal: Using KVOController to manage key value observing
@@ -770,24 +765,24 @@ UITextViewDelegate>
      *
      *  @return
      */
-    //    [self.inputToolbar.contentView.textView addObserver:self
-    //                                             forKeyPath:NSStringFromSelector(@selector(contentSize))
-    //                                                options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-    //                                                context:kJSQMessagesKeyValueObservingContext];
+    [self.inputToolbar.contentView.textView addObserver:self
+                                             forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                                                context:kJSQMessagesKeyValueObservingContext];
 }
 
 /**
  *  By: Rishabh Tayal: No need to remove overser anymore.
  */
-//- (void)jsq_removeObservers
-//{
-//    @try {
-//        [self.inputToolbar.contentView.textView removeObserver:self
-//                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
-//                                                       context:kJSQMessagesKeyValueObservingContext];
-//    }
-//    @catch (NSException * __unused exception) { }
-//}
+- (void)jsq_removeObservers
+{
+    @try {
+        [self.inputToolbar.contentView.textView removeObserver:self
+                                                    forKeyPath:NSStringFromSelector(@selector(contentSize))
+                                                       context:kJSQMessagesKeyValueObservingContext];
+    }
+    @catch (NSException * __unused exception) { }
+}
 
 - (void)jsq_registerForNotifications:(BOOL)registerForNotifications
 {
