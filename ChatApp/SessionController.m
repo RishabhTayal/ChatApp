@@ -201,9 +201,7 @@ static NSString * const kMCSessionServiceType = @"vcinityp2p";
         if (![[NSFileManager defaultManager] copyItemAtPath:[localURL path] toPath:copyPath error:nil])
         {
             DLog(@"Error copying resource to documents directory");
-        }
-        else
-        {
+        } else {
             // Get a URL for the path we just copied the resource to
             NSURL *url = [NSURL fileURLWithPath:copyPath];
             DLog(@"url = %@", url);

@@ -321,6 +321,20 @@
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         Friend* friend = ((Friend*) _friendsUsingApp[indexPath.row]);
         cell.friendName.text = friend.name;
+//        switch (indexPath.row) {
+//            case 0:
+//                      cell.friendName.text = @"Mark Wallace";
+//                break;
+//            case 1:      cell.friendName.text = @"Daniel Redrick";
+//                break;
+//            case 2:      cell.friendName.text = @"Frank Miles";
+//                break;case 3:      cell.friendName.text = @"Kevin Barton";
+//                break;case 4:      cell.friendName.text = @"Oscar Ramirez";
+//                break;
+//            default:      cell.friendName.text = @"";
+//                break;
+//        }
+//        cell.friendName.text = @"";
         [cell.profilePicture setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", friend.fbId]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
         return cell;
     } else {
@@ -540,7 +554,7 @@
         }];
     } else {
         [DropDownView showInViewController:self withText:NSLocalizedString(@"Not a valid email address", nil) height:DropDownViewHeightTall hideAfterDelay:2];
-    }   
+    }
 }
 
 -(BOOL)NSStringIsValidEmail:(NSString*)checkString
