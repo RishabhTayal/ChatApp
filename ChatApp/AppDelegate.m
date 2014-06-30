@@ -213,7 +213,7 @@
         _interstitial = [[GADInterstitial alloc] init];
         _interstitial.delegate = self;
         
-        _interstitial.adUnitID = @"ca-app-pub-8353175505649532/7101209039";
+        _interstitial.adUnitID = kGADAdUnitId;
         [_interstitial loadRequest:[self request]];
         
         _adPresentingVC = controller;

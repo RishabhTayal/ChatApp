@@ -32,6 +32,8 @@
 #define kUDAdLastShowniAd @"adLastShowniAd"
 #define kUDAdLastShownAdMob @"adLastShownAdMob"
 
+#define kGADAdUnitId @"ca-app-pub-8353175505649532/7101209039"
+
 //PFUser currentUser Keys
 #define kPFUser_Name @"name"
 #define kPFUser_Email @"email"
