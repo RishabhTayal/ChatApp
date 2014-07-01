@@ -58,13 +58,15 @@
                     
                     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
                     
+                    [[PFUser currentUser] setObject:result[@"name"] forKey:kPFUser_Name];
+
                     if ([[PFUser currentUser] objectForKey:kPFUser_FBID] == NULL) {
                         DLog(@"First Time");
                         [self notifyFriendsViaPushThatIJoined];
                         [self notifyFriendsViaEmailThatIJoined];
                     }
                     [[PFUser currentUser] setObject:result[@"id"] forKey:kPFUser_FBID];
-                    [[PFUser currentUser] setObject:result[@"name"] forKey:kPFUser_Name];
+                    
                     if (result[@"email"] != NULL) {
                         [[PFUser currentUser] setObject:result[@"email"] forKey:kPFUser_Email];
                     }
@@ -98,16 +100,16 @@
                     sideMenu.menuSlideAnimationEnabled = YES;
                     self.view.window.rootViewController = sideMenu;
                     
-//                    CATransition* anim = [CATransition animation];
-//                    [anim setDelegate:self];
-//                    [anim setDuration:1.5];
-//                    [anim setTimingFunction:UIViewAnimationCurveEaseInOut];
-//                    [anim setType:@"rippleEffect"];
-//                    [anim setFillMode:kCAFillModeRemoved];
-//                    anim.endProgress = 0.99;
-//                    [anim setRemovedOnCompletion:NO];
-//                    
-//                    [self.view.layer addAnimation:anim forKey:nil];
+                    //                    CATransition* anim = [CATransition animation];
+                    //                    [anim setDelegate:self];
+                    //                    [anim setDuration:1.5];
+                    //                    [anim setTimingFunction:UIViewAnimationCurveEaseInOut];
+                    //                    [anim setType:@"rippleEffect"];
+                    //                    [anim setFillMode:kCAFillModeRemoved];
+                    //                    anim.endProgress = 0.99;
+                    //                    [anim setRemovedOnCompletion:NO];
+                    //
+                    //                    [self.view.layer addAnimation:anim forKey:nil];
                 }
             }];
         }
@@ -128,23 +130,27 @@
         NSArray* friendsUsingApp = [NSMutableArray arrayWithArray:result[@"data"]];
         
         NSArray* recipients = [friendsUsingApp valueForKey:@"id"];
-        PFQuery* pushQuery = [PFInstallation query];
-        [pushQuery whereKey:@"owner" containedIn:recipients];
         
-        PFPush *push = [[PFPush alloc] init];
-        [push setQuery:pushQuery];
-        
-        [push setMessage:[NSString stringWithFormat:@"Your friend %@ just joined vCinity! Start Chatting with them now.", [PFUser currentUser][kPFUser_Name]]];
-        [push sendPushInBackground];
+        if (recipients.count != 0) {
+            
+            PFQuery* pushQuery = [PFInstallation query];
+            [pushQuery whereKey:@"owner" containedIn:recipients];
+            
+            PFPush *push = [[PFPush alloc] init];
+            [push setQuery:pushQuery];
+            
+            [push setMessage:[NSString stringWithFormat:@"Your friend %@ just joined vCinity! Start Chatting with them now.", [PFUser currentUser][kPFUser_Name]]];
+            [push sendPushInBackground];
+        }
     }];
 }
 
 -(void)notifyFriendsViaEmailThatIJoined
 {
-//    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//        DLog(@"%@", result[@"data"]);
-//
-//    }];
+    //    [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+    //        DLog(@"%@", result[@"data"]);
+    //
+    //    }];
 }
 
 @end
