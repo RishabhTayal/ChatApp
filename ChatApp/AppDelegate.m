@@ -188,23 +188,13 @@
     
     // Register App Install on Facebook Ads Manager
     [FBAppEvents activateApp];
-    
-    [self updateInstallation];
-    
+
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
--(void)updateInstallation
-{
-    PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
-    //    [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation setChannels:@[@"channel"]];
-    [currentInstallation saveInBackground];
 }
 
 -(void)displayAdMobInViewController:(UIViewController*)controller
