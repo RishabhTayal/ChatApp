@@ -208,7 +208,7 @@
             mailVC.mailComposeDelegate = self;
             mailVC.view.tintColor = [UIColor whiteColor];
             [mailVC setSubject:@"vCinity App Support"];
-            [mailVC setToRecipients:@[@"contact@appikon.com"]];
+            [mailVC setToRecipients:@[@"helpme@appikon.com"]];
             
             NSString* info = [NSString stringWithFormat:@"Email: %@\n App Version: %@\nDevice: %@\n OS Version: %@", [PFUser currentUser][kPFUser_Email], [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [UIDevice currentDevice].platformString, [UIDevice currentDevice].systemVersion];
             [mailVC setMessageBody:[NSString stringWithFormat:@"Please describe the issue you're having here.\n\n//Device Info\n%@", info] isHTML:NO];
@@ -219,7 +219,7 @@
             issueVC.mailComposeDelegate = self;
             issueVC.view.tintColor = [UIColor whiteColor];
             [issueVC setSubject:@"Reporting abuse content from vCinity"];
-            [issueVC setToRecipients:@[@"contact@appikon.com"]];
+            [issueVC setToRecipients:@[@"reportabuse@appikon.com"]];
             [self presentViewController:issueVC animated:YES completion:nil];
         }
     }
@@ -228,7 +228,7 @@
         mailVC.mailComposeDelegate = self;
         mailVC.view.tintColor = [UIColor whiteColor];
         [mailVC setSubject:@"Feedback for vCinity App."];
-        [mailVC setToRecipients:@[@"contact@appikon.com"]];
+        [mailVC setToRecipients:@[@"feedback@appikon.com"]];
         [self presentViewController:mailVC animated:YES completion:nil];
     }
 }
