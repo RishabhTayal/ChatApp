@@ -168,7 +168,7 @@
 {
     if (section == [tableView numberOfSections] - 1) {
         UIView* view = [[[NSBundle mainBundle] loadNibNamed:@"SettingsShareView" owner:self options:nil] objectAtIndex:0];
-
+        
         [_facebookButton.layer setCornerRadius:4];
         [_facebookButton.layer setMasksToBounds:YES];
         
@@ -181,7 +181,11 @@
         NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
         NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
         NSString *minorVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
-        _appVersionLabel.text = [NSString stringWithFormat:@"Version %@ (%@)", majorVersion, minorVersion];
+        if (DEBUGMODE) {
+            _appVersionLabel.text = [NSString stringWithFormat:@"Version %@ (%@) DB", majorVersion, minorVersion];
+        } else {
+            _appVersionLabel.text = [NSString stringWithFormat:@"Version %@ (%@)", majorVersion, minorVersion];
+        }
         
         return view;
     }
@@ -295,7 +299,7 @@
             //Import from Facebook
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", [PFUser currentUser][kPFUser_FBID]]]];
-
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.tableView.parallaxView.imageView.image = [UIImage imageWithData:imgData];
                 });
@@ -345,7 +349,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - 
+#pragma mark -
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
