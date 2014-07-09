@@ -222,7 +222,7 @@
         int hours = (int)interval/3600;
         int minutes = (interval - (hours*3600)) / 60;
         DLog(@"Ad - Minutes since last shown: %d", minutes);
-        if (minutes >= 2 || minutes < 0) {
+        if (minutes >= 1 || minutes < 0) {
             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownAdMob];
             [[NSUserDefaults standardUserDefaults] synchronize];
             return YES;
