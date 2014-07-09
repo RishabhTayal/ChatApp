@@ -15,7 +15,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) SessionController* sessionController;
 
--(void)setLoginView;
+-(void)setLoginViewModal:(BOOL)modal;
 
 -(void)displayAdMobInViewController:(UIViewController*)controller;
 

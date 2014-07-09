@@ -50,8 +50,10 @@
     _nameLabel.text = [PFUser currentUser][kPFUser_Name];
     
     PFFile* file = [PFUser currentUser][kPFUser_Picture];
-    UIImage* img = [UIImage imageWithData:[file getData]];
-    [self.tableView addParallaxWithImage:img andHeight:220];
+    if (file) {
+        UIImage* img = [UIImage imageWithData:[file getData]];
+        [self.tableView addParallaxWithImage:img andHeight:220];
+    }
     
     //Add tap gesture to Parallax View
     UITapGestureRecognizer* tapGestuere = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(parallaxHeaderTapped:)];

@@ -41,6 +41,19 @@
 {
 }
 
+-(void)skipButtonClicked:(id)sender
+{
+    DLog(@"Skip");
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUDKeyLoginSkipped];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    MFSideMenuContainerViewController* sideMenu = [MFSideMenuContainerViewController containerWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NearChatViewController"]] leftMenuViewController:[[UINavigationController alloc] initWithRootViewController:[[MenuViewController alloc] init]] rightMenuViewController:nil];
+    sideMenu.menuSlideAnimationEnabled = YES;
+    self.view.window.rootViewController = sideMenu;
+}
+
 -(void)loginWithFacebook:(id)sender
 {
     DLog(@"login with facebook");

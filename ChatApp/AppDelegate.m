@@ -77,7 +77,11 @@
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue] && [PFUser currentUser][kPFUser_Name]) {
         [self setMainView];
     } else {
-        [self setLoginView];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kUDKeyLoginSkipped] == true) {
+            [self setMainView];
+        } else {
+            [self setLoginViewModal:NO];
+        }
     }
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"VCinityModel"];
@@ -90,12 +94,17 @@
     PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation setChannels:@[@"channel"]];
-    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [currentInstallation saveEventually:^(BOOL succeeded, NSError *error) {
         if (error) {
             DLog(@"Push Registration Error: %@", error);
             [GAI trackEventWithCategory:@"pf_installation" action:@"registration_error" label:error.description value:nil];
         }
     }];
+}
+
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    DLog(@"%@", error.localizedDescription);
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -125,7 +134,7 @@
     }
 }
 
--(void)setLoginView
+-(void)setLoginViewModal:(BOOL)modal
 {
     NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your Facebook Friends when Internet available."}, @{@"Header": @"Camping with Family/Friends?", @"Label": @"Chat with nearby people even when Internet is not available."}, @{@"Header": @"Take it to the beach", @"Label": @"Make new friends at the beach."}, @{@"Header": @"Attending a Concert or a Game?", @"Label":@"Share your thoughts with others."}, @{@"Header":@"Going to a Conference?", @"Label":@"Connect with other people seemlessly."}];
     
@@ -138,8 +147,14 @@
     [intro setLoginButton:loginButton];
     intro.loginButton.layer.cornerRadius = 10;
     
-    self.window.rootViewController = intro;
-    [self.window makeKeyAndVisible];
+    if (modal) {
+        DLog(@"%@", self.window.rootViewController);
+        intro.skipButton.hidden = YES;
+        [self.window.rootViewController presentViewController:intro animated:YES completion:nil];
+    } else {
+        self.window.rootViewController = intro;
+        [self.window makeKeyAndVisible];
+    }
 }
 
 -(void)setMainView
@@ -188,7 +203,7 @@
     
     // Register App Install on Facebook Ads Manager
     [FBAppEvents activateApp];
-
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -251,7 +266,7 @@
 {
     DLog(@"Google Ads recieved");
     DLog(@"Presenting on VC: %@", self.window.rootViewController);
-
+    
     [_interstitial presentFromRootViewController:self.window.rootViewController];
 }
 

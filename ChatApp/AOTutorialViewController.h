@@ -47,7 +47,7 @@ typedef NSUInteger AOTutorialButton;
  * Dismiss button
  */
 
-@property (weak, nonatomic) IBOutlet UIButton *dismissButton;
+@property (weak, nonatomic) IBOutlet UIButton *skipButton;
 
 /**
  * Custom init method to create a new AOTutorialController object
@@ -98,6 +98,6 @@ typedef NSUInteger AOTutorialButton;
  */
 
 
-- (IBAction)dismiss:(id)sender;
+- (IBAction)skipButtonClicked:(id)sender;
 
 @end

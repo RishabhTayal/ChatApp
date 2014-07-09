@@ -25,6 +25,7 @@
 
 //NSUserDefaults Keys
 #define kUDKeyUserLoggedIn @"loggedin"
+#define kUDKeyLoginSkipped @"loginSkipped"
 
 //Setting UserDefaults
 #define kUDInAppVibrate @"inAppVibrate"

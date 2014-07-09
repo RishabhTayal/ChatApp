@@ -17,6 +17,7 @@
 #import "AppDelegate.h"
 #import "Friend.h"
 #import "Group.h"
+#import "IntroViewController.h"
 #import "Chat.h"
 
 @interface MenuViewController ()
@@ -166,11 +167,17 @@
             break;
         case 1:
         {
-            if (!_friends)
-                _friends = [sb instantiateViewControllerWithIdentifier:@"FriendsListViewController"];
-            array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_friends], nil];
-            self.menuContainerViewController.centerViewController = array[0];
-            [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+            if ([PFUser currentUser] == nil) {
+                DLog(@"Show login");
+                AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                [appDelegate setLoginViewModal:YES];
+            } else {
+                if (!_friends)
+                    _friends = [sb instantiateViewControllerWithIdentifier:@"FriendsListViewController"];
+                array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_friends], nil];
+                self.menuContainerViewController.centerViewController = array[0];
+                [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+            }
         }
             break;
         case 2:
@@ -212,10 +219,11 @@
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:false] forKey:kUDKeyUserLoggedIn];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUDKeyLoginSkipped];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate setLoginView];
+    [appDelegate setLoginViewModal:NO];
 }
 
 @end
