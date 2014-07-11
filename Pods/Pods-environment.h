@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_Bolts 1
 #define COCOAPODS_VERSION_PATCH_Bolts 0
 
+// ChartboostSDK
+#define COCOAPODS_POD_AVAILABLE_ChartboostSDK
+#define COCOAPODS_VERSION_MAJOR_ChartboostSDK 4
+#define COCOAPODS_VERSION_MINOR_ChartboostSDK 5
+#define COCOAPODS_VERSION_PATCH_ChartboostSDK 0
+
 // DACircularProgress
 #define COCOAPODS_POD_AVAILABLE_DACircularProgress
 #define COCOAPODS_VERSION_MAJOR_DACircularProgress 2

@@ -97,6 +97,15 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright (c) 2012 Chartboost. All rights reserved.
+</string>
+			<key>Title</key>
+			<string>ChartboostSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string># License
 
 ## MIT License

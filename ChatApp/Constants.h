@@ -30,8 +30,8 @@
 //Setting UserDefaults
 #define kUDInAppVibrate @"inAppVibrate"
 #define kUDInAppSound @"inAppSound"
-#define kUDAdLastShowniAd @"adLastShowniAd"
-#define kUDAdLastShownAdMob @"adLastShownAdMob"
+//#define kUDAdLastShowniAd @"adLastShowniAd"
+#define kUDAdLastShown @"adLastShown"
 
 #define kGADAdUnitId @"ca-app-pub-8353175505649532/7101209039"
 

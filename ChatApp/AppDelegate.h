@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "SessionController.h"
-#import "GADInterstitial.h"
+//#import "GADInterstitial.h"
+#import <ChartboostSDK/Chartboost.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, GADInterstitialDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, ChartboostDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) SessionController* sessionController;

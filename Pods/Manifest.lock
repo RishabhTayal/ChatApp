@@ -20,6 +20,7 @@ PODS:
     - AFNetworking/NSURLSession
   - APParallaxHeader (0.1.3)
   - Bolts (1.1.0)
+  - ChartboostSDK (4.5)
   - DACircularProgress (2.2.0)
   - Facebook-iOS-SDK (3.15.1):
     - Bolts
@@ -49,6 +50,7 @@ PODS:
 
 DEPENDENCIES:
   - APParallaxHeader
+  - ChartboostSDK (~> 4.2)
   - GoogleAnalytics-iOS-SDK
   - IDMPhotoBrowser
   - iRate
@@ -66,6 +68,7 @@ SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
   APParallaxHeader: 266806ff19b9ed3fa9d75b3678fb0b031cb14cbe
   Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
+  ChartboostSDK: b66508cfa6e246c8ecdb2d826ee6d01ee6be5e5a
   DACircularProgress: 3b41941891a56dc6aa17971f5322a9a38a6f446e
   Facebook-iOS-SDK: 56214af8e0ef16e751eb2804250326b709e571b8
   GoogleAnalytics-iOS-SDK: bb285d8eef15a682f1b82971becd0d22edd0e53b

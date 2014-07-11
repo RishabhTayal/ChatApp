@@ -21,7 +21,7 @@
 
 @interface AppDelegate()
 
-@property (strong) GADInterstitial* interstitial;
+//@property (strong) GADInterstitial* interstitial;
 @property (strong) UIViewController* adPresentingVC;
 
 @end
@@ -204,6 +204,9 @@
     // Register App Install on Facebook Ads Manager
     [FBAppEvents activateApp];
     
+    [Chartboost startWithAppId:@"53bf5d3fc26ee44757e2913e" appSignature:@"5ac84c35d9b1113455f7b9d8d2c354abca32a1ee" delegate:self];
+
+    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -214,22 +217,28 @@
 
 -(void)displayAdMobInViewController:(UIViewController*)controller
 {
-    if ([self shouldDisplayAd]) {
-        _interstitial = [[GADInterstitial alloc] init];
-        _interstitial.delegate = self;
-        
-        _interstitial.adUnitID = kGADAdUnitId;
-        [_interstitial loadRequest:[self request]];
-        
-        _adPresentingVC = controller;
-    }
+//    if ([self shouldDisplayAd]) {
+        [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
+//        _interstitial = [[GADInterstitial alloc] init];
+//        _interstitial.delegate = self;
+//        
+//        _interstitial.adUnitID = kGADAdUnitId;
+//        [_interstitial loadRequest:[self request]];
+//        
+//        _adPresentingVC = controller;
+//    }
+}
+
+-(BOOL)shouldDisplayInterstitial:(CBLocation)location
+{
+    return [self shouldDisplayAd];
 }
 
 -(BOOL)shouldDisplayAd
 {
-    NSDate* lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:kUDAdLastShownAdMob];
+    NSDate* lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:kUDAdLastShown];
     if (!lastDate) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownAdMob];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShown];
         [[NSUserDefaults standardUserDefaults] synchronize];
         return YES;
     } else {
@@ -238,7 +247,7 @@
         int minutes = (interval - (hours*3600)) / 60;
         DLog(@"Ad - Minutes since last shown: %d", minutes);
         if (minutes >= 1 || minutes < 0) {
-            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShownAdMob];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShown];
             [[NSUserDefaults standardUserDefaults] synchronize];
             return YES;
         }
@@ -248,26 +257,26 @@
 
 #pragma mark - GADRequest implementation
 
-- (GADRequest *)request {
-    GADRequest *request = [GADRequest request];
-    
-    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
-    // you want to receive test ads.
-    request.testDevices = @[
-                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
-                            // the console when the app is launched.
-                            GAD_SIMULATOR_ID,
-                            @"4a4d13e777b61b0f28cb678991220815"
-                            ];
-    return request;
-}
-
--(void)interstitialDidReceiveAd:(GADInterstitial *)ad
-{
-    DLog(@"Google Ads recieved");
-    DLog(@"Presenting on VC: %@", self.window.rootViewController);
-    
-    [_interstitial presentFromRootViewController:self.window.rootViewController];
-}
+//- (GADRequest *)request {
+//    GADRequest *request = [GADRequest request];
+//    
+//    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+//    // you want to receive test ads.
+//    request.testDevices = @[
+//                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+//                            // the console when the app is launched.
+//                            GAD_SIMULATOR_ID,
+//                            @"4a4d13e777b61b0f28cb678991220815"
+//                            ];
+//    return request;
+//}
+//
+//-(void)interstitialDidReceiveAd:(GADInterstitial *)ad
+//{
+//    DLog(@"Google Ads recieved");
+//    DLog(@"Presenting on VC: %@", self.window.rootViewController);
+//    
+//    [_interstitial presentFromRootViewController:self.window.rootViewController];
+//}
 
 @end
