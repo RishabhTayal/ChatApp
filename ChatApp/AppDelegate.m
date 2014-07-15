@@ -94,6 +94,9 @@
     PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation setChannels:@[@"channel"]];
+    if ([PFUser currentUser][kPFUser_FBID]) {
+        [currentInstallation setObject:[PFUser currentUser][kPFUser_FBID] forKey:@"owner"];
+    }
     [currentInstallation saveEventually:^(BOOL succeeded, NSError *error) {
         if (error) {
             DLog(@"Push Registration Error: %@", error);
@@ -205,7 +208,7 @@
     [FBAppEvents activateApp];
     
     [Chartboost startWithAppId:@"53bf5d3fc26ee44757e2913e" appSignature:@"5ac84c35d9b1113455f7b9d8d2c354abca32a1ee" delegate:self];
-
+    
     [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
@@ -217,16 +220,16 @@
 
 -(void)displayAdMobInViewController:(UIViewController*)controller
 {
-//    if ([self shouldDisplayAd]) {
-        [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
-//        _interstitial = [[GADInterstitial alloc] init];
-//        _interstitial.delegate = self;
-//        
-//        _interstitial.adUnitID = kGADAdUnitId;
-//        [_interstitial loadRequest:[self request]];
-//        
-//        _adPresentingVC = controller;
-//    }
+    //    if ([self shouldDisplayAd]) {
+    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
+    //        _interstitial = [[GADInterstitial alloc] init];
+    //        _interstitial.delegate = self;
+    //
+    //        _interstitial.adUnitID = kGADAdUnitId;
+    //        [_interstitial loadRequest:[self request]];
+    //
+    //        _adPresentingVC = controller;
+    //    }
 }
 
 -(BOOL)shouldDisplayInterstitial:(CBLocation)location
@@ -259,7 +262,7 @@
 
 //- (GADRequest *)request {
 //    GADRequest *request = [GADRequest request];
-//    
+//
 //    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
 //    // you want to receive test ads.
 //    request.testDevices = @[
@@ -275,7 +278,7 @@
 //{
 //    DLog(@"Google Ads recieved");
 //    DLog(@"Presenting on VC: %@", self.window.rootViewController);
-//    
+//
 //    [_interstitial presentFromRootViewController:self.window.rootViewController];
 //}
 
