@@ -15,19 +15,32 @@
 #define DEBUGMODE NO
 #endif
 
+#ifndef DLog
+#ifdef DEBUG
+#define DLog(_format_, ...) NSLog(_format_, ## __VA_ARGS__)
+#else
+#define DLog(_format_, ...)
+#endif
+#endif
+
 //NSUserDefaults Keys
 #define kUDKeyUserLoggedIn @"loggedin"
+#define kUDKeyLoginSkipped @"loginSkipped"
 
 //Setting UserDefaults
 #define kUDInAppVibrate @"inAppVibrate"
 #define kUDInAppSound @"inAppSound"
-#define kUDSyncContactsToServer @"syncContactsToServer"
+//#define kUDAdLastShowniAd @"adLastShowniAd"
+#define kUDAdLastShown @"adLastShown"
+
+#define kGADAdUnitId @"ca-app-pub-8353175505649532/7101209039"
 
 //PFUser currentUser Keys
-#define kPFUser_Username @"username"
+#define kPFUser_Name @"name"
 #define kPFUser_Email @"email"
 #define kPFUser_FBID @"fbID"
 #define kPFUser_Picture @"picture"
+#define kPFUser_Invited @"invited"
 
 //Parse Table Names
 #define kPFTableName_Chat @"Wechat"

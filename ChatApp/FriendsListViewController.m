@@ -21,6 +21,7 @@
 #import "CreateGroupViewController.h"
 #import "Group.h"
 #import "Friend.h"
+#import "AppDelegate.h"
 
 @interface FriendsListViewController ()
 
@@ -29,7 +30,8 @@
 @property (strong) NSMutableArray* friendsNotUsingApp;
 
 @property (strong) Reachability* reachability;
-@property (strong) GADInterstitial* interstitial;
+
+-(BOOL)NSStringIsValidEmail:(NSString*)checkString;
 
 @end
 
@@ -67,14 +69,15 @@
     UIRefreshControl* refreshControl = [[UIRefreshControl alloc] init];
     [self.tableView addSubview:refreshControl];
     [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
-    
-    [self loadInterstitial];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [GAI trackWithScreenName:kScreenNameFriendsList];
+    
+    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [appDelegate displayAdMobInViewController:self];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -142,7 +145,7 @@
 {
     FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends?fields=installed" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         [GAI trackEventWithCategory:@"ui_event" action:@"facebook_friends" label:[PFUser currentUser][kPFUser_FBID] value:[NSNumber numberWithInt:[result[@"data"] count]]];
         [Friend MR_truncateAll];
         for (NSDictionary* object in result[@"data"]) {
@@ -152,12 +155,12 @@
         }
         [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
             if (success) {
-                NSLog(@"You successfully saved your context.");
+                DLog(@"You successfully saved your context.");
                 _friendsUsingApp = [NSMutableArray arrayWithArray:[Friend MR_findAll]];
                 
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
             } else if (error) {
-                NSLog(@"Error saving context: %@", error.description);
+                DLog(@"Error saving context: %@", error.description);
             }
         }];
     }];
@@ -181,12 +184,12 @@
         }
         [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
             if (success) {
-                NSLog(@"You successfully saved your context.");
+                DLog(@"You successfully saved your context.");
                 _groups = [[NSMutableArray alloc] initWithArray:[Group MR_findAllSortedBy:@"updatedAt" ascending:YES]];
                 
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             } else if (error) {
-                NSLog(@"Error saving context: %@", error.description);
+                DLog(@"Error saving context: %@", error.description);
             }
         }];
     }];
@@ -196,7 +199,7 @@
 
 -(void)createNewGroup:(id)sender
 {
-    NSLog(@"Create group");
+    DLog(@"Create group");
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CreateGroupViewController* createGroupVC = [sb instantiateViewControllerWithIdentifier:@"CreateGroupViewController"];
     createGroupVC.friendsListVC = self;
@@ -255,7 +258,11 @@
         CFRelease(people);
     }
     
-    _friendsNotUsingApp = [NSMutableArray arrayWithArray:allcontacts];
+    NSSortDescriptor* descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+    
+    NSArray* sortDescriptors = [NSArray arrayWithObject:descriptor];
+    [allcontacts sortedArrayUsingDescriptors:sortDescriptors];
+    _friendsNotUsingApp = [NSMutableArray arrayWithArray:[allcontacts sortedArrayUsingDescriptors:sortDescriptors]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
     });
@@ -314,12 +321,35 @@
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         Friend* friend = ((Friend*) _friendsUsingApp[indexPath.row]);
         cell.friendName.text = friend.name;
+//        switch (indexPath.row) {
+//            case 0:
+//                      cell.friendName.text = @"Mark Wallace";
+//                break;
+//            case 1:      cell.friendName.text = @"Daniel Redrick";
+//                break;
+//            case 2:      cell.friendName.text = @"Frank Miles";
+//                break;case 3:      cell.friendName.text = @"Kevin Barton";
+//                break;case 4:      cell.friendName.text = @"Oscar Ramirez";
+//                break;
+//            default:      cell.friendName.text = @"";
+//                break;
+//        }
+//        cell.friendName.text = @"";
         [cell.profilePicture setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", friend.fbId]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
         return cell;
     } else {
         FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friendNotUsingAppCell"];
         cell.friendName.text = _friendsNotUsingApp[indexPath.row][@"name"];
         cell.profilePicture.image = _friendsNotUsingApp[indexPath.row][@"image"];
+        
+        NSArray* array = [PFUser currentUser][kPFUser_Invited];
+        if ([array containsObject:_friendsNotUsingApp[indexPath.row][@"email"] ]) {
+            cell.inviteButton.enabled = false;
+            [cell.inviteButton setTitle:NSLocalizedString(@"Invited", nil) forState:UIControlStateDisabled];
+        } else {
+            cell.inviteButton.enabled = true;
+        }
+        
         return cell;
     }
 }
@@ -389,7 +419,7 @@
 //}
 //- (void)tableView:(UITableView *)tableView moreOptionButtonPressedInRowAtIndexPath:(NSIndexPath *)indexPath {
 //    // Called when "MORE" button is pushed.
-//    NSLog(@"MORE button pushed in row at: %@", indexPath.description);
+//    DLog(@"MORE button pushed in row at: %@", indexPath.description);
 //    // Hide more- and delete-confirmation view
 //    [tableView.visibleCells enumerateObjectsUsingBlock:^(MSCMoreOptionTableViewCell *cell, NSUInteger idx, BOOL *stop) {
 //        if ([[tableView indexPathForCell:cell] isEqual:indexPath]) {
@@ -402,13 +432,13 @@
 //{
 //    switch (state) {
 //        case 0:
-//            NSLog(@"utility buttons closed");
+//            DLog(@"utility buttons closed");
 //            break;
 //        case 1:
-//            NSLog(@"left utility buttons open");
+//            DLog(@"left utility buttons open");
 //            break;
 //        case 2:
-//            NSLog(@"right utility buttons open");
+//            DLog(@"right utility buttons open");
 //            break;
 //        default:
 //            break;
@@ -419,16 +449,16 @@
 //{
 //    switch (index) {
 //        case 0:
-//            NSLog(@"left button 0 was pressed");
+//            DLog(@"left button 0 was pressed");
 //            break;
 //        case 1:
-//            NSLog(@"left button 1 was pressed");
+//            DLog(@"left button 1 was pressed");
 //            break;
 //        case 2:
-//            NSLog(@"left button 2 was pressed");
+//            DLog(@"left button 2 was pressed");
 //            break;
 //        case 3:
-//            NSLog(@"left btton 3 was pressed");
+//            DLog(@"left btton 3 was pressed");
 //        default:
 //            break;
 //    }
@@ -439,7 +469,7 @@
 //    switch (index) {
 //        case 0:
 //        {
-//            NSLog(@"More button was pressed");
+//            DLog(@"More button was pressed");
 //            UIAlertView *alertTest = [[UIAlertView alloc] initWithTitle:@"Hello" message:@"More more more" delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
 //            [alertTest show];
 //
@@ -495,52 +525,46 @@
     if (DEBUGMODE) {
         recipientEmail = @"rtayal11@gmail.com";
     }
-    NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
-    NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [[PFUser currentUser] username], @"text": @"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391", @"subject":@"vCinity Chat App for iPhone"};
-    [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
-        NSLog(@"%@", object);
-        if (!error) {
-            //Show Success
-            [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:DropDownViewHeightTall hideAfterDelay:2];
-            [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
-        } else {
-            //Show Error
-            [DropDownView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:DropDownViewHeightTall hideAfterDelay:2];
-            [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
-        }
-    }];
-}
-
-
-#pragma mark - GADRequest implementation
-
-- (GADRequest *)request {
-    GADRequest *request = [GADRequest request];
     
-    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
-    // you want to receive test ads.
-    request.testDevices = @[
-                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
-                            // the console when the app is launched.
-                            GAD_SIMULATOR_ID,
-                            @"4a4d13e777b61b0f28cb678991220815"
-                            ];
-    return request;
+    if ([self NSStringIsValidEmail:recipientEmail]) {
+        NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
+        NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [PFUser currentUser][kPFUser_Name], @"text": @"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391", @"subject":@"vCinity Chat App for iPhone"};
+        [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
+            DLog(@"%@", object);
+            if (!error) {
+                //Show Success
+                [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:DropDownViewHeightTall hideAfterDelay:2];
+                [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
+                
+                //Save email to invited coloumn
+                NSMutableArray* array = [PFUser currentUser][kPFUser_Invited];
+                if (!array) {
+                    array = [[NSMutableArray alloc] init];
+                }
+                if (![array containsObject:recipientEmail]) {
+                    [array addObject:recipientEmail];
+                    [[PFUser currentUser] setObject:array forKey:kPFUser_Invited];
+                    [[PFUser currentUser] saveEventually];
+                }
+            } else {
+                //Show Error
+                [DropDownView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:DropDownViewHeightTall hideAfterDelay:2];
+                [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
+            }
+        }];
+    } else {
+        [DropDownView showInViewController:self withText:NSLocalizedString(@"Not a valid email address", nil) height:DropDownViewHeightTall hideAfterDelay:2];
+    }
 }
 
--(void)loadInterstitial
+-(BOOL)NSStringIsValidEmail:(NSString*)checkString
 {
-    _interstitial = [[GADInterstitial alloc] init];
-    _interstitial.delegate = self;
-    
-    _interstitial.adUnitID = @"ca-app-pub-8353175505649532/7101209039";
-    [_interstitial loadRequest:[self request]];
-}
-
--(void)interstitialDidReceiveAd:(GADInterstitial *)ad
-{
-    NSLog(@"Google Ads recieved");
-    [_interstitial presentFromRootViewController:self];
+    BOOL stricterFilter = YES; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
 }
 
 @end

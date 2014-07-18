@@ -73,6 +73,9 @@
             [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Connected to %d recipients", nil), [_sessionController connectedPeers].count] height:DropDownViewHeightDefault hideAfterDelay:0];
         }
     }
+    
+    AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
+    [appDelegate displayAdMobInViewController:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,7 +152,7 @@
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text sender:(NSString *)sender date:(NSDate *)date
 {
-    NSLog(@"sent");
+    DLog(@"sent");
     NSString* message = text;
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppSound] boolValue] == YES) {
@@ -168,7 +171,7 @@
     
     NSError* error = nil;
     if (![_sessionController sendData:data]) {
-        NSLog(@"%@", error);
+        DLog(@"%@", error);
     } else {
         
 //        NSMutableDictionary* dict = [NSMutableDictionary new];
@@ -357,7 +360,7 @@
     UIWindow* window = [[UIApplication sharedApplication] keyWindow];
     
     UIViewController* currentVC = ((UINavigationController*)((MFSideMenuContainerViewController*)window.rootViewController).centerViewController).visibleViewController;
-    NSLog(@"%@", currentVC);
+    DLog(@"%@", currentVC);
     if ([currentVC isKindOfClass:[NearChatViewController class]]) {
         return NO;
     }

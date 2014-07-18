@@ -19,6 +19,13 @@
 #import "InAppNotificationTapListener.h"
 #import "InAppNotificationView.h"
 
+@interface AppDelegate()
+
+//@property (strong) GADInterstitial* interstitial;
+@property (strong) UIViewController* adPresentingVC;
+
+@end
+
 @implementation AppDelegate
 
 +(void)initialize
@@ -67,10 +74,14 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDInAppSound];
     }
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue]) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue] && [PFUser currentUser][kPFUser_Name]) {
         [self setMainView];
     } else {
-        [self setLoginView];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:kUDKeyLoginSkipped] == true) {
+            [self setMainView];
+        } else {
+            [self setLoginViewModal:NO];
+        }
     }
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"VCinityModel"];
@@ -83,12 +94,20 @@
     PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation setChannels:@[@"channel"]];
-    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    if ([PFUser currentUser][kPFUser_FBID]) {
+        [currentInstallation setObject:[PFUser currentUser][kPFUser_FBID] forKey:@"owner"];
+    }
+    [currentInstallation saveEventually:^(BOOL succeeded, NSError *error) {
         if (error) {
-            NSLog(@"Push Registration Error: %@", error);
+            DLog(@"Push Registration Error: %@", error);
             [GAI trackEventWithCategory:@"pf_installation" action:@"registration_error" label:error.description value:nil];
         }
     }];
+}
+
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    DLog(@"%@", error.localizedDescription);
 }
 
 -(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -118,7 +137,7 @@
     }
 }
 
--(void)setLoginView
+-(void)setLoginViewModal:(BOOL)modal
 {
     NSArray* infoArray = @[@{@"Header": @"Hanging out with Friends", @"Label": @"Chat with your Facebook Friends when Internet available."}, @{@"Header": @"Camping with Family/Friends?", @"Label": @"Chat with nearby people even when Internet is not available."}, @{@"Header": @"Take it to the beach", @"Label": @"Make new friends at the beach."}, @{@"Header": @"Attending a Concert or a Game?", @"Label":@"Share your thoughts with others."}, @{@"Header":@"Going to a Conference?", @"Label":@"Connect with other people seemlessly."}];
     
@@ -131,8 +150,14 @@
     [intro setLoginButton:loginButton];
     intro.loginButton.layer.cornerRadius = 10;
     
-    self.window.rootViewController = intro;
-    [self.window makeKeyAndVisible];
+    if (modal) {
+        DLog(@"%@", self.window.rootViewController);
+        intro.skipButton.hidden = YES;
+        [self.window.rootViewController presentViewController:intro animated:YES completion:nil];
+    } else {
+        self.window.rootViewController = intro;
+        [self.window makeKeyAndVisible];
+    }
 }
 
 -(void)setMainView
@@ -182,7 +207,9 @@
     // Register App Install on Facebook Ads Manager
     [FBAppEvents activateApp];
     
-    [self updateInstallation];
+    [Chartboost startWithAppId:@"53bf5d3fc26ee44757e2913e" appSignature:@"5ac84c35d9b1113455f7b9d8d2c354abca32a1ee" delegate:self];
+    
+    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -191,12 +218,68 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
--(void)updateInstallation
+-(void)displayAdMobInViewController:(UIViewController*)controller
 {
-    PFInstallation* currentInstallation  = [PFInstallation currentInstallation];
-    //    [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation setChannels:@[@"channel"]];
-    [currentInstallation saveInBackground];
+    //    if ([self shouldDisplayAd]) {
+    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
+    //        _interstitial = [[GADInterstitial alloc] init];
+    //        _interstitial.delegate = self;
+    //
+    //        _interstitial.adUnitID = kGADAdUnitId;
+    //        [_interstitial loadRequest:[self request]];
+    //
+    //        _adPresentingVC = controller;
+    //    }
 }
+
+-(BOOL)shouldDisplayInterstitial:(CBLocation)location
+{
+    return [self shouldDisplayAd];
+}
+
+-(BOOL)shouldDisplayAd
+{
+    NSDate* lastDate = [[NSUserDefaults standardUserDefaults] objectForKey:kUDAdLastShown];
+    if (!lastDate) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShown];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        return YES;
+    } else {
+        NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:lastDate];
+        int hours = (int)interval/3600;
+        int minutes = (interval - (hours*3600)) / 60;
+        DLog(@"Ad - Minutes since last shown: %d", minutes);
+        if (minutes >= 1 || minutes < 0) {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kUDAdLastShown];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            return YES;
+        }
+    }
+    return NO;
+}
+
+#pragma mark - GADRequest implementation
+
+//- (GADRequest *)request {
+//    GADRequest *request = [GADRequest request];
+//
+//    // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
+//    // you want to receive test ads.
+//    request.testDevices = @[
+//                            // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
+//                            // the console when the app is launched.
+//                            GAD_SIMULATOR_ID,
+//                            @"4a4d13e777b61b0f28cb678991220815"
+//                            ];
+//    return request;
+//}
+//
+//-(void)interstitialDidReceiveAd:(GADInterstitial *)ad
+//{
+//    DLog(@"Google Ads recieved");
+//    DLog(@"Presenting on VC: %@", self.window.rootViewController);
+//
+//    [_interstitial presentFromRootViewController:self.window.rootViewController];
+//}
 
 @end

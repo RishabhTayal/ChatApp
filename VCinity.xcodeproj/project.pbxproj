@@ -49,6 +49,7 @@
 		068FAA2A19435B9A009ECC44 /* SettingsShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FAA2919435B9A009ECC44 /* SettingsShareView.xib */; };
 		069895DF19421C3F00307197 /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 069895E119421C3F00307197 /* menu_background.png */; };
 		069CFA8F1948B222008E493E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 069CFA911948B222008E493E /* Localizable.strings */; };
+		06DCBD1B196F987300E8C9B2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DCBD1A196F987300E8C9B2 /* CoreTelephony.framework */; };
 		06E0B6AA194B947E00159C93 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */; };
 		06E0B6AD194B981B00159C93 /* GroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6AC194B981B00159C93 /* GroupInfoViewController.m */; };
 		06E0B6DF194D7B0300159C93 /* VCinityModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6DD194D7B0300159C93 /* VCinityModel.xcdatamodeld */; };
@@ -75,7 +76,7 @@
 		0608598C191C7ACD005F6A75 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownView.h; sourceTree = "<group>"; };
 		0608598D191C7ACD005F6A75 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownView.m; sourceTree = "<group>"; };
 		060D47EE192FD8040062982B /* GAI+MyGAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GAI+MyGAITracker.h"; sourceTree = "<group>"; };
-		060D47EF192FD8040062982B /* GAI+MyGAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GAI+MyGAITracker.m"; sourceTree = "<group>"; };
+		060D47EF192FD8040062982B /* GAI+MyGAITracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "GAI+MyGAITracker.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		060D47F2192FE3610062982B /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		060D47F3192FE3610062982B /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		060D4804192FE9790062982B /* AOTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOTutorialViewController.h; sourceTree = "<group>"; };
@@ -88,7 +89,7 @@
 		061E7E4919183D1400A0DF90 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		061E7E4A19183D1400A0DF90 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		061E7E4C191880C000A0DF90 /* FriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsListViewController.h; sourceTree = "<group>"; };
-		061E7E4D191880C000A0DF90 /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsListViewController.m; sourceTree = "<group>"; };
+		061E7E4D191880C000A0DF90 /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FriendsListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		061E7E4F1918818400A0DF90 /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		061E7E501918818400A0DF90 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		062365A219420F3700F46FD9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
@@ -96,7 +97,7 @@
 		062365A71942112000F46FD9 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = es; path = es.lproj/Main.storyboard; sourceTree = "<group>"; };
 		062EA2231948D28A00AA64E5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		062EA23C194A08A600AA64E5 /* CreateGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupViewController.h; sourceTree = "<group>"; };
-		062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupViewController.m; sourceTree = "<group>"; };
+		062EA23D194A08A600AA64E5 /* CreateGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CreateGroupViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0641F1161951E7A100FCC691 /* CreateGroupFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGroupFriendsTableViewCell.h; sourceTree = "<group>"; };
 		0641F1171951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGroupFriendsTableViewCell.m; sourceTree = "<group>"; };
 		0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupFriendsTableViewCell.xib; sourceTree = "<group>"; };
@@ -124,14 +125,14 @@
 		065A15E01912BCFB00B85D3D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		065A15E21912BCFB00B85D3D /* VCinity-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VCinity-Prefix.pch"; sourceTree = "<group>"; };
 		065A15E31912BCFB00B85D3D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		065A15E41912BCFB00B85D3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		065A15E41912BCFB00B85D3D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		065A15E71912BCFB00B85D3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		065A15E91912BCFB00B85D3D /* NearChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NearChatViewController.h; sourceTree = "<group>"; };
 		065A15EA1912BCFB00B85D3D /* NearChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NearChatViewController.m; sourceTree = "<group>"; };
 		065A15EC1912BCFB00B85D3D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		065A15F31912BCFB00B85D3D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
-		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Constants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		065A16261914257700B85D3D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationTapListener.h; sourceTree = "<group>"; };
@@ -152,7 +153,7 @@
 		069CFA931948B3D2008E493E /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		069CFA961948BEE8008E493E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		069CFA971948BEEB008E493E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.xcconfig"; path = "Pods/Pods-Tests.xcconfig"; sourceTree = "<group>"; };
+		06DCBD1A196F987300E8C9B2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		06E0B6A8194B947E00159C93 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
 		06E0B6AB194B981B00159C93 /* GroupInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupInfoViewController.h; sourceTree = "<group>"; };
@@ -174,14 +175,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				062EA2241948D28A00AA64E5 /* iAd.framework in Frameworks */,
+				06DCBD1B196F987300E8C9B2 /* CoreTelephony.framework in Frameworks */,
 				0642159219213AD300FB1F6D /* Social.framework in Frameworks */,
+				065A15D71912BCFB00B85D3D /* CoreGraphics.framework in Frameworks */,
+				062EA2241948D28A00AA64E5 /* iAd.framework in Frameworks */,
 				0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */,
 				06085981191C36AC005F6A75 /* MessageUI.framework in Frameworks */,
 				0645FB4B195399F0005FA941 /* libGoogleAdMobAds.a in Frameworks */,
 				0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */,
 				065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */,
-				065A15D71912BCFB00B85D3D /* CoreGraphics.framework in Frameworks */,
 				065A15D91912BCFB00B85D3D /* UIKit.framework in Frameworks */,
 				065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */,
 				D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */,
@@ -326,7 +328,6 @@
 				065A15D31912BCFB00B85D3D /* Frameworks */,
 				065A15D21912BCFB00B85D3D /* Products */,
 				184A048636424222948F2C41 /* Pods.xcconfig */,
-				06BCE57637A549C099F7C961 /* Pods-Tests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -341,6 +342,7 @@
 		065A15D31912BCFB00B85D3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06DCBD1A196F987300E8C9B2 /* CoreTelephony.framework */,
 				069705B01937ACE7006BB9C5 /* libPods.a */,
 				062EA2231948D28A00AA64E5 /* iAd.framework */,
 				0642159119213AD300FB1F6D /* Social.framework */,
@@ -733,8 +735,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Rishabh Tayal (6X269LVTHH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rishabh Tayal (6X269LVTHH)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
@@ -759,6 +765,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: appikon software private limited (CEBY93VF85)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: appikon software private limited (CEBY93VF85)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";

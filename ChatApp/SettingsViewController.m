@@ -47,11 +47,13 @@
     
     [MenuButton setupLeftMenuBarButtonOnViewController:self];
     
-    _nameLabel.text = [PFUser currentUser].username;
+    _nameLabel.text = [PFUser currentUser][kPFUser_Name];
     
     PFFile* file = [PFUser currentUser][kPFUser_Picture];
-    UIImage* img = [UIImage imageWithData:[file getData]];
-    [self.tableView addParallaxWithImage:img andHeight:220];
+    if (file) {
+        UIImage* img = [UIImage imageWithData:[file getData]];
+        [self.tableView addParallaxWithImage:img andHeight:220];
+    }
     
     //Add tap gesture to Parallax View
     UITapGestureRecognizer* tapGestuere = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(parallaxHeaderTapped:)];
@@ -120,7 +122,7 @@
 
 -(IBAction)followOnTwitter:(id)sender
 {
-    NSLog(@"follow");
+    DLog(@"follow");
     NSArray *urls = [NSArray arrayWithObjects:
                      @"twitter://user?screen_name={handle}", // Twitter
                      @"tweetbot:///user_profile/{handle}", // TweetBot
@@ -149,7 +151,7 @@
 
 -(IBAction)reviewOnAppStore:(id)sender
 {
-    NSLog(@"review on app store");
+    DLog(@"review on app store");
     [[iRate sharedInstance] openRatingsPageInAppStore];
 }
 
@@ -168,7 +170,7 @@
 {
     if (section == [tableView numberOfSections] - 1) {
         UIView* view = [[[NSBundle mainBundle] loadNibNamed:@"SettingsShareView" owner:self options:nil] objectAtIndex:0];
-
+        
         [_facebookButton.layer setCornerRadius:4];
         [_facebookButton.layer setMasksToBounds:YES];
         
@@ -181,7 +183,11 @@
         NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
         NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
         NSString *minorVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
-        _appVersionLabel.text = [NSString stringWithFormat:@"Version %@ (%@)", majorVersion, minorVersion];
+        if (DEBUGMODE) {
+            _appVersionLabel.text = [NSString stringWithFormat:@"Version %@ (%@) DB", majorVersion, minorVersion];
+        } else {
+            _appVersionLabel.text = [NSString stringWithFormat:@"Version %@ (%@)", majorVersion, minorVersion];
+        }
         
         return view;
     }
@@ -202,7 +208,7 @@
             mailVC.mailComposeDelegate = self;
             mailVC.view.tintColor = [UIColor whiteColor];
             [mailVC setSubject:@"vCinity App Support"];
-            [mailVC setToRecipients:@[@"contact@appikon.com"]];
+            [mailVC setToRecipients:@[@"helpme@appikon.com"]];
             
             NSString* info = [NSString stringWithFormat:@"Email: %@\n App Version: %@\nDevice: %@\n OS Version: %@", [PFUser currentUser][kPFUser_Email], [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [UIDevice currentDevice].platformString, [UIDevice currentDevice].systemVersion];
             [mailVC setMessageBody:[NSString stringWithFormat:@"Please describe the issue you're having here.\n\n//Device Info\n%@", info] isHTML:NO];
@@ -213,7 +219,7 @@
             issueVC.mailComposeDelegate = self;
             issueVC.view.tintColor = [UIColor whiteColor];
             [issueVC setSubject:@"Reporting abuse content from vCinity"];
-            [issueVC setToRecipients:@[@"contact@appikon.com"]];
+            [issueVC setToRecipients:@[@"reportabuse@appikon.com"]];
             [self presentViewController:issueVC animated:YES completion:nil];
         }
     }
@@ -222,7 +228,7 @@
         mailVC.mailComposeDelegate = self;
         mailVC.view.tintColor = [UIColor whiteColor];
         [mailVC setSubject:@"Feedback for vCinity App."];
-        [mailVC setToRecipients:@[@"contact@appikon.com"]];
+        [mailVC setToRecipients:@[@"feedback@appikon.com"]];
         [self presentViewController:mailVC animated:YES completion:nil];
     }
 }
@@ -295,7 +301,7 @@
             //Import from Facebook
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 NSData* imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=500", [PFUser currentUser][kPFUser_FBID]]]];
-
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.tableView.parallaxView.imageView.image = [UIImage imageWithData:imgData];
                 });
@@ -345,7 +351,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - 
+#pragma mark -
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

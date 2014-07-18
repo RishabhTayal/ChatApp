@@ -21,6 +21,8 @@
 "Friends not on vCinity" = "أصدقاء لا على vCinity";
 "Invitation sent to %@!" = "أرسلت دعوة إلى %@!";
 "Invitation could not be sent!" = "!تعذر إرسال دعوة";
+"Invited" = "دعوة";
+"Not a valid email address" = "ليس عنوان بريد إلكتروني صالح";
 
 "Add People:" = "إضافة أشخاص";
 "Create" = "Create";

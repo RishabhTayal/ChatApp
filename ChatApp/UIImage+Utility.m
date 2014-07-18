@@ -34,7 +34,7 @@
 
 +(void)imageForURL:(NSURL *)url imageDownloadBlock:(ImageDownloadedBloack)block
 {
-    NSLog(@"%@", url);
+    DLog(@"%@", url);
     
     [[SDWebImageManager sharedManager] downloadWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         

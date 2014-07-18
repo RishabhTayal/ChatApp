@@ -21,6 +21,8 @@
 "Friends not on vCinity" = "Friends not on vCinity";
 "Invitation sent to %@!" = "Invitation sent to %@!";
 "Invitation could not be sent!" = "Invitation could not be sent!";
+"Invited" = "Invited";
+"Not a valid email address" = "Not a valid email address";
 
 "Add People:" = "Add People";
 "Create" = "Create";

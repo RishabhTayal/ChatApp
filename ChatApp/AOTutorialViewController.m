@@ -182,10 +182,10 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
 {
     //    [self.loginButton setTitleColor:[UIColor colorWithHexString:loginLabelColor] forState:UIControlStateNormal];
     [self.signupButton setTitleColor:[UIColor colorWithHexString:signupLabelColor] forState:UIControlStateNormal];
-    [self.dismissButton setTitleColor:[UIColor colorWithHexString:dismissLabelColor] forState:UIControlStateNormal];
+    [self.skipButton setTitleColor:[UIColor colorWithHexString:dismissLabelColor] forState:UIControlStateNormal];
     
     
-    [self.dismissButton setHidden:YES];
+//    [self.skipButton setHidden:YES];
     
     switch (self.buttons) {
         case AOTutorialButtonSignup:
@@ -201,7 +201,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         default:
             [self.signupButton setHidden:YES];
             [self.loginButton setHidden:YES];
-            [self.dismissButton setHidden:NO];
+            [self.skipButton setHidden:NO];
     }
 }
 
@@ -234,7 +234,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
         } else {
             
             header = [[UILabel alloc] initWithFrame:CGRectMake(0.0f + (SCREEN_WIDTH * index) + headerLeftMargin,
-                                                               SCREEN_HEIGHT - 170.0f - lSize.height,
+                                                               SCREEN_HEIGHT - 200 - lSize.height,
                                                                SCREEN_WIDTH - (headerLeftMargin * 2),
                                                                hSize.height + 5.0f)];
             
@@ -362,7 +362,7 @@ CGSize ACMStringSize(NSString *string, CGSize size, NSDictionary *attributes)
     
 }
 
-- (IBAction)dismiss:(id)sender
+- (IBAction)skipButtonClicked:(id)sender
 {
     
 }

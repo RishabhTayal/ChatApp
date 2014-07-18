@@ -134,7 +134,7 @@
             PFPush *push = [[PFPush alloc] init];
             [push setQuery:pushQuery];
             
-            [push setMessage:[NSString stringWithFormat:@"%@ invited you to group \"%@\".", [PFUser currentUser].username, _groupNameTF.text]];
+            [push setMessage:[NSString stringWithFormat:@"%@ invited you to group \"%@\".", [PFUser currentUser][kPFUser_Name], _groupNameTF.text]];
             [push sendPushInBackground];
         }];
     }
@@ -174,13 +174,13 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"Image size: %.2fMB", UIImagePNGRepresentation(info[UIImagePickerControllerOriginalImage]).length/1024.0f/1024.0f);
+        DLog(@"Image size: %.2fMB", UIImagePNGRepresentation(info[UIImagePickerControllerOriginalImage]).length/1024.0f/1024.0f);
         
         int imageSize = UIImagePNGRepresentation(info[UIImagePickerControllerOriginalImage]).length/1024/1024;
         if (imageSize > 9) {
             [_groupPhotoButton setImage:[self downScaleImage:info[UIImagePickerControllerOriginalImage]] forState:UIControlStateNormal];
             
-            NSLog(@"Reduced size: %.2fMB", UIImagePNGRepresentation(_groupPhotoButton.imageView.image).length/1024.0f/1024.0f);
+            DLog(@"Reduced size: %.2fMB", UIImagePNGRepresentation(_groupPhotoButton.imageView.image).length/1024.0f/1024.0f);
         } else {
             [_groupPhotoButton setImage:info[UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
         }
@@ -254,7 +254,7 @@
 
 -(void)tokenField:(TITokenField *)field performCustomSearchForSearchString:(NSString *)searchString withCompletionHandler:(void (^)(NSArray *))completionHandler
 {
-    NSLog(@"search");
+    DLog(@"search");
     NSMutableArray* filteredArray;
     NSPredicate* pred = [NSPredicate predicateWithFormat:@"name contains[cd] %@", searchString];
     filteredArray  = [[NSMutableArray alloc] initWithArray:[_friendsArray filteredArrayUsingPredicate:pred]];
