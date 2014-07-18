@@ -1,1 +1,0 @@
-../../ChartboostSDK/Chartboost/CBNewsfeedUI.h

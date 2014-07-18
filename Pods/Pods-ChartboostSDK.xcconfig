@@ -1,2 +1,0 @@
-PODS_CHARTBOOSTSDK_LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/ChartboostSDK/Chartboost"
-PODS_CHARTBOOSTSDK_OTHER_LDFLAGS = -lChartboost -framework AVFoundation -framework CoreData -framework CoreGraphics -framework CoreMedia -framework QuartzCore -framework StoreKit -framework SystemConfiguration -weak_framework AdSupport
