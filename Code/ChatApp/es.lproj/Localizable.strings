@@ -1,0 +1,40 @@
+/*
+ File.strings
+ VCinity
+ 
+ Created by Rishabh Tayal on 6/11/14.
+ Copyright (c) 2014 Rishabh Tayal. All rights reserved.
+ */
+
+"vCinity Chat" = "vCinity Chat";
+"Friends" = "Amigos";
+"Settings" = "Ajustes";
+"Logout" = "Salir";
+
+"No users nearby" = "No hay usuarios cercanos";
+"Connected to %d recipient" = "Conectado a %d destinatario";
+"Connected to %d recipients" = "Conectado a %d destinatarios";
+
+"New Group" = "Nuevo Grupo";
+"Groups" = "Grupos";
+"Friends using vCinity" = "Amigos que usan vCinity";
+"Friends not on vCinity" = "No amigos sobre vCinity";
+"Invitation sent to %@!" = "Invitación enviada a %@!";
+"Invitation could not be sent!" = "Invitación no se pudo enviar!";
+"Invited" = "Invitado";
+"Not a valid email address" = "No es una dirección de correo electrónico válida";
+
+"Add People:" = "Agregar Personas";
+"Create" = "Create";
+"Please Enter a Group Name" = "Por favor ingrese un nombre de grupo";
+"Creating Group..." = "Creación de Grupo...";
+
+"Cancel" = "Cancelar";
+"Take Photo" = "Tomar la Foto";
+"Choose Exisiting Photo" = "Elegir Foto Existente";
+"View Profile Photo" = "Ver Perfil de Fotos";
+"Import from Facebook" = "Importar desde Facebook";
+"Message" = "Mensaje";
+"Mail" = "Mail";
+"Facebook" = "Facebook";
+"Twitter" = "Twitter";
