@@ -42,6 +42,7 @@
 		065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065A15EC1912BCFB00B85D3D /* Images.xcassets */; };
 		065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */; };
 		065A16281914257700B85D3D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16271914257700B85D3D /* SettingsViewController.m */; };
+		06693D8D1A23AA3400AB7346 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06693D8C1A23AA3400AB7346 /* Launch Screen.xib */; };
 		068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */; };
 		068F7333192D275600442F4D /* InAppNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F7332192D275600442F4D /* InAppNotificationView.m */; };
 		068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068F7334192D2F2300442F4D /* InAppNotificationView.xib */; };
@@ -124,6 +125,7 @@
 		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Constants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		065A16261914257700B85D3D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		06693D8C1A23AA3400AB7346 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationTapListener.h; sourceTree = "<group>"; };
 		068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppNotificationTapListener.m; sourceTree = "<group>"; };
 		068F7331192D275600442F4D /* InAppNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationView.h; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 		065A15DB1912BCFB00B85D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				06693D8C1A23AA3400AB7346 /* Launch Screen.xib */,
 				069CFA911948B222008E493E /* Localizable.strings */,
 				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				065A15DC1912BCFB00B85D3D /* VCinity-Info.plist */,
@@ -508,6 +511,7 @@
 				069895DF19421C3F00307197 /* menu_background.png in Resources */,
 				065A15DF1912BCFB00B85D3D /* InfoPlist.strings in Resources */,
 				068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */,
+				06693D8D1A23AA3400AB7346 /* Launch Screen.xib in Resources */,
 				065A15E81912BCFB00B85D3D /* Main.storyboard in Resources */,
 				0608597E191C27A1005F6A75 /* ActivityView.xib in Resources */,
 				0641F11A1951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib in Resources */,
@@ -740,8 +744,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -755,7 +759,7 @@
 					"$(PROJECT_DIR)/ChatApp",
 				);
 				PRODUCT_NAME = VCinity;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2D51740C-49CD-4271-BFE6-C866F691800E";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
