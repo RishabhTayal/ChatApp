@@ -23,7 +23,7 @@
 +(void)showInView:(UIView *)view loadingMessage:(NSString *)loadingMessage
 {
     ActivityView* activity = [ActivityView sharedInstance];
-    activity.frame = view.frame;
+//    activity.frame = view.bounds;
     //    [activity.actisityIndicator startAnimating];
     activity.animating = YES;
     [activity spinWithOptions:UIViewAnimationOptionCurveEaseIn];
@@ -81,6 +81,7 @@
     if (self) {
         UIView* view = [[[NSBundle mainBundle] loadNibNamed:@"ActivityView" owner:self options:nil] objectAtIndex:0];
         view.opaque = NO;
+        view.frame = [UIScreen mainScreen].bounds;
         [self addSubview:view];
         // Initialization code
     }
