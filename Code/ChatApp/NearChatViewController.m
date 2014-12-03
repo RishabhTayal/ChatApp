@@ -132,7 +132,7 @@
     
     //    JSQMessage* messagObj = [[JSQMessage alloc] initWithText:message sender:peerName date:[NSDate date]];
     JSQMessage* messageObj = nil;
-    if ([object isKindOfClass:[NSString class]]) {
+    if ([message isKindOfClass:[NSString class]]) {
         messageObj = [[JSQMessage alloc] initWithSenderId:@"" senderDisplayName:peerName date:[NSDate date] text:message];
     } else {
         JSQPhotoMediaItem* media = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageWithData:message]];
@@ -160,7 +160,7 @@
 
 #pragma mark - Sending Data
 
--(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text sender:(NSString *)sender date:(NSDate *)date
+-(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date
 {
     DLog(@"sent");
     NSString* message = text;
