@@ -42,6 +42,13 @@
 		065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065A15EC1912BCFB00B85D3D /* Images.xcassets */; };
 		065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */; };
 		065A16281914257700B85D3D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16271914257700B85D3D /* SettingsViewController.m */; };
+		0665B7BC1AF40222008DACB2 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0665B7BB1AF40222008DACB2 /* InterfaceController.m */; };
+		0665B7BF1AF40222008DACB2 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0665B7BE1AF40222008DACB2 /* NotificationController.m */; };
+		0665B7C11AF40222008DACB2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7C01AF40222008DACB2 /* Images.xcassets */; };
+		0665B7C51AF40222008DACB2 /* VCinity WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7C41AF40222008DACB2 /* VCinity WatchKit App.app */; };
+		0665B7CD1AF40222008DACB2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7CB1AF40222008DACB2 /* Interface.storyboard */; };
+		0665B7CF1AF40222008DACB2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7CE1AF40222008DACB2 /* Images.xcassets */; };
+		0665B7D21AF40222008DACB2 /* VCinity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0665B7B51AF40222008DACB2 /* VCinity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */; };
 		068F7333192D275600442F4D /* InAppNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F7332192D275600442F4D /* InAppNotificationView.m */; };
 		068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068F7334192D2F2300442F4D /* InAppNotificationView.xib */; };
@@ -60,6 +67,37 @@
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0665B7C61AF40222008DACB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 065A15C91912BCFB00B85D3D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0665B7C31AF40222008DACB2;
+			remoteInfo = "VCinity WatchKit App";
+		};
+		0665B7D01AF40222008DACB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 065A15C91912BCFB00B85D3D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0665B7B41AF40222008DACB2;
+			remoteInfo = "VCinity WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0665B7D91AF40222008DACB2 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0665B7D21AF40222008DACB2 /* VCinity WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0603F77A194F62CE003544BF /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
@@ -124,6 +162,18 @@
 		065A1625191422BE00B85D3D /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Constants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		065A16261914257700B85D3D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		065A16271914257700B85D3D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SettingsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0665B7B51AF40222008DACB2 /* VCinity WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "VCinity WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0665B7B81AF40222008DACB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0665B7B91AF40222008DACB2 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		0665B7BA1AF40222008DACB2 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		0665B7BB1AF40222008DACB2 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		0665B7BD1AF40222008DACB2 /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
+		0665B7BE1AF40222008DACB2 /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
+		0665B7C01AF40222008DACB2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0665B7C41AF40222008DACB2 /* VCinity WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VCinity WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0665B7CA1AF40222008DACB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0665B7CC1AF40222008DACB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		0665B7CE1AF40222008DACB2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationTapListener.h; sourceTree = "<group>"; };
 		068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppNotificationTapListener.m; sourceTree = "<group>"; };
 		068F7331192D275600442F4D /* InAppNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationView.h; sourceTree = "<group>"; };
@@ -182,6 +232,13 @@
 				065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */,
 				D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */,
 				06AA720C1A13AC020015D909 /* FacebookSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0665B7B21AF40222008DACB2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +349,8 @@
 			isa = PBXGroup;
 			children = (
 				065A15DA1912BCFB00B85D3D /* ChatApp */,
+				0665B7B61AF40222008DACB2 /* VCinity WatchKit Extension */,
+				0665B7C81AF40222008DACB2 /* VCinity WatchKit App */,
 				065A15D31912BCFB00B85D3D /* Frameworks */,
 				065A15D21912BCFB00B85D3D /* Products */,
 				E4D52221C5095BB7AE7C23F3 /* Pods */,
@@ -302,6 +361,8 @@
 			isa = PBXGroup;
 			children = (
 				065A15D11912BCFB00B85D3D /* VCinity.app */,
+				0665B7B51AF40222008DACB2 /* VCinity WatchKit Extension.appex */,
+				0665B7C41AF40222008DACB2 /* VCinity WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -384,6 +445,46 @@
 			name = "Intro ViewController";
 			sourceTree = "<group>";
 		};
+		0665B7B61AF40222008DACB2 /* VCinity WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0665B7BA1AF40222008DACB2 /* InterfaceController.h */,
+				0665B7BB1AF40222008DACB2 /* InterfaceController.m */,
+				0665B7BD1AF40222008DACB2 /* NotificationController.h */,
+				0665B7BE1AF40222008DACB2 /* NotificationController.m */,
+				0665B7C01AF40222008DACB2 /* Images.xcassets */,
+				0665B7B71AF40222008DACB2 /* Supporting Files */,
+			);
+			path = "VCinity WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		0665B7B71AF40222008DACB2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0665B7B81AF40222008DACB2 /* Info.plist */,
+				0665B7B91AF40222008DACB2 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0665B7C81AF40222008DACB2 /* VCinity WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				0665B7CB1AF40222008DACB2 /* Interface.storyboard */,
+				0665B7CE1AF40222008DACB2 /* Images.xcassets */,
+				0665B7C91AF40222008DACB2 /* Supporting Files */,
+			);
+			path = "VCinity WatchKit App";
+			sourceTree = "<group>";
+		};
+		0665B7C91AF40222008DACB2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0665B7CA1AF40222008DACB2 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		068F7336192D338B00442F4D /* InApp Notificaition */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,15 +554,50 @@
 				065A15CE1912BCFB00B85D3D /* Frameworks */,
 				065A15CF1912BCFB00B85D3D /* Resources */,
 				A89842095498485C925C89CF /* Copy Pods Resources */,
+				0665B7D91AF40222008DACB2 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0665B7D11AF40222008DACB2 /* PBXTargetDependency */,
 			);
 			name = VCinity;
 			productName = ChatApp;
 			productReference = 065A15D11912BCFB00B85D3D /* VCinity.app */;
 			productType = "com.apple.product-type.application";
+		};
+		0665B7B41AF40222008DACB2 /* VCinity WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0665B7D81AF40222008DACB2 /* Build configuration list for PBXNativeTarget "VCinity WatchKit Extension" */;
+			buildPhases = (
+				0665B7B11AF40222008DACB2 /* Sources */,
+				0665B7B21AF40222008DACB2 /* Frameworks */,
+				0665B7B31AF40222008DACB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0665B7C71AF40222008DACB2 /* PBXTargetDependency */,
+			);
+			name = "VCinity WatchKit Extension";
+			productName = "VCinity WatchKit Extension";
+			productReference = 0665B7B51AF40222008DACB2 /* VCinity WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		0665B7C31AF40222008DACB2 /* VCinity WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0665B7D71AF40222008DACB2 /* Build configuration list for PBXNativeTarget "VCinity WatchKit App" */;
+			buildPhases = (
+				0665B7C21AF40222008DACB2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "VCinity WatchKit App";
+			productName = "VCinity WatchKit App";
+			productReference = 0665B7C41AF40222008DACB2 /* VCinity WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
 		};
 /* End PBXNativeTarget section */
 
@@ -474,6 +610,13 @@
 				TargetAttributes = {
 					065A15D01912BCFB00B85D3D = {
 						DevelopmentTeam = CEBY93VF85;
+					};
+					0665B7B41AF40222008DACB2 = {
+						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = CEBY93VF85;
+					};
+					0665B7C31AF40222008DACB2 = {
+						CreatedOnToolsVersion = 6.3;
 					};
 				};
 			};
@@ -494,6 +637,8 @@
 			projectRoot = "";
 			targets = (
 				065A15D01912BCFB00B85D3D /* VCinity */,
+				0665B7B41AF40222008DACB2 /* VCinity WatchKit Extension */,
+				0665B7C31AF40222008DACB2 /* VCinity WatchKit App */,
 			);
 		};
 /* End PBXProject section */
@@ -513,6 +658,24 @@
 				0641F11A1951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib in Resources */,
 				068FAA2A19435B9A009ECC44 /* SettingsShareView.xib in Resources */,
 				069CFA8F1948B222008E493E /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0665B7B31AF40222008DACB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0665B7C11AF40222008DACB2 /* Images.xcassets in Resources */,
+				0665B7C51AF40222008DACB2 /* VCinity WatchKit App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0665B7C21AF40222008DACB2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0665B7CD1AF40222008DACB2 /* Interface.storyboard in Resources */,
+				0665B7CF1AF40222008DACB2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,7 +750,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0665B7B11AF40222008DACB2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0665B7BF1AF40222008DACB2 /* NotificationController.m in Sources */,
+				0665B7BC1AF40222008DACB2 /* InterfaceController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0665B7C71AF40222008DACB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0665B7C31AF40222008DACB2 /* VCinity WatchKit App */;
+			targetProxy = 0665B7C61AF40222008DACB2 /* PBXContainerItemProxy */;
+		};
+		0665B7D11AF40222008DACB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0665B7B41AF40222008DACB2 /* VCinity WatchKit Extension */;
+			targetProxy = 0665B7D01AF40222008DACB2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		065A15DD1912BCFB00B85D3D /* InfoPlist.strings */ = {
@@ -610,6 +795,14 @@
 				069895E41942206300307197 /* fr */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0665B7CB1AF40222008DACB2 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0665B7CC1AF40222008DACB2 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 		069895E119421C3F00307197 /* menu_background.png */ = {
@@ -761,6 +954,86 @@
 			};
 			name = Release;
 		};
+		0665B7D31AF40222008DACB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "VCinity WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0665B7D41AF40222008DACB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "VCinity WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		0665B7D51AF40222008DACB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = VCinity_WatchKit_Extension;
+				INFOPLIST_FILE = "VCinity WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		0665B7D61AF40222008DACB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = VCinity_WatchKit_Extension;
+				INFOPLIST_FILE = "VCinity WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -781,6 +1054,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		0665B7D71AF40222008DACB2 /* Build configuration list for PBXNativeTarget "VCinity WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0665B7D51AF40222008DACB2 /* Debug */,
+				0665B7D61AF40222008DACB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0665B7D81AF40222008DACB2 /* Build configuration list for PBXNativeTarget "VCinity WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0665B7D31AF40222008DACB2 /* Debug */,
+				0665B7D41AF40222008DACB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

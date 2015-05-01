@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Notification - VCinity WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
+		<key>VCinity WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
 		<key>VCinity.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>065A15F11912BCFB00B85D3D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0665B7C31AF40222008DACB2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
