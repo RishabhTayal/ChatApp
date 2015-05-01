@@ -219,7 +219,7 @@
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(nil, nil);
     
     __block BOOL accessGranted = NO;
-    if (ABAddressBookRequestAccessWithCompletion != NULL) {
+    if (&ABAddressBookRequestAccessWithCompletion != NULL) {
         dispatch_semaphore_t sema = dispatch_semaphore_create(0);
         
         ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {

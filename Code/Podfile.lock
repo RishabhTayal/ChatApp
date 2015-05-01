@@ -1,11 +1,11 @@
 PODS:
   - AFNetworking (2.4.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-    - AFNetworking/UIKit
+    - AFNetworking/NSURLConnection (= 2.4.1)
+    - AFNetworking/NSURLSession (= 2.4.1)
+    - AFNetworking/Reachability (= 2.4.1)
+    - AFNetworking/Security (= 2.4.1)
+    - AFNetworking/Serialization (= 2.4.1)
+    - AFNetworking/UIKit (= 2.4.1)
   - AFNetworking/NSURLConnection (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -23,7 +23,9 @@ PODS:
   - APParallaxHeader (0.1.6)
   - DACircularProgress (2.2.0)
   - Google-Mobile-Ads-SDK (6.12.2)
-  - GoogleAnalytics-iOS-SDK (3.10)
+  - GoogleAnalytics-iOS-SDK (3.10):
+    - GoogleAnalytics-iOS-SDK/Core (= 3.10)
+  - GoogleAnalytics-iOS-SDK/Core (3.10)
   - IDMPhotoBrowser (1.4):
     - AFNetworking
     - DACircularProgress
@@ -33,13 +35,13 @@ PODS:
     - JSQSystemSoundPlayer (~> 2.0.0)
   - JSQSystemSoundPlayer (2.0.0)
   - MagicalRecord (2.2):
-    - MagicalRecord/Core
+    - MagicalRecord/Core (= 2.2)
   - MagicalRecord/Core (2.2)
   - MFSideMenu (0.5.5)
   - pop (1.0.7)
   - Reachability (3.1.1)
   - SDWebImage (3.7.1):
-    - SDWebImage/Core
+    - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - SWTableViewCell (0.2.9)
   - TITokenField (0.9.5)
@@ -63,22 +65,22 @@ DEPENDENCIES:
   - UINavigationBar+Addition
 
 SPEC CHECKSUMS:
-  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
-  APParallaxHeader: 6e7cc27c052be34e1a5655dc2fab6c40eecbbe55
-  DACircularProgress: 3b41941891a56dc6aa17971f5322a9a38a6f446e
-  Google-Mobile-Ads-SDK: 9761186eb5dc5e1493e71dcce2b525159f763d42
-  GoogleAnalytics-iOS-SDK: e5872d2acc120613d954320e206c7e3bc8357d7c
-  IDMPhotoBrowser: da2110d99ea8735ad9a0ba52f2d184e756104a71
-  iRate: 5e1978bac8b3f3f0296dbeccc0dd7b50e6e50657
-  JSQMessagesViewController: 61c8defbe86f3859f796146f082f8231dad8de66
-  JSQSystemSoundPlayer: c98443b1cbb3b45db09d0d3d6c2355cf78294981
-  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
-  MFSideMenu: 0493b0f57385dd036cc5443407a31fda6dee81ac
-  pop: 2f14a1ea61339767af9e66741b418c831b3844df
-  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
-  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
-  SWTableViewCell: 6639b27224bd89244ca36d271a3fda715cbdb8a9
-  TITokenField: 5806434c695cd7e8ee9d7df126f318db652d6943
-  UINavigationBar+Addition: 75b1b709f000aa7de774df19d4fd9098ba939a51
+  AFNetworking: 41d45d2c14219af0fa5addf3cfd433a002c13c9f
+  APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
+  DACircularProgress: 0f92b77239d5f3c612fc66185e2998391ac8e054
+  Google-Mobile-Ads-SDK: 40217793219e3466f24cb884d1d44023f37a20ee
+  GoogleAnalytics-iOS-SDK: 4f98a376c1d61e6ac4ca47951655820314856eef
+  IDMPhotoBrowser: 53dfdb71f4db4567f625954c1f4cdf14871be8d5
+  iRate: 09ef501c74ade02013348bc33225ea48f7aa4e55
+  JSQMessagesViewController: ce414df02c16eddefdf802dd7e3b767eb0e55573
+  JSQSystemSoundPlayer: 74b22f446040c77a0d8f75615ae84125702967c6
+  MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
+  MFSideMenu: 268122e6894f2747fc3a2b48578100b232506c60
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+  Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
+  SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
+  SWTableViewCell: 86b240e0b86074cb42de9f781774310db48cc674
+  TITokenField: 39da9ead760009440ffc38602070d2097901430c
+  UINavigationBar+Addition: c633d66af2245dfdc97a917c3b20a6db02089f2b
 
-COCOAPODS: 0.34.4
+COCOAPODS: 0.36.3

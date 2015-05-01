@@ -1,5 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
+#link_with 'VCinity', 'VCinity WatchKit Extension'
+
 platform:ios, '7.0'
 
 inhibit_all_warnings!
