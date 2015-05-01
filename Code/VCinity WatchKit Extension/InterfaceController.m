@@ -36,7 +36,10 @@
 }
 
 -(void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
-    
+    [self presentTextInputControllerWithSuggestions:@[@"Ok", @"Thank you.", @"Talk later?", @"Sorry, I can't talk right now.", @"What's up?"] allowedInputMode:WKTextInputModeAllowAnimatedEmoji completion:^(NSArray *results) {
+        NSLog(@"Text: %@", results[0]);
+        NSString* facebookID = self.datasourceArray[rowIndex][@"id"];
+    }];
 }
 
 -(void)loadContacts {
