@@ -36,14 +36,18 @@
 }
 
 -(void)table:(WKInterfaceTable *)table didSelectRowAtIndex:(NSInteger)rowIndex {
-    [self presentTextInputControllerWithSuggestions:@[@"Ok", @"Thank you.", @"Talk later?", @"Sorry, I can't talk right now.", @"What's up?"] allowedInputMode:WKTextInputModeAllowAnimatedEmoji completion:^(NSArray *results) {
+    [self presentTextInputControllerWithSuggestions:@[@"Ok", @"Thank you.", @"Talk later?", @"Sorry, I can't talk right now.", @"What's up?"] allowedInputMode:WKTextInputModePlain completion:^(NSArray *results) {
         NSLog(@"Text: %@", results[0]);
         NSString* facebookID = self.datasourceArray[rowIndex][@"id"];
+        
+        [WKInterfaceController openParentApplication:@{@"request": @"sendMessage", @"recipientFBID": facebookID, @"message": results[0]} reply:^(NSDictionary *replyInfo, NSError *error) {
+            NSLog(@"Message sending result: %d", [replyInfo[@"success"] boolValue]);
+        }];
     }];
 }
 
 -(void)loadContacts {
-    [WKInterfaceController openParentApplication:@{} reply:^(NSDictionary *replyInfo, NSError *error) {
+    [WKInterfaceController openParentApplication:@{@"request": @"contacts"} reply:^(NSDictionary *replyInfo, NSError *error) {
         NSLog(@"Contacts: %@", replyInfo);
         self.datasourceArray = [NSMutableArray new];
         self.datasourceArray = replyInfo[@"data"];
@@ -55,7 +59,7 @@
             MyRowController* rowController = [self.tableView rowControllerAtIndex:i];
             [rowController.nameLabel setText:friendName];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", self.datasourceArray[i][@"id"]]]];
+                NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=50", self.datasourceArray[i][@"id"]]]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [rowController.profileImage setImageData:data];
                 });

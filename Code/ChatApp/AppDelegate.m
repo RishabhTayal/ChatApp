@@ -49,7 +49,7 @@
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
     
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-40631521-4"];
-
+    
     //Use Development DB on Parse for Development mode.
     if (DEBUGMODE) {
         [Parse setApplicationId:@"WDzqlRDNdilFgPoLusTBKgmeY0FyFaHr6tCFvmgf" clientKey:@"MvV94eU6Z9r3GlrAEfNIhQsM00jDVWh076jKiUJ7"];
@@ -165,7 +165,7 @@
 {
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
-//    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+    //    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
     
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         UIUserNotificationType types = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
@@ -187,12 +187,42 @@
 }
 
 -(void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *))reply {
-
-    FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends?fields=installed" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
-    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        DLog(@"Error: %@", error);
-        reply(result);
-    }];
+    if ([userInfo[@"request"] isEqualToString:@"contacts"]) {
+        FBRequest* request = [FBRequest requestWithGraphPath:@"me/friends?fields=installed" parameters:@{@"fields":@"name,first_name"} HTTPMethod:@"GET"];
+        [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            DLog(@"Error: %@", error);
+            reply(result);
+        }];
+    } else if([userInfo[@"request"] isEqualToString:@"sendMessage"]) {
+        NSString* recipientFBID = userInfo[@"recipientFBID"];
+        NSString* message = userInfo[@"message"];
+        PFQuery* pushQuery = [PFInstallation query];
+        [pushQuery whereKey:@"owner" containedIn:@[recipientFBID]];
+        
+        PFPush *push = [[PFPush alloc] init];
+        [push setQuery:pushQuery];
+        
+        NSMutableDictionary* pushData = [NSMutableDictionary dictionaryWithObjects:@[@{@"name": [PFUser currentUser][kPFUser_Name], @"id":[PFUser currentUser][kPFUser_FBID]}] forKeys:@[kNotificationSender]];
+        
+        [pushData setObject:[NSNumber numberWithBool:NO] forKey:kNotificationIsMedia];
+        [pushData setObject:message forKey:kNotificationMessage];
+        [pushData setObject:[NSString stringWithFormat:@"%@: %@", [PFUser currentUser][kPFUser_Name], message] forKey:kNotificationAlert];
+        
+        [pushData setObject:[NSNumber numberWithBool:YES] forKey:@"groupMessage"];
+        [pushData setObject:[NSDictionary dictionaryWithObjects:@[[NSNumber numberWithBool:NO]] forKeys:@[kNotificationPayloadIsGroupChat]] forKey:kNotificationPayload];
+        
+        PFObject *sendObjects = [PFObject objectWithClassName:kPFTableName_Chat];
+        [sendObjects setObject:[PFUser currentUser][kPFUser_FBID] forKey:kPFChatSender];
+        [sendObjects setObject:recipientFBID forKey:kPFChatReciever];
+        [sendObjects setObject:[NSString stringWithFormat:@"%@", message] forKey:kPFChatMessage];
+        [sendObjects saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            DLog(@"save");
+            [push setData:pushData];
+            [push sendPushInBackground];
+            
+            reply(@{@"success": [NSNumber numberWithBool:succeeded], @"error": error});
+        }];
+    }
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
@@ -226,9 +256,9 @@
     // Register App Install on Facebook Ads Manager
     [FBAppEvents activateApp];
     
-//    [Chartboost startWithAppId:@"53bf5d3fc26ee44757e2913e" appSignature:@"5ac84c35d9b1113455f7b9d8d2c354abca32a1ee" delegate:self];
-//    
-//    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
+    //    [Chartboost startWithAppId:@"53bf5d3fc26ee44757e2913e" appSignature:@"5ac84c35d9b1113455f7b9d8d2c354abca32a1ee" delegate:self];
+    //
+    //    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
@@ -239,16 +269,16 @@
 
 -(void)displayAdMobInViewController:(UIViewController*)controller
 {
-        if ([self shouldDisplayAd]) {
-//    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
-            _interstitial = [[GADInterstitial alloc] init];
-            _interstitial.delegate = self;
-    
-            _interstitial.adUnitID = kGADAdUnitId;
-            [_interstitial loadRequest:[self request]];
-    
-            _adPresentingVC = controller;
-        }
+    if ([self shouldDisplayAd]) {
+        //    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
+        _interstitial = [[GADInterstitial alloc] init];
+        _interstitial.delegate = self;
+        
+        _interstitial.adUnitID = kGADAdUnitId;
+        [_interstitial loadRequest:[self request]];
+        
+        _adPresentingVC = controller;
+    }
 }
 
 //-(BOOL)shouldDisplayInterstitial:(CBLocation)location
@@ -281,7 +311,7 @@
 
 - (GADRequest *)request {
     GADRequest *request = [GADRequest request];
-
+    
     // Make the request for a test ad. Put in an identifier for the simulator as well as any devices
     // you want to receive test ads.
     request.testDevices = @[
@@ -298,7 +328,7 @@
 {
     DLog(@"Google Ads recieved");
     DLog(@"Presenting on VC: %@", self.window.rootViewController);
-
+    
     [_interstitial presentFromRootViewController:self.window.rootViewController];
 }
 
