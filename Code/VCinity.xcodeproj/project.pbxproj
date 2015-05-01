@@ -47,7 +47,6 @@
 		0665B7C51AF40222008DACB2 /* VCinity WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7C41AF40222008DACB2 /* VCinity WatchKit App.app */; };
 		0665B7CD1AF40222008DACB2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7CB1AF40222008DACB2 /* Interface.storyboard */; };
 		0665B7CF1AF40222008DACB2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7CE1AF40222008DACB2 /* Images.xcassets */; };
-		0665B7D21AF40222008DACB2 /* VCinity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0665B7B51AF40222008DACB2 /* VCinity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0665B7DC1AF406DD008DACB2 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0665B7DB1AF406DD008DACB2 /* InterfaceController.m */; };
 		0665B7DF1AF40818008DACB2 /* MyRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0665B7DE1AF40818008DACB2 /* MyRowController.m */; };
 		068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */; };
@@ -59,6 +58,7 @@
 		06AA720A1A13ABB20015D909 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA72091A13ABB20015D909 /* Parse.framework */; };
 		06AA720C1A13AC020015D909 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA720B1A13AC020015D909 /* FacebookSDK.framework */; };
 		06AA720E1A13AC220015D909 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA720D1A13AC220015D909 /* ParseFacebookUtils.framework */; };
+		06CC4C1B1AF422B600034EC7 /* VCinity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0665B7B51AF40222008DACB2 /* VCinity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		06DCBD1B196F987300E8C9B2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DCBD1A196F987300E8C9B2 /* CoreTelephony.framework */; };
 		06E0B6AA194B947E00159C93 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */; };
 		06E0B6AD194B981B00159C93 /* GroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6AC194B981B00159C93 /* GroupInfoViewController.m */; };
@@ -78,7 +78,7 @@
 			remoteGlobalIDString = 0665B7C31AF40222008DACB2;
 			remoteInfo = "VCinity WatchKit App";
 		};
-		0665B7D01AF40222008DACB2 /* PBXContainerItemProxy */ = {
+		06CC4C1C1AF422B600034EC7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 065A15C91912BCFB00B85D3D /* Project object */;
 			proxyType = 1;
@@ -88,13 +88,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0665B7D91AF40222008DACB2 /* Embed App Extensions */ = {
+		06CC4C1E1AF422B600034EC7 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0665B7D21AF40222008DACB2 /* VCinity WatchKit Extension.appex in Embed App Extensions */,
+				06CC4C1B1AF422B600034EC7 /* VCinity WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,12 +561,12 @@
 				065A15CE1912BCFB00B85D3D /* Frameworks */,
 				065A15CF1912BCFB00B85D3D /* Resources */,
 				A89842095498485C925C89CF /* Copy Pods Resources */,
-				0665B7D91AF40222008DACB2 /* Embed App Extensions */,
+				06CC4C1E1AF422B600034EC7 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0665B7D11AF40222008DACB2 /* PBXTargetDependency */,
+				06CC4C1D1AF422B600034EC7 /* PBXTargetDependency */,
 			);
 			name = VCinity;
 			productName = ChatApp;
@@ -808,10 +808,10 @@
 			target = 0665B7C31AF40222008DACB2 /* VCinity WatchKit App */;
 			targetProxy = 0665B7C61AF40222008DACB2 /* PBXContainerItemProxy */;
 		};
-		0665B7D11AF40222008DACB2 /* PBXTargetDependency */ = {
+		06CC4C1D1AF422B600034EC7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0665B7B41AF40222008DACB2 /* VCinity WatchKit Extension */;
-			targetProxy = 0665B7D01AF40222008DACB2 /* PBXContainerItemProxy */;
+			targetProxy = 06CC4C1C1AF422B600034EC7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -925,7 +925,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -974,8 +975,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1000,6 +1001,8 @@
 			baseConfigurationReference = B4F96C4EC7B832293B3DF514 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1021,6 +1024,8 @@
 			baseConfigurationReference = 3F1EEABA77A84AB273496064 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1030,6 +1035,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1063,7 +1069,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1073,6 +1080,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
