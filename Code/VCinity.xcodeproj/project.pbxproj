@@ -42,13 +42,14 @@
 		065A15ED1912BCFB00B85D3D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065A15EC1912BCFB00B85D3D /* Images.xcassets */; };
 		065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A16121912DAB600B85D3D /* MultipeerConnectivity.framework */; };
 		065A16281914257700B85D3D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A16271914257700B85D3D /* SettingsViewController.m */; };
-		0665B7BC1AF40222008DACB2 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0665B7BB1AF40222008DACB2 /* InterfaceController.m */; };
 		0665B7BF1AF40222008DACB2 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0665B7BE1AF40222008DACB2 /* NotificationController.m */; };
 		0665B7C11AF40222008DACB2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7C01AF40222008DACB2 /* Images.xcassets */; };
 		0665B7C51AF40222008DACB2 /* VCinity WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7C41AF40222008DACB2 /* VCinity WatchKit App.app */; };
 		0665B7CD1AF40222008DACB2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7CB1AF40222008DACB2 /* Interface.storyboard */; };
 		0665B7CF1AF40222008DACB2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0665B7CE1AF40222008DACB2 /* Images.xcassets */; };
 		0665B7D21AF40222008DACB2 /* VCinity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0665B7B51AF40222008DACB2 /* VCinity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0665B7DC1AF406DD008DACB2 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0665B7DB1AF406DD008DACB2 /* InterfaceController.m */; };
+		0665B7DF1AF40818008DACB2 /* MyRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0665B7DE1AF40818008DACB2 /* MyRowController.m */; };
 		068F7330192CFC9B00442F4D /* InAppNotificationTapListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */; };
 		068F7333192D275600442F4D /* InAppNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 068F7332192D275600442F4D /* InAppNotificationView.m */; };
 		068F7335192D2F2300442F4D /* InAppNotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068F7334192D2F2300442F4D /* InAppNotificationView.xib */; };
@@ -65,6 +66,7 @@
 		06E0B6E2194D7DA100159C93 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6E1194D7DA100159C93 /* Group.m */; };
 		06E0B6E7194D99F200159C93 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6E6194D99F200159C93 /* Friend.m */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
+		23E730A760E64DC245A69ECB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 		D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C94CC7A30A47D08D7B3D0A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -165,8 +167,6 @@
 		0665B7B51AF40222008DACB2 /* VCinity WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "VCinity WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0665B7B81AF40222008DACB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0665B7B91AF40222008DACB2 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		0665B7BA1AF40222008DACB2 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
-		0665B7BB1AF40222008DACB2 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
 		0665B7BD1AF40222008DACB2 /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
 		0665B7BE1AF40222008DACB2 /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
 		0665B7C01AF40222008DACB2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -174,6 +174,10 @@
 		0665B7CA1AF40222008DACB2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0665B7CC1AF40222008DACB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		0665B7CE1AF40222008DACB2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0665B7DA1AF406DD008DACB2 /* InterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		0665B7DB1AF406DD008DACB2 /* InterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		0665B7DD1AF40818008DACB2 /* MyRowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRowController.h; sourceTree = "<group>"; };
+		0665B7DE1AF40818008DACB2 /* MyRowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRowController.m; sourceTree = "<group>"; };
 		068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationTapListener.h; sourceTree = "<group>"; };
 		068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppNotificationTapListener.m; sourceTree = "<group>"; };
 		068F7331192D275600442F4D /* InAppNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationView.h; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23E730A760E64DC245A69ECB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,8 +453,10 @@
 		0665B7B61AF40222008DACB2 /* VCinity WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0665B7BA1AF40222008DACB2 /* InterfaceController.h */,
-				0665B7BB1AF40222008DACB2 /* InterfaceController.m */,
+				0665B7DA1AF406DD008DACB2 /* InterfaceController.h */,
+				0665B7DB1AF406DD008DACB2 /* InterfaceController.m */,
+				0665B7DD1AF40818008DACB2 /* MyRowController.h */,
+				0665B7DE1AF40818008DACB2 /* MyRowController.m */,
 				0665B7BD1AF40222008DACB2 /* NotificationController.h */,
 				0665B7BE1AF40222008DACB2 /* NotificationController.m */,
 				0665B7C01AF40222008DACB2 /* Images.xcassets */,
@@ -570,9 +577,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0665B7D81AF40222008DACB2 /* Build configuration list for PBXNativeTarget "VCinity WatchKit Extension" */;
 			buildPhases = (
+				F55EE7FBD7587D1197B29642 /* Check Pods Manifest.lock */,
 				0665B7B11AF40222008DACB2 /* Sources */,
 				0665B7B21AF40222008DACB2 /* Frameworks */,
 				0665B7B31AF40222008DACB2 /* Resources */,
+				968A499A185D7A04D9426AAC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -698,6 +707,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		968A499A185D7A04D9426AAC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A89842095498485C925C89CF /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -711,6 +735,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F55EE7FBD7587D1197B29642 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -755,8 +794,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0665B7DF1AF40818008DACB2 /* MyRowController.m in Sources */,
 				0665B7BF1AF40222008DACB2 /* NotificationController.m in Sources */,
-				0665B7BC1AF40222008DACB2 /* InterfaceController.m in Sources */,
+				0665B7DC1AF406DD008DACB2 /* InterfaceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -957,6 +997,7 @@
 		};
 		0665B7D31AF40222008DACB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4F96C4EC7B832293B3DF514 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -977,6 +1018,7 @@
 		};
 		0665B7D41AF40222008DACB2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F1EEABA77A84AB273496064 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COPY_PHASE_STRIP = NO;
