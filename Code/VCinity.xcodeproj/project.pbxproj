@@ -178,6 +178,11 @@
 		0665B7DB1AF406DD008DACB2 /* InterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
 		0665B7DD1AF40818008DACB2 /* MyRowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRowController.h; sourceTree = "<group>"; };
 		0665B7DE1AF40818008DACB2 /* MyRowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRowController.m; sourceTree = "<group>"; };
+		067537531B51DF2500FC71A8 /* ne */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ne; path = ne.lproj/Localizable.strings; sourceTree = "<group>"; };
+		067537541B51DF2500FC71A8 /* ne */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ne; path = ne.lproj/menu_background.png; sourceTree = "<group>"; };
+		067537551B51DF2500FC71A8 /* ne */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ne; path = ne.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		067537561B51DF2500FC71A8 /* ne */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ne; path = ne.lproj/Main.strings; sourceTree = "<group>"; };
+		067537571B51DF2500FC71A8 /* ne */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ne; path = ne.lproj/Interface.strings; sourceTree = "<group>"; };
 		068F732E192CFC9B00442F4D /* InAppNotificationTapListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationTapListener.h; sourceTree = "<group>"; };
 		068F732F192CFC9B00442F4D /* InAppNotificationTapListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppNotificationTapListener.m; sourceTree = "<group>"; };
 		068F7331192D275600442F4D /* InAppNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppNotificationView.h; sourceTree = "<group>"; };
@@ -562,6 +567,7 @@
 				065A15CF1912BCFB00B85D3D /* Resources */,
 				A89842095498485C925C89CF /* Copy Pods Resources */,
 				06CC4C1E1AF422B600034EC7 /* Embed App Extensions */,
+				067537581B51DF6000FC71A8 /* Build Update Run Script */,
 			);
 			buildRules = (
 			);
@@ -640,6 +646,7 @@
 				es,
 				ar,
 				fr,
+				ne,
 			);
 			mainGroup = 065A15C81912BCFB00B85D3D;
 			productRefGroup = 065A15D21912BCFB00B85D3D /* Products */;
@@ -692,6 +699,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		067537581B51DF6000FC71A8 /* Build Update Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Update Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
 		264A6F7DCE714B87B5E3A693 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -823,6 +844,7 @@
 				0697199E19266F6900171B7A /* es */,
 				062365A319420F3700F46FD9 /* ar */,
 				069895E71942206400307197 /* fr */,
+				067537551B51DF2500FC71A8 /* ne */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -834,6 +856,7 @@
 				062365A219420F3700F46FD9 /* ar */,
 				062365A71942112000F46FD9 /* es */,
 				069895E41942206300307197 /* fr */,
+				067537561B51DF2500FC71A8 /* ne */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -842,6 +865,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0665B7CC1AF40222008DACB2 /* Base */,
+				067537571B51DF2500FC71A8 /* ne */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -853,6 +877,7 @@
 				069895E219421C4500307197 /* ar */,
 				069895E319421EC100307197 /* es */,
 				069895E61942206300307197 /* fr */,
+				067537541B51DF2500FC71A8 /* ne */,
 			);
 			name = menu_background.png;
 			sourceTree = "<group>";
@@ -864,6 +889,7 @@
 				069CFA931948B3D2008E493E /* ar */,
 				069CFA961948BEE8008E493E /* es */,
 				069CFA971948BEEB008E493E /* fr */,
+				067537531B51DF2500FC71A8 /* ne */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

@@ -1,0 +1,42 @@
+
+/* Class = "UITextField"; placeholder = "Name (ex: Family)"; ObjectID = "0U8-fa-zNh"; */
+"0U8-fa-zNh.placeholder" = "Name (ex: Family)";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "94b-6T-zpQ"; */
+"94b-6T-zpQ.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Invite"; ObjectID = "DUe-e7-pBn"; */
+"DUe-e7-pBn.normalTitle" = "Invite";
+
+/* Class = "UILabel"; text = "Tell A Friend"; ObjectID = "Pt5-Cq-V27"; */
+"Pt5-Cq-V27.text" = "Tell A Friend";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "T3Z-wQ-sLz"; */
+"T3Z-wQ-sLz.text" = "Label";
+
+/* Class = "UILabel"; text = "In-App Vibrate"; ObjectID = "TwJ-n9-p9e"; */
+"TwJ-n9-p9e.text" = "In-App Vibrate";
+
+/* Class = "UILabel"; text = "Report Abuse"; ObjectID = "U0Z-Me-R3w"; */
+"U0Z-Me-R3w.text" = "Report Abuse";
+
+/* Class = "UILabel"; text = "Send Feedback"; ObjectID = "Yru-ro-okG"; */
+"Yru-ro-okG.text" = "Send Feedback";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "k2X-JJ-smV"; */
+"k2X-JJ-smV.text" = "Label";
+
+/* Class = "UILabel"; text = "Terms of Use"; ObjectID = "lGh-wF-qmi"; */
+"lGh-wF-qmi.text" = "Terms of Use";
+
+/* Class = "UILabel"; text = "Help"; ObjectID = "nAa-CU-azq"; */
+"nAa-CU-azq.text" = "Help";
+
+/* Class = "UILabel"; text = "Sound"; ObjectID = "o0Y-NB-Uhb"; */
+"o0Y-NB-Uhb.text" = "Sound";
+
+/* Class = "UILabel"; text = "Logged in as"; ObjectID = "tmP-B0-F0B"; */
+"tmP-B0-F0B.text" = "Logged in as";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "wy3-fX-u95"; */
+"wy3-fX-u95.text" = "Label";
