@@ -58,6 +58,7 @@
 		06AA720A1A13ABB20015D909 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA72091A13ABB20015D909 /* Parse.framework */; };
 		06AA720C1A13AC020015D909 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA720B1A13AC020015D909 /* FacebookSDK.framework */; };
 		06AA720E1A13AC220015D909 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA720D1A13AC220015D909 /* ParseFacebookUtils.framework */; };
+		06CB9E0C1B52235B00C8E5A2 /* VCinityModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 06CB9E0A1B52235B00C8E5A2 /* VCinityModel.xcdatamodeld */; };
 		06CC4C1B1AF422B600034EC7 /* VCinity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0665B7B51AF40222008DACB2 /* VCinity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		06DCBD1B196F987300E8C9B2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DCBD1A196F987300E8C9B2 /* CoreTelephony.framework */; };
 		06E0B6AA194B947E00159C93 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */; };
@@ -203,6 +204,7 @@
 		06AA72091A13ABB20015D909 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		06AA720B1A13AC020015D909 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		06AA720D1A13AC220015D909 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		06CB9E0B1B52235B00C8E5A2 /* VCinityModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VCinityModel.xcdatamodel; sourceTree = "<group>"; };
 		06DCBD1A196F987300E8C9B2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		06E0B6A8194B947E00159C93 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 		06E0B6EA194F51E500159C93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				06CB9E0A1B52235B00C8E5A2 /* VCinityModel.xcdatamodeld */,
 				0603F77A194F62CE003544BF /* Chat.h */,
 				0603F77B194F62CE003544BF /* Chat.m */,
 				06E0B6E0194D7DA100159C93 /* Group.h */,
@@ -766,6 +769,7 @@
 				0641F1191951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m in Sources */,
 				065A15EB1912BCFB00B85D3D /* NearChatViewController.m in Sources */,
 				061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */,
+				06CB9E0C1B52235B00C8E5A2 /* VCinityModel.xcdatamodeld in Sources */,
 				060D4809192FFFE00062982B /* FriendsListViewController.m in Sources */,
 				060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */,
 				065A15E51912BCFB00B85D3D /* AppDelegate.m in Sources */,
@@ -1135,6 +1139,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		06CB9E0A1B52235B00C8E5A2 /* VCinityModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				06CB9E0B1B52235B00C8E5A2 /* VCinityModel.xcdatamodel */,
+			);
+			currentVersion = 06CB9E0B1B52235B00C8E5A2 /* VCinityModel.xcdatamodel */;
+			path = VCinityModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 065A15C91912BCFB00B85D3D /* Project object */;
 }

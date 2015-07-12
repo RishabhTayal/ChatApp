@@ -7,34 +7,34 @@
  */
 
 "vCinity Chat" = "vCinity Chat";
-"Friends" = "Friends";
-"Settings" = "Settings";
-"Logout" = "Logout";
+"Friends" = "मित्र";
+"Settings" = "सेटिङ";
+"Logout" = "लगआउट";
 
-"No users nearby" = "No users nearby";
-"Connected to %d recipient" = "Connected to %d recipient";
-"Connected to %d recipients" = "Connected to %d recipients";
+"No users nearby" = "कुनै प्रयोगकर्ता नजिकका";
+"Connected to %d recipient" = "%d प्राप्तकर्ता जोडिएको";
+"Connected to %d recipients" = "%d प्रापकलाई जोडिएको";
 
-"New Group" = "New Group";
-"Groups" = "Groups";
-"Friends using vCinity" = "Friends using vCinity";
-"Friends not on vCinity" = "Friends not on vCinity";
-"Invitation sent to %@!" = "Invitation sent to %@!";
-"Invitation could not be sent!" = "Invitation could not be sent!";
-"Invited" = "Invited";
-"Not a valid email address" = "Not a valid email address";
+"New Group" = "नयाँ समूह";
+"Groups" = "समूह";
+"Friends using vCinity" = "vCinity प्रयोग मित्र";
+"Friends not on vCinity" = "vCinity मा मित्र छैन";
+"Invitation sent to %@!" = "निमन्त्रणा %@ पठाइएको!";
+"Invitation could not be sent!" = "निमन्त्रणा पठाउन सकिएन!";
+"Invited" = "निमन्त्रणा";
+"Not a valid email address" = "वैध इमेल ठेगाना";
 
-"Add People:" = "Add People";
-"Create" = "Create";
-"Please Enter a Group Name" = "Please Enter a Group Name";
-"Creating Group..." = "Creating Group...";
+"Add People:" = "मान्छे थप्न";
+"Create" = "सिर्जना";
+"Please Enter a Group Name" = "एक समूह का नाम दर्ज करें";
+"Creating Group..." = "समूह बना रहा है ...";
 
-"Cancel" = "Cancel";
-"Take Photo" = "Take Photo";
-"Choose Exisiting Photo" = "Choose Exisiting Photo";
-"View Profile Photo" = "View Profile Photo";
-"Import from Facebook" = "Import from Facebook";
-"Message" = "Message";
-"Mail" = "Mail";
-"Facebook" = "Facebook";
-"Twitter" = "Twitter";
+"Cancel" = "रद्द";
+"Take Photo" = "फोटो लो";
+"Choose Exisiting Photo" = "मौजूदा फोटो चुनें";
+"View Profile Photo" = "प्रोफ़ाइल देखें फोटो";
+"Import from Facebook" = "फेसबुक से आयात करें";
+"Message" = "संदेश";
+"Mail" = "मेल";
+"Facebook" = "फेसबुक";
+"Twitter" = "ट्विटर";
