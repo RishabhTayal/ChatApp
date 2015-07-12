@@ -7,34 +7,34 @@
  */
 
 "vCinity Chat" = "vCinity Chat";
-"Friends" = "मित्र";
+"Friends" = "साथी";
 "Settings" = "सेटिङ";
 "Logout" = "लगआउट";
 
-"No users nearby" = "कुनै प्रयोगकर्ता नजिकका";
+"No users nearby" = "कुनै प्रयोगकर्ता नजिक छैनन्";
 "Connected to %d recipient" = "%d प्राप्तकर्ता जोडिएको";
-"Connected to %d recipients" = "%d प्रापकलाई जोडिएको";
+"Connected to %d recipients" = "%d प्प्राप्तकर्ताहरु जोडिएको";
 
 "New Group" = "नयाँ समूह";
 "Groups" = "समूह";
-"Friends using vCinity" = "vCinity प्रयोग मित्र";
-"Friends not on vCinity" = "vCinity मा मित्र छैन";
-"Invitation sent to %@!" = "निमन्त्रणा %@ पठाइएको!";
+"Friends using vCinity" = "vCinity प्रयोग गर्ने मित्र";
+"Friends not on vCinity" = "vCinity प्रयोग नगर्ने मित्र";
+"Invitation sent to %@!" = "%@ लाई निमन्त्रणा पठाइएको!";
 "Invitation could not be sent!" = "निमन्त्रणा पठाउन सकिएन!";
-"Invited" = "निमन्त्रणा";
-"Not a valid email address" = "वैध इमेल ठेगाना";
+"Invited" = "निमन्त्रित";
+"Not a valid email address" = "गलत इमेल ठेगाना";
 
-"Add People:" = "मान्छे थप्न";
+"Add People:" = "साथी थप्ने";
 "Create" = "सिर्जना";
-"Please Enter a Group Name" = "एक समूह का नाम दर्ज करें";
-"Creating Group..." = "समूह बना रहा है ...";
+"Please Enter a Group Name" = "समूहको नाम दिनुहोस्";
+"Creating Group..." = "समूह बनिरहेको छ...";
 
 "Cancel" = "रद्द";
-"Take Photo" = "फोटो लो";
-"Choose Exisiting Photo" = "मौजूदा फोटो चुनें";
-"View Profile Photo" = "प्रोफ़ाइल देखें फोटो";
-"Import from Facebook" = "फेसबुक से आयात करें";
-"Message" = "संदेश";
+"Take Photo" = "फोटो खिच्नुहोस्";
+"Choose Exisiting Photo" = "भएको फोटो छान्ने";
+"View Profile Photo" = "प्रोफ़ाइल फोटो हेर्ने";
+"Import from Facebook" = "फेसबुकबाट तान्ने";
+"Message" = "सन्देश";
 "Mail" = "मेल";
 "Facebook" = "फेसबुक";
-"Twitter" = "ट्विटर";
+"Twitter" = "त्वित्टर";
