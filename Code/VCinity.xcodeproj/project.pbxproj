@@ -484,8 +484,8 @@
 		06E0B6EA194F51E500159C93 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0603F77A194F62CE003544BF /* Chat.h */,
 				0653B0C91B5230B7005FFA1C /* VCinityModel.xcdatamodeld */,
+				0603F77A194F62CE003544BF /* Chat.h */,
 				0603F77B194F62CE003544BF /* Chat.m */,
 				06E0B6E0194D7DA100159C93 /* Group.h */,
 				06E0B6E1194D7DA100159C93 /* Group.m */,
@@ -528,6 +528,7 @@
 				065A15CF1912BCFB00B85D3D /* Resources */,
 				A89842095498485C925C89CF /* Copy Pods Resources */,
 				06CC4C1E1AF422B600034EC7 /* Embed App Extensions */,
+				06A4E5CC1B52F143007A6956 /* Build Update Run Script */,
 			);
 			buildRules = (
 			);
@@ -595,6 +596,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		06A4E5CC1B52F143007A6956 /* Build Update Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Update Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
 		264A6F7DCE714B87B5E3A693 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
