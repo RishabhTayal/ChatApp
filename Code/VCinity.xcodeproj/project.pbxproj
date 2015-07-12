@@ -62,7 +62,6 @@
 		06DCBD1B196F987300E8C9B2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DCBD1A196F987300E8C9B2 /* CoreTelephony.framework */; };
 		06E0B6AA194B947E00159C93 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */; };
 		06E0B6AD194B981B00159C93 /* GroupInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6AC194B981B00159C93 /* GroupInfoViewController.m */; };
-		06E0B6DF194D7B0300159C93 /* VCinityModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6DD194D7B0300159C93 /* VCinityModel.xcdatamodeld */; };
 		06E0B6E2194D7DA100159C93 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6E1194D7DA100159C93 /* Group.m */; };
 		06E0B6E7194D99F200159C93 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6E6194D99F200159C93 /* Friend.m */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
@@ -209,7 +208,6 @@
 		06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
 		06E0B6AB194B981B00159C93 /* GroupInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupInfoViewController.h; sourceTree = "<group>"; };
 		06E0B6AC194B981B00159C93 /* GroupInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupInfoViewController.m; sourceTree = "<group>"; };
-		06E0B6DE194D7B0300159C93 /* VCinityModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VCinityModel.xcdatamodel; sourceTree = "<group>"; };
 		06E0B6E0194D7DA100159C93 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		06E0B6E1194D7DA100159C93 /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		06E0B6E5194D99F200159C93 /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Friend.h; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 				065A15E31912BCFB00B85D3D /* AppDelegate.h */,
 				065A15E41912BCFB00B85D3D /* AppDelegate.m */,
 				068F7336192D338B00442F4D /* InApp Notificaition */,
-				06E0B6DD194D7B0300159C93 /* VCinityModel.xcdatamodeld */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";
@@ -567,7 +564,6 @@
 				065A15CF1912BCFB00B85D3D /* Resources */,
 				A89842095498485C925C89CF /* Copy Pods Resources */,
 				06CC4C1E1AF422B600034EC7 /* Embed App Extensions */,
-				067537581B51DF6000FC71A8 /* Build Update Run Script */,
 			);
 			buildRules = (
 			);
@@ -699,20 +695,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		067537581B51DF6000FC71A8 /* Build Update Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Build Update Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
-		};
 		264A6F7DCE714B87B5E3A693 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -805,7 +787,6 @@
 				0603F77F194F7563003544BF /* CoreDataHelper.m in Sources */,
 				068F7333192D275600442F4D /* InAppNotificationView.m in Sources */,
 				06085970191991B5005F6A75 /* UIImage+Utility.m in Sources */,
-				06E0B6DF194D7B0300159C93 /* VCinityModel.xcdatamodeld in Sources */,
 				0613983D192413E400C9AB1F /* SessionController.m in Sources */,
 				06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */,
 			);
@@ -930,7 +911,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -963,7 +944,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1154,19 +1135,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		06E0B6DD194D7B0300159C93 /* VCinityModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				06E0B6DE194D7B0300159C93 /* VCinityModel.xcdatamodel */,
-			);
-			currentVersion = 06E0B6DE194D7B0300159C93 /* VCinityModel.xcdatamodel */;
-			path = VCinityModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 065A15C91912BCFB00B85D3D /* Project object */;
 }
