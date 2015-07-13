@@ -19,6 +19,8 @@
 #import "SessionController.h"
 #import "InAppNotificationTapListener.h"
 #import "InAppNotificationView.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate()
 
@@ -42,6 +44,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Fabric with:@[CrashlyticsKit]];
+
     [GAI sharedInstance].trackUncaughtExceptions = !DEBUGMODE;
     
     [GAI sharedInstance].dispatchInterval = 20;

@@ -49,6 +49,8 @@
 		068FAA2A19435B9A009ECC44 /* SettingsShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068FAA2919435B9A009ECC44 /* SettingsShareView.xib */; };
 		069895DF19421C3F00307197 /* menu_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 069895E119421C3F00307197 /* menu_background.png */; };
 		069CFA8F1948B222008E493E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 069CFA911948B222008E493E /* Localizable.strings */; };
+		06A4E5D01B53FC4C007A6956 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A4E5CE1B53FC4C007A6956 /* Fabric.framework */; };
+		06A4E5D11B53FC4C007A6956 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A4E5CF1B53FC4C007A6956 /* Crashlytics.framework */; };
 		06AA720A1A13ABB20015D909 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA72091A13ABB20015D909 /* Parse.framework */; };
 		06AA720C1A13AC020015D909 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA720B1A13AC020015D909 /* FacebookSDK.framework */; };
 		06AA720E1A13AC220015D909 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AA720D1A13AC220015D909 /* ParseFacebookUtils.framework */; };
@@ -173,6 +175,8 @@
 		069CFA931948B3D2008E493E /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		069CFA961948BEE8008E493E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		069CFA971948BEEB008E493E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		06A4E5CE1B53FC4C007A6956 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		06A4E5CF1B53FC4C007A6956 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		06AA72091A13ABB20015D909 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		06AA720B1A13AC020015D909 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		06AA720D1A13AC220015D909 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -208,7 +212,9 @@
 				06AA720E1A13AC220015D909 /* ParseFacebookUtils.framework in Frameworks */,
 				0608596C19196CD9005F6A75 /* AddressBook.framework in Frameworks */,
 				065A16131912DAB600B85D3D /* MultipeerConnectivity.framework in Frameworks */,
+				06A4E5D11B53FC4C007A6956 /* Crashlytics.framework in Frameworks */,
 				065A15D91912BCFB00B85D3D /* UIKit.framework in Frameworks */,
+				06A4E5D01B53FC4C007A6956 /* Fabric.framework in Frameworks */,
 				065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */,
 				D05F0981A32D4D6EADD4D418 /* libPods.a in Frameworks */,
 				06AA720C1A13AC020015D909 /* FacebookSDK.framework in Frameworks */,
@@ -340,6 +346,8 @@
 		065A15D31912BCFB00B85D3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06A4E5CE1B53FC4C007A6956 /* Fabric.framework */,
+				06A4E5CF1B53FC4C007A6956 /* Crashlytics.framework */,
 				06AA720D1A13AC220015D909 /* ParseFacebookUtils.framework */,
 				06AA720B1A13AC020015D909 /* FacebookSDK.framework */,
 				06AA72091A13ABB20015D909 /* Parse.framework */,
@@ -529,6 +537,7 @@
 				A89842095498485C925C89CF /* Copy Pods Resources */,
 				06CC4C1E1AF422B600034EC7 /* Embed App Extensions */,
 				06A4E5CC1B52F143007A6956 /* Build Update Run Script */,
+				06A4E5CD1B53FB79007A6956 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -609,6 +618,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+		06A4E5CD1B53FB79007A6956 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 02d3f7db22ac1a3e538528547a694d5230eb8278 af6ede98bc0742057c556b0ed733e4c57ae435cd7cc81f516bb2b4e456b7e234";
 		};
 		264A6F7DCE714B87B5E3A693 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
