@@ -20,7 +20,9 @@
 #import "GAI+MyGAITracker.h"
 
 #define MR_ENABLE_ACTIVE_RECORD_LOGGING 0
-#import "CoreData+MagicalRecord.h"
+//#import "CoreData+MagicalRecord.h"
+#import <MagicalRecord/MagicalRecord+ShorthandMethods.h>
+#import <MagicalRecord/MagicalRecordShorthandMethodAliases.h>
 #import "CoreDataHelper.h"
 
 #import <pop/POP.h>

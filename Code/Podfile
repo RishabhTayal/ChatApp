@@ -8,7 +8,7 @@ inhibit_all_warnings!
 
 pod 'AFNetworking'
 pod 'SDWebImage', '~> 3.6'
-pod 'JSQMessagesViewController'
+pod 'JSQMessagesViewController', '~> 6.0.0'
 #pod 'AOTutorial', '1.5'
 pod 'MFSideMenu'
 pod 'APParallaxHeader'

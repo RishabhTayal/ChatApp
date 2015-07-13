@@ -37,7 +37,7 @@
     
     [iRate sharedInstance].eventsUntilPrompt = 5;
     
-    [iRate sharedInstance].daysUntilPrompt = 0;
+//    [iRate sharedInstance].daysUntilPrompt = 0;
     [iRate sharedInstance].remindPeriod = 0;
     [iRate sharedInstance].previewMode = NO;
 }
@@ -323,7 +323,7 @@
                             // the console when the app is launched.
                             GAD_SIMULATOR_ID,
                             @"a44c4f48b8618dc383b218b3eb5b4318",
-                            @"c1427a90c624ef2f9aa4ec73a74e2362"
+                            @"b2b90183ec41862bb579456ba9c7f4c1"
                             ];
     return request;
 }
