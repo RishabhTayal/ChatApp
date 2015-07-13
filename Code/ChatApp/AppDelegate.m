@@ -39,7 +39,7 @@
     
 //    [iRate sharedInstance].daysUntilPrompt = 0;
     [iRate sharedInstance].remindPeriod = 0;
-    [iRate sharedInstance].previewMode = NO;
+    [iRate sharedInstance].previewMode = DEBUGMODE;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -275,10 +275,10 @@
 {
     if ([self shouldDisplayAd]) {
         //    [[Chartboost sharedChartboost] showInterstitial:CBLocationHomeScreen];
-        _interstitial = [[GADInterstitial alloc] init];
+        _interstitial = [[GADInterstitial alloc] initWithAdUnitID:kGADAdUnitId];
         _interstitial.delegate = self;
         
-        _interstitial.adUnitID = kGADAdUnitId;
+//        _interstitial.adUnitID = kGADAdUnitId;
         [_interstitial loadRequest:[self request]];
         
         _adPresentingVC = controller;
@@ -321,7 +321,7 @@
     request.testDevices = @[
                             // TODO: Add your device/simulator test identifiers here. Your device identifier is printed to
                             // the console when the app is launched.
-                            GAD_SIMULATOR_ID,
+                            kGADSimulatorID,
                             @"a44c4f48b8618dc383b218b3eb5b4318",
                             @"b2b90183ec41862bb579456ba9c7f4c1"
                             ];

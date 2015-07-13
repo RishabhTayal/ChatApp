@@ -22,10 +22,20 @@ PODS:
     - AFNetworking/NSURLSession
   - APParallaxHeader (0.1.6)
   - DACircularProgress (2.3.1)
-  - Google-Mobile-Ads-SDK (6.12.2)
-  - GoogleAnalytics-iOS-SDK (3.12):
-    - GoogleAnalytics-iOS-SDK/Core (= 3.12)
-  - GoogleAnalytics-iOS-SDK/Core (3.12)
+  - Google-Mobile-Ads-SDK (7.3.1)
+  - Google/Analytics (1.0.7):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (1.0.7):
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
+  - GoogleAnalytics (3.12.0)
+  - GoogleNetworkingUtilities (1.0.0):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleSymbolUtilities (1.0.0)
+  - GoogleUtilities (1.0.1):
+    - GoogleSymbolUtilities (~> 1.0)
   - IDMPhotoBrowser (1.6.2):
     - AFNetworking
     - DACircularProgress
@@ -48,8 +58,8 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - APParallaxHeader
-  - Google-Mobile-Ads-SDK (~> 6.10)
-  - GoogleAnalytics-iOS-SDK
+  - Google-Mobile-Ads-SDK (~> 7.0)
+  - Google/Analytics (~> 1.0.0)
   - IDMPhotoBrowser
   - iRate
   - JSQMessagesViewController (~> 6.0.0)
@@ -66,8 +76,12 @@ SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
-  Google-Mobile-Ads-SDK: 40217793219e3466f24cb884d1d44023f37a20ee
-  GoogleAnalytics-iOS-SDK: 13241762fa4aea845eb75bef6c0da3427a26e7b3
+  Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
+  Google-Mobile-Ads-SDK: 3647bfddc7384c514ab96a8bed86d98b31e623e4
+  GoogleAnalytics: ef2e0b800ef3c1e62688cdfc959e0d3132bc246c
+  GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
+  GoogleSymbolUtilities: a7b0feed1fe667c8d5e647177938d0ecd62d6948
+  GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
   IDMPhotoBrowser: ebbfa6690456b72dd92d93b7bc11d71519f4d06d
   iRate: 599ed07c854e0695f3c605d1b2a64c67d912acb7
   JSQMessagesViewController: ce414df02c16eddefdf802dd7e3b767eb0e55573
