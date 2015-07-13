@@ -54,7 +54,12 @@
     self.collectionView.showsVerticalScrollIndicator = NO;
     
     PFFile *file = [PFUser currentUser][kPFUser_Picture];
-    _myImageData = [file getData];
+    if (file) {
+        _myImageData = [file getData];
+    } else {
+        _myImageData = UIImagePNGRepresentation([UIImage imageNamed:@"avatar-placeholder.png"]);
+    }
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
