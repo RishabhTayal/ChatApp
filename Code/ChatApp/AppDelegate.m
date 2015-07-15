@@ -22,6 +22,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <MaveSDK.h>
+#import <PonyDebugger/PonyDebugger.h>
 
 @interface AppDelegate()
 
@@ -93,6 +94,11 @@
     }
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"VCinityModel"];
+    
+    PDDebugger* debugger = [PDDebugger defaultInstance];
+    [debugger connectToURL:[NSURL URLWithString:@"ws://localhost:9000/device"]];
+    [debugger enableCoreDataDebugging];
+    [debugger addManagedObjectContext: [NSManagedObjectContext MR_defaultContext]];
     
     return YES;
 }

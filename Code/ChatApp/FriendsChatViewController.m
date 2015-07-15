@@ -11,6 +11,7 @@
 #import <JSQMessages.h>
 //#import "GroupInfoViewController.h"
 #import <AFNetworking/AFHTTPRequestOperation.h>
+#import "DropDownView.h"
 
 @interface FriendsChatViewController ()
 
@@ -140,40 +141,46 @@
         //        _chatArray = [NSMutableArray new];
         
         [Chat MR_deleteAllMatchingPredicate:[NSPredicate predicateWithFormat:@"friendId = %@", _friendObj.fbId]];
-        for (int i = 0; i < objects.count; i++) {
-            PFObject* object = objects[i];
-            __block JSQMessage* message = nil;
-            Chat* chatObj = [Chat MR_createEntity];
-            chatObj.friendId = _friendObj.fbId;
-            chatObj.updatedAt = object.createdAt;
-            
-            if (object[kPFChatIsMedia]) {
-                PFFile* mediaFile = object[kPFChatMedia];
-                [mediaFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                    JSQPhotoMediaItem* mediaItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageWithData:data]];
-                    message = [[JSQMessage alloc] initWithSenderId:object[kPFChatSender] senderDisplayName:@"" date:object.createdAt media:mediaItem];
+        if (objects.count != 0) {
+            for (int i = 0; i < objects.count; i++) {
+                PFObject* object = objects[i];
+                __block JSQMessage* message = nil;
+                Chat* chatObj = [Chat MR_createEntity];
+                chatObj.friendId = _friendObj.fbId;
+                chatObj.updatedAt = object.createdAt;
+                
+                if (object[kPFChatIsMedia]) {
+                    PFFile* mediaFile = object[kPFChatMedia];
+                    [mediaFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                        JSQPhotoMediaItem* mediaItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageWithData:data]];
+                        message = [[JSQMessage alloc] initWithSenderId:object[kPFChatSender] senderDisplayName:@"" date:object.createdAt media:mediaItem];
+                        chatObj.jsmessage = message;
+                        
+                        [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
+                            DLog(@"SAVED TO PERSISTENT - media");
+                            if (i == objects.count - 1) {
+                                _chatArray =  [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
+                                [self finishReceivingMessage];
+                            }
+                        }];
+                    }];
+                } else {
+                    message = [[JSQMessage alloc] initWithSenderId:object[kPFChatSender] senderDisplayName:@"" date:object.createdAt text:object[kPFChatMessage]];
                     chatObj.jsmessage = message;
-                    
+                    if (chatObj.jsmessage == nil) {
+                        DLog(@"Nil found");
+                    }
                     [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
-                        DLog(@"SAVED TO PERSISTENT - media");
+                        DLog(@"SAVED TO PERSISTENT");
                         if (i == objects.count - 1) {
                             _chatArray =  [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
                             [self finishReceivingMessage];
                         }
                     }];
-                }];
-            } else {
-                message = [[JSQMessage alloc] initWithSenderId:object[kPFChatSender] senderDisplayName:@"" date:object.createdAt text:object[kPFChatMessage]];
-                chatObj.jsmessage = message;
-                
-                [CoreDataHelper savePersistentCompletionBlock:^(BOOL success, NSError *error) {
-                    DLog(@"SAVED TO PERSISTENT");
-                    if (i == objects.count - 1) {
-                        _chatArray =  [[NSMutableArray alloc] initWithArray:[[[Chat MR_findByAttribute:@"friendId" withValue:_friendObj.fbId andOrderBy:@"updatedAt" ascending:NO] reverseObjectEnumerator] allObjects]];
-                        [self finishReceivingMessage];
-                    }
-                }];
+                }
             }
+        } else {
+            [DropDownView showInViewController:self withText:@"Start a conversation" height:DropDownViewHeightDefault hideAfterDelay:2.0];
         }
     }];
 }
@@ -460,8 +467,12 @@
 
 -(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DLog(@"%ld", (long)indexPath.item);
-    JSQMessage* message = ((Chat*) _chatArray[indexPath.item]).jsmessage;
+    Chat* chat = _chatArray[indexPath.item];
+    JSQMessage* message = chat.jsmessage;
+    if (message == nil) {
+        NSLog(@"nil found");
+        message = [[JSQMessage alloc] initWithSenderId:@"1" senderDisplayName:@"" date:[NSDate date] text:@""];
+    }
     return message;
 }
 
