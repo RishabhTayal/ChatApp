@@ -43,4 +43,32 @@
     }];
 }
 
+-(UIImage*)imageWithColor:(UIColor*)color {
+    
+    UIGraphicsBeginImageContextWithOptions(self.size, false, [UIScreen mainScreen].scale);
+    //        UIGraphicsBeginImageContext(image.size)
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [color setFill];
+    CGContextTranslateCTM(context, 0, self.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    
+    // set the blend mode to color burn, and the original image
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    CGContextDrawImage(context, rect, self.CGImage);
+    
+    // set a mask that matches the shape of the image, then draw (color burn) a colored rectangle
+    CGContextClipToMask(context, rect, self.CGImage);
+    CGContextAddRect(context, rect);
+    CGContextDrawPath(context,kCGPathFill);
+    
+    // generate a new UIImage from the graphics context we drew onto
+    UIImage* coloredImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //return the color-burned image
+    return coloredImage;
+}
+
 @end

@@ -132,8 +132,8 @@
         case 2:
         {
             cell.textLabel.text = NSLocalizedString(@"Invite", nil);
-            cell.imageView.image = [UIImage imageNamed:@""];
-            cell.imageView.highlightedImage = [UIImage imageNamed:@""];
+            cell.imageView.image = [[UIImage imageNamed:@"share-off"] imageWithColor:[UIColor lightGrayColor]];
+            cell.imageView.highlightedImage = [[UIImage imageNamed:@"share-off"] imageWithColor:[UIColor redColor]];
         }
             break;
         case 3:

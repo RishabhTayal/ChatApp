@@ -16,4 +16,6 @@ typedef void (^ImageDownloadedBloack)(UIImage *image, NSError *error);
 
 +(void)imageForURL:(NSURL*)url imageDownloadBlock:(ImageDownloadedBloack)block;
 
+-(UIImage*)imageWithColor:(UIColor*)color;
+
 @end
