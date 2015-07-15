@@ -20,6 +20,7 @@
 #import "IntroViewController.h"
 #import "Chat.h"
 #import <MaveSDK.h>
+#import "MenuButton.h"
 
 @interface MenuViewController ()
 
@@ -193,11 +194,17 @@
             MaveSDK* mave = [MaveSDK sharedInstance];
             MAVEUserData* userData = [[MAVEUserData alloc] initWithUserID:@"1" firstName:@"Rishabh" lastName:@"Tayal"];
             [mave identifyUser:userData];
-            [mave presentInvitePageModallyWithBlock:^(UIViewController *inviteController) {
-                array = [[NSMutableArray alloc] initWithObjects:inviteController , nil];
+            [mave presentInvitePagePushWithBlock:^(UIViewController *inviteController) {
+                [MenuButton setupLeftMenuBarButtonOnViewController:inviteController];
+                [((UIButton*)inviteController.navigationItem.leftBarButtonItem.customView) removeTarget:inviteController action:nil forControlEvents:UIControlEventTouchUpInside];
+                [((UIButton*)inviteController.navigationItem.leftBarButtonItem.customView) addTarget:self action:@selector(leftMenuPressed:) forControlEvents:UIControlEventTouchUpInside];
+                inviteController.navigationItem.rightBarButtonItem = nil;
+                array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:inviteController] , nil];
                 self.menuContainerViewController.centerViewController = array[0];
                 [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
-            } dismissBlock:^(UIViewController *controller, NSUInteger numberOfInvitesSent) {
+            } forwardBlock:^(UIViewController *controller, NSUInteger numberOfInvitesSent) {
+                
+            } backBlock:^(UIViewController *controller, NSUInteger numberOfInvitesSent) {
                 
             } inviteContext:@"default"];
         }
@@ -246,6 +253,11 @@
     
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate setLoginViewModal:NO];
+}
+
+-(void)leftMenuPressed:(id)sender
+{
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
 @end
