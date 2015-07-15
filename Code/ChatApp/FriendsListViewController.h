@@ -10,7 +10,7 @@
 
 @interface FriendsListViewController : UITableViewController
 
--(IBAction)inviteFriend:(id)sender;
+//-(IBAction)inviteFriend:(id)sender;
 
 -(void)loadGroupsFromServer;
 
