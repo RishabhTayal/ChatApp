@@ -19,6 +19,8 @@
 #import "Group.h"
 #import "IntroViewController.h"
 #import "Chat.h"
+#import <MaveSDK.h>
+#import "MenuButton.h"
 
 @interface MenuViewController ()
 
@@ -89,7 +91,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return 5;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,6 +132,13 @@
             break;
         case 2:
         {
+            cell.textLabel.text = NSLocalizedString(@"Invite", nil);
+            cell.imageView.image = [[UIImage imageNamed:@"share-off"] imageWithColor:[UIColor lightGrayColor]];
+            cell.imageView.highlightedImage = [[UIImage imageNamed:@"share-off"] imageWithColor:[UIColor redColor]];
+        }
+            break;
+        case 3:
+        {
             cell.textLabel.text = NSLocalizedString(@"Settings", nil);
             cell.imageView.image = [UIImage imageNamed:@"settings-off"];
             cell.imageView.highlightedImage = [UIImage imageNamed:@"settings-on"];
@@ -150,7 +159,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray* array;
+    __block NSMutableArray* array;
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     switch (indexPath.row) {
         case 0:
@@ -181,6 +190,26 @@
         }
             break;
         case 2:
+        {
+            MaveSDK* mave = [MaveSDK sharedInstance];
+            MAVEUserData* userData = [[MAVEUserData alloc] initWithUserID:@"1" firstName:@"Rishabh" lastName:@"Tayal"];
+            [mave identifyUser:userData];
+            [mave presentInvitePagePushWithBlock:^(UIViewController *inviteController) {
+                [MenuButton setupLeftMenuBarButtonOnViewController:inviteController];
+                [((UIButton*)inviteController.navigationItem.leftBarButtonItem.customView) removeTarget:inviteController action:nil forControlEvents:UIControlEventTouchUpInside];
+                [((UIButton*)inviteController.navigationItem.leftBarButtonItem.customView) addTarget:self action:@selector(leftMenuPressed:) forControlEvents:UIControlEventTouchUpInside];
+                inviteController.navigationItem.rightBarButtonItem = nil;
+                array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:inviteController] , nil];
+                self.menuContainerViewController.centerViewController = array[0];
+                [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+            } forwardBlock:^(UIViewController *controller, NSUInteger numberOfInvitesSent) {
+                
+            } backBlock:^(UIViewController *controller, NSUInteger numberOfInvitesSent) {
+                
+            } inviteContext:@"default"];
+        }
+            break;
+        case 3:
         {
             if (!_settings)
                 _settings = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
@@ -224,6 +253,11 @@
     
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate setLoginViewModal:NO];
+}
+
+-(void)leftMenuPressed:(id)sender
+{
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
 @end

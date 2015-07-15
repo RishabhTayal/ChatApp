@@ -69,4 +69,6 @@
 #define kNotificationPayloadIsGroupChat @"isGroupChat"
 #define kNotificationPayloadGroupId @"groupId"
 
+#define kCMNearChatShown @"CMNearChatShown"
+
 #endif

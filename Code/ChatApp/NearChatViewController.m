@@ -59,7 +59,6 @@
     } else {
         _myImageData = UIImagePNGRepresentation([UIImage imageNamed:@"avatar-placeholder.png"]);
     }
-
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -81,6 +80,15 @@
     
     AppDelegate* appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
     [appDelegate displayAdMobInViewController:self];
+    
+    if (![NSUserDefaults isNearChatCoachmarkShown]) {
+        DLog(@"show coachmark");
+        NSArray* coachmarks = @[@{@"rect": [NSValue valueWithCGRect:CGRectMake(0, self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height, self.view.frame.size.width, DropDownViewHeightDefault)], @"caption": @"People around you using vCinity will be automatically connected."}, @{@"rect": [NSValue valueWithCGRect:CGRectMake(0, [UIApplication sharedApplication].statusBarFrame.size.height, 60, 50)], @"caption" :@"Navigate to other options"}];
+        WSCoachMarksView* cmView = [[WSCoachMarksView alloc] initWithFrame:self.view.frame coachMarks:coachmarks];
+        [self.navigationController.view addSubview:cmView];
+        [cmView start];
+        [NSUserDefaults setNearChatCoachmarkShown];
+    }
 }
 
 - (void)didReceiveMemoryWarning
