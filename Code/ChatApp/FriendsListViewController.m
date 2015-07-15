@@ -27,7 +27,7 @@
 
 @property (strong) NSMutableArray* groups;
 @property (strong) NSMutableArray* friendsUsingApp;
-@property (strong) NSMutableArray* friendsNotUsingApp;
+//@property (strong) NSMutableArray* friendsNotUsingApp;
 
 @property (strong) Reachability* reachability;
 
@@ -56,7 +56,7 @@
     
     _friendsUsingApp = [NSMutableArray new];
     
-    [NSThread detachNewThreadSelector:@selector(getAllDeviceContacts) toTarget:self withObject:nil];
+//    [NSThread detachNewThreadSelector:@selector(getAllDeviceContacts) toTarget:self withObject:nil];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"New Group", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(createNewGroup:)];
     _reachability = [Reachability reachabilityForInternetConnection];
@@ -213,67 +213,67 @@
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
--(void)getAllDeviceContacts
-{
-    NSMutableArray* allcontacts = [NSMutableArray new];
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(nil, nil);
-    
-    __block BOOL accessGranted = NO;
-    if (&ABAddressBookRequestAccessWithCompletion != NULL) {
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-        
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-            accessGranted = granted;
-            dispatch_semaphore_signal(sema);
-        });
-        
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-    } else {
-        accessGranted = NO;
-    }
-    
-    if (accessGranted) {
-        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
-        
-        CFIndex numberOfPeople = CFArrayGetCount(people);
-        for (int i = 0; i < numberOfPeople; i++) {
-            ABRecordRef ref = CFArrayGetValueAtIndex(people, i);
-            ABMultiValueRef emails = ABRecordCopyValue(ref, kABPersonEmailProperty);
-            for (CFIndex j = 0; j < ABMultiValueGetCount(emails); j++) {
-                NSString* email = (__bridge NSString*)(ABMultiValueCopyValueAtIndex(emails, j));
-                NSString* firstName = (__bridge NSString*)(ABRecordCopyValue(ref, kABPersonFirstNameProperty));
-                NSString* lastName = (__bridge NSString*)(ABRecordCopyValue(ref, kABPersonLastNameProperty));
-                NSString* name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-                NSData* imgData = (__bridge NSData*)(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail));
-                UIImage* img = [UIImage imageWithData:imgData];
-                if (img == nil) {
-                    img = [UIImage imageNamed:@"avatar-placeholder"];
-                }
-                NSDictionary* dict = @{@"name": name, @"email": email, @"image": img};
-                [allcontacts addObject:dict];
-            }
-            CFRelease(emails);
-        }
-        CFRelease(addressBook);
-        CFRelease(people);
-    }
-    
-    NSSortDescriptor* descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
-    
-    NSArray* sortDescriptors = [NSArray arrayWithObject:descriptor];
-    [allcontacts sortedArrayUsingDescriptors:sortDescriptors];
-    _friendsNotUsingApp = [NSMutableArray arrayWithArray:[allcontacts sortedArrayUsingDescriptors:sortDescriptors]];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
-    });
-}
+//-(void)getAllDeviceContacts
+//{
+//    NSMutableArray* allcontacts = [NSMutableArray new];
+//    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(nil, nil);
+//    
+//    __block BOOL accessGranted = NO;
+//    if (&ABAddressBookRequestAccessWithCompletion != NULL) {
+//        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+//        
+//        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+//            accessGranted = granted;
+//            dispatch_semaphore_signal(sema);
+//        });
+//        
+//        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+//    } else {
+//        accessGranted = NO;
+//    }
+//    
+//    if (accessGranted) {
+//        CFArrayRef people = ABAddressBookCopyArrayOfAllPeople(addressBook);
+//        
+//        CFIndex numberOfPeople = CFArrayGetCount(people);
+//        for (int i = 0; i < numberOfPeople; i++) {
+//            ABRecordRef ref = CFArrayGetValueAtIndex(people, i);
+//            ABMultiValueRef emails = ABRecordCopyValue(ref, kABPersonEmailProperty);
+//            for (CFIndex j = 0; j < ABMultiValueGetCount(emails); j++) {
+//                NSString* email = (__bridge NSString*)(ABMultiValueCopyValueAtIndex(emails, j));
+//                NSString* firstName = (__bridge NSString*)(ABRecordCopyValue(ref, kABPersonFirstNameProperty));
+//                NSString* lastName = (__bridge NSString*)(ABRecordCopyValue(ref, kABPersonLastNameProperty));
+//                NSString* name = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+//                NSData* imgData = (__bridge NSData*)(ABPersonCopyImageDataWithFormat(ref, kABPersonImageFormatThumbnail));
+//                UIImage* img = [UIImage imageWithData:imgData];
+//                if (img == nil) {
+//                    img = [UIImage imageNamed:@"avatar-placeholder"];
+//                }
+//                NSDictionary* dict = @{@"name": name, @"email": email, @"image": img};
+//                [allcontacts addObject:dict];
+//            }
+//            CFRelease(emails);
+//        }
+//        CFRelease(addressBook);
+//        CFRelease(people);
+//    }
+//    
+//    NSSortDescriptor* descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+//    
+//    NSArray* sortDescriptors = [NSArray arrayWithObject:descriptor];
+//    [allcontacts sortedArrayUsingDescriptors:sortDescriptors];
+//    _friendsNotUsingApp = [NSMutableArray arrayWithArray:[allcontacts sortedArrayUsingDescriptors:sortDescriptors]];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    });
+//}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return 2;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -281,10 +281,7 @@
     if (section == 0) {
         return NSLocalizedString(@"Groups", nil);
     }
-    if (section == 1) {
-        return NSLocalizedString(@"Friends using vCinity", nil);
-    }
-    return NSLocalizedString(@"Friends not on vCinity", nil);
+    return NSLocalizedString(@"Friends using vCinity", nil);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -296,10 +293,10 @@
         }
         return _groups.count;
     }
-    if (section == 1) {
+//    if (section == 1) {
         return _friendsUsingApp.count;
-    }
-    return _friendsNotUsingApp.count;
+//    }
+//    return _friendsNotUsingApp.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -316,42 +313,42 @@
             [cell.profilePicture setImageWithURL:[NSURL URLWithString:group.imageurl]];
         }
         return cell;
-    }
-    if (indexPath.section == 1) {
+    } else {
+//    if (indexPath.section == 1) {
         FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         Friend* friend = ((Friend*) _friendsUsingApp[indexPath.row]);
         cell.friendName.text = friend.name;
-//        switch (indexPath.row) {
-//            case 0:
-//                      cell.friendName.text = @"Mark Wallace";
-//                break;
-//            case 1:      cell.friendName.text = @"Daniel Redrick";
-//                break;
-//            case 2:      cell.friendName.text = @"Frank Miles";
-//                break;case 3:      cell.friendName.text = @"Kevin Barton";
-//                break;case 4:      cell.friendName.text = @"Oscar Ramirez";
-//                break;
-//            default:      cell.friendName.text = @"";
-//                break;
-//        }
-//        cell.friendName.text = @"";
+        //        switch (indexPath.row) {
+        //            case 0:
+        //                      cell.friendName.text = @"Mark Wallace";
+        //                break;
+        //            case 1:      cell.friendName.text = @"Daniel Redrick";
+        //                break;
+        //            case 2:      cell.friendName.text = @"Frank Miles";
+        //                break;case 3:      cell.friendName.text = @"Kevin Barton";
+        //                break;case 4:      cell.friendName.text = @"Oscar Ramirez";
+        //                break;
+        //            default:      cell.friendName.text = @"";
+        //                break;
+        //        }
+        //        cell.friendName.text = @"";
         [cell.profilePicture setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?width=200", friend.fbId]] placeholderImage:[UIImage imageNamed:@"avatar-placeholder"]];
         return cell;
-    } else {
-        FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friendNotUsingAppCell"];
-        cell.friendName.text = _friendsNotUsingApp[indexPath.row][@"name"];
-        cell.profilePicture.image = _friendsNotUsingApp[indexPath.row][@"image"];
-        
-        NSArray* array = [PFUser currentUser][kPFUser_Invited];
-        if ([array containsObject:_friendsNotUsingApp[indexPath.row][@"email"] ]) {
-            cell.inviteButton.enabled = false;
-            [cell.inviteButton setTitle:NSLocalizedString(@"Invited", nil) forState:UIControlStateDisabled];
-        } else {
-            cell.inviteButton.enabled = true;
-        }
-        
-        return cell;
-    }
+    }// else {
+//        FriendTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"friendNotUsingAppCell"];
+//        cell.friendName.text = _friendsNotUsingApp[indexPath.row][@"name"];
+//        cell.profilePicture.image = _friendsNotUsingApp[indexPath.row][@"image"];
+//        
+//        NSArray* array = [PFUser currentUser][kPFUser_Invited];
+//        if ([array containsObject:_friendsNotUsingApp[indexPath.row][@"email"] ]) {
+//            cell.inviteButton.enabled = false;
+//            [cell.inviteButton setTitle:NSLocalizedString(@"Invited", nil) forState:UIControlStateDisabled];
+//        } else {
+//            cell.inviteButton.enabled = true;
+//        }
+//        
+//        return cell;
+//    }
 }
 
 #pragma mark -
@@ -516,46 +513,46 @@
 
 #pragma mark -
 
--(void)inviteFriend:(id)sender
-{
-    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
-    NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
-    
-    NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
-    if (DEBUGMODE) {
-        recipientEmail = @"rtayal11@gmail.com";
-    }
-    
-    if ([self NSStringIsValidEmail:recipientEmail]) {
-        NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
-        NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [PFUser currentUser][kPFUser_Name], @"text": @"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391", @"subject":@"vCinity Chat App for iPhone"};
-        [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
-            DLog(@"%@", object);
-            if (!error) {
-                //Show Success
-                [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:DropDownViewHeightTall hideAfterDelay:2];
-                [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
-                
-                //Save email to invited coloumn
-                NSMutableArray* array = [PFUser currentUser][kPFUser_Invited];
-                if (!array) {
-                    array = [[NSMutableArray alloc] init];
-                }
-                if (![array containsObject:recipientEmail]) {
-                    [array addObject:recipientEmail];
-                    [[PFUser currentUser] setObject:array forKey:kPFUser_Invited];
-                    [[PFUser currentUser] saveEventually];
-                }
-            } else {
-                //Show Error
-                [DropDownView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:DropDownViewHeightTall hideAfterDelay:2];
-                [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
-            }
-        }];
-    } else {
-        [DropDownView showInViewController:self withText:NSLocalizedString(@"Not a valid email address", nil) height:DropDownViewHeightTall hideAfterDelay:2];
-    }
-}
+//-(void)inviteFriend:(id)sender
+//{
+//    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
+//    NSIndexPath* indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+//    
+//    NSString* recipientEmail = _friendsNotUsingApp[indexPath.row][@"email"];
+//    if (DEBUGMODE) {
+//        recipientEmail = @"rtayal11@gmail.com";
+//    }
+//    
+//    if ([self NSStringIsValidEmail:recipientEmail]) {
+//        NSString* recipientName = _friendsNotUsingApp[indexPath.row][@"name"];
+//        NSDictionary* params = @{@"toEmail": recipientEmail, @"toName": recipientName, @"fromEmail": [[PFUser currentUser] email], @"fromName": [PFUser currentUser][kPFUser_Name], @"text": @"Hey, \n\nI just downloaded vCinity Chat on my iPhone. \n\nIt is a chat app which lets me chat with people around me. Even if there is no Internet connection. The signup is very easy and simple. You don't have to remember anything. \n\nDownload it now on the AppStore to start chatting. https://itunes.apple.com/app/id875395391", @"subject":@"vCinity Chat App for iPhone"};
+//        [PFCloud callFunctionInBackground:@"sendMail" withParameters:params block:^(id object, NSError *error) {
+//            DLog(@"%@", object);
+//            if (!error) {
+//                //Show Success
+//                [DropDownView showInViewController:self withText:[NSString stringWithFormat:NSLocalizedString(@"Invitation sent to %@!", nil), recipientName] height:DropDownViewHeightTall hideAfterDelay:2];
+//                [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"success" value:nil];
+//                
+//                //Save email to invited coloumn
+//                NSMutableArray* array = [PFUser currentUser][kPFUser_Invited];
+//                if (!array) {
+//                    array = [[NSMutableArray alloc] init];
+//                }
+//                if (![array containsObject:recipientEmail]) {
+//                    [array addObject:recipientEmail];
+//                    [[PFUser currentUser] setObject:array forKey:kPFUser_Invited];
+//                    [[PFUser currentUser] saveEventually];
+//                }
+//            } else {
+//                //Show Error
+//                [DropDownView showInViewController:self withText:NSLocalizedString(@"Invitation could not be sent!", nil) height:DropDownViewHeightTall hideAfterDelay:2];
+//                [GAI trackEventWithCategory:kGAICategoryButton action:@"invite" label:@"failed" value:nil];
+//            }
+//        }];
+//    } else {
+//        [DropDownView showInViewController:self withText:NSLocalizedString(@"Not a valid email address", nil) height:DropDownViewHeightTall hideAfterDelay:2];
+//    }
+//}
 
 -(BOOL)NSStringIsValidEmail:(NSString*)checkString
 {
