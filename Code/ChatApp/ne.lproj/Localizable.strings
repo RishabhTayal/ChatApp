@@ -1,0 +1,40 @@
+/*
+ File.strings
+ VCinity
+ 
+ Created by Rishabh Tayal on 6/11/14.
+ Copyright (c) 2014 Rishabh Tayal. All rights reserved.
+ */
+
+"vCinity Chat" = "vCinity Chat";
+"Friends" = "साथी";
+"Settings" = "सेटिङ";
+"Logout" = "लगआउट";
+
+"No users nearby" = "कुनै प्रयोगकर्ता नजिक छैनन्";
+"Connected to %d recipient" = "%d प्राप्तकर्ता जोडिएको";
+"Connected to %d recipients" = "%d प्प्राप्तकर्ताहरु जोडिएको";
+
+"New Group" = "नयाँ समूह";
+"Groups" = "समूह";
+"Friends using vCinity" = "vCinity प्रयोग गर्ने मित्र";
+"Friends not on vCinity" = "vCinity प्रयोग नगर्ने मित्र";
+"Invitation sent to %@!" = "%@ लाई निमन्त्रणा पठाइएको!";
+"Invitation could not be sent!" = "निमन्त्रणा पठाउन सकिएन!";
+"Invited" = "निमन्त्रित";
+"Not a valid email address" = "गलत इमेल ठेगाना";
+
+"Add People:" = "साथी थप्ने";
+"Create" = "सिर्जना";
+"Please Enter a Group Name" = "समूहको नाम दिनुहोस्";
+"Creating Group..." = "समूह बनिरहेको छ...";
+
+"Cancel" = "रद्द";
+"Take Photo" = "फोटो खिच्नुहोस्";
+"Choose Exisiting Photo" = "भएको फोटो छान्ने";
+"View Profile Photo" = "प्रोफ़ाइल फोटो हेर्ने";
+"Import from Facebook" = "फेसबुकबाट तान्ने";
+"Message" = "सन्देश";
+"Mail" = "मेल";
+"Facebook" = "फेसबुक";
+"Twitter" = "त्वित्टर";

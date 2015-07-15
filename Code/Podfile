@@ -1,20 +1,22 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
+#link_with 'VCinity', 'VCinity WatchKit Extension'
+
 platform:ios, '7.0'
 
 inhibit_all_warnings!
 
 pod 'AFNetworking'
 pod 'SDWebImage', '~> 3.6'
-pod 'JSQMessagesViewController'
+pod 'JSQMessagesViewController', '~> 6.0.0'
 #pod 'AOTutorial', '1.5'
 pod 'MFSideMenu'
 pod 'APParallaxHeader'
 pod 'iRate'
 pod 'UINavigationBar+Addition'
 pod 'IDMPhotoBrowser'
-pod 'GoogleAnalytics-iOS-SDK'
-pod 'Google-Mobile-Ads-SDK', '~> 6.10'
+pod 'Google/Analytics', '~> 1.0.0'
+pod 'Google-Mobile-Ads-SDK', '~> 7.0'
 pod 'Reachability'
 pod 'TITokenField'
 #pod 'SWTableViewCell'
