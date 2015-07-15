@@ -21,6 +21,7 @@
 #import "InAppNotificationView.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <MaveSDK.h>
 
 @interface AppDelegate()
 
@@ -53,6 +54,8 @@
     [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelError];
     
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-40631521-4"];
+    
+    [MaveSDK setupSharedInstanceWithApplicationID:@"534691800578442"];
     
     //Use Development DB on Parse for Development mode.
     if (DEBUGMODE) {

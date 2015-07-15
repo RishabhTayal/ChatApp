@@ -19,6 +19,7 @@
 #import "Group.h"
 #import "IntroViewController.h"
 #import "Chat.h"
+#import <MaveSDK.h>
 
 @interface MenuViewController ()
 
@@ -89,7 +90,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return 5;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,6 +131,13 @@
             break;
         case 2:
         {
+            cell.textLabel.text = NSLocalizedString(@"Invite", nil);
+            cell.imageView.image = [UIImage imageNamed:@""];
+            cell.imageView.highlightedImage = [UIImage imageNamed:@""];
+        }
+            break;
+        case 3:
+        {
             cell.textLabel.text = NSLocalizedString(@"Settings", nil);
             cell.imageView.image = [UIImage imageNamed:@"settings-off"];
             cell.imageView.highlightedImage = [UIImage imageNamed:@"settings-on"];
@@ -150,7 +158,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray* array;
+    __block NSMutableArray* array;
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     switch (indexPath.row) {
         case 0:
@@ -181,6 +189,20 @@
         }
             break;
         case 2:
+        {
+            MaveSDK* mave = [MaveSDK sharedInstance];
+            MAVEUserData* userData = [[MAVEUserData alloc] initWithUserID:@"1" firstName:@"Rishabh" lastName:@"Tayal"];
+            [mave identifyUser:userData];
+            [mave presentInvitePageModallyWithBlock:^(UIViewController *inviteController) {
+                array = [[NSMutableArray alloc] initWithObjects:inviteController , nil];
+                self.menuContainerViewController.centerViewController = array[0];
+                [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+            } dismissBlock:^(UIViewController *controller, NSUInteger numberOfInvitesSent) {
+                
+            } inviteContext:@"default"];
+        }
+            break;
+        case 3:
         {
             if (!_settings)
                 _settings = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
