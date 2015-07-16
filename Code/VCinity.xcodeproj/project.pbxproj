@@ -31,6 +31,7 @@
 		0641F11A1951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */; };
 		0642159019213ACE00FB1F6D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642158F19213ACE00FB1F6D /* Accounts.framework */; };
 		0642159219213AD300FB1F6D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0642159119213AD300FB1F6D /* Social.framework */; };
+		0646C25E1B5815C900AF93CC /* UIColor+MyColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0646C25D1B5815C900AF93CC /* UIColor+MyColor.m */; };
 		0653B0CB1B5230B7005FFA1C /* VCinityModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0653B0C91B5230B7005FFA1C /* VCinityModel.xcdatamodeld */; };
 		065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D41912BCFB00B85D3D /* Foundation.framework */; };
 		065A15D71912BCFB00B85D3D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065A15D61912BCFB00B85D3D /* CoreGraphics.framework */; };
@@ -121,6 +122,8 @@
 		0641F1181951E7A100FCC691 /* CreateGroupFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGroupFriendsTableViewCell.xib; sourceTree = "<group>"; };
 		0642158F19213ACE00FB1F6D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		0642159119213AD300FB1F6D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0646C25C1B5815C900AF93CC /* UIColor+MyColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MyColor.h"; sourceTree = "<group>"; };
+		0646C25D1B5815C900AF93CC /* UIColor+MyColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MyColor.m"; sourceTree = "<group>"; };
 		0653B0CA1B5230B7005FFA1C /* VCinityModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VCinityModel.xcdatamodel; sourceTree = "<group>"; };
 		065A15D11912BCFB00B85D3D /* VCinity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VCinity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065A15D41912BCFB00B85D3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -244,6 +247,8 @@
 				06E0B6A9194B947E00159C93 /* UIDevice-Hardware.m */,
 				0608596E191991B5005F6A75 /* UIImage+Utility.h */,
 				0608596F191991B5005F6A75 /* UIImage+Utility.m */,
+				0646C25C1B5815C900AF93CC /* UIColor+MyColor.h */,
+				0646C25D1B5815C900AF93CC /* UIColor+MyColor.m */,
 				06085976191BFB10005F6A75 /* MenuButton.h */,
 				06085977191BFB10005F6A75 /* MenuButton.m */,
 				060D47EE192FD8040062982B /* GAI+MyGAITracker.h */,
@@ -683,6 +688,7 @@
 				060D47F0192FD8040062982B /* GAI+MyGAITracker.m in Sources */,
 				065A15E51912BCFB00B85D3D /* AppDelegate.m in Sources */,
 				06E0B6E7194D99F200159C93 /* Friend.m in Sources */,
+				0646C25E1B5815C900AF93CC /* UIColor+MyColor.m in Sources */,
 				060D4807192FE9790062982B /* AOTutorialViewController.m in Sources */,
 				061E7E511918818400A0DF90 /* FriendTableViewCell.m in Sources */,
 				061E7E4B19183D1400A0DF90 /* MenuViewController.m in Sources */,
