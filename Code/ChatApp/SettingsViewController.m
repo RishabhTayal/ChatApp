@@ -358,7 +358,7 @@
     if ([segue.identifier isEqualToString:@"termsSegue"]) {
         WebViewController* webViewContr = segue.destinationViewController;
         webViewContr.title = @"Terms of Use";
-        webViewContr.url = [NSURL URLWithString:@"http://appikon.com/vCinityChat/ToS.html"];
+        webViewContr.url = [NSURL URLWithString:@"http://www.vcinitychat.com/ToS.html"];
     }
 }
 

@@ -192,8 +192,8 @@
         case 2:
         {
             MaveSDK* mave = [MaveSDK sharedInstance];
-            MAVEUserData* userData = [[MAVEUserData alloc] initWithUserID:@"1" firstName:@"Rishabh" lastName:@"Tayal"];
-            [mave identifyUser:userData];
+//            MAVEUserData* userData = [[MAVEUserData alloc] initWithUserID:@"1" firstName:@"Rishabh" lastName:@"Tayal"];
+            [mave identifyAnonymousUser];
             [mave presentInvitePagePushWithBlock:^(UIViewController *inviteController) {
                 [MenuButton setupLeftMenuBarButtonOnViewController:inviteController];
                 [((UIButton*)inviteController.navigationItem.leftBarButtonItem.customView) removeTarget:inviteController action:nil forControlEvents:UIControlEventTouchUpInside];
