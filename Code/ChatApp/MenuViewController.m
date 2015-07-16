@@ -109,7 +109,7 @@
         
     }
     cell.textLabel.textColor = [UIColor lightGrayColor];
-    cell.textLabel.highlightedTextColor = [UIColor redColor];
+    cell.textLabel.highlightedTextColor = [UIColor kRedColor];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.textLabel.font = [UIFont systemFontOfSize:28];
     cell.backgroundColor = [UIColor clearColor];
@@ -120,35 +120,35 @@
         {
             cell.textLabel.text = NSLocalizedString(@"vCinity Chat", nil);
             cell.imageView.image = [UIImage imageNamed:@"chat-off"];
-            cell.imageView.highlightedImage = [UIImage imageNamed:@"chat-on"];
+            cell.imageView.highlightedImage = [[UIImage imageNamed:@"chat-off"] imageWithColor:[UIColor kRedColor]];
         }
             break;
         case 1:
         {
             cell.textLabel.text = NSLocalizedString(@"Friends", nil);
             cell.imageView.image = [UIImage imageNamed:@"sillouhette-off"];
-            cell.imageView.highlightedImage = [UIImage imageNamed:@"sillouhette-on"];
+            cell.imageView.highlightedImage = [[UIImage imageNamed:@"sillouhette-off"] imageWithColor:[UIColor kRedColor]];
         }
             break;
         case 2:
         {
             cell.textLabel.text = NSLocalizedString(@"Invite", nil);
             cell.imageView.image = [[UIImage imageNamed:@"share-off"] imageWithColor:[UIColor lightGrayColor]];
-            cell.imageView.highlightedImage = [[UIImage imageNamed:@"share-off"] imageWithColor:[UIColor redColor]];
+            cell.imageView.highlightedImage = [[UIImage imageNamed:@"share-off"] imageWithColor:[UIColor kRedColor]];
         }
             break;
         case 3:
         {
             cell.textLabel.text = NSLocalizedString(@"Settings", nil);
             cell.imageView.image = [UIImage imageNamed:@"settings-off"];
-            cell.imageView.highlightedImage = [UIImage imageNamed:@"settings-on"];
+            cell.imageView.highlightedImage = [[UIImage imageNamed:@"settings-off"] imageWithColor:[UIColor kRedColor]];
         }
             break;
         default:
         {
             cell.textLabel.text = NSLocalizedString(@"Logout", nil);
             cell.imageView.image = [UIImage imageNamed:@"logout-off"];
-            cell.imageView.highlightedImage = [UIImage imageNamed:@"logout-on"];
+            cell.imageView.highlightedImage = [[UIImage imageNamed:@"logout-off"] imageWithColor:[UIColor kRedColor]];
         }
             break;
     }

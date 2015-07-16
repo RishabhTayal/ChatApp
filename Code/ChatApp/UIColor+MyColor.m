@@ -11,7 +11,7 @@
 @implementation UIColor (MyColor)
 
 +(UIColor *)kRedColor {
-    return [UIColor colorWithRed:255/255 green:90/255 blue:90/255 alpha:1.0];
+    return [UIColor colorWithRed:255.0/255.0 green:90.0f/255.0f blue:90.0f/255.0f alpha:1.0];
 }
 
 @end
