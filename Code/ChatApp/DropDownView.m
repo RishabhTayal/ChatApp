@@ -38,7 +38,7 @@
     }
     label.font = [UIFont systemFontOfSize:fontSize];
     label.textAlignment = NSTextAlignmentCenter;
-    label.backgroundColor = [UIColor redColor];
+    label.backgroundColor = [UIColor kRedColor];
     CGPoint center = CGPointMake(view.center.x, label.center.y);
     label.center = center;
     
