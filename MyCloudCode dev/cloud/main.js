@@ -34,10 +34,20 @@ Parse.Cloud.define("sendMail", function(request, response) {
 	});
 });
 
-Parse.Cloud.onCreate(Parse.User, function(request, response) {
-	if (true) {
-		response.success;
-	} else {
-		response.success;	
-	}
+//Schedule job
+Parse.Cloud.job("notification", function(request, status) {
+    Parse.Cloud.useMasterKey();
+    Parse.Push.send({
+        channels: ["channel"],
+        data: {         
+            alert: request.params.alert
+        }
+    }, {
+        success: function() {
+            status.success("Push sent to all users");
+        },
+        error: function(error) {
+            status.error("Error sending pushes: " + error.code + ": " + error.message);
+        }
+    });
 });
