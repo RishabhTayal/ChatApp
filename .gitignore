@@ -2,3 +2,6 @@
 Code/Pods/
 
 *.xcuserstate
+
+Code/build/
+Code/DerivedData/

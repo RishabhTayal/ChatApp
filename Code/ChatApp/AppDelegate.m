@@ -74,7 +74,9 @@
     //Don't add [[uiview apperance].tintcolor
     [UINavigationBar appearance].barTintColor = [UIColor kRedColor];
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
-    [UINavigationBar appearance].translucent = false;
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+        [UINavigationBar appearance].translucent = false;
+    }
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kUDInAppVibrate] == nil) {

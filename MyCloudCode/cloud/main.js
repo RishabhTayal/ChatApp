@@ -1,3 +1,5 @@
+var slack = require('cloud/slack.js');
+
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
 Parse.Cloud.define("hello", function(request, response) {
@@ -32,6 +34,12 @@ Parse.Cloud.define("sendMail", function(request, response) {
 			response.error("Uh oh, something went wrong");
 		}
 	});
+});
+
+Parse.Cloud.afterSave('Wechat', function(request) {
+	if (!request.object.existed()) {
+		slack.postNotificationToSlack('New chat sent on Parse.com');
+	}
 });
 
 //Schedule job
