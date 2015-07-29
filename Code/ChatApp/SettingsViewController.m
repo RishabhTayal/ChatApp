@@ -204,33 +204,49 @@
             sheet.tag = ActionSheetTypeShare;
             [sheet showInView:self.view.window];
         } else if (indexPath.row == 1) {
-            MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
-            mailVC.mailComposeDelegate = self;
-            mailVC.view.tintColor = [UIColor whiteColor];
-            [mailVC setSubject:@"vCinity App Support"];
-            [mailVC setToRecipients:@[@"vcinity@icloud.com"]];
-            
-            NSString* info = [NSString stringWithFormat:@"Email: %@\n App Version: %@\nDevice: %@\n OS Version: %@", [PFUser currentUser][kPFUser_Email], [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [UIDevice currentDevice].platformString, [UIDevice currentDevice].systemVersion];
-            [mailVC setMessageBody:[NSString stringWithFormat:@"Please describe the issue you're having here.\n\n//Device Info\n%@", info] isHTML:NO];
-            [self presentViewController:mailVC animated:YES completion:nil];
+            if ([MFMailComposeViewController canSendMail]) {
+                MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
+                mailVC.mailComposeDelegate = self;
+                mailVC.view.tintColor = [UIColor whiteColor];
+                [mailVC setSubject:@"vCinity App Support"];
+                [mailVC setToRecipients:@[@"vcinity@icloud.com"]];
+                
+                NSString* info = [NSString stringWithFormat:@"Email: %@\n App Version: %@\nDevice: %@\n OS Version: %@", [PFUser currentUser][kPFUser_Email], [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"], [UIDevice currentDevice].platformString, [UIDevice currentDevice].systemVersion];
+                [mailVC setMessageBody:[NSString stringWithFormat:@"Please describe the issue you're having here.\n\n//Device Info\n%@", info] isHTML:NO];
+                [self presentViewController:mailVC animated:YES completion:nil];
+            } else {
+                [self showMailErrorAlert];
+            }
         } else if(indexPath.row == 2) {
             //Report an abuse
-            MFMailComposeViewController* issueVC = [[MFMailComposeViewController alloc] init];
-            issueVC.mailComposeDelegate = self;
-            issueVC.view.tintColor = [UIColor whiteColor];
-            [issueVC setSubject:@"Reporting abuse content from vCinity"];
-            [issueVC setToRecipients:@[@"vcinity@icloud.com"]];
-            [self presentViewController:issueVC animated:YES completion:nil];
+            if ([MFMailComposeViewController canSendMail]) {
+                MFMailComposeViewController* issueVC = [[MFMailComposeViewController alloc] init];
+                issueVC.mailComposeDelegate = self;
+                issueVC.view.tintColor = [UIColor whiteColor];
+                [issueVC setSubject:@"Reporting abuse content from vCinity"];
+                [issueVC setToRecipients:@[@"vcinity@icloud.com"]];
+                [self presentViewController:issueVC animated:YES completion:nil];
+            } else {
+                [self showMailErrorAlert];
+            }
         }
     }
     if (indexPath.section == 2) {
-        MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
-        mailVC.mailComposeDelegate = self;
-        mailVC.view.tintColor = [UIColor whiteColor];
-        [mailVC setSubject:@"Feedback for vCinity App."];
-        [mailVC setToRecipients:@[@"vcinity@icloud.com"]];
-        [self presentViewController:mailVC animated:YES completion:nil];
+        if ([MFMailComposeViewController canSendMail]) {
+            MFMailComposeViewController* mailVC = [[MFMailComposeViewController alloc] init];
+            mailVC.mailComposeDelegate = self;
+            mailVC.view.tintColor = [UIColor whiteColor];
+            [mailVC setSubject:@"Feedback for vCinity App."];
+            [mailVC setToRecipients:@[@"vcinity@icloud.com"]];
+            [self presentViewController:mailVC animated:YES completion:nil];
+        } else {
+            [self showMailErrorAlert];
+        }
     }
+}
+
+-(void)showMailErrorAlert {
+    [[[UIAlertView alloc] initWithTitle:@"Can not send mail" message:@"No mail account setup on device" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
 }
 
 #pragma mark - UIAction Sheet Delegate
