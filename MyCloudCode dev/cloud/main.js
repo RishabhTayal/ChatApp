@@ -36,11 +36,11 @@ Parse.Cloud.define("sendMail", function(request, response) {
 	});
 });
 
-Parse.Cloud.afterSave('Wechat', function(request) {
-	if (!request.object.existed()) {
-		slack.postNotificationToSlack('New chat sent on Parse.com');
-	}
-});
+// Parse.Cloud.afterSave('Wechat', function(request) {
+// 	if (!request.object.existed()) {
+// 		slack.postNotificationToSlack('New chat sent on Parse.com');
+// 	}
+// });
 
 //Schedule job
 Parse.Cloud.job("notification", function(request, status) {
