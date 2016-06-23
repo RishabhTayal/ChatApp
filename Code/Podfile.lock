@@ -1,24 +1,18 @@
 PODS:
-  - AFNetworking (2.5.4):
-    - AFNetworking/NSURLConnection (= 2.5.4)
-    - AFNetworking/NSURLSession (= 2.5.4)
-    - AFNetworking/Reachability (= 2.5.4)
-    - AFNetworking/Security (= 2.5.4)
-    - AFNetworking/Serialization (= 2.5.4)
-    - AFNetworking/UIKit (= 2.5.4)
-  - AFNetworking/NSURLConnection (2.5.4):
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.4):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.4)
-  - AFNetworking/Security (2.5.4)
-  - AFNetworking/Serialization (2.5.4)
-  - AFNetworking/UIKit (2.5.4):
-    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - APParallaxHeader (0.1.6)
   - CCTemplate (0.2.0)
@@ -26,7 +20,7 @@ PODS:
     - Fabric (~> 1.6.3)
   - DACircularProgress (2.3.1)
   - Fabric (1.6.7)
-  - Google-Mobile-Ads-SDK (7.3.1)
+  - Google-Mobile-Ads-SDK (7.8.1)
   - Google/Analytics (1.0.7):
     - Google/Core
     - GoogleAnalytics (~> 3.12)
@@ -34,37 +28,39 @@ PODS:
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
     - GoogleUtilities (~> 1.0)
-  - GoogleAnalytics (3.12.0)
-  - GoogleNetworkingUtilities (1.0.0):
+  - GoogleAnalytics (3.14.0)
+  - GoogleNetworkingUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
-  - GoogleSymbolUtilities (1.0.0)
-  - GoogleUtilities (1.0.1):
+  - GoogleSymbolUtilities (1.1.1)
+  - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
-  - IDMPhotoBrowser (1.6.2):
-    - AFNetworking
+  - IDMPhotoBrowser (1.8.4):
     - DACircularProgress
     - pop
+    - SDWebImage
   - iRate (1.11.4)
   - JSQMessagesViewController (6.0.0):
     - JSQSystemSoundPlayer (~> 2.0.0)
   - JSQSystemSoundPlayer (2.0.1)
-  - libPhoneNumber-iOS (0.8.5)
-  - MagicalRecord (2.3.0)
-  - MaveSDK (0.7.4):
+  - libPhoneNumber-iOS (0.8.13)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/Core (2.3.2)
+  - MaveSDK (0.7.11):
     - CCTemplate (= 0.2.0)
     - libPhoneNumber-iOS (~> 0.8.3)
   - MFSideMenu (0.5.5)
-  - PonyDebugger (0.4.4):
+  - PonyDebugger (0.4.5):
     - SocketRocket
-  - pop (1.0.7)
+  - pop (1.0.9)
   - Reachability (3.2)
-  - SDWebImage (3.7.2):
-    - SDWebImage/Core (= 3.7.2)
-  - SDWebImage/Core (3.7.2)
-  - SocketRocket (0.4)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
+  - SocketRocket (0.5.1)
   - SWTableViewCell (0.2.9)
   - TITokenField (0.9.5)
-  - UINavigationBar+Addition (1.0.0)
+  - UINavigationBar+Addition (1.3.0)
   - WSCoachMarksView (0.2)
 
 DEPENDENCIES:
@@ -90,34 +86,34 @@ DEPENDENCIES:
   - WSCoachMarksView
 
 SPEC CHECKSUMS:
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
   CCTemplate: f00efa85dad31e12b8a766b8e8198eb772c71c4f
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
-  Google-Mobile-Ads-SDK: 3647bfddc7384c514ab96a8bed86d98b31e623e4
-  GoogleAnalytics: ef2e0b800ef3c1e62688cdfc959e0d3132bc246c
-  GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
-  GoogleSymbolUtilities: a7b0feed1fe667c8d5e647177938d0ecd62d6948
-  GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
-  IDMPhotoBrowser: ebbfa6690456b72dd92d93b7bc11d71519f4d06d
+  Google-Mobile-Ads-SDK: 3c2a6656117989469bfe7645640aa1de024a4c6c
+  GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
+  GoogleNetworkingUtilities: 3e83269048cfb498dc7ec83ab36813360965c74f
+  GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
+  GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
+  IDMPhotoBrowser: b574fe3229754e701f32df271afbc4ac7e4e1997
   iRate: 599ed07c854e0695f3c605d1b2a64c67d912acb7
   JSQMessagesViewController: ce414df02c16eddefdf802dd7e3b767eb0e55573
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  libPhoneNumber-iOS: b8ccd23576379caca37c7cbdd554addf384459ed
-  MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
-  MaveSDK: b219824dcedbd7985b8158cb056a7b0dfdeab127
+  libPhoneNumber-iOS: 3a37004baf779b4262ab29a31a87d2ae668159d4
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  MaveSDK: 9315ad3bd8719b1aa6d10fe8f78fa11a5ad43a7a
   MFSideMenu: 268122e6894f2747fc3a2b48578100b232506c60
-  PonyDebugger: 5648349890fba58948aae88ec099a99e35c762e3
-  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+  PonyDebugger: 1c60f7c876bdb6a8b6bf0f0269087f8a234fafa7
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  SocketRocket: 01443933b7bc362621325f4607b80b4286a99707
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SWTableViewCell: 86b240e0b86074cb42de9f781774310db48cc674
   TITokenField: 39da9ead760009440ffc38602070d2097901430c
-  UINavigationBar+Addition: c633d66af2245dfdc97a917c3b20a6db02089f2b
+  UINavigationBar+Addition: 433c16a992cfb73c3141b1f7fcaa93169c15cfa0
   WSCoachMarksView: d1653c058c8289a300ddf28af9dd49eb659c9c42
 
 COCOAPODS: 0.39.0
