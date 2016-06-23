@@ -22,7 +22,10 @@ PODS:
     - AFNetworking/NSURLSession
   - APParallaxHeader (0.1.6)
   - CCTemplate (0.2.0)
+  - Crashlytics (3.7.2):
+    - Fabric (~> 1.6.3)
   - DACircularProgress (2.3.1)
+  - Fabric (1.6.7)
   - Google-Mobile-Ads-SDK (7.3.1)
   - Google/Analytics (1.0.7):
     - Google/Core
@@ -67,6 +70,8 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - APParallaxHeader
+  - Crashlytics
+  - Fabric
   - Google-Mobile-Ads-SDK (~> 7.0)
   - Google/Analytics (~> 1.0.0)
   - IDMPhotoBrowser
@@ -88,7 +93,9 @@ SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
   CCTemplate: f00efa85dad31e12b8a766b8e8198eb772c71c4f
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
   Google-Mobile-Ads-SDK: 3647bfddc7384c514ab96a8bed86d98b31e623e4
   GoogleAnalytics: ef2e0b800ef3c1e62688cdfc959e0d3132bc246c
@@ -113,4 +120,4 @@ SPEC CHECKSUMS:
   UINavigationBar+Addition: c633d66af2245dfdc97a917c3b20a6db02089f2b
   WSCoachMarksView: d1653c058c8289a300ddf28af9dd49eb659c9c42
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.39.0
