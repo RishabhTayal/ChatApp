@@ -19,8 +19,8 @@
 #import "SessionController.h"
 #import "InAppNotificationTapListener.h"
 #import "InAppNotificationView.h"
-//#import <Fabric/Fabric.h>
-//#import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 #import <MaveSDK.h>
 #import <PonyDebugger/PonyDebugger.h>
 
@@ -46,7 +46,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    [Fabric with:@[CrashlyticsKit]];
+    [Fabric with:@[CrashlyticsKit]];
 
     [GAI sharedInstance].trackUncaughtExceptions = !DEBUGMODE;
     
