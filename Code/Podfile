@@ -7,14 +7,14 @@ inhibit_all_warnings!
 
 target :VCinity do
     pod 'AFNetworking'
-    pod 'SDWebImage'#, '~> 3.6'
+    pod 'SDWebImage', '= 3.8.1'
     pod 'JSQMessagesViewController'#, '~> 6.0.0'
     #pod 'AOTutorial'#, '1.5'
     pod 'MFSideMenu'
     pod 'APParallaxHeader'
     pod 'iRate'
     pod 'UINavigationBar+Addition'
-    pod 'IDMPhotoBrowser'
+    pod 'IDMPhotoBrowser', '=1.8.4'
     pod 'Google/Analytics'#, '~> 1.0.0'
     pod 'Google-Mobile-Ads-SDK'#, '~> 7.0'
     pod 'Reachability'
