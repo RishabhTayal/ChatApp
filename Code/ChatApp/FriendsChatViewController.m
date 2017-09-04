@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import <JSQMessages.h>
 //#import "GroupInfoViewController.h"
-#import <AFNetworking/AFHTTPRequestOperation.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 #import "DropDownView.h"
 
 @interface FriendsChatViewController ()
@@ -100,9 +100,9 @@
             __block JSQMessage* message = nil;
             Chat* chatObj = [Chat MR_createEntity];
             if ([notification.userInfo[kNotificationIsMedia] boolValue]) {
-                AFHTTPRequestOperation* request = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:notification.userInfo[kNotificationMediaUrl]]]];
-                request.responseSerializer = [AFImageResponseSerializer serializer];
-                [request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                AFHTTPSessionManager* manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+                manager.responseSerializer = [AFImageResponseSerializer serializer];
+                [manager GET:@"" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                     JSQPhotoMediaItem* media = [[JSQPhotoMediaItem alloc] initWithImage:responseObject];
                     message = [[JSQMessage alloc] initWithSenderId:notification.userInfo[kNotificationSender][@"id"] senderDisplayName:notification.userInfo[kNotificationSender][@"name"] date:[NSDate date] media:media];
                     chatObj.jsmessage = message;
@@ -110,7 +110,7 @@
                     [_chatArray addObject:chatObj];
                     [self finishReceivingMessage];
                 } failure:nil];
-                [request start];
+//                [request start];
             } else {
                 message = [[JSQMessage alloc] initWithSenderId:notification.userInfo[kNotificationSender][@"id"] senderDisplayName:notification.userInfo[kNotificationSender][@"name"] date:[NSDate date] text:notification.userInfo[kNotificationMessage]];
                 chatObj.jsmessage = message;

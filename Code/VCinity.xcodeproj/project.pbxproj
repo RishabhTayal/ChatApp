@@ -60,7 +60,7 @@
 		06E0B6E2194D7DA100159C93 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6E1194D7DA100159C93 /* Group.m */; };
 		06E0B6E7194D99F200159C93 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6E6194D99F200159C93 /* Friend.m */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
-		54CF069AEB65BCB9DC80709A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 178D49D10767C08F6CD194E8 /* libPods.a */; };
+		224FB6E313B78418BA808A6E /* libPods-VCinity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B4B5B77B1EF8D78B63D65A /* libPods-VCinity.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -191,9 +191,9 @@
 		06E0B6E6194D99F200159C93 /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Friend.m; sourceTree = "<group>"; };
 		06FD23841917F1B800AE7226 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
 		06FD23851917F1B800AE7226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		178D49D10767C08F6CD194E8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F1EEABA77A84AB273496064 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		B4F96C4EC7B832293B3DF514 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5606B65D4CEBA0F954F26D8B /* Pods-VCinity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VCinity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VCinity/Pods-VCinity.debug.xcconfig"; sourceTree = "<group>"; };
+		73B4B5B77B1EF8D78B63D65A /* libPods-VCinity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VCinity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6E66D1B42A2B9B364FB617E /* Pods-VCinity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VCinity.release.xcconfig"; path = "Pods/Target Support Files/Pods-VCinity/Pods-VCinity.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,7 +214,7 @@
 				065A15D91912BCFB00B85D3D /* UIKit.framework in Frameworks */,
 				065A15D51912BCFB00B85D3D /* Foundation.framework in Frameworks */,
 				06AA720C1A13AC020015D909 /* FacebookSDK.framework in Frameworks */,
-				54CF069AEB65BCB9DC80709A /* libPods.a in Frameworks */,
+				224FB6E313B78418BA808A6E /* libPods-VCinity.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +332,7 @@
 				0665B7C81AF40222008DACB2 /* VCinity WatchKit App */,
 				065A15D31912BCFB00B85D3D /* Frameworks */,
 				065A15D21912BCFB00B85D3D /* Products */,
-				E4D52221C5095BB7AE7C23F3 /* Pods */,
+				8A69EB3EAB5B040E6227D017 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -360,7 +360,7 @@
 				065A15D41912BCFB00B85D3D /* Foundation.framework */,
 				065A15D61912BCFB00B85D3D /* CoreGraphics.framework */,
 				065A15D81912BCFB00B85D3D /* UIKit.framework */,
-				178D49D10767C08F6CD194E8 /* libPods.a */,
+				73B4B5B77B1EF8D78B63D65A /* libPods-VCinity.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -510,11 +510,11 @@
 			name = "Settings VC";
 			sourceTree = "<group>";
 		};
-		E4D52221C5095BB7AE7C23F3 /* Pods */ = {
+		8A69EB3EAB5B040E6227D017 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B4F96C4EC7B832293B3DF514 /* Pods.debug.xcconfig */,
-				3F1EEABA77A84AB273496064 /* Pods.release.xcconfig */,
+				5606B65D4CEBA0F954F26D8B /* Pods-VCinity.debug.xcconfig */,
+				B6E66D1B42A2B9B364FB617E /* Pods-VCinity.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -526,15 +526,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 065A16031912BCFB00B85D3D /* Build configuration list for PBXNativeTarget "VCinity" */;
 			buildPhases = (
-				264A6F7DCE714B87B5E3A693 /* Check Pods Manifest.lock */,
+				EA88520593F5B28CD17FF9D4 /* [CP] Check Pods Manifest.lock */,
+				FA9EE11D9372BE740A31777E /* [CP] Check Pods Manifest.lock */,
 				065A15CD1912BCFB00B85D3D /* Sources */,
 				065A15CE1912BCFB00B85D3D /* Frameworks */,
 				065A15CF1912BCFB00B85D3D /* Resources */,
-				A89842095498485C925C89CF /* Copy Pods Resources */,
 				06CC4C1E1AF422B600034EC7 /* Embed App Extensions */,
 				06A4E5CC1B52F143007A6956 /* Build Update Run Script */,
-				1D09A8260FD3288426F160E2 /* Embed Pods Frameworks */,
 				69F9DC341D1C406000C75B73 /* ShellScript */,
+				57EEC852D041F208723A31A4 /* [CP] Embed Pods Frameworks */,
+				075FA080A1D6CB038C2D3F3B /* [CP] Copy Pods Resources */,
+				FB9912D60864E264229F7216 /* Embed Pods Frameworks */,
+				2921E886E7D7809EE57F0D70 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -616,34 +619,62 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
-		1D09A8260FD3288426F160E2 /* Embed Pods Frameworks */ = {
+		075FA080A1D6CB038C2D3F3B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-VCinity/Pods-VCinity-resources.sh",
+				"${PODS_ROOT}/IDMPhotoBrowser/Classes/IDMPhotoBrowser.bundle",
+				"${PODS_ROOT}/IDMPhotoBrowser/Classes/IDMPBLocalizations.bundle",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Assets/JSQMessagesAssets.bundle",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Controllers/JSQMessagesViewController.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesCollectionViewCellIncoming.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesCollectionViewCellOutgoing.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesLoadEarlierHeaderView.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesToolbarContentView.xib",
+				"${PODS_ROOT}/JSQMessagesViewController/JSQMessagesViewController/Views/JSQMessagesTypingIndicatorFooterView.xib",
+				"$PODS_CONFIGURATION_BUILD_DIR/MaveSDK/MaveSDK.bundle",
+				"${PODS_ROOT}/iRate/iRate/iRate.bundle",
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VCinity/Pods-VCinity-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		264A6F7DCE714B87B5E3A693 /* Check Pods Manifest.lock */ = {
+		2921E886E7D7809EE57F0D70 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VCinity/Pods-VCinity-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57EEC852D041F208723A31A4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VCinity/Pods-VCinity-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		69F9DC341D1C406000C75B73 /* ShellScript */ = {
@@ -659,19 +690,52 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 02d3f7db22ac1a3e538528547a694d5230eb8278 af6ede98bc0742057c556b0ed733e4c57ae435cd7cc81f516bb2b4e456b7e234";
 		};
-		A89842095498485C925C89CF /* Copy Pods Resources */ = {
+		EA88520593F5B28CD17FF9D4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VCinity-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA9EE11D9372BE740A31777E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FB9912D60864E264229F7216 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VCinity/Pods-VCinity-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -852,7 +916,7 @@
 		};
 		065A16041912BCFB00B85D3D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4F96C4EC7B832293B3DF514 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 5606B65D4CEBA0F954F26D8B /* Pods-VCinity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -866,11 +930,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChatApp",
 				);
+				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rtayal.ChatApp;
 				PRODUCT_NAME = VCinity;
 				PROVISIONING_PROFILE = "";
@@ -881,12 +946,12 @@
 		};
 		065A16051912BCFB00B85D3D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F1EEABA77A84AB273496064 /* Pods.release.xcconfig */;
+			baseConfigurationReference = B6E66D1B42A2B9B364FB617E /* Pods-VCinity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: appikon software private limited (CEBY93VF85)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: appikon software private limited (CEBY93VF85)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -895,14 +960,15 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChatApp",
 				);
+				PODS_ROOT = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rtayal.ChatApp;
 				PRODUCT_NAME = VCinity;
-				PROVISIONING_PROFILE = "c68f3016-0c15-4c1b-afd1-e13b1f18b35b";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
