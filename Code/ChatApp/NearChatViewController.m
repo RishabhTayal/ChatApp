@@ -180,7 +180,7 @@
 {
     
     [ReviewRequest showReview];
-    
+    [[self view] endEditing: true];
     DLog(@"sent");
     NSString* message = text;
     
