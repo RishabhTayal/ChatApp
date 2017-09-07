@@ -23,6 +23,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <MaveSDK.h>
 #import <PonyDebugger/PonyDebugger.h>
+#import "VCinity-Swift.h"
 
 @interface AppDelegate()
 
@@ -86,16 +87,18 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:kUDInAppSound];
     }
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue] && [PFUser currentUser][kPFUser_Name]) {
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:kUDKeyUserLoggedIn] boolValue] && [PFUser currentUser][kPFUser_Name]) {
         [self setMainView];
-    } else {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:kUDKeyLoginSkipped] == true) {
-            [self setMainView];
-        } else {
-            [self setLoginViewModal:NO];
-        }
-    }
+//    } else {
+//        if ([[NSUserDefaults standardUserDefaults] boolForKey:kUDKeyLoginSkipped] == true) {
+//            [self setMainView];
+//        } else {
+//            [self setLoginViewModal:NO];
+//        }
+//    }
     
+    [ReviewRequest incrementAppRuns];
+
     [MagicalRecord setupCoreDataStackWithStoreNamed:@"VCinityModel"];
     
     PDDebugger* debugger = [PDDebugger defaultInstance];

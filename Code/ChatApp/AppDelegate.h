@@ -17,7 +17,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) SessionController* sessionController;
 
--(void)setLoginViewModal:(BOOL)modal;
+-(void)setLoginViewModal:(BOOL)modal __attribute__((unavailable("Update Parse API to enable login feature.")));
 
 -(void)displayAdMobInViewController:(UIViewController*)controller;
 

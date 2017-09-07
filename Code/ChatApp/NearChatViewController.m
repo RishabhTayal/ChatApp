@@ -17,6 +17,8 @@
 #import "AppDelegate.h"
 #import "InAppNotificationView.h"
 #import "MenuViewController.h"
+#import <StoreKit/StoreKit.h>
+#import "VCinity-Swift.h"
 
 @interface NearChatViewController ()
 
@@ -49,6 +51,7 @@
     _sessionController = appDelegate.sessionController;
     
     self.senderDisplayName = _sessionController.displayName;
+    self.senderId = _sessionController.displayName;
     
     //    self.inputToolbar.contentView.leftBarButtonItem = nil;
     self.collectionView.showsVerticalScrollIndicator = NO;
@@ -175,6 +178,9 @@
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date
 {
+    
+    [ReviewRequest showReview];
+    
     DLog(@"sent");
     NSString* message = text;
     
@@ -214,23 +220,27 @@
 
 -(void)didPressAccessoryButton:(UIButton *)sender
 {
-    UIActionSheet* photoSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Take Photo", nil), NSLocalizedString(@"Choose Exisiting Photo", nil), nil];
-    [photoSheet showInView:self.view.window];
-}
-
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    if (buttonIndex == 0) {
-        //Take photo
-        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:imagePicker animated:YES completion:nil];
-    } else if (buttonIndex == 1) {
+    UIAlertController* photoSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [photoSheet addAction:[UIAlertAction actionWithTitle:@"Choose Exisiting Photo" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
         //Choose Photo
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         [self presentViewController:imagePicker animated:YES completion:nil];
-    }
+    }]];
+    [photoSheet addAction:[UIAlertAction actionWithTitle:@"Take Photo" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        //Take photo
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:imagePicker animated:YES completion:nil];
+
+    }]];
+    [photoSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [self presentViewController:photoSheet animated:true completion:nil];
 }
 
 #pragma mark - UIImagePickerController Delegate

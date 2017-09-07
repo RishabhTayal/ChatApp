@@ -61,6 +61,7 @@
 		06E0B6E7194D99F200159C93 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E0B6E6194D99F200159C93 /* Friend.m */; };
 		06FD23861917F1B800AE7226 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FD23851917F1B800AE7226 /* IntroViewController.m */; };
 		224FB6E313B78418BA808A6E /* libPods-VCinity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B4B5B77B1EF8D78B63D65A /* libPods-VCinity.a */; };
+		69C2A6A01F60F6B60078E231 /* ReviewRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C2A69F1F60F6B60078E231 /* ReviewRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -193,6 +194,8 @@
 		06FD23851917F1B800AE7226 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IntroViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5606B65D4CEBA0F954F26D8B /* Pods-VCinity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VCinity.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VCinity/Pods-VCinity.debug.xcconfig"; sourceTree = "<group>"; };
 		690D48511F5E0D5300DACC2A /* VCinity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VCinity.entitlements; sourceTree = "<group>"; };
+		69C2A69E1F60F6B60078E231 /* VCinity-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VCinity-Bridging-Header.h"; sourceTree = "<group>"; };
+		69C2A69F1F60F6B60078E231 /* ReviewRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewRequest.swift; sourceTree = "<group>"; };
 		73B4B5B77B1EF8D78B63D65A /* libPods-VCinity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VCinity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E66D1B42A2B9B364FB617E /* Pods-VCinity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VCinity.release.xcconfig"; path = "Pods/Target Support Files/Pods-VCinity/Pods-VCinity.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -249,6 +252,7 @@
 				0603F77E194F7563003544BF /* CoreDataHelper.m */,
 				06BF1AA61B56DE9C0093C822 /* NSUserDefaults+VCUserDefaults.h */,
 				06BF1AA71B56DE9C0093C822 /* NSUserDefaults+VCUserDefaults.m */,
+				69C2A69F1F60F6B60078E231 /* ReviewRequest.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -388,6 +392,7 @@
 		065A15DB1912BCFB00B85D3D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				69C2A69E1F60F6B60078E231 /* VCinity-Bridging-Header.h */,
 				069CFA911948B222008E493E /* Localizable.strings */,
 				065A15EC1912BCFB00B85D3D /* Images.xcassets */,
 				065A15DC1912BCFB00B85D3D /* VCinity-Info.plist */,
@@ -561,6 +566,7 @@
 				TargetAttributes = {
 					065A15D01912BCFB00B85D3D = {
 						DevelopmentTeam = CEBY93VF85;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -713,7 +719,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA9EE11D9372BE740A31777E /* [CP] Check Pods Manifest.lock */ = {
@@ -756,6 +762,7 @@
 				06E0B6AD194B981B00159C93 /* GroupInfoViewController.m in Sources */,
 				0641F1191951E7A100FCC691 /* CreateGroupFriendsTableViewCell.m in Sources */,
 				065A15EB1912BCFB00B85D3D /* NearChatViewController.m in Sources */,
+				69C2A6A01F60F6B60078E231 /* ReviewRequest.swift in Sources */,
 				061E7E4819182A3600A0DF90 /* FriendsChatViewController.m in Sources */,
 				0653B0CB1B5230B7005FFA1C /* VCinityModel.xcdatamodeld in Sources */,
 				060D4809192FFFE00062982B /* FriendsListViewController.m in Sources */,
@@ -928,10 +935,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VCinity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEVELOPMENT_TEAM = CEBY93VF85;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -942,6 +950,7 @@
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChatApp",
@@ -951,6 +960,9 @@
 				PRODUCT_NAME = VCinity;
 				PROVISIONING_PROFILE = "10273bfc-d87c-4f92-88ca-ca4ad16cd930";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.rtayal.ChatApp";
+				SWIFT_OBJC_BRIDGING_HEADER = "ChatApp/VCinity-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -962,10 +974,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = VCinity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEVELOPMENT_TEAM = CEBY93VF85;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -976,6 +989,7 @@
 				GCC_PREFIX_HEADER = "ChatApp/VCinity-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/VCinity-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ChatApp",
@@ -985,6 +999,8 @@
 				PRODUCT_NAME = VCinity;
 				PROVISIONING_PROFILE = "cc65bb1c-fda1-4f1b-abe3-50cf810b633d";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.rtayal.ChatApp";
+				SWIFT_OBJC_BRIDGING_HEADER = "ChatApp/VCinity-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
