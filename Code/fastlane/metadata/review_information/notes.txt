@@ -1,0 +1,7 @@
+Use the provided username and passwords to login to the Facebook and then use Single sign on to login in the app using Facebook.
+
+username: zeejxof_laverdetwitz_1431292394@tfbnw.net
+password: password
+
+Username: yqtnvat_smithstein_1431292405@tfbnw.net
+password: password

@@ -1,0 +1,15 @@
+###################### More Options ######################
+# If you want to have even more control, check out the documentation
+# https://github.com/fastlane/fastlane/blob/master/deliver/Deliverfile.md
+
+app_identifier "com.rtayal.ChatApp" # The bundle identifier of your app
+username "contact@appikon.com" # your Apple ID user
+
+ignore_language_directory_validation true
+
+submission_information({
+	add_id_info_uses_idfa: true,
+	export_compliance_uses_encryption: false,
+	export_compliance_contains_third_party_cryptography: false,
+	export_compliance_contains_proprietary_cryptography: false
+})
