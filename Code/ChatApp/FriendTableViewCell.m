@@ -21,6 +21,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     _inviteButton.layer.cornerRadius = 15;
     _inviteButton.layer.borderColor = [UIColor kRedColor].CGColor;
     _inviteButton.layer.borderWidth = 1;

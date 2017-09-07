@@ -91,7 +91,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return 3;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -123,21 +123,21 @@
             cell.imageView.highlightedImage = [[UIImage imageNamed:@"chat-off"] imageWithColor:[UIColor kRedColor]];
         }
             break;
+//        case 1:
+//        {
+//            cell.textLabel.text = NSLocalizedString(@"Friends", nil);
+//            cell.imageView.image = [UIImage imageNamed:@"sillouhette-off"];
+//            cell.imageView.highlightedImage = [[UIImage imageNamed:@"sillouhette-off"] imageWithColor:[UIColor kRedColor]];
+//        }
+//            break;
         case 1:
-        {
-            cell.textLabel.text = NSLocalizedString(@"Friends", nil);
-            cell.imageView.image = [UIImage imageNamed:@"sillouhette-off"];
-            cell.imageView.highlightedImage = [[UIImage imageNamed:@"sillouhette-off"] imageWithColor:[UIColor kRedColor]];
-        }
-            break;
-        case 2:
         {
             cell.textLabel.text = NSLocalizedString(@"Invite", nil);
             cell.imageView.image = [[UIImage imageNamed:@"share-off"] imageWithColor:[UIColor lightGrayColor]];
             cell.imageView.highlightedImage = [[UIImage imageNamed:@"share-off"] imageWithColor:[UIColor kRedColor]];
         }
             break;
-        case 3:
+        case 2:
         {
             cell.textLabel.text = NSLocalizedString(@"Settings", nil);
             cell.imageView.image = [UIImage imageNamed:@"settings-off"];
@@ -174,22 +174,22 @@
             [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
         }
             break;
-        case 1:
-        {
-            if ([PFUser currentUser] == nil) {
-                DLog(@"Show login");
-                AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                [appDelegate setLoginViewModal:YES];
-            } else {
-                if (!_friends)
-                    _friends = [sb instantiateViewControllerWithIdentifier:@"FriendsListViewController"];
-                array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_friends], nil];
-                self.menuContainerViewController.centerViewController = array[0];
-                [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
-            }
-        }
+//        case 1:
+//        {
+//            if ([PFUser currentUser] == nil) {
+//                DLog(@"Show login");
+//                AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//                [appDelegate setLoginViewModal:YES];
+//            } else {
+//                if (!_friends)
+//                    _friends = [sb instantiateViewControllerWithIdentifier:@"FriendsListViewController"];
+//                array = [[NSMutableArray alloc] initWithObjects:[[UINavigationController alloc] initWithRootViewController:_friends], nil];
+//                self.menuContainerViewController.centerViewController = array[0];
+//                [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+//            }
+//        }
             break;
-        case 2:
+        case 1:
         {
             MaveSDK* mave = [MaveSDK sharedInstance];
 //            MAVEUserData* userData = [[MAVEUserData alloc] initWithUserID:@"1" firstName:@"Rishabh" lastName:@"Tayal"];
@@ -209,7 +209,7 @@
             } inviteContext:@"default"];
         }
             break;
-        case 3:
+        case 2:
         {
             if (!_settings)
                 _settings = [sb instantiateViewControllerWithIdentifier:@"SettingsViewController"];
@@ -236,7 +236,7 @@
     }
 }
 
--(void)performLogout
+-(void)performLogout __attribute__((unavailable("Update Parse API to enable login feature.")))
 {
     [ActivityView hide];
     

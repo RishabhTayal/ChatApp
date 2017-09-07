@@ -40,7 +40,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>143</string>
+	<string>152</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -61,6 +61,8 @@
 	<string>vCinity</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSContactsUsageDescription</key>
+	<string>Uses Contact to find Friends</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Share photos with Friends</string>
 	<key>UIMainStoryboardFile</key>
