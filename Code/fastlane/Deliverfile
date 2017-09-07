@@ -8,8 +8,10 @@ username "contact@appikon.com" # your Apple ID user
 ignore_language_directory_validation true
 
 submission_information({
-	add_id_info_uses_idfa: true,
+	add_id_info_serves_ads: true,
+	add_id_info_limits_tracking: true,
 	export_compliance_uses_encryption: false,
 	export_compliance_contains_third_party_cryptography: false,
-	export_compliance_contains_proprietary_cryptography: false
+	export_compliance_contains_proprietary_cryptography: false,
+	export_compliance_encryption_updated: false
 })
