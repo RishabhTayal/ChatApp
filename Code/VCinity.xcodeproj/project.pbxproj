@@ -952,7 +952,7 @@
 				CODE_SIGN_ENTITLEMENTS = VCinity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_TEAM = CEBY93VF85;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -991,7 +991,7 @@
 				CODE_SIGN_ENTITLEMENTS = VCinity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_TEAM = CEBY93VF85;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
